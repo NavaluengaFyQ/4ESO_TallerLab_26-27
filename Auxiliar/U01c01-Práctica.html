@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guion de prácticas: La química de los olores (4º ESO)</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f4f6f9;
+            color: #1a202c;
+            line-height: 1.5;
+        }
+        .hoja {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px 35px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        h1 {
+            font-size: 1.8em;
+            margin: 0 0 6px 0;
+            color: #2d3748;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 8px;
+        }
+        h2 {
+            font-size: 1.3em;
+            margin: 28px 0 12px 0;
+            color: #2b6cb0;
+            border-left: 5px solid #667eea;
+            padding-left: 10px;
+        }
+        h3 {
+            font-size: 1.1em;
+            margin: 18px 0 8px 0;
+            color: #4a5568;
+        }
+        p, li { font-size: 0.98em; }
+        ul, ol { padding-left: 1.6em; }
+        li { margin-bottom: 4px; }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 20px 0;
+            font-size: 0.88em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background: #f7fafc; }
+        .formula { font-family: 'Courier New', monospace; font-size: 0.9em; background: #edf2f7; padding: 1px 5px; border-radius: 4px; }
+        .peligro { color: #c53030; font-weight: 600; }
+        .nota { background: #fffbeb; border-left: 4px solid #f6e05e; padding: 10px 14px; border-radius: 6px; margin: 15px 0; font-size: 0.92em; }
+        .firma { margin-top: 30px; border-top: 1px dashed #a0aec0; padding-top: 12px; font-size: 0.85em; color: #718096; }
+        .registro td { height: 26px; }
+        @media print {
+            body { background: white; padding: 0; }
+            .hoja { box-shadow: none; padding: 10mm; max-width: 100%; }
+            h2 { page-break-after: avoid; }
+            table { page-break-inside: auto; }
+            tr { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+<div class="hoja">
+
+    <h1>🧪 La química de los olores en el laboratorio</h1>
+    <p><strong>Nivel:</strong> 4º ESO · <strong>Duración:</strong> 55 min · <strong>Asignatura:</strong> Física y Química / Biología y Geología</p>
+
+    <h2>🎯 Objetivos</h2>
+    <ul>
+        <li>Identificar olores característicos de algunos reactivos disponibles en el laboratorio.</li>
+        <li>Relacionar cada olor con el grupo funcional responsable.</li>
+        <li>Aprender las normas de seguridad para percibir olores sin riesgos.</li>
+        <li>Comprender que la percepción del olor depende de la estructura química y de la concentración.</li>
+    </ul>
+
+    <h2>⚠️ Normas de seguridad (obligatorio)</h2>
+    <ul>
+        <li><strong>Nunca</strong> acercar la nariz directamente al frasco ni inhalar profundamente.</li>
+        <li><strong>Siempre</strong> abanicar suavemente los vapores hacia la nariz con la mano, manteniendo el frasco a 20–30 cm.</li>
+        <li>Usar bata, guantes y gafas de seguridad.</li>
+        <li>Trabajar en campana de gases o con ventilación forzada.</li>
+        <li>Usar cantidades mínimas (1–2 gotas o una pizca).</li>
+        <li>No mezclar reactivos ni oler sustancias desconocidas.</li>
+        <li>Lavarse las manos al terminar y ventilar la zona.</li>
+    </ul>
+
+    <h2>🧴 Reactivos disponibles y preparación</h2>
+    <p>Con los reactivos del inventario se pueden reproducir <strong>6 olores</strong>. Los demás olores del taller (plátano, canela, vainilla, huevo podrido, etc.) requieren compuestos que no están disponibles; se pueden simular con esencias alimentarias o adquirir los compuestos seguros indicados al final.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Reactivo</th>
+                <th>Fórmula</th>
+                <th>Estado</th>
+                <th>Olor esperado</th>
+                <th>Grupo funcional</th>
+                <th>Preparación / dilución</th>
+                <th>Precauciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ácido acético glacial</td>
+                <td><span class="formula">CH₃–COOH</span></td>
+                <td>Líquido</td>
+                <td>Vinagre</td>
+                <td>Ácido carboxílico</td>
+                <td>Diluir a ~5 %: 1 mL en 20 mL de agua. Etiquetar como “vinagre diluido”.</td>
+                <td class="peligro">Corrosivo. Irritante. Manipular con guantes y gafas. Diluir en campana.</td>
+            </tr>
+            <tr>
+                <td>Etanol 96 %</td>
+                <td><span class="formula">C₂H₅OH</span></td>
+                <td>Líquido</td>
+                <td>Alcohol</td>
+                <td>Alcohol</td>
+                <td>No requiere dilución. Usar 1–2 gotas en algodón o vidrio de reloj.</td>
+                <td class="peligro">Inflamable. Mantener lejos de llamas. Irritante ocular.</td>
+            </tr>
+            <tr>
+                <td>Acetona</td>
+                <td><span class="formula">C₃H₆O</span></td>
+                <td>Líquido</td>
+                <td>Disolvente, dulzón</td>
+                <td>Cetona</td>
+                <td>No requiere dilución. 1–2 gotas en vidrio de reloj.</td>
+                <td class="peligro">Muy inflamable. Irritante. Evitar inhalación prolongada. Usar en campana.</td>
+            </tr>
+            <tr>
+                <td>Amoniaco 30 %</td>
+                <td><span class="formula">NH₃</span></td>
+                <td>Líquido</td>
+                <td>Amoniaco pungente</td>
+                <td>Amina / base nitrogenada</td>
+                <td>Diluir a ~1 %: 1 mL en 100 mL de agua. Etiquetar como “amoniaco diluido”.</td>
+                <td class="peligro">Irritante severo de vías respiratorias y ojos. Manipular solo en campana. Nunca oler directamente.</td>
+            </tr>
+            <tr>
+                <td>Naftaleno</td>
+                <td><span class="formula">C₁₀H₈</span></td>
+                <td>Sólido</td>
+                <td>Bolas de naftalina</td>
+                <td>Hidrocarburo aromático</td>
+                <td>Colocar 1 bolita pequeña en un frasco cerrado. Abrir solo para abanicar.</td>
+                <td class="peligro">Tóxico por inhalación. No ingerir. Evitar contacto con piel y ojos.</td>
+            </tr>
+            <tr>
+                <td>Carbonato de amonio</td>
+                <td><span class="formula">(NH₄)₂CO₃</span></td>
+                <td>Sólido</td>
+                <td>Amoniaco suave</td>
+                <td>Sal de amonio</td>
+                <td>Una pizca en un frasco pequeño. Cerrar y abanicar.</td>
+                <td class="peligro">Irritante. Evitar inhalación directa. No confundir con otros carbonatos.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="nota">
+        <strong>Nota para el profesorado:</strong> El ácido acético glacial y el amoniaco 30 % deben diluirse <em>antes</em> de la práctica, en campana y por el profesor. Los frascos se etiquetan con códigos (A, B, C, D, E, F) para que el alumnado no sepa qué contiene cada uno hasta el final.
+    </div>
+
+    <h2>🔬 Procedimiento</h2>
+    <ol>
+        <li><strong>Preparación previa (profesor):</strong> diluir los reactivos, preparar 6 frascos codificados con una pequeña muestra de cada uno. Colocar algodón o papel de filtro impregnado para los líquidos.</li>
+        <li><strong>Organización:</strong> los alumnos se colocan en grupos de 4. Cada grupo recibe una hoja de registro.</li>
+        <li><strong>Percibir olores:</strong> por turnos, cada alumno abre un frasco, abanica suavemente hacia su nariz y anota el olor percibido y el compuesto que cree que es. Cierra el frasco inmediatamente.</li>
+        <li><strong>Puesta en común:</strong> el profesor revela el contenido de cada frasco y se relaciona con el grupo funcional.</li>
+        <li><strong>Discusión:</strong> ¿por qué el amoniaco diluido huele menos? ¿qué diferencia hay entre etanol y acetona? ¿por qué el naftaleno es sólido y huele? ¿qué relación hay entre estructura y olor?</li>
+    </ol>
+
+    <h2>📋 Tabla de registro de resultados (alumno)</h2>
+    <p>Anota el código del frasco, el olor percibido, el compuesto que crees que es y su grupo funcional.</p>
+    <table class="registro">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Olor percibido</th>
+                <th>Compuesto probable</th>
+                <th>Grupo funcional</th>
+                <th>Observaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>A</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>B</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>C</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>D</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>E</td><td></td><td></td><td></td><td></td></tr>
+            <tr><td>F</td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+    </table>
+
+    <h2>❓ Cuestiones</h2>
+    <ol>
+        <li>¿Qué grupo funcional comparten el ácido acético y el ácido butírico? ¿Por qué huelen de forma parecida?</li>
+        <li>El etanol y la acetona son líquidos volátiles. ¿Por qué uno huele a alcohol y el otro a disolvente?</li>
+        <li>El amoniaco diluido huele mucho menos que el concentrado. ¿Qué nos dice esto sobre la relación entre concentración y percepción olfativa?</li>
+        <li>El naftaleno es sólido a temperatura ambiente y, sin embargo, huele. ¿Cómo es posible?</li>
+        <li>¿Por qué es peligroso oler directamente el amoniaco concentrado o el ácido acético glacial?</li>
+        <li>Busca información: ¿qué compuesto es responsable del olor a huevo podrido? ¿Está en tu inventario? ¿Por qué no se puede utilizar en el laboratorio escolar?</li>
+    </ol>
+
+    <h2>📌 Observaciones para el profesorado</h2>
+    <ul>
+        <li>Esta práctica reproduce solo una parte de los olores del taller teórico. Para completar la experiencia se recomienda adquirir:</li>
+        <ul>
+            <li><strong>Esencias alimentarias:</strong> vainilla, plátano, canela, almendra, fresa.</li>
+            <li><strong>Compuestos seguros:</strong> acetato de isoamilo (plátano), butirato de etilo (piña), benzaldehído (almendras, diluido), cinamaldehído (canela), vainillina (vainilla).</li>
+        </ul>
+        <li>Para el olor a huevo podrido <strong>no se debe generar H₂S</strong> por su toxicidad. Se puede simular con una disolución muy diluida de sulfuro de amonio, siempre en campana y con cantidades mínimas.</li>
+        <li>Se puede complementar con una pequeña exposición sobre grupos funcionales y olores, usando la tabla completa del taller teórico.</li>
+    </ul>
+
+    <div class="firma">
+        <p>IES Valle del Alberche · Departamento de Física y Química · Curso 2025-2026</p>
+    </div>
+
+</div>
+</body>
+</html>
