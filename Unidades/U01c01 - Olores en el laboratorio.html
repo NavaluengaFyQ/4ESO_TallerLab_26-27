@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#T01c01 - La química de los olores en el laboratorio</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* =========================================================
+           ESTILOS PARA LAS TABLAS POR GRUPO FUNCIONAL
+           ========================================================= */
+        .grupo-funcional {
+            margin: 25px 0;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+        .grupo-funcional .gf-header {
+            padding: 12px 18px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.05em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .grupo-funcional .gf-header .gf-icon {
+            font-size: 1.2em;
+        }
+        .grupo-funcional .gf-desc {
+            background: #f7fafc;
+            padding: 8px 18px;
+            font-size: 0.88em;
+            color: #4a5568;
+            font-style: italic;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .gf-acidos .gf-header { background: linear-gradient(135deg, #e53e3e, #c53030); }
+        .gf-esteres .gf-header { background: linear-gradient(135deg, #ed8936, #dd6b20); }
+        .gf-aldehidos .gf-header { background: linear-gradient(135deg, #38a169, #2f855a); }
+        .gf-cetonas .gf-header { background: linear-gradient(135deg, #805ad5, #6b46c1); }
+        .gf-azufre .gf-header { background: linear-gradient(135deg, #d69e2e, #b7791f); }
+        .gf-aminas .gf-header { background: linear-gradient(135deg, #3182ce, #2b6cb0); }
+        .gf-heterociclicos .gf-header { background: linear-gradient(135deg, #dd6b20, #c05621); }
+        .gf-terpenos .gf-header { background: linear-gradient(135deg, #38b2ac, #319795); }
+        .gf-fenoles .gf-header { background: linear-gradient(135deg, #e53e3e, #9b2c2c); }
+
+        .tabla-olores {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            font-size: 0.9em;
+            background: white;
+        }
+        .tabla-olores thead {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .tabla-olores th {
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9em;
+            border-bottom: 2px solid #cbd5e0;
+        }
+        .tabla-olores td {
+            padding: 9px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        .tabla-olores tbody tr:nth-child(even) {
+            background: #f9fafc;
+        }
+        .tabla-olores tbody tr:hover {
+            background: #ebf4ff;
+        }
+        .tabla-olores .formula {
+            font-family: 'Courier New', monospace;
+            font-size: 0.88em;
+            color: #2b3a67;
+            background: #edf2f7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        .tabla-olores .olor {
+            font-weight: 600;
+            color: #c05621;
+        }
+        .tabla-olores .nota {
+            font-size: 0.86em;
+            color: #4a5568;
+        }
+
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA OBLIGATORIA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#T01c01.- </span>
+                <span class="texto">La química de los olores en el laboratorio</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 Enunciado</h2>
+        <p>Partiendo de la idea de que <strong>la estructura química de una molécula determina sus propiedades físicas y, entre ellas, su olor</strong>, vamos a explorar una amplia colección de compuestos cotidianos y no tan cotidianos que podemos encontrar (o producir) en un laboratorio escolar. Muchos de ellos los reconocerás por su aroma: limón, vinagre, plátano, canela… pero otros te sorprenderán por olores mucho menos agradables: huevo podrido, vómito, pescado en descomposición o incluso heces.</p>
+        <div class="formula-box">\[ \text{Estructura química} \;\Longrightarrow\; \text{Propiedades} \;\Longrightarrow\; \text{Olor característico} \]</div>
+        <p>El objetivo es que aprendas a asociar cada olor con su compuesto responsable, su fórmula semidesarrollada y el <strong>grupo funcional</strong> que lo caracteriza. Además, descubrirás que <em>pequeñísimos cambios en la estructura</em> (un grupo funcional, un átomo de azufre, etc.) transforman por completo el aroma.</p>
+
+            <img src="../imagenes/U01c01 - Olores en el laboratorio 01.png" alt="_._._" width="800">
+
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 Objetivo</h2>
+        <p>Identificar los principales compuestos químicos responsables de olores característicos que aparecen en el laboratorio y en la vida cotidiana, <strong>agrupándolos por familias funcionales</strong> (ácidos carboxílicos, ésteres, aldehídos, cetonas, compuestos de azufre, aminas, heterociclos, terpenos y fenoles) y relacionando cada uno con su fórmula semidesarrollada y su olor. Comprender que la percepción del olor depende de la estructura molecular y de la concentración del compuesto.</p>
+    </div>
+
+    <!-- SECCIÓN PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Procedimiento</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>¿Qué es el olor?</strong>
+            <p>El olor es la percepción que tenemos cuando las moléculas volátiles llegan a los receptores olfativos de la nariz. Para que una sustancia huela, debe ser <strong>volátil</strong> (pasar al aire con facilidad) y <strong>liposoluble</strong> (disolverse en las mucosas). Los compuestos con grupos funcionales como ésteres, aldehídos, tioles o aminas suelen ser muy olorosos.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Grupos funcionales y olores típicos</strong>
+            <p>Existe una relación directa entre el grupo funcional y el tipo de olor. A grandes rasgos:</p>
+            <ul>
+                <li><strong>Ácidos carboxílicos</strong> → vinagre, mantequilla rancia, sudor, pies.</li>
+                <li><strong>Ésteres</strong> → olores afrutados (plátano, piña, fresa).</li>
+                <li><strong>Aldehídos</strong> → canela, vainilla, almendras, manzana, chocolate.</li>
+                <li><strong>Cetonas</strong> → mantequilla, caramelo, olores desagradables.</li>
+                <li><strong>Tioles y sulfuros</strong> → huevo podrido, col podrida, gas, mar.</li>
+                <li><strong>Aminas y compuestos nitrogenados</strong> → pescado, carne podrida, orina, amoniaco.</li>
+                <li><strong>Heterociclos aromáticos</strong> → heces, floral, palomitas, caramelo.</li>
+                <li><strong>Terpenos</strong> → cítricos, menta, eucalipto, alcanfor, tierra mojada.</li>
+                <li><strong>Fenoles</strong> → medicinal, hospital.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Tabla de compuestos agrupados por familia funcional</strong>
+            <p>A continuación se recoge una amplia selección de compuestos, <strong>organizados por grupos funcionales</strong>, con su fórmula semidesarrollada, su olor característico y una nota didáctica. ¡Algunos te resultarán muy familiares y otros te harán arrugar la nariz!</p>
+
+            <!-- ==================== ÁCIDOS CARBOXÍLICOS ==================== -->
+            <div class="grupo-funcional gf-acidos">
+                <div class="gf-header">
+                    <span class="gf-icon">🧪</span>
+                    <span>1. ÁCIDOS CARBOXÍLICOS (R–COOH)</span>
+                </div>
+                <div class="gf-desc">Grupo funcional –COOH. Olores ácidos, rancios, a sudor y a vinagre.</div>
+                <table class="tabla-olores">
+                    <thead>
+                        <tr>
+                            <th>Compuesto</th>
+                            <th>Fórmula semidesarrollada</th>
+                            <th>Olor</th>
+                            <th>Nota curiosa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ácido cítrico</td>
+                            <td><span class="formula">HOOC–CH₂–C(OH)(COOH)–CH₂–COOH</span></td>
+                            <td class="olor">Limón</td>
+                            <td class="nota">Responsable del sabor ácido y aroma fresco de los cítricos.</td>
+                        </tr>
+                        <tr>
+                            <td>Ácido acético</td>
+                            <td><span class="formula">CH₃–COOH</span></td>
+                            <td class="olor">Vinagre</td>
+                            <td class="nota">Componente principal del vinagre; se produce en la fermentación del vino.</td>
+                        </tr>
+                        <tr>
+                            <td>Ácido fórmico</td>
+                            <td><span class="formula">H–COOH</span></td>
+                            <td class="olor">Picadura de hormiga</td>
+                            <td class="nota">Es el responsable del dolor y olor de la picadura de las hormigas. El nombre viene del latín <em>formica</em> (hormiga).</td>
+                        </tr>
+                        <tr>
+                            <td>Ácido butírico (butanoico)</td>
+                            <td><span class="formula">CH₃–CH₂–CH₂–COOH</span></td>
+                            <td class="olor">Vómito / Mantequilla rancia</td>
+                            <td class="nota">Principal responsable del olor de la mantequilla rancia y del vómito.</td>
+                        </tr>
+                        <tr>
+                            <td>Ácido valérico (pentanoico)</td>
+                            <td><span class="formula">CH₃–(CH₂)₃–COOH</span></td>
+                            <td class="olor">Pies sudorosos / Queso curado</td>
+                            <td class="nota">Responsable del olor a sudor de pies y de algunos quesos fuertes. ¡Se detecta a concentraciones ínfimas!</td>
+                        </tr>
+                        <tr>
+                            <td>Ácido láctico</td>
+                            <td><span class="formula">CH₃–CH(OH)–COOH</span></td>
+                            <td class="olor">Leche agria / Sudor</td>
+                            <td class="nota">Se produce en la fermentación de la leche y en el músculo durante el ejercicio intenso.</td>
+                        </tr>
+                        <tr>
+                            <td>Ácido úrico</td>
+                            <td><span class="formula">C₅H₄N₄O₃</span></td>
+                            <td class="olor">Orina / Amoniaco (al descomponerse)</td>
+                            <td class="nota">Principal producto nitrogenado de la orina humana y de las aves. Puro es inodoro, pero al descomponerse libera amoniaco.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ==================== ÉSTERES ==================== -->
+            <div class="grupo-funcional gf-esteres">
+                <div class="gf-header">
+                    <span class="gf-icon">🍌</span>
+                    <span>2. ÉSTERES (R–COO–R')</span>
+                </div>
+                <div class="gf-desc">Grupo funcional –COO–. Olores afrutados, dulces y agradables.</div>
+                <table class="tabla-olores">
+                    <thead>
+                        <tr>
+                            <th>Compuesto</th>
+                            <th>Fórmula semidesarrollada</th>
+                            <th>Olor</th>
+                            <th>Nota curiosa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Butanoato de etilo</td>
+                            <td><span class="formula">CH₃–CH₂–CH₂–COO–CH₂–CH₃</span></td>
+                            <td class="olor">Piña / Vómito</td>
+                            <td class="nota">A baja concentración huele a piña; a alta, se asocia al vómito.</td>
+                        </tr>
+                        <tr>
+                            <td>Acetato de isoamilo</td>
+                            <td><span class="formula">CH₃–COO–CH₂–CH₂–CH(CH₃)–CH₃</span></td>
+                            <td class="olor">Plátano</td>
+                            <td class="nota">Éster que da al plátano su olor característico; usado como saborizante.</td>
+                        </tr>
+                        <tr>
+                            <td>Butirato de isoamilo</td>
+                            <td><span class="formula">CH₃–CH₂–CH₂–COO–CH₂–CH₂–CH(CH₃)–CH₃</span></td>
+                            <td class="olor">Plátano / Piña</td>
+                            <td class="nota">Éster afrutado empleado en aromas artificiales.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ==================== ALDEHÍDOS ==================== -->
+            <div class="grupo-funcional gf-aldehidos">
+                <div class="gf-header">
+                    <span class="gf-icon">🌰</span>
+                    <span>3. ALDEHÍDOS (R–CHO)</span>
+                </div>
+                <div class="gf-desc">Grupo funcional –CHO. Olores a frutas, canela, vainilla, almendras y chocolate.</div>
+                <table class="tabla-olores">
+                    <thead>
+                        <tr>
+                            <th>Compuesto</th>
+                            <th>Fórmula semidesarrollada</th>
+                            <th>Olor</th>
+                            <th>Nota curiosa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Cinamaldehído</td>
+                            <td><span class="formula">C₆H₅–CH=CH–CHO</span></td>
+                            <td class="olor">Canela</td>
+                            <td class="nota">Compuesto que da a la canela su aroma y sabor.</td>
+                        </tr>
+                        <tr>
+                            <td>Vainillina</td>
+                            <td><span class="formula">CH₃O–C₆H₃(OH)–CHO</span></td>
+                            <td class="olor">Vainilla</td>
+                            <td class="nota">El aromatizante más famoso del mundo; 4-hidroxi-3-metoxibenzaldehído.</td>
+                        </tr>
+                        <tr>
+                            <td>Benzaldehído</td>
+                            <td><span class="formula">C₆H₅–CHO</span></td>
+                            <td class="olor">Almendras amargas</td>
+                            <td class="nota">Olor característico del extracto de almendra; tóxico en grandes cantidades.</td>
+                        </tr>
+                        <tr>
+                            <td>Acetaldehído</td>
+                            <td><span class="formula">CH₃–CHO</span></td>
+                            <td class="olor">Manzana verde / Resaca</td>
+                            <td class="nota">Se produce en la metabolización del alcohol y es responsable del olor a "resaca". También huele a manzana verde.</td>
+                        </tr>
+                        <tr>
+                            <td>Isobutiraldehído</td>
+                            <td><span class="formula">(CH₃)₂CH–CHO</span></td>
+                            <td class="olor">Chocolate</td>
+                            <td class="nota">Compuesto volátil que contribuye al aroma del chocolate y del cacao.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ==================== CETONAS ==================== -->
+            <div class="grupo-funcional gf-cetonas">
+                <div class="gf-header">
+                    <span class="gf-icon">🧈</span>
+                    <span>4. CETONAS (R–CO–R')</span>
+                </div>
+                <div class="gf-desc">Grupo funcional –CO–. Olores a mantequilla, caramelo o desagradables.</div>
+                <table class="tabla-olores">
+                    <thead>
+                        <tr>
+                            <th>Compuesto</th>
+                            <th>Fórmula semidesarrollada</th>
+                            <th>Olor</th>
+                            <th>Nota curiosa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Diacetilo (butanodiona)</td>
+                            <td><span class="formula">CH₃–CO–CO–CH₃</span></td>
+                            <td class="olor">Mantequilla</td>
+                            <td class="nota">Responsable del sabor y olor de la mantequilla. Se usa en palomitas de microondas.</td>
+                        </tr>
+                        <tr>
+                            <td>Tioacetona (tiocetona)</td>
+                            <td><span class="formula">(CH₃)₂C=S</span></td>
+                            <td class="olor">Extremadamente desagradable</td>
+                            <td class="nota">Considerado uno de los compuestos con peor olor del mundo. En un incidente en 1889, un derrame provocó náuseas y evacuaciones en toda una ciudad.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ==================== COMPUESTOS DE AZUFRE ==================== -->
+            <div class="grupo-funcional gf-azufre">
+                <div class="gf-header">
+                    <span class="gf-icon">🥚</span>
+                    <span>5. COMPUESTOS DE AZUFRE (tioles y sulfuros)</span>
+                </div>
+                <div class="gf-desc">Grupos –SH (tiol) y –S– (sulfuro). Olores a huevo podrido, col, gas y mar.</div>
+                <table class="tabla-olores">
+                    <thead>
+                        <tr>
+                            <th>Compuesto</th>
+                            <th>Fórmula semidesarrollada</th>
+                            <th>Olor</th>
+                            <th>Nota curiosa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sulfuro de hidrógeno</td>
+                            <td><span class="formula">H–S–H</span></td>
+                            <td class="olor">Huevo podrido</td>
+                            <td class="nota">Gas incoloro y muy tóxico; se libera al descomponerse las proteínas del huevo.</td>
+                        </tr>
+                        <tr>
+                            <td>Metanotiol (metilmercaptano)</td>
+                            <td><span class="formula">CH₃–SH</span></td>
+                            <td class="olor">Col podrida / Gas</td>
+                            <td class="nota">Se añade al gas natural para detectar fugas; también causa mal aliento.</td>
+                        </tr>
+                        <tr>
+                            <td>Sulfuro de dimetilo</td>
+                            <td><span class="formula">CH₃–S–CH₃</span></td>
+                            <td class="olor">Mar / Alga / Col cocida</td>
+                            <td class="nota">Es el compuesto que da el característico olor a mar y a algas. También se libera al cocer col.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ==================== AMINAS Y COMPUESTOS NITROGENADOS ==================== -->
+            <div class="grupo-funcional gf-aminas">
+                <div class="gf-header">
+                    <span class="gf-icon">🐟</span>
+                    <span>6. AMINAS Y COMPUESTOS NITROGENADOS</span>
+                </div>
+                <div class="gf-desc">Grupos –NH₂, –NH–, –N– y compuestos nitrogenados. Olores a pescado, carne podrida, orina y amoniaco.</div>
+                <table class="tabla-olores">
+                    <thead>
+                        <tr>
+                            <th>Compuesto</th>
+                            <th>Fórmula semidesarrollada</th>
+                            <th>Olor</th>
+                            <th>Nota curiosa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Trimetilamina</td>
+                            <td><span class="formula">(CH₃)₃N</span></td>
+                            <td class="olor">Pescado en descomposición</td>
+                            <td class="nota">Se forma por descomposición bacteriana del pescado.</td>
+                        </tr>
+                        <tr>
+                            <td>Putrescina</td>
+                            <td><span class="formula">H₂N–CH₂–CH₂–CH₂–CH₂–NH₂</span></td>
+                            <td class="olor">Carne en descomposición</td>
+                            <td class="nota">Amina responsable del olor de la carne podrida.</td>
+                        </tr>
+                        <tr>
+                            <td>Cadaverina</td>
+                            <td><span class="formula">H₂N–CH₂–CH₂–CH₂–CH₂–CH₂–NH₂</span></td>
+                            <td class="olor">Carne en descomposición</td>
+                            <td class="nota">Otra amina con olor repugnante; su nombre lo dice todo.</td>
+                        </tr>
+                        <tr>
+                            <td>Amoníaco</td>
+                            <td><span class="formula">NH₃</span></td>
+                            <td class="olor">Amoniaco / Orina</td>
+                            <td class="nota">Gas incoloro con olor penetrante. Se usa en limpiadores y fertilizantes.</td>
+                        </tr>
+                        <tr>
+                            <td>Urea</td>
+                            <td><span class="formula">CO(NH₂)₂</span></td>
+                            <td class="olor">Amoniaco (al descomponerse)</td>
+                            <td class="nota">Presente en la orina. Por acción de la ureasa se descompone en amoníaco, de ahí el olor de la orina vieja.</td>
+                        </tr>
+                        <tr>
+                            <td>Piridina</td>
+                            <td><span class="formula">C₅H₅N</span></td>
+                            <td class="olor">Pescado / Quemado</td>
+                            <td class="nota">Base nitrogenada heterocíclica con olor desagradable y penetrante. Se usa en síntesis química.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ==================== HETEROCICLOS AROMÁTICOS ==================== -->
+            <div class="grupo-funcional gf-heterociclicos">
+                <div class="gf-header">
+                    <span class="gf-icon">🍿</span>
+                    <span>7. COMPUESTOS HETEROCÍCLICOS AROMÁTICOS</span>
+                </div>
+                <div class="gf-desc">Anillos con nitrógeno u oxígeno. Olores fecales, florales, a palomitas y a caramelo.</div>
+                <table class="tabla-olores">
+                    <thead>
+                        <tr>
+                            <th>Compuesto</th>
+                            <th>Fórmula semidesarrollada</th>
+                            <th>Olor</th>
+                            <th>Nota curiosa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Escatol (3-metilindol)</td>
+                            <td><span class="formula">C₉H₉N</span> (3-metil-1H-indol)</td>
+                            <td class="olor">Heces / Excremento</td>
+                            <td class="nota">A concentraciones muy bajas se usa en perfumería con notas florales.</td>
+                        </tr>
+                        <tr>
+                            <td>Indol</td>
+                            <td><span class="formula">C₈H₇N</span></td>
+                            <td class="olor">Floral / Fecal</td>
+                            <td class="nota">Como el escatol, a baja concentración huele a jazmín; a alta, a heces. Se usa en perfumería.</td>
+                        </tr>
+                        <tr>
+                            <td>2-Acetil-1-pirrolina</td>
+                            <td><span class="formula">CH₃–CO–C₄H₆N</span> (anillo pirrolínico)</td>
+                            <td class="olor">Palomitas de maíz</td>
+                            <td class="nota">También responsable del olor de la orina del binturong.</td>
+                        </tr>
+                        <tr>
+                            <td>Furaneol</td>
+                            <td><span class="formula">C₆H₈O₃</span></td>
+                            <td class="olor">Caramelo / Fresa</td>
+                            <td class="nota">Compuesto clave en el aroma de la fresa y del caramelo. Se forma al calentar azúcares.</td>
+                        </tr>
+                        <tr>
+                            <td>Maltol</td>
+                            <td><span class="formula">C₆H₆O₃</span></td>
+                            <td class="olor">Caramelo / Tostado</td>
+                            <td class="nota">Responsable del olor a caramelo y pan tostado. Se usa en repostería y perfumería.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ==================== TERPENOS ==================== -->
+            <div class="grupo-funcional gf-terpenos">
+                <div class="gf-header">
+                    <span class="gf-icon">🍊</span>
+                    <span>8. TERPENOS</span>
+                </div>
+                <div class="gf-desc">Formados por unidades de isopreno (C₅H₈). Olores cítricos, menta, eucalipto, alcanfor y tierra mojada.</div>
+                <table class="tabla-olores">
+                    <thead>
+                        <tr>
+                            <th>Compuesto</th>
+                            <th>Fórmula semidesarrollada</th>
+                            <th>Olor</th>
+                            <th>Nota curiosa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Limoneno</td>
+                            <td><span class="formula">C₁₀H₁₆</span></td>
+                            <td class="olor">Naranja / Limón</td>
+                            <td class="nota">Terpeno presente en la cáscara de los cítricos. Es el responsable de su olor fresco.</td>
+                        </tr>
+                        <tr>
+                            <td>Mentol</td>
+                            <td><span class="formula">C₁₀H₂₀O</span></td>
+                            <td class="olor">Menta</td>
+                            <td class="nota">Compuesto que da el olor refrescante a la menta. Se usa en chicles, pasta de dientes y medicamentos.</td>
+                        </tr>
+                        <tr>
+                            <td>Eucaliptol (cineol)</td>
+                            <td><span class="formula">C₁₀H₁₈O</span></td>
+                            <td class="olor">Eucalipto</td>
+                            <td class="nota">Componente principal del aceite de eucalipto. Se usa en jarabes y bálsamos para la tos.</td>
+                        </tr>
+                        <tr>
+                            <td>Alcanfor</td>
+                            <td><span class="formula">C₁₀H₁₆O</span> (estructura bicíclica)</td>
+                            <td class="olor">Alcanfor / Menta</td>
+                            <td class="nota">Olor penetrante y refrescante; usado en ungüentos y repelentes.</td>
+                        </tr>
+                        <tr>
+                            <td>Geosmina</td>
+                            <td><span class="formula">C₁₂H₂₂O</span> (estructura bicíclica)</td>
+                            <td class="olor">Tierra mojada (petricor)</td>
+                            <td class="nota">Producida por bacterias del suelo; se libera cuando llueve sobre tierra seca.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <img src="../imagenes/U01c01 - Olores en el laboratorio 02.png" alt="_._._" width="300">
+            </div>
+
+
+            <!-- ==================== FENOLES ==================== -->
+            <div class="grupo-funcional gf-fenoles">
+                <div class="gf-header">
+                    <span class="gf-icon">🏥</span>
+                    <span>9. FENOLES</span>
+                </div>
+                <div class="gf-desc">Grupo –OH unido a un anillo aromático. Olores medicinales.</div>
+                <table class="tabla-olores">
+                    <thead>
+                        <tr>
+                            <th>Compuesto</th>
+                            <th>Fórmula semidesarrollada</th>
+                            <th>Olor</th>
+                            <th>Nota curiosa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fenol</td>
+                            <td><span class="formula">C₆H₅–OH</span></td>
+                            <td class="olor">Medicinal / Hospital</td>
+                            <td class="nota">Antiséptico con olor característico a hospital. Fue el primer antiséptico usado en cirugía por Lister.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Concentración y percepción</strong>
+            <p>Un mismo compuesto puede oler de forma muy distinta según su concentración. El caso más famoso es el <strong>escatol</strong>: a concentraciones altas huele a excremento, pero a concentraciones muy bajas (diluidísimo) se utiliza en perfumería para aportar notas florales de jazmín. Lo mismo ocurre con el <strong>indol</strong> y con el <strong>butanoato de etilo</strong>. Esto demuestra que <em>la nariz no detecta solo la molécula, sino también cuántas moléculas hay por unidad de volumen</em>.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Pequeños cambios, grandes olores</strong>
+            <p>Compara el <strong>ácido butírico</strong> (CH₃–CH₂–CH₂–COOH, olor a vómito) con el <strong>butanoato de etilo</strong> (CH₃–CH₂–CH₂–COO–CH₂–CH₃, olor a piña a baja concentración). La diferencia está en un solo grupo funcional: el ácido –COOH frente al éster –COO–CH₂–CH₃. Un cambio mínimo en la estructura produce un olor completamente distinto. Lo mismo ocurre entre el <strong>ácido acético</strong> (vinagre) y el <strong>acetato de isoamilo</strong> (plátano).</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 Resultado</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            \[ \text{Olor} = f(\text{estructura química}, \text{grupo funcional}, \text{concentración}, \text{receptor olfativo}) \]
+        </div>
+        <div class="note">
+            <strong>Observaciones:</strong> Es fundamental insistir en que <em>el olor no es una propiedad intrínseca de la materia</em>, sino el resultado de la interacción entre las moléculas volátiles y nuestros receptores olfativos. El <strong>grupo funcional</strong> es el principal responsable del tipo de olor: los ésteres huelen a frutas, los ácidos carboxílicos a vinagre o sudor, los tioles a huevo podrido, las aminas a pescado, etc. La misma molécula puede oler de forma agradable o desagradable según su concentración (escatol, indol, butanoato de etilo). Además, conviene recordar que en el laboratorio <strong>nunca se debe acercar la nariz directamente a un frasco</strong>: se debe abanicar suavemente el vapor hacia la nariz con la mano.
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- BLOQUE DESPLEGABLE                                        -->
+    <!-- ========================================================= -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO La química de los olores en el laboratorio</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Identificación de grupos funcionales a partir del olor</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Se te presentan cuatro frascos sin etiqueta con los siguientes olores:</p>
+                    <ul>
+                        <li>Frasco A: huele a plátano.</li>
+                        <li>Frasco B: huele a vinagre.</li>
+                        <li>Frasco C: huele a huevo podrido.</li>
+                        <li>Frasco D: huele a almendras amargas.</li>
+                    </ul>
+                    <p>Indica el grupo funcional más probable de cada frasco y propón un compuesto concreto para cada uno.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> El olor a plátano es típico de los <strong>ésteres</strong>. El compuesto responsable es el <em>acetato de isoamilo</em>, CH₃–COO–CH₂–CH₂–CH(CH₃)–CH₃.</div>
+                    <div class="paso"><strong>Paso 2:</strong> El olor a vinagre corresponde a un <strong>ácido carboxílico</strong>: el <em>ácido acético</em>, CH₃–COOH.</div>
+                    <div class="paso"><strong>Paso 3:</strong> El olor a huevo podrido es característico de los <strong>compuestos de azufre</strong> (tioles y sulfuros). En este caso, el <em>sulfuro de hidrógeno</em>, H–S–H.</div>
+                    <div class="paso"><strong>Paso 4:</strong> El olor a almendras amargas corresponde a un <strong>aldehído aromático</strong>: el <em>benzaldehído</em>, C₆H₅–CHO.</div>
+                    <div class="paso"><strong>Resultado:</strong> A → éster (acetato de isoamilo); B → ácido carboxílico (ácido acético); C → sulfuro (H₂S); D → aldehído (benzaldehído).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Un mismo olor, dos compuestos distintos</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El acetato de isoamilo y el butirato de isoamilo huelen ambos a plátano (o frutas tropicales). Escribe sus fórmulas semidesarrolladas y explica en qué se diferencian estructuralmente.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Acetato de isoamilo: CH₃–COO–CH₂–CH₂–CH(CH₃)–CH₃.</div>
+                    <div class="paso"><strong>Paso 2:</strong> Butirato de isoamilo: CH₃–CH₂–CH₂–COO–CH₂–CH₂–CH(CH₃)–CH₃.</div>
+                    <div class="paso"><strong>Paso 3:</strong> Ambos son <strong>ésteres</strong> y comparten el mismo alcohol (alcohol isoamílico). La diferencia está en el ácido del que provienen: el acetato procede del ácido acético (2 carbonos) y el butirato del ácido butírico (4 carbonos).</div>
+                    <div class="paso"><strong>Resultado:</strong> Comparten grupo funcional éster (–COO–) y olor afrutado, pero difieren en la longitud de la cadena del ácido. Esto demuestra que <em>dentro de un mismo grupo funcional, pequeños cambios en la cadena modifican matices del olor</em>.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>El efecto de la concentración: el escatol y el indol</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El escatol (C₉H₉N) y el indol (C₈H₇N) huelen a excremento a concentraciones altas, pero se utilizan en perfumería a concentraciones muy bajas para aportar notas florales. Explica razonadamente por qué ocurre esto y qué implicación didáctica tiene.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Nuestros receptores olfativos se saturan a concentraciones altas. Cuando hay muchísimas moléculas, la señal que llega al cerebro se interpreta como desagradable.</div>
+                    <div class="paso"><strong>Paso 2:</strong> A concentraciones muy bajas, solo unas pocas moléculas alcanzan los receptores y la percepción cambia por completo: se percibe como una nota floral (jazmín).</div>
+                    <div class="paso"><strong>Paso 3:</strong> El olor <strong>no depende solo de la molécula</strong>, sino también de su concentración. Esto explica por qué muchas sustancias con olor desagradable pueden ser agradables en dosis mínimas.</div>
+                    <div class="paso"><strong>Resultado:</strong> La percepción olfativa es un fenómeno dependiente de la concentración. Es un ejemplo perfecto de que "la dosis hace el veneno" (y también el perfume).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>De ácido a éster: el mismo esqueleto, distinto olor</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El ácido butírico (CH₃–CH₂–CH₂–COOH) huele a vómito, mientras que el butanoato de etilo (CH₃–CH₂–CH₂–COO–CH₂–CH₃) huele a piña a baja concentración. Compara ambas fórmulas y explica la diferencia.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Ambas moléculas comparten el mismo esqueleto de 4 carbonos (butano).</div>
+                    <div class="paso"><strong>Paso 2:</strong> En el ácido butírico el grupo funcional es <strong>–COOH</strong> (ácido carboxílico). En el butanoato de etilo es <strong>–COO–CH₂–CH₃</strong> (éster).</div>
+                    <div class="paso"><strong>Paso 3:</strong> El grupo funcional determina las interacciones con los receptores olfativos. El ácido carboxílico se percibe como desagradable (sudor, vómito, mantequilla rancia), mientras que el éster se percibe como afrutado.</div>
+                    <div class="paso"><strong>Resultado:</strong> Un solo cambio de grupo funcional (ácido → éster) transforma por completo el olor. Es uno de los ejemplos más claros de la relación estructura–propiedades.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>Aminas y pescado: la trimetilamina</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La trimetilamina, (CH₃)₃N, es la responsable del olor a pescado en descomposición. Indica a qué familia de compuestos pertenece, escribe su fórmula semidesarrollada y explica por qué el pescado fresco no huele mal pero el pescado viejo sí.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> La trimetilamina es una <strong>amina terciaria</strong> (el nitrógeno está unido a tres grupos metilo).</div>
+                    <div class="paso"><strong>Paso 2:</strong> Fórmula semidesarrollada: (CH₃)₃N, o también CH₃–N(CH₃)–CH₃.</div>
+                    <div class="paso"><strong>Paso 3:</strong> El pescado fresco contiene óxido de trimetilamina (OTMA), que no huele mal. Al descomponerse, las bacterias reducen el OTMA a trimetilamina, que sí tiene un olor muy desagradable.</div>
+                    <div class="paso"><strong>Resultado:</strong> La trimetilamina pertenece a las aminas. El olor a pescado viejo es una consecuencia directa de la actividad bacteriana sobre el OTMA del pescado fresco.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>El petricor: la geosmina y la lluvia</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El olor a tierra mojada (petricor) se debe a la geosmina, un compuesto bicíclico de fórmula molecular C₁₂H₂₂O. Explica de dónde procede este olor y por qué se percibe especialmente cuando llueve tras un periodo seco.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> La geosmina es producida por bacterias del suelo (como <em>Streptomyces</em>) y también por algunas cianobacterias.</div>
+                    <div class="paso"><strong>Paso 2:</strong> En periodos secos, la geosmina se acumula en el suelo. Cuando las primeras gotas de lluvia golpean la tierra, se libera en forma de aerosol y llega a nuestra nariz.</div>
+                    <div class="paso"><strong>Paso 3:</strong> Nuestro olfato es extremadamente sensible a la geosmina: podemos detectarla a concentraciones de apenas 5 partes por billón.</div>
+                    <div class="paso"><strong>Resultado:</strong> El petricor es un ejemplo de cómo un compuesto producido por microorganismos del suelo puede generar una experiencia olfativa universal y muy agradable.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Normas de seguridad: ¿cómo se huelen las sustancias en el laboratorio?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En el laboratorio escolar vamos a trabajar con sustancias olorosas. Describe el procedimiento correcto para percibir el olor de una sustancia desconocida y explica por qué <strong>nunca</strong> se debe acercar la nariz directamente al frasco.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Nunca se debe acercar la nariz directamente al frasco ni inhalar profundamente. Muchos compuestos volátiles pueden ser tóxicos o irritantes (H₂S, metanotiol, benzaldehído…).</div>
+                    <div class="paso"><strong>Paso 2:</strong> El procedimiento correcto es <strong>abanicar suavemente</strong> los vapores hacia la nariz con la mano, manteniendo el frasco a una distancia prudencial (unos 20–30 cm).</div>
+                    <div class="paso"><strong>Paso 3:</strong> Se aspira con cuidado y se retira inmediatamente la mano. Si el olor es muy fuerte o desagradable, se detiene la experiencia y se ventila la zona.</div>
+                    <div class="paso"><strong>Resultado:</strong> La norma de oro es: <em>"nunca huelas directamente, siempre abanica"</em>. Esta práctica protege nuestras mucosas y evita intoxicaciones por compuestos volátiles peligrosos.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 8 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 8</span>
+                    <span>El gas natural y el metanotiol</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El gas natural (metano, CH₄) es inodoro. Sin embargo, cuando llega a nuestras casas huele a "gas". Explica qué compuesto se añade para que podamos detectar fugas, escribe su fórmula semidesarrollada y razona por qué se eligió ese compuesto y no otro.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> El metano puro es inodoro, por lo que una fuga sería indetectable sin ayuda.</div>
+                    <div class="paso"><strong>Paso 2:</strong> Se añade <strong>metanotiol</strong> (o metilmercaptano), CH₃–SH, en concentraciones muy bajas.</div>
+                    <div class="paso"><strong>Paso 3:</strong> Se eligió porque es extremadamente oloroso (se detecta a concentraciones de partes por billón), es volátil y estable, y no resulta tóxico a las dosis utilizadas.</div>
+                    <div class="paso"><strong>Resultado:</strong> El metanotiol es un ejemplo de compuesto organosulfurado con un olor muy intenso y desagradable, utilizado precisamente por eso como sistema de seguridad.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 9 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 9</span>
+                    <span>El ácido úrico y el olor de la orina</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El ácido úrico (C₅H₄N₄O₃) es el principal producto nitrogenado de la orina humana. Sin embargo, el ácido úrico puro es prácticamente inodoro. Explica por qué la orina vieja huele a amoniaco y qué relación tiene esto con el ácido úrico y la urea.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> La orina fresca contiene urea (CO(NH₂)₂) y ácido úrico (C₅H₄N₄O₃), entre otras sustancias. Ninguna de las dos huele fuertemente por sí sola.</div>
+                    <div class="paso"><strong>Paso 2:</strong> Con el tiempo, las bacterias descomponen la urea mediante la enzima <em>ureasa</em>, liberando <strong>amoníaco</strong> (NH₃), que es el responsable del olor penetrante.</div>
+                    <div class="paso"><strong>Paso 3:</strong> El ácido úrico también se descompone lentamente, contribuyendo a la liberación de compuestos nitrogenados volátiles.</div>
+                    <div class="paso"><strong>Resultado:</strong> El olor a "orina vieja" no lo produce el ácido úrico directamente, sino el amoníaco liberado por la descomposición bacteriana de la urea y, en menor medida, del ácido úrico. Es un ejemplo de cómo el olor cambia con las reacciones químicas y biológicas.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 10 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 10</span>
+                    <span>Terpenos: limoneno, mentol y eucaliptol</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El limoneno (C₁₀H₁₆), el mentol (C₁₀H₂₀O) y el eucaliptol (C₁₀H₁₈O) son terpenos con olores muy característicos. Indica el olor de cada uno y explica qué tienen en común desde el punto de vista estructural.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Limoneno → olor a naranja/limón. Mentol → olor a menta. Eucaliptol → olor a eucalipto.</div>
+                    <div class="paso"><strong>Paso 2:</strong> Los tres son <strong>terpenos</strong>, una familia de compuestos naturales formados por unidades de isopreno (C₅H₈).</div>
+                    <div class="paso"><strong>Paso 3:</strong> Comparten un esqueleto de 10 carbonos (monoterpenos), pero difieren en los grupos funcionales y en la posición de los dobles enlaces, lo que les confiere olores distintos.</div>
+                    <div class="paso"><strong>Resultado:</strong> Limoneno (cítrico), mentol (menta) y eucaliptol (eucalipto) son monoterpenos con olores característicos. Su estructura común explica que todos sean volátiles y aromáticos, y sus diferencias explican la variedad de olores.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Observaciones claves:</strong> El olor no es una propiedad "mágica" de la materia, sino el resultado de la interacción entre moléculas volátiles y nuestros receptores olfativos. El <strong>grupo funcional</strong> determina el tipo de olor: ésteres → frutas; ácidos carboxílicos → vinagre/sudor; tioles → huevo podrido; aminas → pescado/carne podrida; aldehídos → canela/vainilla/almendras; terpenos → cítricos/menta/eucalipto. La misma molécula puede oler de forma muy distinta según su concentración (escatol, indol, butanoato de etilo). Pequeños cambios estructurales transforman por completo el aroma. Y recuerda: en el laboratorio, <strong>siempre se abanica, nunca se inhala directamente</strong>.
+            </div>
+        </div>
+    </details>
+
+    <!-- ============================================
+         BLOQUE "ES HORA DE"
+         ============================================ -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br> La química de los olores<br>
+                <i>(----).</i>
+            </p>
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- fin container -->
+</body>
+</html>
