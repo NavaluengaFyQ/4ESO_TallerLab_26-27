@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c08 - Poliacrilato de sodio: el polímero que "traga" agua</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c08.- </span>
+                <span class="texto">Poliacrilato de sodio: el polímero que "traga" agua</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿Qué es el poliacrilato de sodio?</h2>
+        <p>El <strong>poliacrilato de sodio</strong> es un <strong>polímero superabsorbente</strong> (SAP, <em>Super Absorbent Polymer</em>) que tiene una capacidad asombrosa: puede absorber <strong>hasta 300 veces su peso en agua</strong> (y en agua destilada, incluso más). Es el componente secreto de los pañales, y también se usa para fabricar nieve artificial, retener agua en jardinería y en muchísimos productos industriales.</p>
+        <p>Su fórmula química general es:</p>
+        <div class="formula-box">
+            \[
+            \mathrm{[-CH_2-CH(CO_2Na)-]_n}
+            \]
+        </div>
+        <p>Es un polvo blanco, inodoro y no tóxico. Cuando entra en contacto con el agua, la absorbe y forma un <strong>hidrogel</strong>: una sustancia blanda y esponjosa que parece nieve. En esta práctica vas a comprobar su poder absorbente, aprenderás a controlar la textura según la cantidad de agua y descubrirás qué ocurre cuando le añades sal.</p>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué es un <strong>polímero superabsorbente</strong> y cómo funciona a nivel molecular.</li>
+            <li>Cómo preparar "nieve artificial" controlando la cantidad de agua para obtener distintas texturas.</li>
+            <li>Qué ocurre cuando se añade <strong>sal</strong> al hidrogel y por qué se deshace.</li>
+            <li>Los <strong>usos reales</strong> del poliacrilato de sodio en la industria, la medicina, la agricultura y la vida cotidiana.</li>
+            <li>A trabajar con material de laboratorio sencillo y a seguir un procedimiento ordenado.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y procedimiento</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Materiales</strong>
+            <ul>
+                <li><strong>Poliacrilato de sodio</strong> en polvo (puedes extraerlo de un pañal cortándolo y sacando los granos blancos, o comprarlo como "nieve artificial").</li>
+                <li>Agua (mejor destilada o filtrada; el agua del grifo también sirve).</li>
+                <li>Un vaso de precipitados o un recipiente de vidrio.</li>
+                <li>Una cuchara o varilla de vidrio para remover.</li>
+                <li>Una balanza de precisión (opcional, pero muy recomendable).</li>
+                <li>Sal de mesa (NaCl).</li>
+                <li>Colorante alimentario (opcional, para hacer nieve de colores).</li>
+            </ul>
+            <div class="danger">
+                <strong>⚠️ Seguridad:</strong> el poliacrilato de sodio no es tóxico, pero <strong>no debe ingerirse</strong>. Evita inhalar el polvo (puede irritar las vías respiratorias). Lávate las manos al terminar. No lo tires por el desagüe una vez hinchado: puede atascar las tuberías.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Obtención del poliacrilato a partir de un pañal</strong>
+            <ol>
+                <li>Abre un pañal limpio y separa las capas de plástico y algodón.</li>
+                <li>Busca los pequeños granos blancos (parecen azúcar o sal gruesa). Pueden estar entre el algodón o entre capas plásticas.</li>
+                <li>Recógelos en un recipiente. Con un pañal se obtienen unos <strong>2-3 gramos</strong> de polímero.</li>
+            </ol>
+            <div class="note">
+                <strong>Truco:</strong> si agitas el algodón del pañal dentro de una bolsa, los granos caen al fondo y es más fácil separarlos.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Preparación de la nieve artificial: control de la textura</strong>
+            <p>La clave está en la <strong>proporción de agua</strong>. A continuación tienes una guía orientativa para <strong>10 g de poliacrilato</strong>:</p>
+            <table>
+                <tr><th>Cantidad de agua</th><th>Textura obtenida</th><th>Comentario</th></tr>
+                <tr><td>200 mL</td><td><strong>Nieve compacta</strong></td><td>Se puede moldear con las manos. Parece nieve húmeda.</td></tr>
+                <tr><td>300 mL</td><td><strong>Nieve esponjosa (óptima)</strong></td><td>Textura muy real, suelta y fría al tacto.</td></tr>
+                <tr><td>400 mL</td><td><strong>Nieve muy blanda</strong></td><td>Casi gelatinosa. Se deshace con facilidad.</td></tr>
+                <tr><td>500 mL o más</td><td><strong>Gel acuoso</strong></td><td>No se mantiene sólida. Máximo absorbido pero sin consistencia.</td></tr>
+            </table>
+            <div class="formula-box">
+                <strong>Regla práctica:</strong> 10 g de poliacrilato + 300 mL de agua = nieve perfecta.
+            </div>
+            <p><strong>Procedimiento:</strong></p>
+            <ol>
+                <li>Pesa 10 g de poliacrilato y ponlos en un vaso.</li>
+                <li>Añade el agua <strong>poco a poco</strong>, removiendo suavemente con la varilla.</li>
+                <li>Observa cómo el polvo se hincha y absorbe el agua en segundos.</li>
+                <li>Ajusta la cantidad de agua según la textura que quieras conseguir.</li>
+            </ol>
+            <div class="highlight-box">
+                <strong>¿Por qué se hincha?</strong> El poliacrilato de sodio es una cadena larga con grupos <strong>carboxilato</strong> (\( \mathrm{-COO^-} \)) que se repelen entre sí. Cuando entra agua, los iones sodio (\( \mathrm{Na^+} \)) se separan y las cadenas se estiran para dejar entrar más agua. Es como si la red molecular se abriera para "tragar" el líquido.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>¿Qué ocurre al añadir sal?</strong>
+            <p>Si espolvoreas <strong>sal de mesa (NaCl)</strong> sobre la nieve artificial, ocurre algo espectacular: <strong>la nieve se deshace y vuelve a ser líquida</strong>. Este fenómeno se llama <strong>envenenamiento por sal</strong> (<em>salt poisoning</em>).</p>
+            <p><strong>Explicación:</strong> los iones \( \mathrm{Na^+} \) y \( \mathrm{Cl^-} \) de la sal compiten con las moléculas de agua por los grupos carboxilato del polímero. Los iones \( \mathrm{Na^+} \) adicionales "tapan" las cargas negativas del polímero, eliminando la repulsión que mantenía la red abierta. Sin esa repulsión, la red se contrae y expulsa el agua.</p>
+            <div class="formula-box">
+                <strong>Efecto de la sal:</strong> el hidrogel se colapsa y libera el agua que tenía atrapada.
+            </div>
+            <div class="note">
+                <strong>¿Por qué es importante?</strong> En los pañales, la orina contiene sales disueltas (urea, cloruro de sodio, etc.). Por eso un pañal no absorbe tanta agua como el poliacrilato puro. Y por eso, para eliminar un tapón de hidrogel en un desagüe, se recomienda echar sal: el gel se deshace y se puede limpiar.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Usos del poliacrilato de sodio en el mundo real</strong>
+            <p>Este polímero está muchísimo más presente en tu vida de lo que imaginas. Aquí tienes los usos más importantes:</p>
+
+            <div class="mini-card azul">
+                <h4>🍼 Pañales e higiene</h4>
+                <p>Es el componente clave de los pañales desechables, compresas y apósitos. Absorbe la orina y la retiene, manteniendo la piel seca. También se usa en productos de higiene femenina.</p>
+            </div>
+            <div class="mini-card verde">
+                <h4>🌱 Agricultura y jardinería</h4>
+                <p>Se mezcla con el suelo para <strong>retener el agua de riego</strong> y liberarla poco a poco. Reduce la frecuencia de riego y ayuda a las plantas en zonas secas. Estudios demuestran que mejora la retención de humedad del suelo y el crecimiento de cultivos[reference:0].</p>
+            </div>
+            <div class="mini-card naranja">
+                <h4>❄️ Nieve artificial y decoración</h4>
+                <p>Es la base de la "nieve mágica" que se vende para decoración navideña, belenes, escaparates y efectos especiales. Solo hay que añadir agua[reference:1].</p>
+            </div>
+            <div class="mini-card rojo">
+                <h4>🧴 Detergentes y limpieza</h4>
+                <p>Se usa en detergentes para <strong>dispersar la suciedad</strong>, evitar que se vuelva a depositar en la ropa y reducir la dureza del agua atrapando iones calcio y magnesio[reference:2].</p>
+            </div>
+
+            <p style="margin-top: 15px;">Otros usos menos conocidos:</p>
+            <ul>
+                <li><strong>Industria del petróleo:</strong> como floculante en la perforación de pozos.</li>
+                <li><strong>Papel y cerámica:</strong> como agente dispersante y de retención de agua.</li>
+                <li><strong>Alimentación:</strong> como espesante en salsas y helados (código E-469).</li>
+                <li><strong>Medicina:</strong> en apósitos para heridas y sistemas de liberación controlada de fármacos.</li>
+                <li><strong>Cortafuegos:</strong> se estudia su uso para crear barreras ignífugas con agua retenida.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>Regeneración y eliminación</strong>
+            <p><strong>Regeneración:</strong> si la nieve artificial se seca (pierde agua por evaporación), basta con añadir un poco más de agua para recuperar su volumen.</p>
+            <p><strong>Eliminación:</strong> para deshacerte del hidrogel sin atascar el desagüe, añade sal (NaCl) hasta que se licúe. Después puedes verterlo con abundante agua. También puedes dejarlo secar y tirarlo a la basura como residuo sólido.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 Resumen para llevar en el bolsillo</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>El poliacrilato de sodio es un polímero superabsorbente</strong> que puede absorber hasta 300 veces su peso en agua.</p>
+            <p><strong>Textura:</strong> 10 g de polvo + 300 mL de agua = nieve esponjosa. Menos agua = más compacta. Más agua = más blanda (hasta que deja de ser sólida).</p>
+            <p><strong>Sal:</strong> la sal (NaCl) deshace el hidrogel porque los iones sodio bloquean las cargas del polímero y la red se contrae, expulsando el agua.</p>
+            <p><strong>Usos:</strong> pañales, agricultura, nieve artificial, detergentes, medicina, alimentación…</p>
+        </div>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que el poliacrilato "se disuelve" en agua. En realidad no se disuelve: <strong>absorbe</strong> el agua y forma un gel. Por eso, aunque parezca nieve, no es hielo ni agua sólida; es una red de polímero hinchada.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO el poliacrilato de sodio</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>¿Cuánta agua puede absorber?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Si tienes 5,0 g de poliacrilato de sodio y su capacidad de absorción es de 300 veces su peso en agua destilada, ¿cuántos mililitros de agua puede absorber como máximo? (densidad del agua = 1,0 g/mL).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Interpretamos el dato:</strong> "300 veces su peso" significa que 1 g de polímero absorbe 300 g de agua.</div>
+                    <div class="paso"><strong>Paso 2 — Calculamos la masa de agua:</strong></div>
+                    <div class="formula-box">\[ m_{\text{agua}} = 5{,}0\ \mathrm{g} \times 300 = 1500\ \mathrm{g} \]</div>
+                    <div class="paso"><strong>Paso 3 — Convertimos a volumen:</strong></div>
+                    <div class="formula-box">\[ V = \frac{m}{\rho} = \frac{1500\ \mathrm{g}}{1{,}0\ \mathrm{g/mL}} = 1500\ \mathrm{mL} = 1{,}5\ \mathrm{L} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> 5 g de poliacrilato pueden absorber hasta 1,5 litros de agua destilada. ¡Impresionante!</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Ajustar la textura de la nieve</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Quieres preparar nieve artificial <strong>compacta</strong> (para hacer bolas) usando 15 g de poliacrilato. Según la tabla de texturas, para nieve compacta se usan 200 mL de agua por cada 10 g de polvo. ¿Cuánta agua necesitas?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Proporción:</strong> 200 mL de agua por cada 10 g de polvo.</div>
+                    <div class="paso"><strong>Paso 2 — Regla de tres:</strong></div>
+                    <div class="formula-box">\[ V_{\text{agua}} = 15\ \mathrm{g} \times \frac{200\ \mathrm{mL}}{10\ \mathrm{g}} = 15 \times 20 = 300\ \mathrm{mL} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> necesitas 300 mL de agua para obtener nieve compacta con 15 g de poliacrilato.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>¿Por qué la sal deshace la nieve?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica, con tus palabras, por qué al añadir sal de mesa (NaCl) a la nieve artificial esta se deshace y vuelve a ser líquida.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Cómo mantiene el agua el poliacrilato?</strong> El polímero tiene grupos con carga negativa (\( \mathrm{-COO^-} \)) que se repelen entre sí y mantienen la red estirada, dejando espacio para el agua.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué hace la sal?</strong> Al disolverse, la sal libera iones \( \mathrm{Na^+} \) y \( \mathrm{Cl^-} \). Los iones \( \mathrm{Na^+} \) se colocan cerca de los grupos \( \mathrm{-COO^-} \) y neutralizan sus cargas.</div>
+                    <div class="paso"><strong>Paso 3 — Consecuencia:</strong> sin repulsión eléctrica, la red del polímero se contrae y expulsa el agua que tenía atrapada. Por eso la nieve se "deshace" y vuelve a ser líquida.</div>
+                    <div class="paso"><strong>Conclusión:</strong> este fenómeno se llama <em>envenenamiento por sal</em> y es la razón por la que los pañales absorben menos orina que agua pura (la orina contiene sales).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>El poliacrilato en los pañales</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un pañal contiene aproximadamente 2,5 g de poliacrilato de sodio. Si un bebé produce 300 mL de orina al día y la orina tiene sales disueltas que reducen la capacidad de absorción a 50 veces su peso, ¿cuántos pañales necesitaría como mínimo al día? (densidad de la orina ≈ 1,0 g/mL).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Capacidad de un pañal:</strong> 2,5 g de polímero × 50 = 125 g de orina ≈ 125 mL.</div>
+                    <div class="paso"><strong>Paso 2 — Número de pañales:</strong></div>
+                    <div class="formula-box">\[ n = \frac{300\ \mathrm{mL}}{125\ \mathrm{mL/pañal}} = 2{,}4\ \text{pañales} \]</div>
+                    <div class="paso"><strong>Paso 3 — Redondeamos:</strong> como no se pueden usar fracciones de pañal, se necesitan <strong>3 pañales</strong> al día como mínimo.</div>
+                    <div class="paso"><strong>Comentario:</strong> en la práctica se usan más, porque el pañal también retiene parte de la orina en el algodón y porque no se exprime al máximo.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>Regenerar la nieve seca</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Después de varios días, la nieve artificial ha perdido agua por evaporación y su masa ha pasado de 310 g a 250 g. ¿Cuánta agua hay que añadir para recuperar la masa inicial? ¿Qué porcentaje del agua se ha evaporado?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Agua perdida:</strong> \( 310 - 250 = 60\ \mathrm{g} \) de agua evaporada.</div>
+                    <div class="paso"><strong>Paso 2 — Agua a añadir:</strong> hay que añadir <strong>60 mL</strong> de agua (densidad 1,0 g/mL) para recuperar la masa inicial.</div>
+                    <div class="paso"><strong>Paso 3 — Porcentaje evaporado:</strong></div>
+                    <div class="formula-box">\[ \% = \frac{60}{310} \times 100 \approx 19{,}4\ \% \]</div>
+                    <div class="paso"><strong>Resultado:</strong> se ha evaporado aproximadamente el 19,4 % del agua. Añadiendo 60 mL se recupera la textura original.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>El poliacrilato como retenedor de agua en agricultura</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un agricultor quiere añadir poliacrilato de sodio a 100 kg de suelo seco para mejorar la retención de agua. Según un estudio, la dosis óptima es de 150 g de poliacrilato por cada 2 kg de suelo. ¿Cuánto poliacrilato necesita para los 100 kg de suelo? Si el polímero absorbe 250 veces su peso en agua, ¿cuánta agua extra puede retener el suelo?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Dosis por kg:</strong> \( 150\ \mathrm{g} / 2\ \mathrm{kg} = 75\ \mathrm{g/kg} \).</div>
+                    <div class="paso"><strong>Paso 2 — Poliacrilato para 100 kg:</strong></div>
+                    <div class="formula-box">\[ m = 100\ \mathrm{kg} \times 75\ \mathrm{g/kg} = 7500\ \mathrm{g} = 7{,}5\ \mathrm{kg} \]</div>
+                    <div class="paso"><strong>Paso 3 — Agua retenida:</strong> \( 7500\ \mathrm{g} \times 250 = 1\,875\,000\ \mathrm{g} = 1875\ \mathrm{L} \) de agua.</div>
+                    <div class="paso"><strong>Resultado:</strong> necesitaría 7,5 kg de poliacrilato, que podrían retener hasta 1 875 litros de agua. Es una cantidad enorme, por eso se usa en zonas áridas para reducir el riego.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> El poliacrilato de sodio es un ejemplo perfecto de cómo un polímero puede tener propiedades asombrosas gracias a su estructura molecular. Las ideas clave son: (1) absorbe agua porque tiene cargas negativas que se repelen y estiran la red; (2) la <strong>cantidad de agua</strong> controla la textura (compacta, esponjosa o blanda); (3) la <strong>sal</strong> deshace el gel porque bloquea esas cargas; y (4) sus <strong>usos</strong> van mucho más allá de los pañales: agricultura, detergentes, medicina, alimentación… Es un polímero que, literalmente, "traga" agua.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Un polímero que "traga" agua, se hincha como si no hubiera mañana y se deshace con sal.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>

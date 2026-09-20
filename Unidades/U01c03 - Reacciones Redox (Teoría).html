@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c03 - REDOX: oxidación, reducción, oxidantes y reductores (4º ESO)</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es6/tex-mml-chtml.js"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c03 - </span>
+                <span class="texto">REDOX: oxidación, reducción, oxidantes y reductores</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿REDOX?</h2>
+        <p>Reacciones <strong>REDOX</strong>: son las reacciones en las que unas sustancias <em>ganan electrones</em> y otras <em>los pierden</em>. Están por todas partes: cuando se oxida un clavo de hierro, cuando respiras, cuando se quema gasolina en un coche o cuando una disolución violeta se vuelve transparente como por arte de magia.</p>
+        <p>En este material vas a aprender, paso a paso y sin complicaciones, qué significa <strong>oxidarse</strong>, qué significa <strong>reducirse</strong>, quién es el <strong>oxidante</strong>, quién es el <strong>reductor</strong> y cómo se identifica todo esto en una reacción química.</p>
+        <div class="formula-box">
+            <strong>Idea clave:</strong> en una REDOX, los electrones <br>
+            nunca aparecen ni desaparecen: si hay átomos que pierde electrones, siempre hay alguien que los gana.
+        </div>
+
+
+<img src="../imagenes/U01c03 - Reacciones Redox.png" alt="Imagen" width="800">
+
+
+
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Diferenciar <strong>oxidación</strong> y <strong>reducción</strong> a partir del intercambio de electrones.</li>
+            <li>Identificar el <strong>agente oxidante</strong> y el <strong>agente reductor</strong> en una reacción.</li>
+            <li>Reconocer el <strong>número de oxidación</strong> como la "etiqueta" que nos dice si un átomo gana o pierde electrones.</li>
+            <li>Aplicar todo esto al famoso experimento de "convertir vino en agua".</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN PROCEDIMIENTO / EXPLICACIÓN -->
+    <div class="section procedimiento">
+        <h2>⚙️ Explicación paso a paso</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>¿Qué es el número de oxidación?</strong>
+            <p>El <strong>número de oxidación</strong> es un número (positivo, negativo o cero) que se le asigna a cada átomo en un compuesto. Nos indica, de forma parecida a un marcador, si ese átomo ha "perdido" o "ganado" electrones en comparación con su estado neutro.</p>
+            <ul>
+                <li>Un átomo <strong>neutro</strong> (sin combinarse) tiene número de oxidación 0.</li>
+                <li>Si aparece con número de oxidación <strong>positivo</strong>, ha perdido electrones (le faltan cargas negativas).</li>
+                <li>Si aparece con número de oxidación <strong>negativo</strong>, ha ganado electrones (tiene cargas negativas de más).</li>
+            </ul>
+            <div class="note">
+                <strong>Ejemplo:</strong> el oxígeno casi siempre tiene número de oxidación −2 en los compuestos. El hidrógeno, +1. Y los metales como el sodio (Na) o el potasio (K), +1.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>¿Qué es oxidarse?</strong>
+            <p><strong>Oxidarse</strong> significa <strong>PERDER electrones</strong>. Cuando un átomo se oxida, su número de oxidación <strong>aumenta</strong> (se hace más positivo o menos negativo).</p>
+            <div class="formula-box">
+                <strong>Oxidación = pérdida de electrones</strong> → el número de oxidación SUBE ↑
+            </div>
+            <div class="mini-card rojo">
+                <h4>🔴 Ejemplo de oxidación</h4>
+                <p>El hierro metálico \( \mathrm{Fe} \) (número de oxidación 0) se oxida a \( \mathrm{Fe^{2+}} \) (número de oxidación +2) perdiendo 2 electrones:</p>
+                \[ \mathrm{Fe \rightarrow Fe^{2+} + 2\,e^-} \]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>¿Qué es reducirse?</strong>
+            <p><strong>Reducirse</strong> significa <strong>GANAR electrones</strong>. Cuando un átomo se reduce, su número de oxidación <strong>disminuye</strong> (se hace menos positivo o más negativo).</p>
+            <div class="formula-box">
+                <strong>Reducción = ganancia de electrones</strong> → el número de oxidación BAJA ↓
+            </div>
+            <div class="mini-card azul">
+                <h4>🔵 Ejemplo de reducción</h4>
+                <p>El ion cobre \( \mathrm{Cu^{2+}} \) (número de oxidación +2) se reduce a cobre metálico \( \mathrm{Cu} \) (número de oxidación 0) ganando 2 electrones:</p>
+                \[ \mathrm{Cu^{2+} + 2\,e^- \rightarrow Cu} \]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>¿Qué es entonces una reacción REDOX?</strong>
+            <p>Es una reacción en la que <strong>alguien se oxida y alguien se reduce al mismo tiempo</strong>. Los electrones que pierde uno los gana el otro. ¡No se crean ni se destruyen!</p>
+            <div class="formula-box">
+                <strong>REDOX = OXidación + REDucción simultáneas</strong>
+            </div>
+            <p>Por eso se llama <strong>RED-OX</strong>: <em>RED</em>ucción y <em>OX</em>idación.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>¿Quién es el oxidante y quién el reductor?</strong>
+            <p>Aquí está el detalle que más se lía. Lee despacio:</p>
+            <div class="highlight-box">
+                <p><strong>El agente OXIDANTE</strong> es la sustancia que <strong>hace que otra se oxide</strong>. Como le quita electrones a la otra, ella misma <strong>los gana y se reduce</strong>.</p>
+                <p><strong>El agente REDUCTOR</strong> es la sustancia que <strong>hace que otra se reduzca</strong>. Como le da electrones a la otra, ella misma <strong>los pierde y se oxida</strong>.</p>
+            </div>
+            <table>
+                <tr>
+                    <th>Papel</th>
+                    <th>¿Qué le pasa a sus electrones?</th>
+                    <th>¿Qué le pasa a su número de oxidación?</th>
+                    <th>¿Qué le ocurre a la sustancia?</th>
+                </tr>
+                <tr>
+                    <td><strong>Oxidante</strong></td>
+                    <td>Gana electrones</td>
+                    <td>Baja ↓</td>
+                    <td>Se reduce</td>
+                </tr>
+                <tr>
+                    <td><strong>Reductor</strong></td>
+                    <td>Pierde electrones</td>
+                    <td>Sube ↑</td>
+                    <td>Se oxida</td>
+                </tr>
+            </table>
+            <div class="note">
+                <strong>Truco para no confundirte:</strong> el oxidante contiene al átomo que se reduce, y el reductor contiene al átomo que se oxida. Parece contradictorio, pero tiene su lógica: el oxidante "obliga" a oxidarse a la otra sustancia, quitándole electrones, y por eso él se queda con ellos (se reduce).
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>Mini-regla mnemotécnica</strong>
+            <div class="formula-box">
+                <p><strong>OXI</strong>dación → <strong>P</strong>ierde electrones → número de oxidación <strong>S</strong>ube ↑</p>
+                <p><strong>RED</strong>ucción → <strong>G</strong>ana electrones → número de oxidación <strong>B</strong>aja ↓</p>
+                <p style="margin-top: 10px;">"<em>El oxidante reduce, el reductor oxida</em>"</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">7</span>
+            <strong>El experimento del "vino" que se convierte en "agua"</strong>
+            <p>Este experimento es un ejemplo perfecto de REDOX. Tenemos:</p>
+            <ul>
+                <li>Una disolución violeta de <strong>permanganato de potasio</strong> \( \mathrm{KMnO_4} \) en medio ácido. El ion \( \mathrm{MnO_4^-} \) es el responsable del color violeta.</li>
+                <li>Una disolución de <strong>tiosulfato de sodio</strong> \( \mathrm{Na_2S_2O_3} \), que actúa como reductor.</li>
+            </ul>
+            <p>Al mezclarlas:</p>
+            <ul>
+                <li>El <strong>Mn</strong> pasa de número de oxidación +7 (en \( \mathrm{MnO_4^-} \)) a +2 (en \( \mathrm{Mn^{2+}} \)). <strong>Baja</strong> → se <strong>reduce</strong>. El permanganato es el <strong>oxidante</strong>.</li>
+                <li>El <strong>S</strong> del tiosulfato pasa de número de oxidación +2 (promedio) a +6 (en el sulfato \( \mathrm{SO_4^{2-}} \)). <strong>Sube</strong> → se <strong>oxida</strong>. El tiosulfato es el <strong>reductor</strong>.</li>
+            </ul>
+            <div class="formula-box">
+                <strong>Reducción (Mn):</strong> \( \mathrm{MnO_4^- + 8H^+ + 5e^- \rightarrow Mn^{2+} + 4H_2O} \)<br>
+                <strong>Oxidación (S):</strong> \( \mathrm{S_2O_3^{2-} + 5H_2O \rightarrow 2SO_4^{2-} + 10H^+ + 8e^-} \)
+            </div>
+            <p>¿El resultado? El ion \( \mathrm{MnO_4^-} \) (violeta) se convierte en \( \mathrm{Mn^{2+}} \) (incoloro). Como el color se va, la disolución parece agua. <strong>¡Pero no es agua, es química en acción!</strong></p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 Resumen para llevar en el bolsillo</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>OXIDACIÓN</strong>: el átomo <strong>pierde</strong> electrones. Su número de oxidación <strong>sube</strong>. La sustancia que se oxida es el <strong>reductor</strong>.</p>
+            <p><strong>REDUCCIÓN</strong>: el átomo <strong>gana</strong> electrones. Su número de oxidación <strong>baja</strong>. La sustancia que se reduce es el <strong>oxidante</strong>.</p>
+            <p><strong>REDOX</strong>: las dos cosas ocurren a la vez. Los electrones que uno pierde, el otro los gana.</p>
+        </div>
+        <div class="note">
+            <strong>Consejo para el examen:</strong> cuando veas una reacción, lo primero es calcular el número de oxidación de cada elemento en reactivos y productos. Si alguno sube y otro baja, es REDOX. El que sube se oxida (es el reductor) y el que baja se reduce (es el oxidante).
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO la REDOX: ejemplos resueltos</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>¿Quién se oxida y quién se reduce?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En la reacción:</p>
+                    <div class="formula-box">\[ \mathrm{Zn + Cu^{2+} \rightarrow Zn^{2+} + Cu} \]</div>
+                    <p>Indica qué elemento se oxida, cuál se reduce, cuál es el oxidante y cuál el reductor.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Números de oxidación:</strong></div>
+                    <ul>
+                        <li>Zn pasa de 0 a +2 → <strong>sube</strong> → se oxida.</li>
+                        <li>Cu pasa de +2 a 0 → <strong>baja</strong> → se reduce.</li>
+                    </ul>
+                    <div class="paso"><strong>Paso 2 — Papeles:</strong></div>
+                    <ul>
+                        <li>El Zn se oxida → es el <strong>reductor</strong>.</li>
+                        <li>El \( \mathrm{Cu^{2+}} \) se reduce → es el <strong>oxidante</strong>.</li>
+                    </ul>
+                    <div class="paso"><strong>Resultado:</strong> Zn es el reductor (se oxida); \( \mathrm{Cu^{2+}} \) es el oxidante (se reduce).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Identifica la oxidación y la reducción</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En la reacción:</p>
+                    <div class="formula-box">\[ \mathrm{2\,Mg + O_2 \rightarrow 2\,MgO} \]</div>
+                    <p>¿Qué elemento se oxida? ¿Qué elemento se reduce? ¿Quién es el oxidante?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Números de oxidación:</strong></div>
+                    <ul>
+                        <li>Mg pasa de 0 (metal libre) a +2 (en MgO) → se oxida.</li>
+                        <li>O pasa de 0 (en \( \mathrm{O_2} \)) a −2 (en MgO) → se reduce.</li>
+                    </ul>
+                    <div class="paso"><strong>Paso 2 — Papeles:</strong></div>
+                    <ul>
+                        <li>Mg se oxida → es el <strong>reductor</strong>.</li>
+                        <li>\( \mathrm{O_2} \) se reduce → es el <strong>oxidante</strong>.</li>
+                    </ul>
+                    <div class="paso"><strong>Resultado:</strong> el magnesio se oxida (reductor) y el oxígeno se reduce (oxidante). Es la típica reacción de formación de un óxido.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>El hierro que se oxida al aire</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Cuando un clavo de hierro se oxida, ocurre (de forma simplificada):</p>
+                    <div class="formula-box">\[ \mathrm{4\,Fe + 3\,O_2 \rightarrow 2\,Fe_2O_3} \]</div>
+                    <p>Justifica por qué es una reacción redox e indica el oxidante y el reductor.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Números de oxidación:</strong></div>
+                    <ul>
+                        <li>Fe: pasa de 0 a +3 → se oxida (pierde electrones).</li>
+                        <li>O: pasa de 0 a −2 → se reduce (gana electrones).</li>
+                    </ul>
+                    <div class="paso"><strong>Paso 2 — Conclusión:</strong> como hay un elemento que se oxida y otro que se reduce, es una REDOX.</div>
+                    <div class="paso"><strong>Resultado:</strong> el Fe es el reductor (se oxida); el \( \mathrm{O_2} \) es el oxidante (se reduce).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>El experimento del vino→agua</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En el experimento del "vino" que se convierte en "agua", el permanganato \( \mathrm{MnO_4^-} \) (violeta) se reduce a \( \mathrm{Mn^{2+}} \) (incoloro), y el tiosulfato \( \mathrm{S_2O_3^{2-}} \) se oxida a sulfato \( \mathrm{SO_4^{2-}} \). Indica:</p>
+                    <ul>
+                        <li>a) ¿Qué elemento se reduce y cuál se oxida?</li>
+                        <li>b) ¿Quién es el oxidante y quién el reductor?</li>
+                        <li>c) ¿Por qué desaparece el color violeta?</li>
+                    </ul>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>a)</strong> El Mn pasa de +7 a +2 → se reduce. El S del tiosulfato pasa de +2 (promedio) a +6 → se oxida.</div>
+                    <div class="paso"><strong>b)</strong> El permanganato (que contiene Mn) es el <strong>oxidante</strong>. El tiosulfato (que contiene S) es el <strong>reductor</strong>.</div>
+                    <div class="paso"><strong>c)</strong> Porque el ion responsable del color, \( \mathrm{MnO_4^-} \), se transforma en \( \mathrm{Mn^{2+}} \), que en disolución diluida es prácticamente incoloro. Al no quedar permanganato sin reaccionar, la disolución se ve transparente como el agua.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>Detecta el error: "el oxidante se oxida"</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un compañero afirma: "El oxidante es la sustancia que se oxida". ¿Es correcta esa frase? Explícalo con tus palabras.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Analizamos:</strong> el oxidante es la sustancia que <em>provoca</em> que la otra se oxide. Para lograrlo, le quita electrones a la otra.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué le pasa entonces al oxidante?</strong> Al ganar esos electrones, su número de oxidación baja y por tanto <strong>se reduce</strong>.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la frase es <strong>incorrecta</strong>. Lo correcto es: "el oxidante <em>reduce</em>" y "el reductor <em>oxida</em>". Es la trampa más típica de la REDOX: el nombre indica lo que <em>hace</em> a la otra sustancia, no lo que <em>le pasa</em> a ella misma.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>¿Es o no es REDOX?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Determina si la siguiente reacción es redox o no, calculando los números de oxidación de los elementos que cambian:</p>
+                    <div class="formula-box">\[ \mathrm{AgNO_3 + NaCl \rightarrow AgCl + NaNO_3} \]</div>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Números de oxidación:</strong></div>
+                    <ul>
+                        <li>Ag: +1 en \( \mathrm{AgNO_3} \) y +1 en \( \mathrm{AgCl} \) → no cambia.</li>
+                        <li>Na: +1 en \( \mathrm{NaCl} \) y +1 en \( \mathrm{NaNO_3} \) → no cambia.</li>
+                        <li>N: +5 en \( \mathrm{AgNO_3} \) y +5 en \( \mathrm{NaNO_3} \) → no cambia.</li>
+                        <li>Cl: −1 en \( \mathrm{NaCl} \) y −1 en \( \mathrm{AgCl} \) → no cambia.</li>
+                        <li>O: −2 en todos → no cambia.</li>
+                    </ul>
+                    <div class="paso"><strong>Paso 2 — Conclusión:</strong> ningún elemento cambia su número de oxidación. Por tanto, <strong>NO es una reacción redox</strong>. Es una simple reacción de precipitación (se forma un sólido, el AgCl).</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave:</strong> La gran "trampa" de la REDOX es el lenguaje: el <em>oxidante</em> es el que se reduce, y el <em>reductor</em> es el que se oxida. Si te aprendes esa aparente contradicción y además practicas el cálculo de números de oxidación, la REDOX deja de ser un misterio. Recuerda: <strong>OXI = pierde e⁻ (sube); RED = gana e⁻ (baja)</strong>.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Con un poco de práctica, distinguir oxidación de reducción es más fácil de lo que parece.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>

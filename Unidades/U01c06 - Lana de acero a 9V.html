@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c06 - Práctica: Oxidación de la lana de acero con pila de 9V</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c06 - </span>
+                <span class="texto">Oxidación de la lana de acero con pila de 9V</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>Vamos a provocar la <strong>oxidación rápida del hierro</strong> contenido en la lana de acero finísima (estropajo de aluminio no, ¡de acero!). Para ello, conectaremos una <strong>pila de 9 V</strong> a un extremo de la lana: la corriente eléctrica la calienta hasta ponerla al rojo, y en ese momento el hierro reacciona con el oxígeno del aire.</p>
+        <p>Después compararemos lo que ocurre en dos situaciones:</p>
+        <ul>
+            <li><strong>En aire atmosférico</strong> (aproximadamente un 21 % de oxígeno).</li>
+            <li><strong>En oxígeno puro</strong> (100 % \( \mathrm{O_2} \)).</li>
+        </ul>
+        <div class="formula-box">
+            <strong>Reacción química que ocurre:</strong><br>
+            \[
+            \mathrm{4\,Fe + 3\,O_2 \rightarrow 2\,Fe_2O_3}
+            \]
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué es una <strong>oxidación</strong> y cómo se manifiesta en un metal real.</li>
+            <li>Que la velocidad de una reacción química depende de la <strong>temperatura</strong> y de la <strong>concentración de oxígeno</strong>.</li>
+            <li>Por qué el hierro se oxida más rápido en oxígeno puro que en aire.</li>
+            <li>Que la energía eléctrica se transforma en energía térmica (efecto Joule) y luego en energía química.</li>
+            <li>A identificar los cambios de número de oxidación en una reacción redox (Fe y O).</li>
+            <li>A trabajar con seguridad en el laboratorio: llama, corriente y gases.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>🔬 Fundamento teórico</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>¿Qué es la lana de acero?</strong>
+            <p>Es un ovillo de hilos muy finos de <strong>acero</strong>, es decir, una aleación de <strong>hierro (Fe)</strong> con una pequeña cantidad de carbono. Al ser tan fina, tiene una <strong>superficie de contacto enorme</strong> en comparación con su masa. Eso la hace ideal para reaccionar rápido con el oxígeno.</p>
+            <div class="note">
+                <strong>Ojo:</strong> no confundir con el estropajo de aluminio o con las lanas sintéticas. Debe ser <strong>lana de acero fina</strong>, como la que se usa para pulir metales.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>El papel de la pila de 9 V (efecto Joule)</strong>
+            <p>Cuando conectamos la pila a la lana de acero, pasa una corriente eléctrica por ella. La lana tiene cierta <strong>resistencia eléctrica</strong> \( R \). La corriente que la atraviesa disipa calor según la ley de Joule:</p>
+            <div class="formula-box">
+                \[
+                Q = I^2 \cdot R \cdot t
+                \]
+            </div>
+            <p>Ese calor hace que la lana se ponga al rojo en pocos segundos. La temperatura puede superar los 700 °C localmente, suficiente para que el hierro se oxide rápidamente.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>La reacción química de oxidación</strong>
+            <p>El hierro se combina con el oxígeno para formar óxido de hierro(III), \( \mathrm{Fe_2O_3} \), que es el mismo compuesto que constituye el óxido rojo de los clavos viejos:</p>
+            <div class="formula-box">
+                \[
+                \mathrm{4\,Fe + 3\,O_2 \rightarrow 2\,Fe_2O_3}
+                \]
+            </div>
+            <p>Es una reacción <strong>exotérmica</strong>: libera calor. Si el hierro ya está caliente, ese calor ayuda a que la reacción continúe: es una reacción <strong>autosostenida</strong>.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Es una reacción REDOX</strong>
+            <p>En esta reacción hay transferencia de electrones:</p>
+            <table>
+                <tr><th>Elemento</th><th>Especie inicial</th><th>Nº oxidación</th><th>Especie final</th><th>Nº oxidación</th><th>Electrones</th></tr>
+                <tr><td>Fe</td><td>\( \mathrm{Fe} \)</td><td>0</td><td>\( \mathrm{Fe_2O_3} \)</td><td>+3</td><td>Pierde 3 e⁻</td></tr>
+                <tr><td>O</td><td>\( \mathrm{O_2} \)</td><td>0</td><td>\( \mathrm{Fe_2O_3} \)</td><td>−2</td><td>Gana 2 e⁻</td></tr>
+            </table>
+            <ul>
+                <li>El <strong>hierro se oxida</strong> (pierde electrones) → es el <strong>reductor</strong>.</li>
+                <li>El <strong>oxígeno se reduce</strong> (gana electrones) → es el <strong>oxidante</strong>.</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>Recuerda:</strong> el hierro se oxida porque su número de oxidación pasa de 0 a +3; el oxígeno se reduce porque pasa de 0 a −2.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>¿Por qué arde mejor en oxígeno puro?</strong>
+            <p>La velocidad de muchas reacciones químicas depende de la <strong>concentración de los reactivos</strong>. En el aire, solo 1 de cada 5 moléculas es de oxígeno. En oxígeno puro, todas las moléculas que chocan con el hierro son de \( \mathrm{O_2} \).</p>
+            <p>Por eso, en oxígeno puro:</p>
+            <ul>
+                <li>La reacción es <strong>mucho más rápida</strong>.</li>
+                <li>Se alcanzan <strong>temperaturas más altas</strong>.</li>
+                <li>La lana de acero <strong>arde con llama viva</strong>, saltan chispas y el óxido formado ( \( \mathrm{Fe_2O_3} \) ) sale desprendido.</li>
+            </ul>
+            <div class="note">
+                <strong>Comparación:</strong> en aire, la lana de acero se pone al rojo y se oxida lentamente; en oxígeno puro, la oxidación es tan rápida que se ve como una auténtica <em>combustión</em>.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>¿Por qué la lana de acero y no un clavo?</strong>
+            <p>Un clavo de hierro también puede oxidarse, pero muy lentamente, porque su superficie es pequeña. La lana de acero tiene hilos muy finos, con muchísima superficie expuesta al aire. Eso multiplica los choques con las moléculas de oxígeno y la reacción se acelera enormemente.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN MATERIALES Y PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y procedimiento experimental</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Materiales y reactivos</strong>
+            <ul>
+                <li><strong>Lana de acero finísima</strong> (estropajo de acero, no de aluminio).</li>
+                <li><strong>Pila de 9 V</strong> (o fuente de alimentación regulable).</li>
+                <li>Cables con pinzas de cocodrilo.</li>
+                <li>Pinzas metálicas de laboratorio (para sujetar la lana).</li>
+                <li>Vaso de precipitados resistente al calor (o bandeja metálica).</li>
+                <li>Mechero o cerillas.</li>
+                <li><strong>Campana extractora</strong> o lugar muy ventilado.</li>
+                <li>Para la variante con oxígeno puro:</li>
+                <ul>
+                    <li>Recipiente con oxígeno puro (botella o campana con entrada de \( \mathrm{O_2} \) ).</li>
+                    <li>Bomba o botella de oxígeno comprimido.</li>
+                    <li>Cuidado: el oxígeno puro acelera cualquier combustión.</li>
+                </ul>
+            </ul>
+
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Montaje en aire atmosférico</strong>
+            <ol>
+                <li>Haz un pequeño ovillo con la lana de acero fina. Debe quedar suelto, no apretado.</li>
+                <li>Coloca el ovillo sobre una bandeja metálica o dentro de un vaso de precipitados resistente al calor.</li>
+                <li>Conecta una pinza de cocodrilo al extremo de la lana y la otra a un borne de la pila de 9 V.</li>
+                <li>Repite con el otro extremo de la lana y el otro borne de la pila.</li>
+                <li>Observa cómo la lana se calienta, se pone al rojo y empieza a arder.</li>
+                <li>Cuando la reacción se inicie, <strong>puedes desconectar la pila</strong>: la oxidación continúa sola porque es exotérmica.</li>
+            </ol>
+            <div class="note">
+                <strong>Observación:</strong> en aire, la lana se pone al rojo pero la reacción avanza con relativa calma. Se ve brillo, chispas sueltas y se forma óxido rojizo.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Montaje en oxígeno puro</strong>
+            <ol>
+                <li>Introduce la lana de acero en un recipiente con oxígeno puro (por ejemplo, una campana de vidrio con entrada de \( \mathrm{O_2} \) ).</li>
+                <li>Conecta la pila igual que antes, pero asegúrate de que la lana está bien dentro de la atmósfera de oxígeno.</li>
+                <li>Al conectar, la lana se calienta y reacciona <strong>casi instantáneamente</strong>.</li>
+                <li>Verás una llama muy brillante, chispas abundantes y el óxido de hierro saliendo desprendido.</li>
+                <li><strong>Desconecta la pila inmediatamente</strong>: la reacción se mantiene sola y no queremos que se estropee el montaje.</li>
+            </ol>
+            <div class="danger">
+                <strong>⚠️ Mucho cuidado en oxígeno puro:</strong> la reacción es muy vigorosa. Mantén la cara alejada, no mires directamente sin protección, y no uses más lana de la necesaria.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Comparación de resultados</strong>
+            <table>
+                <tr><th>Aspecto</th><th>En aire (21 % \( \mathrm{O_2} \))</th><th>En oxígeno puro</th></tr>
+                <tr><td>Velocidad de la reacción</td><td>Moderada</td><td>Muy alta</td></tr>
+                <tr><td>Temperatura alcanzada</td><td>Alta (rojo)</td><td>Muy alta (blanco-amarillo)</td></tr>
+                <tr><td>Llama</td><td>Débil o ausente</td><td>Viva y brillante</td></tr>
+                <tr><td>Chispas</td><td>Pocas</td><td>Abundantes</td></tr>
+                <tr><td>Producto</td><td>\( \mathrm{Fe_2O_3} \) (óxido rojo)</td><td>\( \mathrm{Fe_2O_3} \) (óxido rojo)</td></tr>
+                <tr><td>Duración de la reacción</td><td>Más larga</td><td>Muy corta</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has demostrado?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>La velocidad de una reacción química depende de la concentración de los reactivos.</strong></p>
+            <p>El hierro de la lana de acero se oxida en ambas situaciones, pero en oxígeno puro lo hace mucho más rápido y de forma más espectacular porque hay muchas más moléculas de \( \mathrm{O_2} \) disponibles para chocar con el metal.</p>
+        </div>
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>La corriente eléctrica puede iniciar una reacción química actuando como fuente de calor (efecto Joule).</li>
+            <li>El hierro se oxida: pasa de Fe(0) a Fe(+3), es el <strong>reductor</strong>.</li>
+            <li>El oxígeno se reduce: pasa de O(0) a O(−2), es el <strong>oxidante</strong>.</li>
+            <li>La reacción es <strong>exotérmica</strong>: una vez iniciada, se mantiene sola.</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> creer que la pila "quema" la lana. La pila solo la calienta. La oxidación la produce el oxígeno del aire. Si no hubiera oxígeno, la lana se calentaría pero no se oxidaría.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO la oxidación de la lana de acero</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Identifica oxidación y reducción en la reacción</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En la reacción \( \mathrm{4\,Fe + 3\,O_2 \rightarrow 2\,Fe_2O_3} \), indica:</p>
+                    <ul>
+                        <li>a) Qué elemento se oxida y cuál se reduce.</li>
+                        <li>b) Cuál es el oxidante y cuál el reductor.</li>
+                        <li>c) Los números de oxidación de cada elemento en reactivos y productos.</li>
+                    </ul>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>a)</strong> El Fe pasa de 0 a +3 → se oxida. El O pasa de 0 a −2 → se reduce.</div>
+                    <div class="paso"><strong>b)</strong> El \( \mathrm{O_2} \) es el oxidante (se reduce). El Fe es el reductor (se oxida).</div>
+                    <div class="paso"><strong>c) Números de oxidación:</strong></div>
+                    <ul>
+                        <li>Fe en reactivos: 0 (metal libre). Fe en productos: +3.</li>
+                        <li>O en reactivos: 0 (\( \mathrm{O_2} \) molecular). O en productos: −2.</li>
+                    </ul>
+                    <div class="paso"><strong>Resultado:</strong> es una reacción redox típica de formación de un óxido metálico.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Estequiometría de la oxidación del hierro</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Si en la lana de acero tenemos \( 2{,}0 \) g de hierro, ¿qué masa de \( \mathrm{Fe_2O_3} \) se formará suponiendo que todo el hierro se oxida? Datos: \( M(\mathrm{Fe}) = 55{,}85\ \mathrm{g/mol} \); \( M(\mathrm{O}) = 16{,}00\ \mathrm{g/mol} \).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Masa molar del \( \mathrm{Fe_2O_3} \):</strong> \( 2\cdot 55{,}85 + 3\cdot 16{,}00 = 111{,}70 + 48{,}00 = 159{,}70\ \mathrm{g/mol} \).</div>
+                    <div class="paso"><strong>Paso 2 — Moles de Fe:</strong></div>
+                    <div class="formula-box">\[ n(\mathrm{Fe}) = \frac{2{,}0}{55{,}85} \approx 0{,}0358\ \mathrm{mol} \]</div>
+                    <div class="paso"><strong>Paso 3 — Relación estequiométrica:</strong> 4 mol Fe → 2 mol \( \mathrm{Fe_2O_3} \), es decir, 2 mol Fe → 1 mol \( \mathrm{Fe_2O_3} \).</div>
+                    <div class="formula-box">\[ n(\mathrm{Fe_2O_3}) = \frac{0{,}0358}{2} \approx 0{,}0179\ \mathrm{mol} \]</div>
+                    <div class="paso"><strong>Paso 4 — Masa de \( \mathrm{Fe_2O_3} \):</strong></div>
+                    <div class="formula-box">\[ m = 0{,}0179 \cdot 159{,}70 \approx 2{,}86\ \mathrm{g} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> se forman aproximadamente \( 2{,}86\ \mathrm{g} \) de óxido de hierro(III).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>Ley de Joule: calor disipado por la pila</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La lana de acero tiene una resistencia eléctrica de \( R = 2{,}5\ \Omega \). Al conectarla a una pila de 9 V pasa por ella una corriente de \( I = 1{,}2\ \mathrm{A} \). ¿Cuánto calor se disipa en 5 s?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Fórmula de Joule:</strong> \( Q = I^2 \cdot R \cdot t \).</div>
+                    <div class="paso"><strong>Paso 2 — Sustituimos:</strong></div>
+                    <div class="formula-box">\[ Q = (1{,}2)^2 \cdot 2{,}5 \cdot 5 = 1{,}44 \cdot 2{,}5 \cdot 5 = 18\ \mathrm{J} \]</div>
+                    <div class="paso"><strong>Paso 3 — Interpretación:</strong> esos 18 J se invierten en calentar la lana, que se pone al rojo en pocos segundos. La reacción de oxidación, al ser exotérmica, aporta después más calor y mantiene la temperatura alta.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>¿Por qué arde más rápido en oxígeno puro?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica, en términos de choques entre moléculas, por qué la lana de acero se oxida mucho más rápido en oxígeno puro que en aire.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Composición del aire:</strong> el aire contiene aproximadamente un 21 % de \( \mathrm{O_2} \) y un 78 % de \( \mathrm{N_2} \).</div>
+                    <div class="paso"><strong>Paso 2 — Choques con la superficie:</strong> la velocidad de reacción depende de la frecuencia con que las moléculas de \( \mathrm{O_2} \) chocan contra el hierro. En aire, solo 1 de cada 5 choques es con \( \mathrm{O_2} \). En oxígeno puro, todos los choques son con \( \mathrm{O_2} \).</div>
+                    <div class="paso"><strong>Paso 3 — Consecuencia:</strong> en oxígeno puro, la frecuencia de choques eficaces es unas <strong>5 veces mayor</strong>, y como además la reacción libera calor, la temperatura sube más rápido y la reacción se acelera aún más.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la velocidad de reacción depende de la concentración del reactivo gaseoso. Más \( \mathrm{O_2} \) → reacción más rápida.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>¿Por qué la reacción se mantiene sola?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Una vez que la lana de acero empieza a oxidarse, se puede desconectar la pila y la reacción continúa. Explica por qué.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿La reacción libera o absorbe energía?</strong> La oxidación del hierro es <strong>exotérmica</strong>: libera calor.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué hace ese calor?</strong> Calienta la lana, manteniéndola a alta temperatura y favoreciendo que más hierro siga reaccionando.</div>
+                    <div class="paso"><strong>Paso 3 — Consecuencia:</strong> la reacción se retroalimenta: el calor que libera mantiene la temperatura alta, y esa temperatura acelera la reacción. Es un proceso <strong>autosostenido</strong>.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la pila solo hace falta para iniciar la reacción (aportar la energía de activación inicial). Después, la propia reacción se mantiene.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>¿Y si no hubiera oxígeno?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Si repetimos el experimento pero dentro de una atmósfera de nitrógeno puro (sin oxígeno), ¿qué ocurriría al conectar la pila? Justifica tu respuesta.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Hay oxígeno disponible?</strong> No. El nitrógeno es un gas inerte en estas condiciones y no reacciona con el hierro a esas temperaturas.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué hace la pila?</strong> La pila sigue disipando calor por efecto Joule, por lo que la lana se calentaría y se pondría al rojo.</div>
+                    <div class="paso"><strong>Paso 3 — ¿Se oxidaría?</strong> No. Sin oxígeno, no hay reacción redox. La lana se calentaría pero no se formaría \( \mathrm{Fe_2O_3} \). Al desconectar la pila, se enfriaría sin más.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el oxígeno es imprescindible. La pila solo aporta calor; la oxidación la produce el \( \mathrm{O_2} \). Esto demuestra que la pila no es la causante de la oxidación.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> Este experimento es una joya didáctica porque reúne varios conceptos en uno: <em>efecto Joule</em> (la pila calienta la lana), <em>reacción redox</em> (el hierro se oxida y el oxígeno se reduce), <em>cinética química</em> (la velocidad depende de la concentración de \( \mathrm{O_2} \)) y <em>energía de activación</em> (la pila solo aporta el empujón inicial). El error más común es pensar que la pila "quema" la lana; en realidad, solo la calienta para que el oxígeno haga el resto.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Una oxidación muy rápida.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>

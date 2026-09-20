@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c09 - Mirascope: la ilusión óptica de los espejos parabólicos</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c09.- </span>
+                <span class="texto">Mirascope: la ilusión óptica de los espejos parabólicos</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿Qué es un Mirascope?</h2>
+        <p>Un <strong>Mirascope</strong> (o <em>Mirage</em>) es un dispositivo óptico formado por <strong>dos espejos parabólicos enfrentados</strong> por sus caras cóncavas. Su efecto es tan asombroso que parece magia: si colocas un pequeño objeto (una moneda, una figurita, un caramelo) en el fondo, al mirar dentro del aparato <strong>ves el objeto flotando en el aire, justo encima de la abertura</strong>, como si estuviera proyectado en 3D.</p>
+        <p>Si intentas tocarlo con la mano, ¡la atraviesas! No hay nada ahí. Es una <strong>imagen óptica real flotante</strong>: luz que sale proyectada al exterior y que tu ojo interpreta como un objeto sólido en el espacio.</p>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Cómo puede la luz "dibujar" un objeto en el aire sin que exista físicamente?
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué es un <strong>espejo parabólico</strong> y por qué tiene propiedades ópticas únicas.</li>
+            <li>Qué es el <strong>foco</strong> de un espejo parabólico y cómo se relaciona con la distancia focal.</li>
+            <li>Cómo se forma una <strong>imagen real flotante</strong> mediante dos reflexiones sucesivas.</li>
+            <li>La diferencia entre imagen <strong>real</strong> e imagen <strong>virtual</strong>.</li>
+            <li>Los <strong>usos reales</strong> de los espejos parabólicos en la industria, la ciencia y la vida cotidiana.</li>
+            <li>Cómo construir o manipular un Mirascope y por qué la posición relativa de los espejos es crítica.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>🔬 Fundamento teórico</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>¿Qué es un espejo parabólico?</strong>
+            <p>Un espejo parabólico es una superficie reflectante con forma de <strong>paraboloide de revolución</strong>. Se obtiene al girar una parábola alrededor de su eje de simetría. A diferencia de un espejo esférico, el parabólico <strong>no tiene aberración esférica</strong>: todos los rayos paralelos al eje se reflejan y convergen en un único punto.</p>
+            <div class="formula-box">
+                <strong>Ecuación de la parábola (con vértice en el origen):</strong><br>
+                \[ y = \frac{x^2}{4f} \]
+                <p>donde \( f \) es la <strong>distancia focal</strong>: la distancia del vértice al foco.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>La propiedad fundamental: el foco</strong>
+            <p>Todo espejo parabólico tiene un punto especial llamado <strong>foco</strong> (\( F \)), situado sobre el eje a una distancia \( f \) del vértice. Las propiedades clave son:</p>
+            <ul>
+                <li><strong>Rayos paralelos al eje</strong> que llegan al espejo se reflejan y pasan <strong>todos por el foco</strong>.</li>
+                <li>Una fuente situada <strong>en el foco</strong> emite rayos que, tras reflejarse, salen <strong>paralelos al eje</strong>.</li>
+                <li>Un objeto situado en el centro de curvatura \( C = 2f \) forma una imagen real invertida en la misma posición.</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>Idea clave:</strong> el foco es el "punto mágico" de la parábola. Por eso las antenas parabólicas, los telescopios y los faros de los coches usan esta forma: aprovechan esa propiedad para concentrar o dirigir la luz (o las ondas).
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>El Mirascope: dos espejos enfrentados</strong>
+            <p>El Mirascope está formado por <strong>dos espejos parabólicos idénticos</strong> colocados uno encima del otro, con sus caras cóncavas mirándose. La distancia entre los dos vértices es aproximadamente <strong>igual a la distancia focal \( f \)</strong> (o muy próxima a ella). Esta geometría es crítica: si los espejos están mal colocados, la ilusión no funciona.</p>
+            <p>En el <strong>espejo inferior</strong> se coloca el objeto (una moneda, por ejemplo), justo en su centro. La luz que sale del objeto sufre <strong>dos reflexiones sucesivas</strong>:</p>
+            <ol>
+                <li><strong>Primera reflexión (espejo inferior):</strong> los rayos del objeto salen hacia arriba. Como el objeto está cerca del foco del espejo inferior, los rayos reflejados salen aproximadamente <strong>paralelos al eje</strong>.</li>
+                <li><strong>Segunda reflexión (espejo superior):</strong> esos rayos paralelos llegan al espejo superior y, al ser paralelos al eje, se reflejan <strong>convergiendo en su foco</strong>, que está situado por encima del espejo superior (en el aire).</li>
+            </ol>
+            <p>Resultado: se forma una <strong>imagen real</strong> del objeto flotando en el aire, justo por encima de la abertura del Mirascope. Como la imagen es real, se puede <strong>proyectar sobre una pantalla</strong> colocada en ese punto, aunque lo normal es verla directamente con los ojos.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>¿Por qué la imagen es real y no virtual?</strong>
+            <p>En una imagen <strong>virtual</strong> (como la que da un espejo plano), los rayos <em>parecen</em> venir de un punto, pero no pasan realmente por él. No se puede proyectar sobre una pantalla.</p>
+            <p>En una imagen <strong>real</strong>, los rayos <em>convergen realmente</em> en un punto del espacio. Si colocas una pantalla translúcida en ese punto, verás la imagen nítida sobre ella. Esto es lo que ocurre en el Mirascope.</p>
+            <div class="formula-box">
+                <strong>En el Mirascope:</strong> la imagen real se forma en el aire, por encima de la abertura, a una distancia que depende de la geometría de los espejos.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>¿Por qué la posición de los espejos es crítica?</strong>
+            <p>Si los espejos están demasiado separados o demasiado juntos, los rayos no convergen donde deberían y la imagen no se forma correctamente. El diseño óptimo es aquel en el que:</p>
+            <div class="formula-box">
+                \[ d \approx f \]
+                <p>donde \( d \) es la distancia entre los vértices de los dos espejos y \( f \) es la distancia focal de cada uno.</p>
+            </div>
+            <p>Por eso los Mirascopes comerciales están montados en una carcasa rígida que fija esa distancia. Si se desmonta, hay que volver a colocarlo con precisión para recuperar el efecto.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>El objeto y la iluminación</strong>
+            <p>La ilusión se ve mejor cuando:</p>
+            <ul>
+                <li>El objeto es pequeño, colorido y con contraste (una moneda, un caramelo, una figurita de plástico).</li>
+                <li>La luz es <strong>suficiente</strong> pero no directa sobre el objeto: lo mejor es luz ambiental suave o una linterna lateral.</li>
+                <li>La habitación está relativamente oscura, para que la imagen flotante destaque.</li>
+                <li>El objeto está centrado en el espejo inferior, no en los bordes.</li>
+            </ul>
+            <div class="note">
+                <strong>Truco:</strong> si el objeto es demasiado grande o está descentrado, la imagen sale distorsionada o cortada. El Mirascope tiene un "campo de visión" limitado, como una lente.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">7</span>
+            <strong>El tamaño y la orientación de la imagen</strong>
+            <p>La imagen que se forma en el aire tiene el <strong>mismo tamaño</strong> que el objeto (aproximadamente, si los espejos son idénticos y están a la distancia correcta) y aparece <strong>en la misma orientación</strong> (no invertida). Esto sorprende a mucha gente, porque en un espejo plano la imagen está invertida lateralmente y en una lente convergente suele estar invertida.</p>
+            <p>En el Mirascope, la doble reflexión "endereza" la imagen: el rayo que sale del lado izquierdo del objeto acaba llegando al lado izquierdo de la imagen real. Por eso el objeto flotante se ve tal cual, como si estuviera realmente ahí.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">8</span>
+            <strong>¿Qué pasa si mueves el objeto?</strong>
+            <p>La imagen sigue al objeto: si lo desplazas un poco dentro del Mirascope, la imagen flotante también se desplaza en el aire. Esto refuerza la sensación de que "algo" real está flotando. Si el objeto gira, la imagen también gira (sin invertirse).</p>
+            <p>Si tapas parte del objeto con el dedo, la imagen también muestra esa parte tapada. Todo indica que la luz del objeto está siendo proyectada al espacio exterior.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN USOS Y APLICACIONES -->
+    <div class="section procedimiento">
+        <h2>🌍 Los espejos parabólicos en la industria y la sociedad</h2>
+        <p>Aunque el Mirascope es un juguete científico, la tecnología que utiliza (los espejos parabólicos) está presente en muchísimas aplicaciones reales. Aquí tienes las más importantes:</p>
+
+        <div class="mini-card azul">
+            <h4>📡 Antenas parabólicas</h4>
+            <p>Las antenas de TV satélite, radar y comunicaciones usan un reflector parabólico que concentra las ondas electromagnéticas en el foco, donde está el receptor. Funciona con el mismo principio: rayos paralelos → foco.</p>
+        </div>
+        <div class="mini-card naranja">
+            <h4>🔭 Telescopios</h4>
+            <p>El telescopio reflector de Newton utiliza un espejo parabólico para recoger la luz de las estrellas (rayos paralelos) y concentrarla en el foco. Así se ven objetos muy tenues.</p>
+        </div>
+        <div class="mini-card verde">
+            <h4>🚗 Faros de coche</h4>
+            <p>Las bombillas de los faros se colocan en el foco de un espejo parabólico. Los rayos que salen de la bombilla se reflejan paralelos, formando un haz dirigido y potente. Antes de los LED, era la única manera de iluminar bien la carretera.</p>
+        </div>
+        <div class="mini-card rojo">
+            <h4>☀️ Centrales solares</h4>
+            <p>Las centrales termosolares usan grandes espejos parabólicos (o heliostatos) para concentrar la radiación solar en un punto y calentar un fluido que produce vapor y mueve una turbina. Es una forma de aprovechar la energía solar a gran escala.</p>
+        </div>
+
+        <p style="margin-top: 15px;">Otras aplicaciones menos conocidas:</p>
+        <ul>
+            <li><strong>Micrófonos parabólicos:</strong> para escuchar sonidos lejanos (naturaleza, deportes).</li>
+            <li><strong>Linternas y focos:</strong> usan reflectores parabólicos para dirigir la luz.</li>
+            <li><strong>Proyectores y cine:</strong> el reflector parabólico detrás de la lámpara recoge y dirige la luz hacia la lente.</li>
+            <li><strong>Iluminación de estadios:</strong> los focos parabólicos dirigen la luz al campo sin desperdiciarla.</li>
+            <li><strong>Hornos solares:</strong> para cocinar o fundir metales concentrando la luz del Sol.</li>
+            <li><strong>Astronomía amateur:</strong> los telescopios Dobsonianos usan espejos parabólicos grandes y baratos.</li>
+            <li><strong>Sistemas de radar y sonar:</strong> los reflectores parabólicos concentran las ondas hacia el objetivo.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <strong>Reflexión final:</strong> el Mirascope es un ejemplo perfecto de cómo un principio físico (la propiedad focal de la parábola) puede convertirse en un objeto lúdico o en una tecnología que mueve la industria. La misma idea que hace flotar una moneda en el aire es la que permite ver galaxias lejanas o cocinar con el Sol.
+        </div>
+    </div>
+
+    <!-- SECCIÓN PROCEDIMIENTO DE LA PRÁCTICA -->
+    <div class="section procedimiento">
+        <h2>⚙️ Cómo usar un Mirascope</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Materiales</strong>
+            <ul>
+                <li>Un <strong>Mirascope</strong> comercial (o dos espejos parabólicos idénticos montados en una carcasa).</li>
+                <li>Objetos pequeños: monedas, caramelos envueltos, figuritas de plástico, clip, goma de borrar.</li>
+                <li>Una <strong>linterna</strong> o una lámpara de mesa.</li>
+                <li>Una pantalla translúcida (papel vegetal tensado en un marco) para comprobar que la imagen es real.</li>
+                <li>Un puntero o palillo para "atravesar" la imagen.</li>
+            </ul>
+            <div class="danger">
+                <strong>⚠️ Seguridad:</strong> no mires nunca directamente al Sol ni a fuentes de luz muy intensas reflejadas en los espejos. No coloques los dedos entre los espejos si están juntos: podrían pillarte. No desmontes el Mirascope si no es necesario.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Procedimiento</strong>
+            <ol>
+                <li>Coloca el Mirascope sobre una mesa, en una habitación con luz tenue.</li>
+                <li>Levanta con cuidado la tapa superior (si la tiene) y coloca el objeto en el centro del espejo inferior.</li>
+                <li>Vuelve a colocar la tapa (o mira desde arriba sin tocarlo) y observa: verás el objeto <strong>flotando en el aire</strong>, justo encima de la abertura.</li>
+                <li>Acerca lentamente un dedo o un palillo hacia la imagen flotante. Comprobarás que la atraviesas: no hay nada físico ahí.</li>
+                <li>Coloca una pantalla translúcida justo en el lugar donde ves la imagen. Verás la imagen proyectada sobre la pantalla: es una <strong>imagen real</strong>.</li>
+                <li>Mueve el objeto dentro del Mirascope y observa cómo la imagen flotante también se mueve.</li>
+                <li>Cambia la iluminación (enciende una linterna lateral) y observa cómo cambia el brillo de la imagen.</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Variantes para investigar</strong>
+            <ul>
+                <li><strong>Objetos de distintos colores:</strong> ¿se ve igual un objeto rojo que uno azul?</li>
+                <li><strong>Tamaño del objeto:</strong> ¿qué pasa si el objeto es más grande que el campo de visión del Mirascope?</li>
+                <li><strong>Dos objetos a la vez:</strong> ¿se ven dos imágenes flotantes? ¿se solapan?</li>
+                <li><strong>Cambiar la distancia entre espejos:</strong> si se puede ajustar, ¿cómo cambia la posición de la imagen?</li>
+                <li><strong>Mirar desde distintos ángulos:</strong> ¿la imagen se ve igual desde arriba que desde un lado?</li>
+                <li><strong>Fotografiar la imagen:</strong> hacer una foto con el móvil desde arriba. ¿Se ve igual que a simple vista?</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has demostrado?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>Dos espejos parabólicos enfrentados pueden proyectar una imagen real en el aire.</strong></p>
+            <p>La primera reflexión convierte los rayos divergentes del objeto en rayos paralelos; la segunda los hace converger en un punto del espacio. Allí se forma una imagen real, del mismo tamaño y orientación que el objeto, que podemos ver flotando pero no tocar.</p>
+        </div>
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>La <strong>imagen es real</strong>: se puede proyectar sobre una pantalla.</li>
+            <li>El efecto depende de la <strong>posición relativa de los espejos</strong> (\( d \approx f \)).</li>
+            <li>Los <strong>espejos parabólicos</strong> tienen propiedades ópticas únicas que se aprovechan en antenas, telescopios, faros y centrales solares.</li>
+            <li>La ilusión óptica no es "magia": es óptica geométrica pura.</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que el Mirascope "proyecta" una imagen como un proyector de cine. En realidad, no emite luz propia: la luz del objeto es la que se redirige. Si el objeto está a oscuras, no hay imagen. La iluminación es imprescindible.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO el Mirascope</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Propiedades del espejo parabólico</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un espejo parabólico tiene una distancia focal de \( f = 12\ \mathrm{cm} \).</p>
+                    <ul>
+                        <li>a) ¿A qué distancia del vértice está el foco?</li>
+                        <li>b) ¿A qué distancia está el centro de curvatura?</li>
+                        <li>c) Si un objeto se coloca en el centro de curvatura, ¿dónde se forma la imagen?</li>
+                    </ul>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>a)</strong> El foco está a la distancia focal del vértice: \( 12\ \mathrm{cm} \).</div>
+                    <div class="paso"><strong>b)</strong> El centro de curvatura está al doble de la distancia focal: \( C = 2f = 24\ \mathrm{cm} \).</div>
+                    <div class="paso"><strong>c)</strong> Si el objeto está en el centro de curvatura, la imagen se forma también en el centro de curvatura, pero <strong>invertida</strong> y del mismo tamaño. (Es una propiedad de los espejos cóncavos en general).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Ecuación de la parábola</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un espejo parabólico tiene una distancia focal de \( 8{,}0\ \mathrm{cm} \). Escribe la ecuación de la parábola que describe su sección transversal y calcula la altura \( y \) de la superficie cuando \( x = 4{,}0\ \mathrm{cm} \).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Ecuación de la parábola:</strong></div>
+                    <div class="formula-box">\[ y = \frac{x^2}{4f} \]</div>
+                    <div class="paso"><strong>Paso 2 — Sustituimos \( f = 8{,}0\ \mathrm{cm} \):</strong></div>
+                    <div class="formula-box">\[ y = \frac{x^2}{4 \cdot 8{,}0} = \frac{x^2}{32} \]</div>
+                    <div class="paso"><strong>Paso 3 — Calculamos \( y \) para \( x = 4{,}0\ \mathrm{cm} \):</strong></div>
+                    <div class="formula-box">\[ y = \frac{(4{,}0)^2}{32} = \frac{16}{32} = 0{,}50\ \mathrm{cm} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> la superficie del espejo se eleva \( 0{,}50\ \mathrm{cm} \) a \( 4\ \mathrm{cm} \) del eje.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>¿Por qué no se ve la imagen desde cualquier ángulo?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Al mirar un Mirascope desde un lado (no desde arriba), la imagen flotante se ve peor o desaparece. Explica por qué.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿De dónde sale la luz de la imagen?</strong> La imagen real se forma en un punto concreto del aire, por encima de la abertura, sobre el eje de los espejos.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué pasa si miramos de lado?</strong> Desde esa posición, los rayos que salen del punto de la imagen ya no llegan a nuestro ojo con la misma dirección: el cono de luz es estrecho y solo se ve bien desde arriba.</div>
+                    <div class="paso"><strong>Paso 3 — Analogía:</strong> es como mirar una lupa desde un lado: la imagen solo se ve nítida desde la posición correcta.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el Mirascope tiene un <strong>campo de visión</strong> limitado. La imagen solo es visible dentro de un cono de direcciones. Mirar desde el eje o desde arriba es lo que mejor funciona.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>Imagen real vs. imagen virtual</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Clasifica como real o virtual:</p>
+                    <ul>
+                        <li>a) La imagen que da un espejo plano.</li>
+                        <li>b) La imagen que da el Mirascope.</li>
+                        <li>c) La imagen que da una lupa sobre un objeto lejano.</li>
+                        <li>d) La imagen que da un retrovisor de coche.</li>
+                    </ul>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>a)</strong> Espejo plano → imagen <strong>virtual</strong>. Los rayos no pasan realmente por el punto donde "parece" estar la imagen.</div>
+                    <div class="paso"><strong>b)</strong> Mirascope → imagen <strong>real</strong>. Los rayos convergen realmente en el aire y se puede proyectar.</div>
+                    <div class="paso"><strong>c)</strong> Lupa con objeto lejano → imagen <strong>real</strong> (invertida), pero una lupa con objeto cercano da imagen <strong>virtual</strong> (aumentada).</div>
+                    <div class="paso"><strong>d)</strong> Retrovisor de coche → imagen <strong>virtual</strong>.</div>
+                    <div class="paso"><strong>Regla:</strong> si se puede proyectar en una pantalla, es real. Si no, es virtual.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>Aplicación: faro de coche parabólico</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un faro de coche tiene un espejo parabólico con \( f = 5{,}0\ \mathrm{cm} \). La bombilla se coloca en el foco.</p>
+                    <ul>
+                        <li>a) ¿En qué dirección salen los rayos reflejados?</li>
+                        <li>b) ¿Por qué esta configuración ilumina mejor que una bombilla sin reflector?</li>
+                    </ul>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>a)</strong> Los rayos que salen del foco y se reflejan en el espejo salen <strong>paralelos al eje óptico</strong>. Es decir, forman un haz de luz dirigido hacia delante.</div>
+                    <div class="paso"><strong>b)</strong> Sin reflector, la bombilla emite luz en todas direcciones y se desperdicia más de la mitad. Con el reflector parabólico, casi toda la luz se dirige hacia delante en un haz concentrado, iluminando mejor la carretera.</div>
+                    <div class="paso"><strong>Resultado:</strong> el faro parabólico es una aplicación directa de la propiedad focal de la parábola.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>Diseño de un Mirascope casero</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Se quiere construir un Mirascope casero con dos espejos parabólicos de \( f = 15\ \mathrm{cm} \). ¿A qué distancia deben colocarse los vértices? ¿Qué ocurriría si se colocaran a \( 30\ \mathrm{cm} \)?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Distancia óptima:</strong> debe ser aproximadamente igual a la distancia focal. Por tanto, \( d \approx 15\ \mathrm{cm} \).</div>
+                    <div class="paso"><strong>Paso 2 — Si se colocan a \( 30\ \mathrm{cm} \):</strong> esa distancia es \( 2f \), el doble de la óptima. Los rayos reflejados en el espejo inferior saldrían paralelos, pero al llegar al espejo superior, que está más lejos, convergerían en un punto distinto.</div>
+                    <div class="paso"><strong>Paso 3 — Consecuencia:</strong> la imagen no se formaría en el aire por encima de la abertura, o saldría muy distorsionada. El efecto Mirascope se perdería.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la distancia entre los espejos debe ser \( d \approx f \). Es un parámetro crítico.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Antenas parabólicas: comparación con una antena plana</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica por qué una antena parabólica capta mejor las señales de satélite que una antena plana del mismo tamaño.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Señal del satélite:</strong> llega como ondas aproximadamente planas (rayos paralelos) desde una dirección concreta.</div>
+                    <div class="paso"><strong>Paso 2 — Espejo parabólico:</strong> al ser paralelos al eje, todos los rayos reflejados convergen en el foco, donde está el receptor. Así se concentra toda la energía de la señal en un punto.</div>
+                    <div class="paso"><strong>Paso 3 — Antena plana:</strong> no concentra la señal. Cada parte de la antena capta la onda, pero no hay un punto común donde se sumen todas las contribuciones.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la parabólica aprovecha la propiedad focal para concentrar la señal, mejorando la ganancia y la sensibilidad. Es la misma propiedad que hace funcionar el Mirascope, pero aplicada a las microondas.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> El Mirascope es un ejemplo brillante de cómo una propiedad geométrica (el foco de la parábola) se traduce en efectos ópticos sorprendentes. Las ideas clave son: (1) los rayos paralelos al eje se reflejan pasando por el foco; (2) los rayos que salen del foco se reflejan paralelos al eje; (3) dos espejos parabólicos enfrentados pueden crear una imagen real flotante. Y no es solo un juguete: la misma propiedad se usa en antenas, telescopios, faros y centrales solares. Entender el Mirascope es entender la óptica de la parábola.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Óptica geométrica con espejos parabólicos.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>

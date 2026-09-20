@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#F08.02-P - Práctica: La pila de limones (cobre y zinc)</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#F08.02-P.- </span>
+                <span class="texto">La pila de limones (cobre y zinc)</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>Vamos a construir una <strong>pila eléctrica casera</strong> usando limones, una moneda o lámina de <strong>cobre (Cu)</strong> y un tornillo o clavo de <strong>zinc (Zn)</strong>. Al introducir ambos metales en el limón, aparece una pequeña <strong>diferencia de potencial</strong> entre ellos y podemos encender un LED o hacer funcionar un reloj.</p>
+        <p>El limón actúa como <strong>electrolito</strong>: contiene ácido cítrico, que permite el paso de iones y hace de puente entre los dos metales. Es una pila electroquímica real, ¡aunque sea comestible!</p>
+        <div class="formula-box">
+            <strong>Reacción global simplificada:</strong><br>
+            \[
+            \mathrm{Zn + 2\,H^+ \rightarrow Zn^{2+} + H_2}
+            \]
+        </div>
+        <p>El <strong>zinc se oxida</strong> (pierde electrones) y los iones \( \mathrm{H^+} \) del ácido del limón <strong>se reducen</strong> (ganan electrones) formando hidrógeno gaseoso.</p>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué es una <strong>pila electroquímica</strong> y cómo transforma energía química en energía eléctrica.</li>
+            <li>Qué son el <strong>ánodo</strong> y el <strong>cátodo</strong>, y cómo identificarlos.</li>
+            <li>Qué es un <strong>electrolito</strong> y por qué el limón funciona como tal.</li>
+            <li>Reconocer la <strong>oxidación</strong> (en el ánodo) y la <strong>reducción</strong> (en el cátodo).</li>
+            <li>Que la tensión depende de los <strong>metales elegidos</strong> (potencial de reducción).</li>
+            <li>Que podemos sustituir el limón por otros líquidos y los metales por otros conductores.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>🔬 Fundamento teórico</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>¿Qué es una pila electroquímica?</strong>
+            <p>Es un dispositivo que aprovecha una <strong>reacción redox espontánea</strong> para producir corriente eléctrica. Consta de:</p>
+            <div class="mini-card azul">
+                <h4>🔵 Ánodo</h4>
+                <p>Electrodo donde ocurre la <strong>oxidación</strong>. En nuestra pila, el <strong>zinc</strong>. Es el polo <strong>negativo</strong>.</p>
+            </div>
+            <div class="mini-card rojo">
+                <h4>🔴 Cátodo</h4>
+                <p>Electrodo donde ocurre la <strong>reducción</strong>. En nuestra pila, el <strong>cobre</strong>. Es el polo <strong>positivo</strong>.</p>
+            </div>
+            <p>Los electrones viajan por el circuito externo desde el ánodo (Zn) hasta el cátodo (Cu). Los iones viajan por dentro del electrolito (el limón) para cerrar el circuito.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Las semirreacciones</strong>
+            <p>En el ánodo de zinc:</p>
+            <div class="formula-box">
+                \[
+                \mathrm{Zn \rightarrow Zn^{2+} + 2\,e^-} \quad \text{(oxidación)}
+                \]
+            </div>
+            <p>En el cátodo de cobre, los iones \( \mathrm{H^+} \) del ácido cítrico del limón captan los electrones:</p>
+            <div class="formula-box">
+                \[
+                \mathrm{2\,H^+ + 2\,e^- \rightarrow H_2} \quad \text{(reducción)}
+                \]
+            </div>
+            <p>La reacción global es la suma de las dos:</p>
+            <div class="formula-box">
+                \[
+                \mathrm{Zn + 2\,H^+ \rightarrow Zn^{2+} + H_2}
+                \]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>¿Por qué el limón?</strong>
+            <p>El limón contiene <strong>ácido cítrico</strong> disuelto en agua. Esa disolución ácida es un <strong>electrolito</strong>: conduce la electricidad porque contiene iones libres (\( \mathrm{H^+} \), citrato \( \mathrm{C_6H_7O_7^-} \), etc.). Sin electrolito, los electrones no podrían circular y no habría corriente.</p>
+            <div class="note">
+                <strong>Clave:</strong> el limón no "genera" electricidad por sí mismo. Solo permite que la reacción redox entre el zinc y los iones \( \mathrm{H^+} \) se produzca de forma separada, y que los electrones circulen por un camino externo.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>El potencial de reducción estándar</strong>
+            <p>Cada metal tiene una tendencia característica a oxidarse o reducirse. Se mide en <strong>voltios (V)</strong> respecto al electrodo estándar de hidrógeno. Cuanto más negativo sea el potencial, más fácil es que ese metal se oxide (sea ánodo).</p>
+            <table>
+                <tr><th>Par redox</th><th>Potencial estándar \( E^0 \) (V)</th><th>Tendencia</th></tr>
+                <tr><td>\( \mathrm{Zn^{2+}/Zn} \)</td><td>−0,76</td><td>Se oxida fácilmente (ánodo)</td></tr>
+                <tr><td>\( \mathrm{Fe^{2+}/Fe} \)</td><td>−0,44</td><td>Se oxida</td></tr>
+                <tr><td>\( \mathrm{2H^+/H_2} \)</td><td>0,00</td><td>Referencia</td></tr>
+                <tr><td>\( \mathrm{Cu^{2+}/Cu} \)</td><td>+0,34</td><td>Se reduce fácilmente (cátodo)</td></tr>
+                <tr><td>\( \mathrm{Ag^+/Ag} \)</td><td>+0,80</td><td>Muy difícil de oxidar</td></tr>
+            </table>
+            <p>La <strong>tensión teórica</strong> de la pila es la diferencia entre los potenciales del cátodo y del ánodo:</p>
+            <div class="formula-box">
+                \[
+                E_{\text{pila}}^0 = E_{\text{cátodo}}^0 - E_{\text{ánodo}}^0
+                \]
+            </div>
+            <p>Para Zn y Cu: \( E_{\text{pila}}^0 = +0{,}34 - (-0{,}76) = 1{,}10\ \mathrm{V} \). En la práctica, con un solo limón se suele obtener entre 0,7 y 1,0 V por las pérdidas.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>¿Por qué necesitamos varios limones en serie?</strong>
+            <p>Un LED rojo necesita unos 1,8 V para encenderse. Con un solo limón no es suficiente. Al <strong>conectar varios limones en serie</strong> (el cobre de uno con el zinc del siguiente), los voltajes se suman:</p>
+            <div class="formula-box">
+                \[
+                V_{\text{total}} = V_1 + V_2 + V_3 + \dots
+                \]
+            </div>
+            <p>Con 3 limones en serie (\( 3 \cdot 0{,}9 = 2{,}7\ \mathrm{V} \)) ya suele encenderse un LED rojo.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>¿Podemos cambiar el limón por otro líquido?</strong></h>
+            <p>¡Sí! Cualquier líquido que sea <strong>electrolito</strong> (que contenga iones) sirve. Cuanto más ácido o más salino, mejor conduce.</p>
+            <table>
+                <tr><th>Electrolito</th><th>¿Funciona?</th><th>Comentario</th></tr>
+                <tr><td>Limón / naranja / pomelo</td><td>✅ Sí</td><td>Ácido cítrico. Clásico y seguro.</td></tr>
+                <tr><td>Vinagre (ácido acético)</td><td>✅ Sí</td><td>Muy buen resultado. Fácil de conseguir.</td></tr>
+                <tr><td>Refresco de cola</td><td>✅ Sí</td><td>Contiene ácido fosfórico. Funciona aceptablemente.</td></tr>
+                <tr><td>Agua con sal</td><td>✅ Sí</td><td>Los iones Na⁺ y Cl⁻ conducen bien.</td></tr>
+                <tr><td>Agua con bicarbonato</td><td>⚠️ Débil</td><td>Poco ácido, conduce poco.</td></tr>
+                <tr><td>Agua destilada</td><td>❌ No</td><td>No tiene iones disueltos.</td></tr>
+                <tr><td>Zumo de frutas</td><td>✅ Sí</td><td>Ácidos naturales.</td></tr>
+                <tr><td>Patata / manzana</td><td>✅ Sí (débil)</td><td>Contienen agua y iones, pero funcionan peor.</td></tr>
+            </table>
+            <div class="highlight-box">
+                <strong>Idea clave:</strong> lo que hace falta es una disolución con <strong>iones libres</strong> que puedan moverse. Un ácido o una sal disuelta cumplen esa función.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">7</span>
+            <strong>¿Podemos cambiar los metales?</strong>
+            <p>Sí. Cualquier pareja de metales con <strong>potenciales de reducción distintos</strong> sirve. Cuanto mayor sea la diferencia entre sus potenciales, mayor será la tensión de la pila.</p>
+            <table>
+                <tr><th>Pareja de metales</th><th>Tensión teórica (V)</th><th>Comentario</th></tr>
+                <tr><td>Zn / Cu</td><td>1,10</td><td>La clásica. Funciona muy bien.</td></tr>
+                <tr><td>Zn / Ag</td><td>1,56</td><td>Más tensión. La plata es más cara.</td></tr>
+                <tr><td>Mg / Cu</td><td>2,71</td><td>Muy alta. El magnesio se oxida rápido.</td></tr>
+                <tr><td>Fe / Cu</td><td>0,78</td><td>Más débil pero suficiente para un LED con varios.</td></tr>
+                <tr><td>Al / Cu</td><td>2,00</td><td>Buena. El aluminio se pasiva rápido.</td></tr>
+                <tr><td>Cu / Cu</td><td>0,00</td><td>No funciona: hace falta diferencia de potencial.</td></tr>
+            </table>
+            <div class="note">
+                <strong>Regla de oro:</strong> necesitamos un metal que se oxide fácilmente (ánodo, potencial muy negativo) y otro que se reduzca fácilmente (cátodo, potencial muy positivo). El zinc y el cobre son la pareja clásica de laboratorio.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN MATERIALES Y PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y procedimiento experimental</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Materiales</strong>
+            <ul>
+                <li>3 limones (o más, si queremos más tensión).</li>
+                <li>3 monedas de cobre, o mejor, <strong>láminas de cobre</strong> (unos 2 cm × 4 cm).</li>
+                <li>3 <strong>tornillos o clavos galvanizados de zinc</strong> (los típicos tornillos plateados).</li>
+                <li>Cables conductores con pinzas de cocodrilo.</li>
+                <li>Un <strong>LED</strong> (rojo o verde) o un reloj digital pequeño.</li>
+                <li>Un <strong>multímetro</strong> (opcional pero recomendable) para medir la tensión.</li>
+                <li>Cuchillo o tijeras para hacer cortes en los limones.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Preparación de los limones</strong>
+            <ol>
+                <li>Rueda cada limón sobre la mesa presionando ligeramente con la palma. Esto rompe algunas membranas internas y libera más zumo, mejorando la conductividad.</li>
+                <li>Con un cuchillo, haz <strong>dos cortes</strong> en cada limón, separados unos 3 cm, lo bastante profundos para introducir los metales.</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Montaje de la pila</strong>
+            <ol>
+                <li>En el primer limón, introduce una <strong>moneda o lámina de cobre</strong> en un corte y un <strong>tornillo de zinc</strong> en el otro.</li>
+                <li>Repite con los demás limones.</li>
+                <li>Conecta el <strong>tornillo de zinc</strong> del primer limón con el <strong>cobre</strong> del segundo mediante un cable con pinzas.</li>
+                <li>Haz lo mismo entre el segundo y el tercer limón (zinc del 2 con cobre del 3).</li>
+                <li>Los extremos libres son: el <strong>cobre del primer limón</strong> (polo +) y el <strong>zinc del último limón</strong> (polo −).</li>
+            </ol>
+            <div class="highlight-box">
+                <strong>Esquema de conexión en serie:</strong><br>
+                [Cu₁ | Zn₁] —— [Cu₂ | Zn₂] —— [Cu₃ | Zn₃]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;−<br>
+                Los polos libres son el cobre del primer limón (+) y el zinc del último (−).
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Medida y prueba con el LED</strong>
+            <ol>
+                <li>Con el multímetro, mide la tensión entre los extremos libres. Debería dar entre 2 y 3 V con 3 limones.</li>
+                <li>Conecta el <strong>LED</strong> respetando la polaridad: la pata larga del LED (ánodo) al <strong>cobre</strong> (positivo) y la pata corta (cátodo) al <strong>zinc</strong> (negativo).</li>
+                <li>Si el LED se enciende, ¡objetivo conseguido! Si no, prueba a añadir más limones en serie.</li>
+            </ol>
+            <div class="note">
+                <strong>Truco:</strong> los LED tienen polaridad. Si no se enciende, prueba a girarlo. También puede que necesites más limones para alcanzar la tensión umbral del LED (típicamente 1,8–2,2 V para rojo, 2,8–3,2 V para azul o blanco).
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Variantes para investigar</strong>
+            <ul>
+                <li><strong>Cambiar el electrolito:</strong> probar con vinagre, refresco de cola o agua con sal en lugar de limones. Comparar la tensión obtenida.</li>
+                <li><strong>Cambiar los metales:</strong> probar otras parejas (Fe/Cu, Al/Cu, Mg/Cu, Zn/Ag) y medir la tensión.</li>
+                <li><strong>Cambiar el número de celdas:</strong> ver cómo varía la tensión al añadir o quitar limones en serie.</li>
+                <li><strong>Conexión en paralelo:</strong> conectar los limones en paralelo (cobre con cobre, zinc con zinc). La tensión no aumenta, pero la corriente disponible sí.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has demostrado?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>Una reacción redox espontánea puede generar corriente eléctrica.</strong></p>
+            <p>El zinc se oxida (ánodo, polo −) y los iones \( \mathrm{H^+} \) del ácido del limón se reducen en el cobre (cátodo, polo +). Los electrones circulan por el circuito externo y pueden encender un LED.</p>
+        </div>
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>La <strong>tensión de la pila</strong> depende de los metales elegidos (diferencia de potenciales de reducción).</li>
+            <li>El <strong>electrolito</strong> puede ser cualquier disolución con iones: limón, vinagre, refresco, agua con sal…</li>
+            <li>Los <strong>metales</strong> pueden cambiarse siempre que tengan potenciales distintos. Zn/Cu es la pareja clásica.</li>
+            <li>Al conectar varias celdas <strong>en serie</strong>, las tensiones se suman.</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que el limón "produce" electricidad. El limón solo es el electrolito. La energía proviene de la <strong>reacción química</strong> entre el zinc y los iones \( \mathrm{H^+} \). Cuando el zinc se agota o el ácido se neutraliza, la pila deja de funcionar.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO la pila de limones</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Identifica ánodo, cátodo y polos</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En la pila de limón con zinc y cobre, indica:</p>
+                    <ul>
+                        <li>a) ¿Qué metal es el ánodo y cuál el cátodo?</li>
+                        <li>b) ¿Qué electrodo es el polo positivo y cuál el negativo?</li>
+                        <li>c) ¿Dónde ocurre la oxidación y dónde la reducción?</li>
+                    </ul>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>a)</strong> Ánodo: el <strong>zinc</strong> (se oxida). Cátodo: el <strong>cobre</strong> (se reduce).</div>
+                    <div class="paso"><strong>b)</strong> El cobre es el polo <strong>positivo</strong> (+); el zinc es el polo <strong>negativo</strong> (−).</div>
+                    <div class="paso"><strong>c)</strong> La oxidación ocurre en el <strong>ánodo (Zn)</strong>; la reducción, en el <strong>cátodo (Cu)</strong>.</div>
+                    <div class="paso"><strong>Regla mnemotécnica:</strong> el ánodo es donde hay oxidación; el cátodo, donde hay reducción. En una pila, el ánodo es el polo negativo y el cátodo el positivo.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Cálculo de la tensión de la pila</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Calcula la tensión teórica de una pila formada por una lámina de <strong>magnesio</strong> (\( E^0 = -2{,}37\ \mathrm{V} \)) y otra de <strong>cobre</strong> (\( E^0 = +0{,}34\ \mathrm{V} \)) en un electrolito ácido.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Identificamos ánodo y cátodo:</strong> el Mg tiene potencial más negativo → se oxida → es el ánodo. El Cu tiene potencial más positivo → se reduce → es el cátodo.</div>
+                    <div class="paso"><strong>Paso 2 — Fórmula:</strong></div>
+                    <div class="formula-box">\[ E_{\text{pila}} = E_{\text{cátodo}} - E_{\text{ánodo}} \]</div>
+                    <div class="paso"><strong>Paso 3 — Sustituimos:</strong></div>
+                    <div class="formula-box">\[ E_{\text{pila}} = 0{,}34 - (-2{,}37) = 2{,}71\ \mathrm{V} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> la pila Mg/Cu daría teóricamente \( 2{,}71\ \mathrm{V} \), mucho más que la de Zn/Cu (1,10 V).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>¿Por qué necesitamos varios limones?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Cada limón con Zn/Cu produce aproximadamente \( 0{,}9\ \mathrm{V} \) en la práctica. Un LED rojo necesita \( 1{,}8\ \mathrm{V} \) para encenderse. ¿Cuántos limones como mínimo necesitamos conectar en serie?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — En serie, las tensiones se suman:</strong></div>
+                    <div class="formula-box">\[ V_{\text{total}} = n \cdot V_{\text{celda}} \]</div>
+                    <div class="paso"><strong>Paso 2 — Despejamos \( n \):</strong></div>
+                    <div class="formula-box">\[ n = \frac{V_{\text{LED}}}{V_{\text{celda}}} = \frac{1{,}8}{0{,}9} = 2 \]</div>
+                    <div class="paso"><strong>Paso 3 — Margen de seguridad:</strong> como las pérdidas pueden reducir la tensión real, conviene usar al menos <strong>3 limones</strong> para asegurar que el LED se enciende.</div>
+                    <div class="paso"><strong>Resultado:</strong> mínimo 2, recomendable 3 limones en serie.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>¿Funciona con agua destilada?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Si montamos la pila Zn/Cu pero sumergimos los electrodos en <strong>agua destilada</strong> en lugar de en un limón, ¿funcionará? ¿Y si disolvemos sal en el agua? Justifica tus respuestas.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Agua destilada:</strong> no contiene iones disueltos (o muy pocos). No conduce la corriente, así que la pila no funciona.</div>
+                    <div class="paso"><strong>Paso 2 — Agua con sal:</strong> al disolver NaCl aparecen iones Na⁺ y Cl⁻ que hacen la disolución conductora. La pila <strong>sí funciona</strong>, aunque la química interna sea algo distinta (el Cl⁻ puede oxidarse en el ánodo).</div>
+                    <div class="paso"><strong>Conclusión:</strong> lo importante es que el electrolito tenga <strong>iones libres</strong>. El agua destilada no los tiene; el agua salada sí.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>¿Se puede usar una moneda de euro de cobre?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un compañero quiere usar una moneda de 1 céntimo de euro como electrodo de cobre. ¿Es buena idea? ¿Qué otro metal podría usar si no encuentra cobre?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — La moneda de 1 céntimo:</strong> las monedas de 1, 2 y 5 céntimos de euro están recubiertas de cobre, así que sirven bien como electrodo de cobre, aunque su superficie es pequeña.</div>
+                    <div class="paso"><strong>Paso 2 — Alternativas:</strong> podríamos usar plata (monedas antiguas, joyas), o incluso <strong>grafito</strong> (mina de lápiz) como cátodo inerte, aunque el grafito no se reduce igual que el cobre. Lo importante es que haya <strong>diferencia de potencial</strong> respecto al zinc.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la moneda de cobre es una opción aceptable. Mejor aún si es una lámina de cobre pura de mayor superficie, porque el rendimiento será mayor.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>Conexión en serie vs. paralelo</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Tenemos 4 limones, cada uno con Zn/Cu. Si queremos encender un LED que necesita 2,5 V, ¿cómo los conectamos: en serie o en paralelo? ¿Qué pasa con la tensión y con la corriente en cada caso?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — En serie:</strong> las tensiones se suman. Con 4 limones: \( 4 \cdot 0{,}9 = 3{,}6\ \mathrm{V} \) (teóricos). Suficiente para el LED. La corriente disponible es la de un solo limón.</div>
+                    <div class="paso"><strong>Paso 2 — En paralelo:</strong> la tensión es la de un solo limón (\( 0{,}9\ \mathrm{V} \)), pero la corriente total se multiplica por 4. No alcanzaría para encender el LED.</div>
+                    <div class="paso"><strong>Conclusión:</strong> para <strong>aumentar la tensión</strong>, conectar en <strong>serie</strong>. Para aumentar la corriente (sin subir la tensión), en <strong>paralelo</strong>. Para el LED, necesitamos serie.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Comparación con la pila comercial</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Una pila alcalina comercial de 1,5 V dura meses encendiendo un reloj. La pila de limones dura unas horas. Explica por qué.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿De qué depende la duración?</strong> De la cantidad de reactivos disponibles y de la velocidad a la que se consumen.</div>
+                    <div class="paso"><strong>Paso 2 — Pila de limones:</strong> el zinc se oxida y los iones \( \mathrm{H^+} \) se consumen. Cuando el zinc superficial se agota o el ácido se neutraliza, la pila deja de funcionar. Además, la superficie de electrodo es pequeña y la corriente es mínima.</div>
+                    <div class="paso"><strong>Paso 3 — Pila comercial:</strong> usa reactivos mucho más energéticos (Zn y \( \mathrm{MnO_2} \), por ejemplo), sellados y en gran cantidad. La reacción es más lenta y controlada, por eso dura mucho más.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la pila de limón es una demostración didáctica, no una fuente práctica de energía. Su valor es conceptual, no utilitario.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> La pila de limones es un ejemplo perfecto de cómo una reacción redox espontánea puede convertirse en corriente eléctrica. Las tres ideas que hay que llevarse son: (1) el <strong>ánodo se oxida</strong> (polo −) y el <strong>cátodo se reduce</strong> (polo +); (2) el <strong>electrolito</strong> solo necesita tener iones libres (vale limón, vinagre, agua salada…); y (3) la <strong>tensión depende de los metales</strong> elegidos, no del electrolito. Con esta base, el alumnado puede diseñar sus propias pilas y entender por qué las pilas comerciales funcionan.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Un limón, un clavo y una moneda: la energía química convertida en luz.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>

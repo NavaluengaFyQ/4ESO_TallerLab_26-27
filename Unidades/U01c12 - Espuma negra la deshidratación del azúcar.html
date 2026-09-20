@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c12 - Espuma negra: la deshidratación del azúcar</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .seguridad { background: #fff5f5; border-color: #e53e3e; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .seguridad h2 { color: #c53030; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* Tabla de materiales */
+        .tabla-materiales {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.92em;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+        .tabla-materiales thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .tabla-materiales th {
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .tabla-materiales td {
+            padding: 9px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        .tabla-materiales tbody tr:nth-child(even) { background: #f9fafc; }
+        .tabla-materiales tbody tr:hover { background: #ebf4ff; }
+
+        /* Bloque de propiedades destacadas */
+        .propiedades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .prop-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            border-left: 4px solid #e53e3e;
+            transition: transform 0.2s;
+        }
+        .prop-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .prop-card .prop-icon {
+            font-size: 1.5em;
+            margin-bottom: 6px;
+            color: #c53030;
+        }
+        .prop-card h4 {
+            margin: 0 0 6px 0;
+            color: #2d3748;
+            font-size: 0.95em;
+        }
+        .prop-card p {
+            margin: 0;
+            font-size: 0.85em;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        /* Bloque de aplicaciones */
+        .aplicaciones {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .app-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            border-left: 4px solid #4299e1;
+            transition: transform 0.2s;
+        }
+        .app-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .app-card .app-icon {
+            font-size: 1.6em;
+            margin-bottom: 8px;
+            color: #4299e1;
+        }
+        .app-card h4 {
+            margin: 0 0 6px 0;
+            color: #2d3748;
+            font-size: 1em;
+        }
+        .app-card p {
+            margin: 0;
+            font-size: 0.88em;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        /* Bloque de aviso grande */
+        .aviso-grande {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #fff5f5;
+            border: 2px solid #fc8181;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin: 15px 0;
+        }
+        .aviso-grande .icono {
+            font-size: 2.2em;
+            color: #c53030;
+        }
+        .aviso-grande .texto {
+            color: #742a2a;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .aviso-grande .texto strong { color: #9b2c2c; }
+
+        /* Bloque destacado de "truco" */
+        .truco {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 6px solid #d97706;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 18px 0;
+            color: #78350f;
+        }
+        .truco strong { color: #92400e; }
+
+        /* Estilos para el bloque desplegable */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c12.- </span>
+                <span class="texto">Espuma negra: la deshidratación del azúcar</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 Enunciado</h2>
+        <p>Imagina que viertes un líquido transparente y aceitoso sobre un montón de azúcar blanco. Al principio no parece pasar nada, pero en cuestión de segundos la mezcla empieza a calentarse, a humear y a cambiar de color: del blanco pasa al amarillo, luego al marrón y, finalmente, al negro. De repente, una <strong>masa esponjosa negra</strong> comienza a crecer y a salir del vaso como si fuera un gusano gigante, llenando el aire con un olor penetrante a azufre y caramelo quemado.</p>
+        <div class="formula-box">\[ \text{Azúcar blanco} + \text{ácido sulfúrico} \;\longrightarrow\; \text{Carbón negro} + \text{vapor de agua} + \text{calor} \]</div>
+        <p>Este fenómeno, conocido como <strong>“espuma negra”</strong> o <strong>“gusano del azúcar”</strong>, es una de las demostraciones más espectaculares y sencillas de la química. Detrás de él se esconde una reacción de <strong>deshidratación</strong> provocada por el ácido sulfúrico, una sustancia con propiedades únicas que la convierten en uno de los productos industriales más importantes del mundo.</p>
+    </div>
+
+    <!-- OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 Objetivo</h2>
+        <ul>
+            <li>Observar experimentalmente la <strong>deshidratación de la sacarosa</strong> (azúcar común) mediante ácido sulfúrico concentrado.</li>
+            <li>Comprender el concepto de <strong>deshidratación química</strong> y su relación con la carbonización de la materia orgánica.</li>
+            <li>Identificar las <strong>características del ácido sulfúrico</strong>: su poder deshidratante, su carácter fuertemente exotérmico al diluirse y su capacidad oxidante.</li>
+            <li>Reconocer la importancia industrial del ácido sulfúrico, especialmente en la fabricación de fertilizantes y en la industria petroquímica.</li>
+            <li>Aplicar las normas de seguridad en el manejo de ácidos concentrados.</li>
+        </ul>
+    </div>
+
+
+
+    <!-- PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>🧰 Materiales y procedimiento</h2>
+
+        <h3 style="color:#276749; margin-top:0;">Materiales necesarios</h3>
+        <table class="tabla-materiales">
+            <thead>
+                <tr>
+                    <th>Material</th>
+                    <th>Detalle / Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Azúcar común (sacarosa)</td>
+                    <td>40 g (aproximadamente 1/4 de un vaso de 250 cm³)</td>
+                </tr>
+                <tr>
+                    <td>Ácido sulfúrico concentrado (98 %)</td>
+                    <td>12-15 cm³</td>
+                </tr>
+                <tr>
+                    <td>Vaso de precipitados de 250 cm³</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Varilla de vidrio</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Probeta graduada de 25 cm³</td>
+                    <td>1 (para medir el ácido)</td>
+                </tr>
+                <tr>
+                    <td>Campana de gases o zona ventilada</td>
+                    <td>Imprescindible</td>
+                </tr>
+                <tr>
+                    <td>Guantes de nitrilo, gafas de seguridad y bata</td>
+                    <td>Equipo de protección individual</td>
+                </tr>
+                <tr>
+                    <td>Vidrio de reloj grande o bandeja</td>
+                    <td>1 (para colocar el vaso y contener posibles salpicaduras)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 style="color:#276749;">Procedimiento experimental</h3>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Preparación del montaje</strong>
+            <p>Coloca el vaso de precipitados sobre un vidrio de reloj grande o una bandeja, dentro de la campana de gases. Pesa 40 g de azúcar y viértelos en el vaso. El azúcar debe ocupar aproximadamente un cuarto de la capacidad del vaso.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Adición del ácido</strong>
+            <p>Con la probeta, mide 12-15 cm³ de ácido sulfúrico concentrado. Añádelo <strong>lentamente</strong> sobre el azúcar, con cuidado de no salpicar. Puedes ayudarte de la varilla de vidrio para dirigir el chorro. <strong>No remuevas todavía</strong>.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Observación de los primeros cambios</strong>
+            <p>En unos segundos, el azúcar empezará a cambiar de color: primero amarillo, luego marrón. Se desprenderá vapor de agua y la mezcla se calentará notablemente (la reacción es <strong>fuertemente exotérmica</strong>).</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>La espuma negra</strong>
+            <p>Al cabo de 1-2 minutos, la masa comenzará a ennegrecerse y a expandirse. Se formará una <strong>espuma negra y porosa de carbón</strong> que ascenderá por el vaso, pudiendo alcanzar varias veces su altura inicial. Se desprenderán gases con olor a azufre (SO₂) y a caramelo quemado.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Dejar reposar y observar</strong>
+            <p>Deja que la reacción continúe hasta que se detenga por sí sola (unos 3-5 minutos). Observa la textura esponjosa del carbón resultante y cómo el vaso se ha calentado. <strong>No toques el producto</strong>: contiene restos de ácido sulfúrico y puede quemar.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>Limpieza y neutralización</strong>
+            <p>Una vez frío, el residuo debe neutralizarse con cuidado. Añade agua lentamente y, si es necesario, una disolución de bicarbonato de sodio (NaHCO₃) hasta que cese el burbujeo. Desecha según las normas del laboratorio. <strong>Nunca viertas agua directamente sobre el ácido concentrado caliente.</strong></p>
+        </div>
+
+
+    </div>
+
+    <!-- RESULTADO Y EXPLICACIÓN -->
+    <div class="section resultado">
+        <h2>📊 ¿Por qué ocurre? Explicación química</h2>
+
+        <p>La sacarosa es un <strong>hidrato de carbono</strong> de fórmula molecular \( \text{C}_{12}\text{H}_{22}\text{O}_{11} \). Su nombre lo dice todo: “hidrato de carbono” significa que, formalmente, está formada por carbono y agua. El ácido sulfúrico concentrado tiene una avidez enorme por el agua (es <strong>higroscópico</strong>) y es capaz de <strong>arrancar los elementos del agua</strong> (H y O) de la molécula de sacarosa, dejando atrás únicamente átomos de carbono.</p>
+
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            \[ \text{C}_{12}\text{H}_{22}\text{O}_{11} \;\xrightarrow{\text{H}_2\text{SO}_4}\; 12\,\text{C} + 11\,\text{H}_2\text{O} \]
+        </div>
+
+        <p>El agua que se libera no se pierde: queda retenida por el ácido sulfúrico. La disolución del ácido en esa agua es <strong>altamente exotérmica</strong>, lo que hace que el agua se evapore violentamente y empuje la masa de carbón hacia arriba, creando la textura esponjosa. Además, el ácido sulfúrico concentrado actúa como <strong>oxidante</strong> a alta temperatura, oxidando parte del carbono a dióxido de carbono (CO₂) y generando <strong>dióxido de azufre (SO₂)</strong>, responsable del olor penetrante a azufre.</p>
+
+        <div class="formula-box">
+            \[ \text{C} + 2\,\text{H}_2\text{SO}_4 \;\longrightarrow\; \text{CO}_2 + 2\,\text{SO}_2 + 2\,\text{H}_2\text{O} \]
+        </div>
+
+        <h3 style="color:#2b6cb0; margin-top: 25px;">Características del ácido sulfúrico</h3>
+        <p>El ácido sulfúrico (\( \text{H}_2\text{SO}_4 \)) es uno de los compuestos químicos más importantes de la industria. Sus propiedades clave son:</p>
+
+        <div class="propiedades-grid">
+            <div class="prop-card">
+                <div class="prop-icon">💧</div>
+                <h4>Poder deshidratante</h4>
+                <p>Es un agente deshidratante muy potente. Destruye la materia orgánica (papel, madera, azúcar, piel) arrancándole el agua y carbonizándola.</p>
+            </div>
+            <div class="prop-card">
+                <div class="prop-icon">🔥</div>
+                <h4>Dilución exotérmica</h4>
+                <p>La disolución en agua libera una gran cantidad de calor. Por eso <strong>nunca</strong> se debe añadir agua al ácido concentrado: puede provocar salpicaduras violentas.</p>
+            </div>
+            <div class="prop-card">
+                <div class="prop-icon">⚡</div>
+                <h4>Carácter oxidante</h4>
+                <p>En caliente y concentrado, oxida muchos materiales, incluido el carbono, liberando SO₂.</p>
+            </div>
+            <div class="prop-card">
+                <div class="prop-icon">💧</div>
+                <h4>Higroscópico</h4>
+                <p>Absorbe la humedad del aire. Se usa para secar gases y líquidos en el laboratorio.</p>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>Ficha técnica del ácido sulfúrico:</strong> Líquido incoloro, aceitoso e inodoro en estado puro. Punto de ebullición: 335 °C (para la disolución al 98 %). Densidad: 1,84 g/cm³. Miscible con agua en cualquier proporción. Altamente corrosivo para metales y tejidos. Se comercializa a diversas concentraciones (98 %, 78 %, 33-34 % para baterías).
+        </div>
+
+        <h3 style="color:#2b6cb0; margin-top: 25px;">Aplicaciones industriales del ácido sulfúrico</h3>
+        <p>El ácido sulfúrico es el compuesto químico más producido del mundo. Su importancia industrial es enorme:</p>
+
+        <div class="aplicaciones">
+            <div class="app-card">
+                <div class="app-icon">🌾</div>
+                <h4>Fertilizantes</h4>
+                <p>El 60-70 % de la producción mundial se destina a la fabricación de fertilizantes, especialmente superfosfato y fosfato de amonio.</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">🛢️</div>
+                <h4>Refino del petróleo</h4>
+                <p>Se usa como catalizador en el refinado del petróleo crudo y en la producción de combustibles.</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">🧴</div>
+                <h4>Detergentes y químicos</h4>
+                <p>Materia prima para detergentes, fibras sintéticas, plásticos, explosivos y productos farmacéuticos.</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">🔋</div>
+                <h4>Baterías de plomo</h4>
+                <p>El electrolito de las baterías de plomo-ácido de los automóviles es ácido sulfúrico diluido.</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">🏭</div>
+                <h4>Metalurgia</h4>
+                <p>Se emplea en el decapado de metales (eliminación de óxidos) y en la purificación de minerales.</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">💧</div>
+                <h4>Tratamiento de agua</h4>
+                <p>Para producir sulfato de aluminio, utilizado en la potabilización del agua.</p>
+            </div>
+        </div>
+
+        <div class="note" style="margin-top: 20px;">
+            <strong>¿Sabías que...?</strong> El ácido sulfúrico también se conoce como <em>“aceite de vitriolo”</em> porque antiguamente se obtenía por destilación de minerales llamados vitriolos (sulfatos). Fue descubierto por los alquimistas y ha sido fundamental en el desarrollo de la química moderna. En 1831, la producción industrial de ácido sulfúrico mediante el proceso de contacto revolucionó la industria química.
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- BLOQUE DESPLEGABLE CON EJERCICIOS RESUELTOS               -->
+    <!-- ========================================================= -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO Espuma negra: la deshidratación del azúcar</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Estequiometría de la deshidratación de la sacarosa</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Partiendo de la ecuación de la deshidratación de la sacarosa:</p>
+                    <div class="formula-box">\[ \text{C}_{12}\text{H}_{22}\text{O}_{11} \;\longrightarrow\; 12\,\text{C} + 11\,\text{H}_2\text{O} \]</div>
+                    <p>Calcula la masa de carbón (C) que se obtendría a partir de 40 g de sacarosa. Datos: masas atómicas C = 12, H = 1, O = 16.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Masa molar de la sacarosa: \( M(\text{C}_{12}\text{H}_{22}\text{O}_{11}) = 12 \times 12 + 22 \times 1 + 11 \times 16 = 144 + 22 + 176 = 342\ \text{g/mol} \).</div>
+                    <div class="paso"><strong>Paso 2:</strong> Moles de sacarosa: \( n = \frac{40}{342} \approx 0{,}117\ \text{mol} \).</div>
+                    <div class="paso"><strong>Paso 3:</strong> Según la estequiometría, 1 mol de sacarosa produce 12 mol de C. Por tanto: \( n(\text{C}) = 0{,}117 \times 12 = 1{,}404\ \text{mol} \).</div>
+                    <div class="paso"><strong>Paso 4:</strong> Masa de carbono: \( m(\text{C}) = 1{,}404 \times 12 = 16{,}85\ \text{g} \).</div>
+                    <div class="paso"><strong>Resultado:</strong> A partir de 40 g de azúcar se obtienen aproximadamente <strong>16,85 g de carbón</strong>. El resto de la masa corresponde al agua que se libera y que queda retenida por el ácido.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Calor desprendido en la dilución del ácido sulfúrico</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La dilución de ácido sulfúrico concentrado en agua libera aproximadamente 880 kJ por mol de H₂SO₄. Si en la reacción se liberan 11 moles de agua y todo el ácido sulfúrico (0,15 mol) se diluye en ella, calcula la energía liberada solo por la dilución del ácido. ¿Por qué esta energía contribuye a que la mezcla se caliente tanto?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Moles de H₂SO₄: 15 cm³ × 1,84 g/cm³ ÷ 98 g/mol ≈ 0,28 mol. Usaremos 0,15 mol como aproximación para el cálculo.</div>
+                    <div class="paso"><strong>Paso 2:</strong> Energía de dilución: \( Q = n \times \Delta H_{\text{dilución}} = 0{,}15 \times 880 = 132\ \text{kJ} \).</div>
+                    <div class="paso"><strong>Paso 3:</strong> Esta energía es muy significativa: 132 kJ son suficientes para elevar la temperatura de 1 kg de agua en unos 31 °C.</div>
+                    <div class="paso"><strong>Paso 4:</strong> Además, la propia reacción de deshidratación también es exotérmica. La combinación de ambas hace que el vaso se caliente mucho.</div>
+                    <div class="paso"><strong>Resultado:</strong> La dilución del ácido sulfúrico libera una cantidad enorme de calor, que contribuye de forma decisiva al calentamiento de la mezcla y a la evaporación violenta del agua, impulsando la espuma negra hacia arriba.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>Oxidación del carbono por el ácido sulfúrico</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> A alta temperatura, el ácido sulfúrico concentrado oxida parte del carbono según la reacción:</p>
+                    <div class="formula-box">\[ \text{C} + 2\,\text{H}_2\text{SO}_4 \;\longrightarrow\; \text{CO}_2 + 2\,\text{SO}_2 + 2\,\text{H}_2\text{O} \]</div>
+                    <p>Si se oxidan 5 g de carbono, calcula el volumen de SO₂ liberado a 25 °C y 1 atm. Datos: masas atómicas C = 12, S = 32, O = 16. \( R = 0{,}082\ \text{atm·L/(mol·K)} \).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Moles de C: \( n(\text{C}) = \frac{5}{12} = 0{,}417\ \text{mol} \).</div>
+                    <div class="paso"><strong>Paso 2:</strong> Según la estequiometría, 1 mol de C produce 2 mol de SO₂. \( n(\text{SO}_2) = 0{,}417 \times 2 = 0{,}834\ \text{mol} \).</div>
+                    <div class="paso"><strong>Paso 3:</strong> Volumen de SO₂: \( V = \frac{nRT}{P} = \frac{0{,}834 \times 0{,}082 \times 298}{1} \approx 20{,}4\ \text{L} \).</div>
+                    <div class="paso"><strong>Resultado:</strong> Se liberan aproximadamente <strong>20,4 litros de SO₂</strong>. Este gas es tóxico e irritante, de ahí la obligación de realizar la práctica en campana de gases.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>Propiedades del ácido sulfúrico: ¿por qué es deshidratante?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica, en términos de interacciones moleculares, por qué el ácido sulfúrico es un agente deshidratante tan potente. ¿Por qué puede arrancar el agua de la sacarosa?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> La molécula de H₂SO₄ tiene una enorme afinidad por el agua. Es <strong>higroscópica</strong>: absorbe la humedad del aire y se mezcla con el agua en cualquier proporción.</div>
+                    <div class="paso"><strong>Paso 2:</strong> Los grupos –OH del ácido sulfúrico forman <strong>puentes de hidrógeno</strong> muy fuertes con las moléculas de agua. La energía liberada en estas interacciones es muy alta (de ahí que la dilución sea exotérmica).</div>
+                    <div class="paso"><strong>Paso 3:</strong> En la sacarosa, los grupos hidroxilo (–OH) también forman puentes de hidrógeno. El ácido sulfúrico compite eficazmente por esos grupos, arrancando los elementos del agua (H y O) de la molécula de azúcar.</div>
+                    <div class="paso"><strong>Paso 4:</strong> Como el agua se elimina, el esqueleto de carbono queda expuesto y se produce la carbonización.</div>
+                    <div class="paso"><strong>Resultado:</strong> La capacidad deshidratante del H₂SO₄ se debe a su alta afinidad por el agua, mediada por puentes de hidrógeno y por la gran energía de solvatación. Esto le permite “robar” el agua a la materia orgánica.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>¿Por qué la espuma negra crece tanto?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La espuma negra puede alcanzar 3 o 4 veces la altura inicial del azúcar en el vaso. Explica qué dos factores son responsables de esta expansión y por qué el producto final es poroso.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Factor 1: <strong>Vapor de agua</strong>. La reacción libera 11 moles de agua por cada mol de sacarosa. Al calentarse, parte de esa agua se convierte en vapor, que ocupa un volumen enorme (1 mol de agua líquida → 22,4 L de vapor en condiciones normales).</div>
+                    <div class="paso"><strong>Paso 2:</strong> Factor 2: <strong>Gases de la oxidación</strong>. Parte del carbono se oxida a CO₂ y se genera SO₂. Ambos gases contribuyen a la expansión.</div>
+                    <div class="paso"><strong>Paso 3:</strong> A medida que los gases escapan, la masa de carbón se solidifica formando una estructura porosa, similar a una esponja, que conserva las burbujas de gas atrapadas.</div>
+                    <div class="paso"><strong>Resultado:</strong> La expansión se debe al vapor de agua y a los gases (CO₂, SO₂) generados. Al escapar, dejan una estructura porosa y ligera: la “espuma negra”.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>Seguridad: dilución del ácido sulfúrico</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En el laboratorio se necesita preparar 500 mL de una disolución de ácido sulfúrico 1 M a partir de ácido concentrado (98 %, densidad 1,84 g/cm³). Describe el procedimiento correcto y explica por qué <strong>nunca</strong> se debe añadir agua al ácido concentrado.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Cálculo del volumen de ácido concentrado necesario. Moles necesarios: 0,5 L × 1 mol/L = 0,5 mol. Masa de H₂SO₄ puro: 0,5 × 98 = 49 g. Masa de disolución concentrada: 49 / 0,98 = 50 g. Volumen: 50 / 1,84 = 27,2 cm³.</div>
+                    <div class="paso"><strong>Paso 2:</strong> Procedimiento: en un vaso con unos 300 mL de agua, <strong>añadir lentamente el ácido</strong> con agitación constante. Luego enrasar a 500 mL. Siempre el ácido sobre el agua.</div>
+                    <div class="paso"><strong>Paso 3:</strong> ¿Por qué no al revés? Porque la dilución es muy exotérmica. Si se añade agua al ácido concentrado, el agua (menos densa) queda en la superficie y el calor se concentra en esa zona, provocando ebullición violenta y proyecciones de ácido.</div>
+                    <div class="paso"><strong>Resultado:</strong> El procedimiento correcto es añadir el ácido sobre el agua, lentamente y agitando. Nunca al revés. Esta norma es una de las reglas de oro de la seguridad química.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>El ácido sulfúrico en la industria: fertilizantes</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La mayor parte del ácido sulfúrico producido en el mundo se destina a la fabricación de fertilizantes. Explica brevemente por qué es tan importante en este sector y qué tipo de fertilizantes se obtienen a partir de él.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> El ácido sulfúrico se utiliza para <strong>digerir la roca fosfática</strong> (fosfato de calcio) y producir ácido fosfórico y superfosfato, que son fertilizantes ricos en fósforo.</div>
+                    <div class="paso"><strong>Paso 2:</strong> También se usa para fabricar sulfato de amonio, un fertilizante nitrogenado muy común.</div>
+                    <div class="paso"><strong>Paso 3:</strong> El fósforo y el nitrógeno son nutrientes esenciales para las plantas. Sin fertilizantes, la producción agrícola mundial no podría alimentar a la población actual.</div>
+                    <div class="paso"><strong>Resultado:</strong> El ácido sulfúrico es la materia prima clave para los fertilizantes fosfatados y nitrogenados. Se estima que el 60-70 % de la producción mundial se destina a este fin. Sin él, la agricultura moderna tal como la conocemos no sería posible.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 8 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 8</span>
+                    <span>Neutralización del residuo ácido</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Después de la práctica, quedan restos de ácido sulfúrico en el vaso. Para neutralizarlos, se añade bicarbonato de sodio (NaHCO₃) hasta que cesa el burbujeo. Escribe la ecuación química de la neutralización y calcula cuántos gramos de NaHCO₃ se necesitan para neutralizar 0,15 mol de H₂SO₄. Datos: masas atómicas Na = 23, H = 1, C = 12, O = 16.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Ecuación de neutralización: \( \text{H}_2\text{SO}_4 + 2\,\text{NaHCO}_3 \rightarrow \text{Na}_2\text{SO}_4 + 2\,\text{CO}_2 + 2\,\text{H}_2\text{O} \).</div>
+                    <div class="paso"><strong>Paso 2:</strong> Estequiometría: 1 mol de H₂SO₄ reacciona con 2 mol de NaHCO₃. Para 0,15 mol de ácido: \( n(\text{NaHCO}_3) = 0{,}15 \times 2 = 0{,}30\ \text{mol} \).</div>
+                    <div class="paso"><strong>Paso 3:</strong> Masa molar del NaHCO₃: \( M = 23 + 1 + 12 + 3 \times 16 = 84\ \text{g/mol} \).</div>
+                    <div class="paso"><strong>Paso 4:</strong> Masa necesaria: \( m = 0{,}30 \times 84 = 25{,}2\ \text{g} \).</div>
+                    <div class="paso"><strong>Resultado:</strong> Se necesitan aproximadamente <strong>25,2 g de bicarbonato de sodio</strong> para neutralizar el ácido residual. El burbujeo (CO₂) indica que la neutralización está en curso; cesa cuando todo el ácido ha reaccionado.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 9 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 9</span>
+                    <span>Comparación con otros deshidratantes</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Además del ácido sulfúrico, existen otros deshidratantes como el cloruro de calcio (CaCl₂) o la sílica gel. Explica por qué el H₂SO₄ es mucho más agresivo con la materia orgánica que estos otros deshidratantes.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> El CaCl₂ y la sílica gel son deshidratantes <strong>físicos</strong>: absorben agua sin reaccionar químicamente con ella de forma agresiva. Se usan para secar gases y mantener ambientes secos.</div>
+                    <div class="paso"><strong>Paso 2:</strong> El H₂SO₄ concentrado es un deshidratante <strong>químico</strong>: no solo absorbe agua, sino que reacciona con los grupos –OH de las moléculas orgánicas, arrancándolos y carbonizando el material.</div>
+                    <div class="paso"><strong>Paso 3:</strong> Además, es un ácido fuerte y un oxidante en caliente, lo que amplifica su capacidad destructiva sobre la materia orgánica.</div>
+                    <div class="paso"><strong>Resultado:</strong> El H₂SO₄ es mucho más agresivo porque combina alta afinidad por el agua con reactividad química (acidez fuerte y poder oxidante). Por eso carboniza el azúcar, la piel o el papel, mientras que el CaCl₂ solo los humedece o los seca.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 10 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 10</span>
+                    <span>Diseña una variante segura de la práctica</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Si no dispones de campana de gases, ¿qué alternativa segura se te ocurre para demostrar la deshidratación de la sacarosa sin usar ácido sulfúrico concentrado? Investiga y propón una variante.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1: Alternativa con calor.</strong> Calentar azúcar en una cucharilla de combustión hasta que se carbonice. Se observa cómo se funde, cambia de color y se carboniza, aunque sin la espectacularidad de la espuma.</div>
+                    <div class="paso"><strong>Paso 2: Alternativa con ácido cítrico.</strong> El ácido cítrico también puede deshidratar parcialmente el azúcar, pero requiere calor y es mucho menos agresivo. Se puede calentar una mezcla de azúcar y ácido cítrico en una cápsula de porcelana.</div>
+                    <div class="paso"><strong>Paso 3: Vídeo o simulación.</strong> Si no es posible hacer la práctica presencialmente, se puede utilizar un vídeo de la reacción o una simulación por ordenador para explicar el fenómeno.</div>
+                    <div class="paso"><strong>Paso 4: Demostración con arena.</strong> Mezclar azúcar con arena y calentar. El azúcar se carboniza y deja un residuo negro sobre la arena, más seguro y sin gases tóxicos.</div>
+                    <div class="paso"><strong>Resultado:</strong> La variante más segura es la carbonización térmica (sin ácido). Aunque menos espectacular, permite observar el mismo principio: la deshidratación de la sacarosa deja carbón como residuo.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Observaciones claves:</strong> La “espuma negra” es una demostración espectacular de una <strong>reacción de deshidratación</strong>. El ácido sulfúrico concentrado arranca el agua de la sacarosa, dejando carbón puro. La reacción es <strong>fuertemente exotérmica</strong>, y el vapor de agua y los gases generados (CO₂, SO₂) expanden la masa de carbón, creando una espuma porosa. El ácido sulfúrico es un compuesto esencial en la industria (fertilizantes, refino de petróleo, detergentes, baterías) y su poder deshidratante lo convierte en una sustancia extremadamente peligrosa que debe manipularse con máxima precaución en campana de gases.
+            </div>
+        </div>
+    </details>
+
+    <!-- ============================================
+         BLOQUE "ES HORA DE"
+         ============================================ -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br> El arte de pasar de blanco a negro.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- fin container -->
+</body>
+</html>

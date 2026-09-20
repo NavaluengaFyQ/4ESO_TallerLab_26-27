@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c02 - Transformación de "vino" en "agua" (reacción redox)</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c02 - </span>
+                <span class="texto">Transformación de "vino" en "agua" (reacción redox)</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 Enunciado</h2>
+        <p>Partiendo de las semirreacciones de reducción del ion permanganato \( \mathrm{MnO_4^-} \) en medio ácido y de oxidación del ion tiosulfato \( \mathrm{S_2O_3^{2-}} \) a ion sulfato \( \mathrm{SO_4^{2-}} \), y aplicando el método del ion-electrón, demostrar que la ecuación iónica global ajustada de la reacción redox es:</p>
+        <div class="formula-box">
+            \[
+            \mathrm{8\,MnO_4^- + 5\,S_2O_3^{2-} + 14\,H^+ \rightarrow 8\,Mn^{2+} + 10\,SO_4^{2-} + 7\,H_2O}
+            \]
+        </div>
+        <p>Este es el proceso químico que explica por qué una disolución violeta intensa (semejante al vino) se vuelve incolora (semejante al agua) al añadir tiosulfato de sodio en medio sulfúrico.</p>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 Objetivo</h2>
+        <p>Aplicar el método del ion-electrón para ajustar una reacción redox en medio ácido, identificando las especies oxidante y reductora, calculando los números de oxidación, escribiendo las semirreacciones y combinándolas para obtener la ecuación iónica global. Comprender, además, el fundamento químico del cambio de color observado experimentalmente.</p>
+    </div>
+
+    <!-- SECCIÓN PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Procedimiento</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Identificación de las especies oxidante y reductora</strong>
+            <p>El <strong>ion permanganato</strong> \( \mathrm{MnO_4^-} \) es el oxidante: contiene Mn en estado de oxidación +7 y tiende a reducirse. El <strong>ion tiosulfato</strong> \( \mathrm{S_2O_3^{2-}} \) es el reductor: contiene azufre en estados de oxidación intermedios y tiende a oxidarse. El medio ácido lo proporciona el ácido sulfúrico (\( \mathrm{H^+} \)).</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Determinación de los números de oxidación</strong>
+            <p><strong>Manganeso:</strong> en \( \mathrm{MnO_4^-} \), el Mn tiene nº oxidación +7; en \( \mathrm{Mn^{2+}} \), +2.</p>
+            <p><strong>Azufre en el tiosulfato:</strong> el ion \( \mathrm{S_2O_3^{2-}} \) presenta dos azufres no equivalentes:</p>
+            <ul>
+                <li>Azufre central: \(+5\).</li>
+                <li>Azufre terminal: \(-1\).</li>
+                <li>Estado promedio: \(+2\).</li>
+            </ul>
+            <p>En el ion sulfato \( \mathrm{SO_4^{2-}} \), el azufre pasa a \(+6\).</p>
+            <table>
+                <tr><th>Elemento</th><th>Especie inicial</th><th>Nº oxidación</th><th>Especie final</th><th>Nº oxidación</th></tr>
+                <tr><td>Mn</td><td>\( \mathrm{MnO_4^-} \)</td><td>+7</td><td>\( \mathrm{Mn^{2+}} \)</td><td>+2</td></tr>
+                <tr><td>S (central)</td><td>\( \mathrm{S_2O_3^{2-}} \)</td><td>+5</td><td>\( \mathrm{SO_4^{2-}} \)</td><td>+6</td></tr>
+                <tr><td>S (terminal)</td><td>\( \mathrm{S_2O_3^{2-}} \)</td><td>−1</td><td>\( \mathrm{SO_4^{2-}} \)</td><td>+6</td></tr>
+            </table>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Semirreacción de reducción</strong>
+            <p>El permanganato se reduce a \( \mathrm{Mn^{2+}} \). En medio ácido, los oxígenos se equilibran con \( \mathrm{H_2O} \) y los hidrógenos con \( \mathrm{H^+} \), y se añaden los electrones ganados:</p>
+            <div class="formula-box">
+                \[
+                \mathrm{MnO_4^- + 8\,H^+ + 5\,e^- \rightarrow Mn^{2+} + 4\,H_2O}
+                \]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Semirreacción de oxidación</strong>
+            <p>El tiosulfato se oxida a sulfato. Cada ion \( \mathrm{S_2O_3^{2-}} \) produce dos iones \( \mathrm{SO_4^{2-}} \). El azufre central pierde 1 electrón y el terminal pierde 7, en total <strong>8 electrones</strong> por ion tiosulfato:</p>
+            <div class="formula-box">
+                \[
+                \mathrm{S_2O_3^{2-} + 5\,H_2O \rightarrow 2\,SO_4^{2-} + 10\,H^+ + 8\,e^-}
+                \]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Igualación del número de electrones</strong>
+            <p>El mínimo común múltiplo entre 5 (electrones ganados) y 8 (electrones perdidos) es 40. Multiplicamos la reducción por 8 y la oxidación por 5:</p>
+            <div class="formula-box">
+                \[
+                \mathrm{8\,MnO_4^- + 64\,H^+ + 40\,e^- \rightarrow 8\,Mn^{2+} + 32\,H_2O}
+                \]
+            </div>
+            <div class="formula-box">
+                \[
+                \mathrm{5\,S_2O_3^{2-} + 25\,H_2O \rightarrow 10\,SO_4^{2-} + 50\,H^+ + 40\,e^-}
+                \]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>Suma y simplificación de la ecuación iónica global</strong>
+            <p>Sumamos ambas semirreacciones y cancelamos los electrones. Simplificamos \( \mathrm{H^+} \) (64 − 50 = 14) y \( \mathrm{H_2O} \) (32 − 25 = 7):</p>
+            <div class="formula-box">
+                \[
+                \mathrm{8\,MnO_4^- + 5\,S_2O_3^{2-} + 14\,H^+ \rightarrow 8\,Mn^{2+} + 10\,SO_4^{2-} + 7\,H_2O}
+                \]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">7</span>
+            <strong>Comprobación de masa y carga</strong>
+            <p><strong>Masa:</strong> Mn: 8 = 8; S: 10 = 10; O: \(8\cdot4 + 5\cdot3 = 47\) en reactivos y \(10\cdot4 + 7 = 47\) en productos; H: 14 = 14.</p>
+            <p><strong>Carga:</strong> izquierda \(8(-1) + 5(-2) + 14(+1) = -4\); derecha \(8(+2) + 10(-2) = -4\). La ecuación está correctamente ajustada.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 Resultado</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            \[
+            \mathrm{8\,MnO_4^- + 5\,S_2O_3^{2-} + 14\,H^+ \rightarrow 8\,Mn^{2+} + 10\,SO_4^{2-} + 7\,H_2O}
+            \]
+        </div>
+        <p>La desaparición del color violeta se debe a que el \( \mathrm{MnO_4^-} \) (violeta intenso) se reduce a \( \mathrm{Mn^{2+}} \), prácticamente incoloro en disoluciones diluidas. El tiosulfato actúa como reductor y se transforma en sulfato, incoloro. La disolución pasa así de parecer "vino" a parecer "agua".</p>
+        <div class="note">
+            <strong>Observación didáctica:</strong> El cambio de color no es instantáneo ni mágico: es la consecuencia directa de una transferencia de electrones. Es importante insistir en que el ion \( \mathrm{H^+} \) y el ion \( \mathrm{SO_4^{2-}} \) del ácido sulfúrico actúan como medio y como ion espectador, respectivamente; el \( \mathrm{H_2SO_4} \) no se reduce ni se oxida.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO Transformación de "vino" en "agua" (reacción redox)</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Ajuste de una redox sencilla en medio ácido</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Ajusta por el método del ion-electrón la siguiente reacción en medio ácido:</p>
+                    <div class="formula-box">\[ \mathrm{Fe^{2+} + MnO_4^- \rightarrow Fe^{3+} + Mn^{2+}} \]</div>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Números de oxidación:</strong> Fe pasa de +2 a +3 (pierde 1 e⁻). Mn pasa de +7 a +2 (gana 5 e⁻).</div>
+                    <div class="paso"><strong>Paso 2 — Semirreacciones:</strong></div>
+                    <div class="formula-box">\[ \mathrm{Fe^{2+} \rightarrow Fe^{3+} + e^-} \]</div>
+                    <div class="formula-box">\[ \mathrm{MnO_4^- + 8H^+ + 5e^- \rightarrow Mn^{2+} + 4H_2O} \]</div>
+                    <div class="paso"><strong>Paso 3 — Igualamos electrones:</strong> multiplicamos la oxidación por 5.</div>
+                    <div class="formula-box">\[ \mathrm{5Fe^{2+} \rightarrow 5Fe^{3+} + 5e^-} \]</div>
+                    <div class="paso"><strong>Paso 4 — Sumamos:</strong></div>
+                    <div class="formula-box">\[ \mathrm{MnO_4^- + 5Fe^{2+} + 8H^+ \rightarrow Mn^{2+} + 5Fe^{3+} + 4H_2O} \]</div>
+                    <div class="paso"><strong>Comprobación:</strong> cargas: izquierda \(-1 + 10 + 8 = +17\); derecha \(+2 + 15 = +17\). ✔</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Oxidación del ion yoduro por permanganato</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Ajusta en medio ácido la reacción entre el ion yoduro y el ion permanganato:</p>
+                    <div class="formula-box">\[ \mathrm{I^- + MnO_4^- \rightarrow I_2 + Mn^{2+}} \]</div>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Semirreacciones:</strong></div>
+                    <div class="formula-box">\[ \mathrm{2I^- \rightarrow I_2 + 2e^-} \]</div>
+                    <div class="formula-box">\[ \mathrm{MnO_4^- + 8H^+ + 5e^- \rightarrow Mn^{2+} + 4H_2O} \]</div>
+                    <div class="paso"><strong>Paso 2 — Igualamos electrones:</strong> m.c.m.(2,5) = 10. Oxidación ×5, reducción ×2.</div>
+                    <div class="formula-box">\[ \mathrm{10I^- \rightarrow 5I_2 + 10e^-} \]</div>
+                    <div class="formula-box">\[ \mathrm{2MnO_4^- + 16H^+ + 10e^- \rightarrow 2Mn^{2+} + 8H_2O} \]</div>
+                    <div class="paso"><strong>Paso 3 — Suma global:</strong></div>
+                    <div class="formula-box">\[ \mathrm{2MnO_4^- + 10I^- + 16H^+ \rightarrow 2Mn^{2+} + 5I_2 + 8H_2O} \]</div>
+                    <div class="paso"><strong>Comprobación de cargas:</strong> izquierda \(-2 - 10 + 16 = +4\); derecha \(+4\). ✔</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>El dicromato como oxidante en medio ácido</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Ajusta en medio ácido la reducción del dicromato \( \mathrm{Cr_2O_7^{2-}} \) a \( \mathrm{Cr^{3+}} \) por el ion \( \mathrm{Fe^{2+}} \) que pasa a \( \mathrm{Fe^{3+}} \).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Semirreducción:</strong> el Cr pasa de +6 a +3; hay 2 Cr, por lo que se ganan 6 e⁻.</div>
+                    <div class="formula-box">\[ \mathrm{Cr_2O_7^{2-} + 14H^+ + 6e^- \rightarrow 2Cr^{3+} + 7H_2O} \]</div>
+                    <div class="paso"><strong>Paso 2 — Semioxidación:</strong></div>
+                    <div class="formula-box">\[ \mathrm{Fe^{2+} \rightarrow Fe^{3+} + e^-} \]</div>
+                    <div class="paso"><strong>Paso 3 — Igualamos electrones:</strong> multiplicamos la oxidación por 6.</div>
+                    <div class="formula-box">\[ \mathrm{6Fe^{2+} \rightarrow 6Fe^{3+} + 6e^-} \]</div>
+                    <div class="paso"><strong>Paso 4 — Suma global:</strong></div>
+                    <div class="formula-box">\[ \mathrm{Cr_2O_7^{2-} + 6Fe^{2+} + 14H^+ \rightarrow 2Cr^{3+} + 6Fe^{3+} + 7H_2O} \]</div>
+                    <div class="paso"><strong>Comprobación de cargas:</strong> izquierda \(-2 + 12 + 14 = +24\); derecha \(+6 + 18 = +24\). ✔</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>Disproporción del tiosulfato en medio ácido</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En medio ácido fuerte, el tiosulfato puede descomponerse según:</p>
+                    <div class="formula-box">\[ \mathrm{S_2O_3^{2-} + H^+ \rightarrow S + SO_2 + H_2O} \]</div>
+                    <p>Ajusta la ecuación e identifica qué especie se oxida y cuál se reduce.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Números de oxidación:</strong> en \( \mathrm{S_2O_3^{2-}} \) el S promedio es +2. En \( \mathrm{S} \) elemental es 0 (se reduce), y en \( \mathrm{SO_2} \) es +4 (se oxida).</div>
+                    <div class="paso"><strong>Paso 2 — Semirreacciones:</strong></div>
+                    <div class="formula-box">\[ \mathrm{S_2O_3^{2-} + 6H^+ + 4e^- \rightarrow 2S + 3H_2O} \]</div>
+                    <div class="formula-box">\[ \mathrm{S_2O_3^{2-} + H_2O \rightarrow 2SO_2 + 2H^+ + 4e^-} \]</div>
+                    <div class="paso"><strong>Paso 3 — Suma (los electrones ya coinciden):</strong></div>
+                    <div class="formula-box">\[ \mathrm{2S_2O_3^{2-} + 4H^+ \rightarrow 2S + 2SO_2 + 2H_2O} \]</div>
+                    <div class="paso"><strong>Paso 4 — Simplificamos:</strong></div>
+                    <div class="formula-box">\[ \mathrm{S_2O_3^{2-} + 2H^+ \rightarrow S + SO_2 + H_2O} \]</div>
+                    <div class="paso"><strong>Comprobación de cargas:</strong> izquierda \(-2 + 2 = 0\); derecha 0. ✔</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>Estequiometría de la reacción del vino→agua</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Se dispone de 100 mL de una disolución de \( \mathrm{KMnO_4} \) 0,020 M en medio sulfúrico. ¿Qué volumen de disolución de \( \mathrm{Na_2S_2O_3} \) 0,050 M se necesita para decolorarla completamente?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Moles de \( \mathrm{MnO_4^-} \):</strong> \( n = 0{,}100 \cdot 0{,}020 = 2{,}0 \times 10^{-3} \) mol.</div>
+                    <div class="paso"><strong>Paso 2 — Relación estequiométrica:</strong> \( 8 \, \mathrm{MnO_4^-} : 5 \, \mathrm{S_2O_3^{2-}} \) → \( n(\mathrm{S_2O_3^{2-}}) = \frac{5}{8}\cdot 2{,}0\times 10^{-3} = 1{,}25\times 10^{-3} \) mol.</div>
+                    <div class="paso"><strong>Paso 3 — Volumen necesario:</strong></div>
+                    <div class="formula-box">\[ V = \frac{n}{M} = \frac{1{,}25\times 10^{-3}}{0{,}050} = 0{,}025\ \text{L} = 25\ \text{mL} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> se necesitan 25 mL de disolución de tiosulfato.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>Identificación del error: el problema del HCl</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En el experimento del "vino→agua" se insiste en usar \( \mathrm{H_2SO_4} \) y no \( \mathrm{HCl} \) como medio ácido. Razona por qué el \( \mathrm{HCl} \) no sirve para este experimento y qué reacción parásita ocurriría.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — El ion cloruro es reductor:</strong> el \( \mathrm{Cl^-} \) puede oxidarse a \( \mathrm{Cl_2} \) por acción del permanganato.</div>
+                    <div class="paso"><strong>Paso 2 — Semirreacción parásita:</strong></div>
+                    <div class="formula-box">\[ \mathrm{2Cl^- \rightarrow Cl_2 + 2e^-} \]</div>
+                    <div class="paso"><strong>Paso 3 — Consecuencia:</strong> parte del \( \mathrm{MnO_4^-} \) se consume oxidando al cloruro en lugar del tiosulfato; se desprende cloro gas (tóxico) y el ajuste estequiométrico del experimento ya no se cumple.</div>
+                    <div class="paso"><strong>Conclusión:</strong> hay que usar un ácido cuyo anión sea espectador redox, como el \( \mathrm{SO_4^{2-}} \) del \( \mathrm{H_2SO_4} \).</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Observaciones claves:</strong> La "trampa" mental más habitual en redox es <em>no ver quién gana y quién pierde electrones</em>, o confundir el estado de oxidación promedio del tiosulfato con el de cada azufre individual. La segunda trampa es olvidar que en medio ácido los oxígenos se ajustan con \( \mathrm{H_2O} \) y los hidrógenos con \( \mathrm{H^+} \). Dominar el método del ion-electrón permite predecir el color final de la disolución, la estequiometría y las condiciones experimentales (por ejemplo, evitar el HCl).
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  No hay milagro: solo química bien explicada.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U01c02 - Práctica: Transformación de "vino" en "agua" (Guía del profesor)</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE (preguntas frecuentes)
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .faq-item {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem;
+            margin: 1.2rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .faq-item .faq-q {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        .faq-item .faq-a {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c02 - </span>
+                <span class="texto">Práctica: Transformación de "vino" en "agua" (Guía del profesor)</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 Descripción de la práctica</h2>
+        <p>Demostración experimental en la que una disolución violeta intensa (semejante al vino) se vuelve incolora (semejante al agua) al entrar en contacto con una disolución saturada de tiosulfato de sodio en medio ácido sulfúrico.</p>
+        <p>El fundamento es una <strong>reacción redox</strong> en la que el ion permanganato \( \mathrm{MnO_4^-} \) (violeta) se reduce a ion manganeso(II) \( \mathrm{Mn^{2+}} \) (incoloro), mientras que el ion tiosulfato \( \mathrm{S_2O_3^{2-}} \) se oxida a ion sulfato \( \mathrm{SO_4^{2-}} \).</p>
+        <div class="formula-box">
+            \[
+            \mathrm{8\,MnO_4^- + 5\,S_2O_3^{2-} + 14\,H^+ \rightarrow 8\,Mn^{2+} + 10\,SO_4^{2-} + 7\,H_2O}
+            \]
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 Objetivo didáctico</h2>
+        <ul>
+            <li>Ilustrar de forma visual y espectacular una reacción de oxidación-reducción en medio ácido.</li>
+            <li>Relacionar el cambio de color con el cambio en el número de oxidación del manganeso.</li>
+            <li>Introducir el método del ion-electrón para ajustar reacciones redox.</li>
+            <li>Practicar la preparación de disoluciones y el manejo seguro de reactivos químicos.</li>
+            <li>Desmontar la idea de "milagro" o "truco de magia": todo tiene una explicación química.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales, reactivos y procedimiento</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Materiales y reactivos necesarios</strong>
+            <ul>
+                <li>Vaso de precipitados de 1 L (para la disolución A).</li>
+                <li>Vaso de precipitados de 250 mL (para la disolución B).</li>
+                <li>Vaso de precipitados de 100–150 mL (para la demostración).</li>
+                <li>Varilla de vidrio, pipetas Pasteur o cuentagotas.</li>
+                <li>Balanza de precisión (0,01 g).</li>
+                <li>Probeta de 100 mL y matraz aforado de 1 L.</li>
+                <li>Guantes, gafas de seguridad, bata y campana extractora.</li>
+                <li><strong>Permanganato de potasio</strong> \( \mathrm{KMnO_4} \) (sólido).</li>
+                <li><strong>Ácido sulfúrico</strong> \( \mathrm{H_2SO_4} \) 2 M.</li>
+                <li><strong>Tiosulfato de sodio</strong> \( \mathrm{Na_2S_2O_3} \) (preferiblemente pentahidratado) o disolución saturada.</li>
+                <li>Agua destilada.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Preparación de la disolución violeta (A)</strong>
+            <p>En un vaso de precipitados de 1 L:</p>
+            <ul>
+                <li>Pesar <strong>0,4 g de \( \mathrm{KMnO_4} \)}</strong>.</li>
+                <li>Añadir <strong>100 mL de \( \mathrm{H_2SO_4} \) 2 M</strong>.</li>
+                <li>Disolver con ayuda de una varilla de vidrio.</li>
+                <li>Trasvasar a un matraz aforado de 1 L y enrasar con agua destilada.</li>
+            </ul>
+            <p>La disolución resultante es de color violeta intenso.</p>
+            <div class="note">
+                <strong>¡Atención!</strong> Añadir siempre el ácido sobre el agua, nunca al revés, y hacerlo lentamente. Usar guantes y gafas.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Preparación de la disolución reductora (B)</strong>
+            <p>Preparar una <strong>disolución saturada de tiosulfato de sodio</strong> \( \mathrm{Na_2S_2O_3} \) en agua destilada. Para ello:</p>
+            <ul>
+                <li>Añadir tiosulfato sólido a 100 mL de agua destilada removiendo hasta que no se disuelva más.</li>
+                <li>Dejar reposar y filtrar si es necesario para eliminar el exceso de sólido.</li>
+            </ul>
+            <p>También puede usarse metabisulfito sódico, pero en esta práctica se recomienda tiosulfato por ser menos irritante y no liberar \( \mathrm{SO_2} \) en las condiciones de trabajo.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Realización de la demostración</strong>
+            <ol>
+                <li>En un vaso de precipitados de 100–150 mL, colocar unas <strong>pocas gotas</strong> de la disolución saturada de tiosulfato (B).</li>
+                <li>Añadir sobre ellas una porción (unos 30–50 mL) de la disolución violeta (A).</li>
+                <li>Agitar suavemente con una varilla o moviendo el vaso.</li>
+                <li>El color violeta desaparece rápidamente y la disolución queda incolora.</li>
+            </ol>
+            <div class="note">
+                <strong>Consejo:</strong> El tiosulfato debe estar en exceso para decolorar todo el permanganato. Si se añade demasiado poco, quedará un color residual rosado o marrón. Si aparece turbidez marrón, puede deberse a la formación de \( \mathrm{MnO_2} \), lo que indica que faltó ácido o que la reducción no fue completa.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 Explicación química y observaciones</h2>
+        <p><strong>¿Por qué cambia el color?</strong></p>
+        <ul>
+            <li>El ion permanganato \( \mathrm{MnO_4^-} \) es violeta intenso. Por eso la disolución inicial parece "vino".</li>
+            <li>Al añadir tiosulfato, el \( \mathrm{MnO_4^-} \) se reduce a \( \mathrm{Mn^{2+}} \), que en disolución diluida es prácticamente incoloro.</li>
+            <li>El tiosulfato se oxida a sulfato \( \mathrm{SO_4^{2-}} \), también incoloro.</li>
+            <li>Cuando todo el permanganato ha reaccionado, el color violeta desaparece y la disolución queda transparente, como "agua".</li>
+        </ul>
+        <p><strong>Cambios en los números de oxidación:</strong></p>
+        <table>
+            <tr><th>Elemento</th><th>Especie inicial</th><th>Nº oxidación</th><th>Especie final</th><th>Nº oxidación</th><th>Electrones</th></tr>
+            <tr><td>Mn</td><td>\( \mathrm{MnO_4^-} \)</td><td>+7</td><td>\( \mathrm{Mn^{2+}} \)</td><td>+2</td><td>Gana 5 e⁻</td></tr>
+            <tr><td>S (central)</td><td>\( \mathrm{S_2O_3^{2-}} \)</td><td>+5</td><td>\( \mathrm{SO_4^{2-}} \)</td><td>+6</td><td>Pierde 1 e⁻</td></tr>
+            <tr><td>S (terminal)</td><td>\( \mathrm{S_2O_3^{2-}} \)</td><td>−1</td><td>\( \mathrm{SO_4^{2-}} \)</td><td>+6</td><td>Pierde 7 e⁻</td></tr>
+        </table>
+        <p>El azufre del ácido sulfúrico (\( \mathrm{H_2SO_4} \)) está en estado de oxidación +6 y no participa en la redox; solo aporta \( \mathrm{H^+} \) y \( \mathrm{SO_4^{2-}} \) como ion espectador.</p>
+
+        <div class="formula-box">
+            <strong>Semirreacción de reducción:</strong><br>
+            \[
+            \mathrm{MnO_4^- + 8\,H^+ + 5\,e^- \rightarrow Mn^{2+} + 4\,H_2O}
+            \]
+        </div>
+        <div class="formula-box">
+            <strong>Semirreacción de oxidación:</strong><br>
+            \[
+            \mathrm{S_2O_3^{2-} + 5\,H_2O \rightarrow 2\,SO_4^{2-} + 10\,H^+ + 8\,e^-}
+            \]
+        </div>
+        <div class="formula-box">
+            <strong>Ecuación iónica global ajustada:</strong><br>
+            \[
+            \mathrm{8\,MnO_4^- + 5\,S_2O_3^{2-} + 14\,H^+ \rightarrow 8\,Mn^{2+} + 10\,SO_4^{2-} + 7\,H_2O}
+            \]
+        </div>
+
+        <div class="note">
+            <strong>Observación didáctica:</strong> Es fundamental insistir en que el cambio de color no es instantáneo ni mágico: es la consecuencia directa de una transferencia de electrones. Además, el uso de \( \mathrm{H_2SO_4} \) y no \( \mathrm{HCl} \) es crítico: el ion cloruro podría oxidarse a cloro gas, interfiriendo en la reacción y generando un gas tóxico.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE: PREGUNTAS FRECUENTES -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 PREGUNTAS FRECUENTES Y ERRORES COMUNES</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <div class="faq-item">
+                <div class="faq-q">❓ ¿Por qué no se puede usar HCl en lugar de H₂SO₄?</div>
+                <div class="faq-a">
+                    <p>Porque el ion cloruro \( \mathrm{Cl^-} \) es un reductor que puede ser oxidado por el permanganato a cloro gas \( \mathrm{Cl_2} \), una sustancia tóxica. Esto consumiría parte del oxidante y alteraría la estequiometría, además de generar un gas peligroso. El anión sulfato \( \mathrm{SO_4^{2-}} \) es espectador redox en estas condiciones.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">❓ ¿Qué ocurre si añado poco tiosulfato?</div>
+                <div class="faq-a">
+                    <p>Quedará permanganato sin reaccionar y la disolución conservará un color rosado o violeta residual. Si la reducción es incompleta, también puede aparecer \( \mathrm{MnO_2} \) (sólido marrón), que enturbia la disolución. Por eso conviene usar un exceso de tiosulfato.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">❓ ¿La disolución final es agua potable?</div>
+                <div class="faq-a">
+                    <p>No. Aunque sea incolora, contiene iones manganeso(II), sulfatos, restos de tiosulfato y ácido sulfúrico. No debe ingerirse. Es solo una demostración visual.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">❓ ¿Por qué el tiosulfato tiene dos azufres con estados de oxidación diferentes?</div>
+                <div class="faq-a">
+                    <p>En el ion tiosulfato \( \mathrm{S_2O_3^{2-}} \), un azufre está en el centro (unido a tres oxígenos y al otro azufre) y el otro es terminal. El central tiene estado de oxidación +5 y el terminal −1. El estado promedio es +2. Ambos se oxidan a +6 en el sulfato, pero pierden distinto número de electrones: 1 y 7 respectivamente, sumando 8 electrones por ion tiosulfato.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-q">❓ ¿Se puede hacer la práctica con metabisulfito sódico en lugar de tiosulfato?</div>
+                <div class="faq-a">
+                    <p>Sí, el metabisulfito sódico \( \mathrm{Na_2S_2O_5} \) también actúa como reductor, pero en medio ácido libera \( \mathrm{SO_2} \), un gas irritante. Si se usa, debe hacerse en campana extractora. El tiosulfato es más seguro y no genera gases tóxicos en las condiciones habituales.</p>
+                </div>
+            </div>
+
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> La práctica "vino→agua" es una excelente oportunidad para que el alumnado compruebe que una reacción redox puede cambiar drásticamente el aspecto de una disolución. El error más común es pensar que el color desaparece "por arte de magia" o que el agua "diluye" el vino. En realidad, el ion responsable del color se transforma en otra especie incolora. Insistir en la ecuación iónica global y en los estados de oxidación ayuda a fijar el concepto.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  No hay milagro: solo química bien explicada.<br>
+                <i>(Guía para el profesorado. Los detalles sobre las pruebas escritas se publicarán en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>

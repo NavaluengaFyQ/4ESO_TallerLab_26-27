@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c10 - Un billete que no arde</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .seguridad { background: #fff5f5; border-color: #e53e3e; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .seguridad h2 { color: #c53030; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* Tabla de materiales */
+        .tabla-materiales {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.92em;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+        .tabla-materiales thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .tabla-materiales th {
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .tabla-materiales td {
+            padding: 9px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        .tabla-materiales tbody tr:nth-child(even) { background: #f9fafc; }
+        .tabla-materiales tbody tr:hover { background: #ebf4ff; }
+
+        /* Bloque de aviso grande */
+        .aviso-grande {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #fff5f5;
+            border: 2px solid #fc8181;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin: 15px 0;
+        }
+        .aviso-grande .icono {
+            font-size: 2.2em;
+            color: #c53030;
+        }
+        .aviso-grande .texto {
+            color: #742a2a;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .aviso-grande .texto strong { color: #9b2c2c; }
+
+        /* Bloque destacado de "truco" */
+        .truco {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 6px solid #d97706;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 18px 0;
+            color: #78350f;
+        }
+        .truco strong { color: #92400e; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+
+        /* Aviso de seguridad (grande, para la cabecera de la demo) */
+        .aviso-seguridad {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #fff5f5;
+            border: 2px solid #fc8181;
+            border-radius: 12px;
+            padding: 12px 18px;
+            margin: 15px 0;
+            color: #742a2a;
+            font-size: 0.95em;
+        }
+        .aviso-seguridad i {
+            font-size: 1.6em;
+            color: #c53030;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c10.- </span>
+                <span class="texto">Un billete que no arde</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 Enunciado</h2>
+        <p>Imagina que empapamos un billete de 5 euros en una mezcla de <strong>agua y alcohol</strong> y, a continuación, le acercamos una llama. La intuición nos dice que el billete arderá irremediablemente. Sin embargo, lo que ocurre es sorprendente: <strong>el alcohol se quema, pero el billete no</strong>.</p>
+        <div class="formula-box">\[ \text{Billete} + \text{llama} \;\xrightarrow{\text{¿?}}\; \text{Billete intacto} \]</div>
+        <p>¿Por qué el papel no se quema? ¿Qué papel juega el agua de la mezcla? ¿Y por qué añadimos sal común? Esta demostración combina conceptos de <strong>combustión</strong>, <strong>calor latente de vaporización</strong> y <strong>temperatura de ignición</strong>, además de ser un espectáculo visual muy vistoso.</p>
+    </div>
+
+    <!-- OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 Objetivo</h2>
+        <p>Comprender el fenómeno de la <strong>combustión</strong> y el papel que desempeñan el agua y el alcohol en la protección del papel frente a la llama. En concreto:</p>
+        <ul>
+            <li>Explicar por qué el agua impide que el papel alcance su temperatura de ignición.</li>
+            <li>Diferenciar entre <strong>combustión del alcohol</strong> y <strong>combustión del papel</strong>.</li>
+            <li>Valorar la importancia del <strong>calor latente de vaporización</strong> en procesos cotidianos.</li>
+            <li>Aplicar normas de seguridad en una demostración con llama.</li>
+        </ul>
+    </div>
+
+    <!-- MATERIALES Y SEGURIDAD -->
+    <div class="section procedimiento">
+        <h2>🧰 Materiales necesarios</h2>
+        <table class="tabla-materiales">
+            <thead>
+                <tr>
+                    <th>Material</th>
+                    <th>Cantidad / Detalle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mechero Bunsen (o mechero de alcohol)</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Pinzas metálicas largas (tenazas)</td>
+                    <td>1 par</td>
+                </tr>
+                <tr>
+                    <td>Superficie refractaria resistente al calor</td>
+                    <td>1 (bandeja metálica o placa cerámica)</td>
+                </tr>
+                <tr>
+                    <td>Vasos de precipitados de 250 cm³</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>Etanol (alcohol etílico)</td>
+                    <td>75 cm³ aprox.</td>
+                </tr>
+                <tr>
+                    <td>Agua</td>
+                    <td>75 cm³ aprox.</td>
+                </tr>
+                <tr>
+                    <td>Cloruro de sodio (sal común)</td>
+                    <td>Una pizca (unos gramos)</td>
+                </tr>
+                <tr>
+                    <td>Billete de 5 euros (o papel de tamaño similar)</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Papel de filtro o trozos de papel</td>
+                    <td>Varios (para ensayos previos)</td>
+                </tr>
+                <tr>
+                    <td>Cerillas o encendedor</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="aviso-grande">
+            <div class="icono"><i class="fas fa-fire-extinguisher"></i></div>
+            <div class="texto">
+                <strong>SEGURIDAD:</strong> Es obligatorio el uso de gafas de protección. Debe haber un <strong>extintor de incendios</strong> cerca. La demostración se realiza sobre una superficie refractaria. El profesor es el único que manipula la llama y el billete. Se recomienda tener a mano un recipiente con agua para sofocar cualquier llama accidental.
+            </div>
+        </div>
+    </div>
+
+    <!-- PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Procedimiento</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Preparación de los tres vasos</strong>
+            <p>Prepara tres vasos de precipitados de 250 cm³:</p>
+            <ul>
+                <li><strong>Vaso A:</strong> 50 cm³ de <strong>agua</strong>.</li>
+                <li><strong>Vaso B:</strong> 50 cm³ de <strong>etanol puro</strong>.</li>
+                <li><strong>Vaso C:</strong> una <strong>mezcla</strong> de 25 cm³ de agua + 25 cm³ de etanol + una pizca de <strong>cloruro de sodio</strong> (sal común) disuelta.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Ensayo con papel mojado en agua</strong>
+            <p>Empapa un trozo de papel en el vaso A (solo agua) y sujétalo con las tenazas. Acércalo a la llama del mechero. <strong>El papel no arde</strong>: el agua que contiene absorbe el calor y se evapora, manteniendo la temperatura del papel por debajo de su punto de ignición.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Ensayo con papel mojado en alcohol puro</strong>
+            <p>Empapa un segundo trozo de papel en el vaso B (etanol puro) y acércalo a la llama. <strong>El papel se quema</strong>: el alcohol arde y, al no haber agua que lo proteja, el papel alcanza su temperatura de ignición (unos 230 °C) y se consume.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Ensayo con papel mojado en la mezcla</strong>
+            <p>Empapa un tercer trozo de papel en el vaso C (mezcla de agua, alcohol y sal) y acércalo a la llama del mechero. <strong>El alcohol arde, pero el papel no se quema</strong>. La llama es amarilla-anaranjada por el sodio de la sal.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>La demostración estrella: el billete</strong>
+            <p>Repite el paso anterior con un billete de 5 euros (o un papel de tamaño similar). Empápalo bien en la mezcla del vaso C, sujétalo con las tenazas y acércalo a la llama. El alcohol arderá durante unos segundos formando una llama amarilla, pero <strong>el billete permanecerá intacto</strong>. Una vez apagada la llama, el billete estará húmedo, pero no quemado.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>Observación final</strong>
+            <p>Deja que el público (alumnado) toque el billete y compruebe que solo está mojado. Compara el resultado con los ensayos previos: el agua es la clave de la protección. Repite la demostración variando la proporción agua/alcohol para ver cómo afecta al resultado.</p>
+        </div>
+
+        <!-- Truco del profesor -->
+        <div class="truco">
+            <i class="fas fa-magic" style="margin-right: 8px;"></i>
+            <strong>Truco del profesor:</strong> Para aumentar el factor sorpresa, comienza diciendo que vas a quemar un billete de 5 euros. Mientras preparas la mezcla, juega con el alumnado: moja papeles en agua (no arden), en alcohol (arden), échales sal (siguen ardiendo)… deja que ellos hagan sus predicciones y, cuando menos se lo esperen, ¡usa el billete! La mezcla debe tener <strong>algo más de la mitad de agua que de alcohol</strong>; si hay demasiado alcohol, el papel puede quemarse ligeramente por los bordes.
+        </div>
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 Resultado</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            \[ \text{Alcohol} + \text{O}_2 \rightarrow \text{CO}_2 + \text{H}_2\text{O} + \text{calor} \]
+            \[ \text{Agua (l)} + \text{calor} \rightarrow \text{Agua (v)} \]
+            \[ T_{\text{papel}} < T_{\text{ignición}} \approx 230\,^\circ\text{C} \]
+        </div>
+        <div class="note">
+            <strong>Explicación:</strong> Cuando la mezcla de agua y alcohol se calienta, el alcohol (que es más volátil y tiene menor punto de ebullición, 78 °C) se evapora y se quema en la superficie. Mientras tanto, el agua absorbe gran parte del calor desprendido y se evapora, pero <strong>mientras quede agua líquida, la temperatura del papel no puede superar los 100 °C</strong>. Como la temperatura de ignición del papel (unos 230 °C) es muy superior, el papel no se quema. La sal común (NaCl) se añade únicamente para que la llama del alcohol, que es casi invisible, adquiera el característico color amarillo-anaranjado del sodio y pueda verse mejor.
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- BLOQUE DESPLEGABLE CON EJERCICIOS RESUELTOS               -->
+    <!-- ========================================================= -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO Un billete que no arde</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Convertir la temperatura de ignición del papel</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La temperatura de ignición del papel es de aproximadamente 230 °C. Convierte esta temperatura a kelvin y a grados Fahrenheit. La novela de Ray Bradbury se titula <em>Fahrenheit 451</em>. ¿Coincide el valor con la temperatura de ignición del papel?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Conversión a kelvin: \(T_K = T_C + 273{,}15 = 230 + 273{,}15 = 503{,}15\ \text{K}\).</div>
+                    <div class="paso"><strong>Paso 2:</strong> Conversión a Fahrenheit: \(T_F = \frac{9}{5}T_C + 32 = \frac{9}{5}\cdot 230 + 32 = 414 + 32 = 446\ ^\circ\text{F}\).</div>
+                    <div class="paso"><strong>Paso 3:</strong> El valor de 446 °F está próximo a 451 °F, el título de la novela de Bradbury. La diferencia (5 °F ≈ 2,8 °C) se debe a que el autor redondeó y ajustó el número por motivos literarios.</div>
+                    <div class="paso"><strong>Resultado:</strong> \(230\ ^\circ\text{C} = 503\ \text{K} \approx 446\ ^\circ\text{F}\). Coincide razonablemente con el famoso "Fahrenheit 451".</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Calor necesario para evaporar el agua de la mezcla</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En la mezcla hay 25 cm³ de agua (25 g). Calcula la energía necesaria para evaporar completamente esa agua a 100 °C. Dato: calor latente de vaporización del agua \(L_v = 2\,260\ \text{J/g}\).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Fórmula: \(Q = m \cdot L_v\).</div>
+                    <div class="paso"><strong>Paso 2:</strong> Sustituimos: \(Q = 25\ \text{g} \cdot 2\,260\ \text{J/g} = 56\,500\ \text{J} = 56{,}5\ \text{kJ}\).</div>
+                    <div class="paso"><strong>Paso 3:</strong> Además, para calentar el agua de 20 °C a 100 °C se necesita \(Q' = m \cdot c_e \cdot \Delta T = 25 \cdot 4{,}18 \cdot 80 = 8\,360\ \text{J}\).</div>
+                    <div class="paso"><strong>Resultado:</strong> Se necesitan unos 56,5 kJ solo para evaporar el agua, más unos 8,4 kJ para calentarla hasta 100 °C. Todo ese calor lo absorbe el agua, "robándoselo" al papel.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>Comparación del calor de combustión del etanol</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El calor de combustión del etanol es \(q = 1\,367\ \text{kJ/mol}\). Calcula la energía liberada al quemar 25 cm³ de etanol (densidad \(\rho = 0{,}789\ \text{g/cm}^3\), masa molar \(M = 46\ \text{g/mol}\)).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Masa de etanol: \(m = \rho \cdot V = 0{,}789 \cdot 25 = 19{,}7\ \text{g}\).</div>
+                    <div class="paso"><strong>Paso 2:</strong> Moles: \(n = \frac{m}{M} = \frac{19{,}7}{46} \approx 0{,}428\ \text{mol}\).</div>
+                    <div class="paso"><strong>Paso 3:</strong> Energía liberada: \(Q = n \cdot q = 0{,}428 \cdot 1\,367 \approx 585\ \text{kJ}\).</div>
+                    <div class="paso"><strong>Resultado:</strong> El alcohol libera unos 585 kJ al quemarse. De esa energía, una parte importante la absorbe el agua para evaporarse, evitando que el papel se caliente.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>¿Por qué huele a alcohol la mezcla?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En la mezcla de agua y alcohol, ¿por qué el alcohol arde primero y el agua permanece más tiempo? Explica el fenómeno a nivel molecular.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> El etanol tiene un punto de ebullición de 78 °C, inferior al del agua (100 °C). Por tanto, se evapora antes.</div>
+                    <div class="paso"><strong>Paso 2:</strong> Los vapores de etanol son los que se mezclan con el oxígeno del aire y arden en la superficie.</div>
+                    <div class="paso"><strong>Paso 3:</strong> El agua, al tener mayor punto de ebullición y mayor calor latente de vaporización, absorbe gran cantidad de calor antes de evaporarse, manteniendo la temperatura del sistema próxima a 100 °C.</div>
+                    <div class="paso"><strong>Resultado:</strong> El alcohol es más volátil y arde primero; el agua, con su alta capacidad calorífica y su elevado calor latente, actúa como "escudo térmico" que protege al papel.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>¿Qué pasa si la mezcla tiene más alcohol que agua?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Si preparamos una mezcla con 40 cm³ de etanol y 10 cm³ de agua, el papel se quema ligeramente por los bordes. Explica por qué ocurre esto y qué papel juega la proporción agua/alcohol.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Con menos agua, hay menos líquido que pueda absorber el calor de la combustión.</div>
+                    <div class="paso"><strong>Paso 2:</strong> El alcohol se evapora y arde rápidamente; el agua presente se evapora pronto y deja de proteger al papel.</div>
+                    <div class="paso"><strong>Paso 3:</strong> En los bordes, donde la evaporación es más rápida y la concentración de alcohol mayor, el papel puede alcanzar la temperatura de ignición y quemarse.</div>
+                    <div class="paso"><strong>Resultado:</strong> La proporción ideal es al menos <strong>50 % de agua</strong>. Cuanto mayor sea la cantidad de agua, más tiempo tarda en evaporarse y mejor protege al papel. Si hay demasiado alcohol, el efecto protector desaparece.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>El color amarillo de la llama: la sal de sodio</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> ¿Por qué se añade cloruro de sodio (NaCl) a la mezcla? ¿Qué fenómeno físico-químico explica el color amarillo-anaranjado de la llama?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> La llama del etanol es casi invisible a la luz del día. Añadiendo NaCl, la llama adquiere un color amarillo-anaranjado muy visible.</div>
+                    <div class="paso"><strong>Paso 2:</strong> El fenómeno se denomina <strong>emisión atómica</strong>: los átomos de sodio, excitados por la energía de la llama, emiten luz de una longitud de onda característica (unos 589 nm, en la zona amarilla del espectro).</div>
+                    <div class="paso"><strong>Paso 3:</strong> Este es el mismo principio que se utiliza en los fuegos artificiales y en los análisis de espectroscopía de emisión.</div>
+                    <div class="paso"><strong>Resultado:</strong> La sal no participa en la combustión, solo sirve para <strong>hacer visible la llama</strong> y aumentar el efecto visual de la demostración.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Combustión del etanol: ecuación química</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Escribe y ajusta la ecuación química de la combustión completa del etanol (C₂H₅OH). Indica los productos y comprueba que se cumple la conservación de la masa.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Reacción sin ajustar: \(\text{C}_2\text{H}_5\text{OH} + \text{O}_2 \rightarrow \text{CO}_2 + \text{H}_2\text{O}\).</div>
+                    <div class="paso"><strong>Paso 2:</strong> Ajustamos el carbono: 2 CO₂. \(\text{C}_2\text{H}_5\text{OH} + \text{O}_2 \rightarrow 2\,\text{CO}_2 + \text{H}_2\text{O}\).</div>
+                    <div class="paso"><strong>Paso 3:</strong> Ajustamos el hidrógeno: 6 H → 3 H₂O. \(\text{C}_2\text{H}_5\text{OH} + \text{O}_2 \rightarrow 2\,\text{CO}_2 + 3\,\text{H}_2\text{O}\).</div>
+                    <div class="paso"><strong>Paso 4:</strong> Ajustamos el oxígeno: en productos hay 4 + 3 = 7 O. En reactivos, el etanol aporta 1 O; necesitamos 3 O₂. \(\text{C}_2\text{H}_5\text{OH} + 3\,\text{O}_2 \rightarrow 2\,\text{CO}_2 + 3\,\text{H}_2\text{O}\).</div>
+                    <div class="paso"><strong>Resultado:</strong> \(\text{C}_2\text{H}_5\text{OH} + 3\,\text{O}_2 \rightarrow 2\,\text{CO}_2 + 3\,\text{H}_2\text{O}\). Verificación: C: 2 = 2; H: 6 = 6; O: 1 + 6 = 4 + 3 → 7 = 7. ✓</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 8 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 8</span>
+                    <span>Seguridad en la demostración</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Enumera al menos cinco normas de seguridad que deben seguirse en esta demostración y explica por qué es importante cada una.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Usar <strong>gafas de protección</strong>: evitan que las chispas o el alcohol ardiendo alcancen los ojos.</div>
+                    <div class="paso"><strong>Paso 2:</strong> Tener un <strong>extintor</strong> cerca: en caso de que la llama se descontrole, se puede sofocar rápidamente.</div>
+                    <div class="paso"><strong>Paso 3:</strong> Trabajar sobre una <strong>superficie refractaria</strong>: evita que el alcohol derramado provoque un incendio en la mesa.</div>
+                    <div class="paso"><strong>Paso 4:</strong> Usar <strong>pinzas metálicas largas</strong>: mantienen las manos alejadas de la llama.</div>
+                    <div class="paso"><strong>Paso 5:</strong> No usar <strong>ropa suelta ni el pelo largo suelto</strong>: pueden prender con facilidad. Recogerse el pelo y llevar bata abrochada.</div>
+                    <div class="paso"><strong>Paso 6:</strong> Realizar la demostración <strong>solo el profesor</strong>: los alumnos observan desde una distancia prudencial.</div>
+                    <div class="paso"><strong>Resultado:</strong> La demostración es segura si se respetan estas normas. El mayor riesgo es la inflamabilidad del etanol y la posibilidad de que el alcohol derramado se encienda.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 9 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 9</span>
+                    <span>Aplicaciones cotidianas del calor latente</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El mismo principio físico que protege al billete (el agua absorbe calor al evaporarse) se utiliza en muchas situaciones cotidianas. Cita al menos tres ejemplos y explica brevemente cómo funciona en cada uno.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1: Sudoración.</strong> Cuando hace calor, sudamos. El sudor se evapora en la piel absorbiendo calor del cuerpo, lo que nos refresca.</div>
+                    <div class="paso"><strong>Paso 2: Botijo o vasija de barro.</strong> El agua se filtra por los poros y se evapora en la superficie exterior, enfriando el agua del interior.</div>
+                    <div class="paso"><strong>Paso 3: Extintores de agua.</strong> El agua pulverizada sobre el fuego absorbe calor y se evapora, enfriando el material y desplazando el oxígeno.</div>
+                    <div class="paso"><strong>Paso 4: Refrigeración por evaporación.</strong> Los sistemas de aire acondicionado evaporativo funcionan con este mismo principio: hacen pasar aire por agua, que se evapora y enfría el aire.</div>
+                    <div class="paso"><strong>Resultado:</strong> El calor latente de vaporización del agua es uno de los fenómenos físicos más útiles en la vida cotidiana: desde la sudoración hasta la refrigeración industrial.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 10 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 10</span>
+                    <span>Diseña tu propia variante de la demostración</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Propón una variante de la demostración cambiando alguna variable (por ejemplo, usar alcohol isopropílico, o añadir colorante, o cambiar la proporción agua/alcohol). Describe qué cambiarías y qué esperarías observar.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1: Variante con alcohol isopropílico.</strong> El isopropanol tiene un punto de ebullición de 82,6 °C (similar al etanol). Se podría probar la misma mezcla. Esperaríamos un comportamiento parecido, aunque el olor es más fuerte.</div>
+                    <div class="paso"><strong>Paso 2: Variante con colorante alimentario.</strong> Añadir una gota de colorante a la mezcla permite visualizar cómo el líquido empapa el papel, aunque no afecta a la combustión.</div>
+                    <div class="paso"><strong>Paso 3: Variante con proporciones.</strong> Probar 60 % agua / 40 % alcohol, 40 % agua / 60 % alcohol, etc. Observaríamos que cuanto menos agua, más riesgo de que el papel se queme.</div>
+                    <div class="paso"><strong>Paso 4: Variante con papel de distintos grosores.</strong> Comparar papel de filtro (fino) con cartulina (gruesa). El papel fino se calienta y seca más rápido, por lo que podría quemarse antes.</div>
+                    <div class="paso"><strong>Resultado:</strong> La demostración admite múltiples variantes. La variable más crítica es la proporción agua/alcohol: debe haber suficiente agua para actuar como escudo térmico durante toda la combustión.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Observaciones claves:</strong> El billete no arde porque el agua de la mezcla absorbe el calor de la combustión del alcohol y se evapora, manteniendo la temperatura del papel por debajo de su temperatura de ignición (~230 °C). Mientras quede agua líquida, la temperatura no supera los 100 °C. Este es un ejemplo espectacular de cómo el <strong>calor latente de vaporización</strong> puede proteger un material inflamable. La sal solo sirve para dar color a la llama. La proporción ideal es al menos 50 % agua, y la demostración es completamente segura si se respetan las normas básicas de seguridad.
+            </div>
+        </div>
+    </details>
+
+    <!-- ============================================
+         BLOQUE "ES HORA DE"
+         ============================================ -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br> A veces lo espectacular está en los detalles más sencillos.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- fin container -->
+</body>
+</html>

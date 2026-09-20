@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#Q08.03-P - Práctica: Cromatografía con tintas de rotuladores</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#Q08.03-P.- </span>
+                <span class="texto">Práctica: Cromatografía con tintas de rotuladores</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>Vamos a separar los componentes de la tinta de varios rotuladores usando una técnica llamada <strong>cromatografía en papel</strong>. Aunque un rotulador nos parezca de un solo color (negro, azul, morado…), muchas veces su tinta es en realidad una <strong>mezcla de varios pigmentos</strong>. La cromatografía nos permite <em>verlos por separado</em>.</p>
+        <p>Al final de la práctica obtendrás una tira de papel con manchas de distintos colores: es como si hubieras "desmontado" el color del rotulador.</p>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿De qué colores está hecha realmente la tinta de un rotulador?
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué es la <strong>cromatografía</strong> y para qué sirve.</li>
+            <li>Que muchas tintas son <strong>mezclas</strong> de sustancias, no un solo color puro.</li>
+            <li>Cómo se separan las sustancias según su <strong>solubilidad</strong> y su <strong>afinidad</strong> por el papel y por el disolvente.</li>
+            <li>A interpretar un <strong>cromatograma</strong> y calcular el <strong>factor de retención \( R_f \)</strong>.</li>
+            <li>A trabajar con material sencillo de laboratorio siguiendo un procedimiento ordenado.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y procedimiento</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Materiales y reactivos</strong>
+            <ul>
+                <li>Un vaso de precipitados alto (o un vaso de vidrio o un frasco) de unos 250 mL.</li>
+                <li>Papel de filtro o papel de cromatografía (también vale papel de cocina grueso).</li>
+                <li>Tijeras y regla.</li>
+                <li>Lápiz (¡no bolígrafo!).</li>
+                <li>Rotuladores de distintos colores (negro, azul, marrón, morado, verde…). Cuantos más colores, mejor.</li>
+                <li>Disolvente: agua, alcohol etílico, o una mezcla de alcohol y agua. También vale agua con sal.</li>
+                <li>Un palillo o clip para sujetar el papel.</li>
+                <li>Cuentagotas o pipeta Pasteur.</li>
+                <li>Regla para medir distancias.</li>
+            </ul>
+            <div class="note">
+                <strong>¡Cuidado!</strong> El alcohol es inflamable. No lo uses cerca de llamas ni de fuentes de calor. Trabaja en un sitio ventilado.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Preparación de la tira de papel</strong>
+            <ol>
+                <li>Corta una tira de papel de filtro de unos <strong>3 cm de ancho</strong> y <strong>10–12 cm de alto</strong>.</li>
+                <li>Con un lápiz, traza una <strong>línea horizontal</strong> a unos <strong>2 cm del borde inferior</strong>. Esta será la <em>línea de origen</em>.</li>
+                <li>Sobre esa línea, haz una <strong>pequeña marca</strong> con cada rotulador. Deja un espacio de al menos 1,5 cm entre marcas para que no se mezclen.</li>
+                <li>Anota en la parte superior del papel (con lápiz) qué color corresponde a cada marca: por ejemplo, "N" para negro, "A" para azul, "M" para morado…</li>
+            </ol>
+            <div class="note">
+                <strong>Importante:</strong> usa lápiz y no bolígrafo para escribir en el papel. La tinta del bolígrafo también se separaría con el disolvente y estropearía el experimento.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Montaje del experimento</strong>
+            <ol>
+                <li>Vierte el disolvente (agua, alcohol o mezcla) en el vaso hasta una altura de <strong>aproximadamente 1 cm</strong>. Es importante que la capa sea fina.</li>
+                <li>Sujeta la tira de papel con el clip o con un palillo horizontal colocado sobre el borde del vaso, de forma que la tira <strong>cuelgue verticalmente</strong> dentro del vaso.</li>
+                <li>Comprueba que la <strong>línea de origen NO toca el disolvente</strong>. Si la mancha de tinta se sumerge directamente, el color se disolvería en el líquido y no veríamos la separación.</li>
+                <li>La parte inferior del papel debe quedar a 0,5–1 cm por encima del disolvente.</li>
+            </ol>
+            <div class="highlight-box">
+                <strong>Regla de oro de la cromatografía:</strong><br>
+                El disolvente debe subir por el papel <em>por capilaridad</em>, no por inmersión. Es la subida del líquido la que arrastra los pigmentos.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Desarrollo del cromatograma</strong>
+            <ol>
+                <li>Deja el montaje en reposo <strong>sin moverlo ni agitarlo</strong>.</li>
+                <li>Observa cómo el disolvente va subiendo poco a poco por el papel.</li>
+                <li>Cuando el frente del disolvente llegue a unos <strong>2 cm del borde superior</strong>, saca la tira y déjala secar sobre un papel absorbente.</li>
+                <li>Con una regla, mide y anota las distancias que necesites para calcular el \( R_f \).</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Repetición con distintos disolventes</strong>
+            <p>Si quieres, puedes repetir la experiencia cambiando el disolvente:</p>
+            <ul>
+                <li><strong>Agua</strong>: los pigmentos más solubles en agua suben más.</li>
+                <li><strong>Alcohol etílico</strong>: separa mejor los pigmentos poco solubles en agua.</li>
+                <li><strong>Mezcla alcohol-agua</strong> (por ejemplo, 50 %): buen compromiso entre ambos.</li>
+            </ul>
+            <p>Compara los cromatogramas obtenidos: verás que los colores se separan de forma distinta según el disolvente.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section objetivo">
+        <h2>🔬 ¿Por qué se separan los colores? (fundamento)</h2>
+        <p>La cromatografía se basa en dos fenómenos que ocurren a la vez:</p>
+        <div class="mini-card azul">
+            <h4>💧 Fase móvil</h4>
+            <p>Es el <strong>disolvente</strong> que sube por el papel. Arrastra los pigmentos hacia arriba.</p>
+        </div>
+        <div class="mini-card rojo">
+            <h4>📄 Fase estacionaria</h4>
+            <p>Es el <strong>papel</strong>. Retiene a los pigmentos con más o menos fuerza.</p>
+        </div>
+        <p>Cada pigmento de la tinta tiene una <strong>solubilidad</strong> distinta en el disolvente y una <strong>afinidad</strong> distinta por el papel:</p>
+        <ul>
+            <li>Los pigmentos <strong>muy solubles</strong> en el disolvente y con <strong>poca afinidad</strong> por el papel <strong>suben mucho</strong>.</li>
+            <li>Los pigmentos <strong>poco solubles</strong> o con <strong>mucha afinidad</strong> por el papel <strong>suben poco</strong> y se quedan cerca del origen.</li>
+        </ul>
+        <p>Por eso cada componente de la mezcla acaba en una posición distinta: el cromatograma es como un "mapa" de la mezcla.</p>
+
+        <div class="formula-box">
+            <strong>Factor de retención:</strong><br>
+            \[
+            R_f = \frac{\text{distancia recorrida por el pigmento}}{\text{distancia recorrida por el disolvente}}
+            \]
+        </div>
+        <p>El \( R_f \) es un número entre 0 y 1 que caracteriza a cada pigmento para un disolvente y un papel determinados. Cuanto mayor sea el \( R_f \), más lejos ha llegado el pigmento.</p>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué deberías observar y cómo interpretarlo?</h2>
+        <p>En función del rotulador y del disolvente utilizado, verás cosas como:</p>
+        <table>
+            <tr><th>Rotulador</th><th>Color que se ve a simple vista</th><th>Colores que aparecen en el cromatograma</th></tr>
+            <tr><td>Negro</td><td>Negro</td><td>Azul, violeta, rosa, naranja…</td></tr>
+            <tr><td>Marrón</td><td>Marrón</td><td>Naranja, rojo, amarillo…</td></tr>
+            <tr><td>Verde</td><td>Verde</td><td>Amarillo y azul</td></tr>
+            <tr><td>Morado</td><td>Morado</td><td>Rosa y azul</td></tr>
+        </table>
+        <p>Esto demuestra que la mayoría de los rotuladores no contienen un solo pigmento, sino una <strong>mezcla de varios</strong> que juntos dan la sensación de un solo color.</p>
+
+        <div class="note">
+            <strong>¿Y si no veo separación?</strong> Puede ocurrir si:
+            <ul>
+                <li>La mancha de tinta era demasiado grande o estaba muy concentrada.</li>
+                <li>El disolvente ha subido demasiado rápido (por ejemplo, si has usado alcohol puro).</li>
+                <li>La línea de origen estaba sumergida en el disolvente.</li>
+                <li>El rotulador usado es de un solo pigmento (algunos rotuladores de colores básicos, como el rojo puro, pueden no separarse).</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO la cromatografía: preguntas y ejercicios</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Cálculo del factor de retención \( R_f \)</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En un cromatograma, el disolvente ha recorrido 8,0 cm desde la línea de origen. Un pigmento azul ha recorrido 6,4 cm y otro pigmento rojo ha recorrido 2,0 cm. Calcula el \( R_f \) de cada pigmento.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Fórmula:</strong> \( R_f = \dfrac{\text{distancia del pigmento}}{\text{distancia del disolvente}} \).</div>
+                    <div class="paso"><strong>Paso 2 — Pigmento azul:</strong></div>
+                    <div class="formula-box">\[ R_f(\text{azul}) = \frac{6{,}4}{8{,}0} = 0{,}80 \]</div>
+                    <div class="paso"><strong>Paso 3 — Pigmento rojo:</strong></div>
+                    <div class="formula-box">\[ R_f(\text{rojo}) = \frac{2{,}0}{8{,}0} = 0{,}25 \]</div>
+                    <div class="paso"><strong>Interpretación:</strong> el azul es mucho más soluble en el disolvente (o tiene menos afinidad por el papel), por eso sube más. El rojo se queda más cerca del origen.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>¿Cuántos pigmentos hay en la mezcla?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Al hacer la cromatografía de un rotulador morado se observan en el papel 3 manchas: una rosa a 5,0 cm, una azul a 3,5 cm y una violeta a 1,8 cm. El frente del disolvente ha llegado a 7,0 cm. ¿Cuántos pigmentos contiene la tinta? Calcula sus \( R_f \).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Número de pigmentos:</strong> cada mancha corresponde a un pigmento distinto. Hay <strong>3 pigmentos</strong>.</div>
+                    <div class="paso"><strong>Paso 2 — Cálculo de los \( R_f \):</strong></div>
+                    <div class="formula-box">\[ R_f(\text{rosa}) = \frac{5{,}0}{7{,}0} \approx 0{,}71 \]</div>
+                    <div class="formula-box">\[ R_f(\text{azul}) = \frac{3{,}5}{7{,}0} = 0{,}50 \]</div>
+                    <div class="formula-box">\[ R_f(\text{violeta}) = \frac{1{,}8}{7{,}0} \approx 0{,}26 \]</div>
+                    <div class="paso"><strong>Conclusión:</strong> la tinta morada es en realidad una mezcla de tres pigmentos con distintas solubilidades.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>Interpretación de un cromatograma</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un compañero ha obtenido un cromatograma en el que el pigmento amarillo tiene \( R_f = 0{,}90 \) y el pigmento verde tiene \( R_f = 0{,}15 \). Explica qué significa cada valor y por qué el amarillo ha llegado tan arriba.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Significado del \( R_f \):</strong> indica la fracción del recorrido total del disolvente que ha alcanzado el pigmento.</div>
+                    <div class="paso"><strong>Paso 2 — Amarillo (\( R_f = 0{,}90 \)):</strong> ha recorrido el 90 % del camino del disolvente. Es un pigmento muy soluble en el disolvente y con poca afinidad por el papel.</div>
+                    <div class="paso"><strong>Paso 3 — Verde (\( R_f = 0{,}15 \)):</strong> ha recorrido solo el 15 % del camino del disolvente. Es poco soluble en el disolvente o tiene mucha afinidad por el papel.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el amarillo sube casi hasta el frente del disolvente porque "prefiere" estar disuelto; el verde se queda cerca del origen porque "prefiere" quedarse pegado al papel.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>¿Por qué no mojar la línea de origen?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica qué ocurriría si, por error, la línea de origen con las manchas de tinta quedara sumergida en el disolvente al montar el experimento.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Qué hace el disolvente?</strong> Si la línea de origen está sumergida, el disolvente disuelve directamente los pigmentos en el vaso en lugar de arrastrarlos por el papel.</div>
+                    <div class="paso"><strong>Paso 2 — Consecuencia:</strong> los pigmentos se mezclarían en la disolución del fondo del vaso y no subirían por capilaridad. No habría separación.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la línea de origen debe quedar <strong>por encima</strong> del nivel del disolvente. Es el disolvente el que debe subir por el papel, no el papel el que se sumerge en el disolvente.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>Comparación de dos disolventes</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Se hace la cromatografía de un rotulador marrón con agua y con alcohol. Con agua, los pigmentos quedan muy juntos cerca del origen. Con alcohol, se separan mucho más. ¿A qué puede deberse?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Solubilidad:</strong> los pigmentos de la tinta del rotulador son poco solubles en agua, pero muy solubles en alcohol.</div>
+                    <div class="paso"><strong>Paso 2 — Consecuencia:</strong> en agua apenas son arrastrados y se quedan cerca del origen; en alcohol son arrastrados con facilidad y suben más, separándose mejor.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la elección del disolvente es clave. Un buen disolvente debe disolver bien los componentes de la mezcla para que se separen correctamente.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>Identificación de una tinta desconocida</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Se sospecha que dos rotuladores distintos (uno "negro" y otro "azul oscuro") pueden usar la misma tinta. Al hacer la cromatografía con el mismo disolvente y el mismo papel, se observa que ambos producen manchas a las mismas alturas: 4,2 cm (azul), 2,8 cm (violeta) y 1,5 cm (rosa). ¿Podemos concluir que son la misma tinta? Justifica la respuesta.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Qué significa que coincidan las manchas?</strong> Si dos sustancias tienen el mismo \( R_f \) en las mismas condiciones (mismo disolvente y mismo papel), probablemente son la misma sustancia.</div>
+                    <div class="paso"><strong>Paso 2 — Comprobación:</strong> ambos rotuladores presentan manchas a las mismas distancias, luego los \( R_f \) coinciden.</div>
+                    <div class="paso"><strong>Paso 3 — Conclusión:</strong> es muy probable que ambos rotuladores utilicen la misma mezcla de pigmentos. La cromatografía es una técnica muy útil para identificar sustancias comparando sus \( R_f \) con los de patrones conocidos.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> La cromatografía es mucho más que "colores que suben por un papel". Es una técnica analítica que nos permite <em>separar</em> mezclas e <em>identificar</em> sustancias comparando sus \( R_f \). El gran error es pensar que un rotulador "negro" contiene solo tinta negra: casi siempre es una mezcla de pigmentos. Aprender a calcular el \( R_f \) y a interpretar un cromatograma es una habilidad básica en química analítica.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  ULos colores no son lo que parecen.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>
