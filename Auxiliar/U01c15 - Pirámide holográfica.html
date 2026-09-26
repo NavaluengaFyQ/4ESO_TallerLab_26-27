@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c15 - Pirámide holográfica: el holograma que no es holograma</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+        .mini-card.morado { border-top-color: #805ad5; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c15.- </span>
+                <span class="texto">Pirámide holográfica: el holograma que no es holograma</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>Vamos a construir una <strong>pirámide holográfica</strong>: un dispositivo formado por cuatro caras de plástico transparente (acetato, metacrilato o incluso la tapa de una caja de CD) cortadas en forma de trapecio y unidas formando una pirámide truncada. Al colocarla sobre la pantalla de un móvil o una tablet, con un vídeo especialmente diseñado, en su interior aparece una <strong>imagen tridimensional flotante</strong> que se ve desde cualquier ángulo.</p>
+        <p>Parece un holograma de película, pero <strong>no lo es</strong>. Es una <strong>ilusión óptica</strong> basada en la <strong>reflexión de la luz</strong> y en un truco de <strong>percepción visual</strong> que ya se usaba en el siglo XIX. En esta práctica vas a descubrir cómo funciona, por qué engaña a tu cerebro y qué relación tiene con la magia y el ilusionismo.</p>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Por qué vemos una imagen flotante en 3D si en realidad solo hay cuatro imágenes planas en una pantalla?
+      
+      
+      <img src="../imagenes/Pirámide holográfica.jpg" alt="Imagen" width="800">
+
+
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué es la <strong>reflexión de la luz</strong> y cómo se aplica en las caras de la pirámide.</li>
+            <li>Por qué el cerebro interpreta cuatro imágenes planas como <strong>un objeto 3D flotante</strong>.</li>
+            <li>La diferencia entre un <strong>holograma real</strong> y una <strong>ilusión óptica tipo "holograma"</strong>.</li>
+            <li>Los <strong>precursores históricos</strong> de esta técnica: el "Fantasma de Pepper", los espectáculos de magia del siglo XIX y la linterna mágica.</li>
+            <li>Las <strong>aplicaciones reales</strong> de este efecto: publicidad, museos, educación, conciertos, medicina, etc.</li>
+            <li>Cómo construir la pirámide con materiales caseros y diseñar tu propio contenido.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>🔬 Fundamento teórico</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>La reflexión de la luz</strong>
+            <p>La luz, al llegar a una superficie, puede reflejarse, refractarse o absorberse. En el caso de las caras transparentes de la pirámide, ocurren dos cosas a la vez: <strong>parte de la luz se refleja</strong> y <strong>parte se transmite</strong> (refracción). Por eso se dice que son superficies <strong>semitransparentes</strong> o <strong>"semiespejadas"</strong>.</p>
+            <p>La <strong>ley de la reflexión</strong> nos dice que el ángulo con el que llega un rayo a la superficie (ángulo de incidencia) es igual al ángulo con el que sale (ángulo de reflexión), medidos respecto a la normal (la perpendicular a la superficie):</p>
+            <div class="formula-box">
+                \[ \theta_i = \theta_r \]
+            </div>
+            <p>Las caras de la pirámide están inclinadas 45° respecto a la pantalla. Gracias a esa inclinación, un rayo que sale de la pantalla horizontalmente se refleja en la cara y sale hacia el ojo del observador.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>¿Por qué la imagen parece flotar en el centro?</strong>
+            <p>El vídeo que se reproduce en el móvil no es una imagen normal: está diseñado específicamente para esta ilusión. Contiene <strong>cuatro imágenes idénticas</strong> del objeto, dispuestas en una cruz o en un cuadrado, cada una orientada hacia un lado de la pantalla.</p>
+            <p>Cada cara de la pirámide refleja la imagen que le corresponde. Como las cuatro caras están inclinadas simétricamente, <strong>las cuatro imágenes reflejadas convergen en el mismo punto del espacio</strong>, en el centro de la pirámide. Tu cerebro recibe simultáneamente esas cuatro vistas parciales y las <strong>fusiona</strong> en una sola imagen tridimensional.</p>
+            <div class="highlight-box">
+                <strong>Idea clave:</strong> no hay un objeto real en el centro. Lo que hay es <strong>luz reflejada</strong> que proviene de cuatro imágenes planas y que tu cerebro interpreta como un objeto sólido flotando. Es una ilusión creada por la geometría y por la forma en que procesamos la información visual.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>La geometría de la pirámide</strong>
+            <p>Para que las cuatro imágenes converjan correctamente, las caras deben cumplir ciertas condiciones:</p>
+            <ul>
+                <li>Deben ser <strong>trapecios isósceles</strong> idénticos.</li>
+                <li>La inclinación respecto a la horizontal debe ser de <strong>45°</strong>.</li>
+                <li>La pirámide debe estar <strong>truncada</strong> (sin vértice en la parte superior).</li>
+                <li>Las dimensiones deben ser proporcionales al tamaño de la pantalla.</li>
+            </ul>
+            <p>Unas medidas típicas para un móvil son: base mayor de 6 cm, base menor de 1 cm y altura de 4 cm. Pero se pueden escalar según el dispositivo.</p>
+            <div class="note">
+                <strong>Consejo:</strong> cuanto más grande sea la pirámide, más grande será la imagen flotante. Pero también necesitarás una pantalla más grande y un vídeo con las cuatro imágenes más separadas.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>¿Es esto un holograma de verdad?</strong>
+            <p><strong>No.</strong> Un holograma auténtico se crea mediante <strong>interferencia de haces de luz coherente</strong> (normalmente de un láser) sobre una placa fotosensible. Un holograma real almacena la información de fase y amplitud de la luz, y al iluminarlo de nuevo reproduce una imagen tridimensional completa, con paralaje vertical y horizontal.</p>
+            <p>La pirámide holográfica, en cambio, no usa interferencia ni láser. Solo usa <strong>reflexión</strong> de cuatro imágenes planas. Es un <strong>"falso holograma"</strong> o <strong>"pseudo-holograma"</strong>. Su nombre correcto en óptica sería <strong>"visualizador de reflexión 360°"</strong> o <strong>"efecto Fantasma de Pepper moderno"</strong>.</p>
+            <div class="formula-box">
+                <strong>Diferencia clave:</strong><br>
+                Holograma real → interferencia de luz coherente.<br>
+                Pirámide holográfica → reflexión de cuatro imágenes en caras inclinadas.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>El error que comete tu cerebro</strong>
+            <p>¿Por qué vemos un objeto 3D donde solo hay luz reflejada? Porque nuestro sistema visual está diseñado para interpretar la <strong>profundidad</strong> a partir de varias pistas:</p>
+            <ul>
+                <li><strong>Paralaje:</strong> si mueves la cabeza, la imagen flotante se mueve ligeramente, como un objeto real.</li>
+                <li><strong>Perspectiva:</strong> las cuatro vistas corresponden a ángulos ligeramente distintos del objeto.</li>
+                <li><strong>Movimiento:</strong> si el vídeo es animado, el objeto "gira" o "se mueve" en 3D.</li>
+                <li><strong>Fusión binocular:</strong> cada ojo ve una versión ligeramente distinta de la imagen reflejada, lo que refuerza la sensación de volumen.</li>
+            </ul>
+            <p>El cerebro combina todas estas señales y "decide" que hay un objeto sólido flotando. Es una <strong>ilusión óptica</strong>, no una proyección real.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>Precursores históricos: el Fantasma de Pepper</strong>
+            <p>La técnica de usar cristales inclinados para reflejar una imagen y hacerla aparecer "flotando" es muy antigua. Su precursor más famoso es el <strong>"Fantasma de Pepper"</strong> (Pepper's Ghost), una ilusión teatral del siglo XIX.</p>
+
+            <img src="../imagenes/Peppers_Ghost.jpg" alt="Imagen" width="800">
+            
+            <p>En 1862, el científico e ilusionista <strong>John Henry Pepper</strong> popularizó un efecto en el Royal Polytechnic Institution de Londres. Usaba una <strong>lámina de vidrio inclinada 45°</strong> frente al escenario. Un actor, escondido en un foso debajo del escenario e iluminado con una luz muy potente, se reflejaba en el cristal y aparecía sobre las tablas como un fantasma translúcido[reference:0]. El público enloquecía. El efecto fue tan popular que se exportó a América, Canadá y Australia, y visitó la realeza europea.</p>
+            <p>En realidad, la idea había sido desarrollada por <strong>Henry Dircks</strong>, que la patentó, pero Pepper la hizo famosa y se quedó con el nombre. Hay indicios de que una técnica similar ya se conocía desde el siglo XVI, cuando el erudito <strong>Giovanni Battista della Porta</strong> describió cómo usar espejos y cristales para crear apariciones[reference:1].</p>
+            <div class="note">
+                <strong>Curiosidad:</strong> el Fantasma de Pepper sigue usándose hoy en día. La atracción "Haunted Mansion" de Disneylandia lo utiliza para hacer aparecer fantasmas bailando en el salón. Y la pirámide holográfica es su descendiente directa: en lugar de un cristal plano, usamos cuatro caras que reflejan cuatro vistas del mismo objeto.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">7</span>
+            <strong>De la magia a la tecnología</strong>
+            <p>El Fantasma de Pepper nació en el mundo del espectáculo y la magia. Los ilusionistas del siglo XIX lo usaban para hacer aparecer y desaparecer personas, para crear "apariciones espiritistas" y para asombrar al público. Era un efecto "mágico" que en realidad era <strong>óptica pura</strong>.</p>
+            <p>En el siglo XX y XXI, la técnica se ha refinado y digitalizado. Hoy se usa en:</p>
+            <ul>
+                <li><strong>Parques temáticos:</strong> fantasmas, duendes y efectos especiales en atracciones.</li>
+                <li><strong>Conciertos:</strong> artistas fallecidos "resucitan" en el escenario como hologramas (por ejemplo, el famoso caso de Tupac en Coachella 2012).</li>
+                <li><strong>Teatro y ópera:</strong> para crear escenas fantásticas.</li>
+                <li><strong>Museos:</strong> para mostrar objetos o personajes históricos.</li>
+                <li><strong>Publicidad y escaparates:</strong> para llamar la atención.</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>Reflexión:</strong> la frontera entre magia y ciencia es a menudo una cuestión de conocimiento. Lo que para el público del siglo XIX era un fenómeno sobrenatural, para un físico es una consecuencia de la ley de la reflexión. La pirámide holográfica es un recordatorio de que entender la ciencia no le quita magia al mundo: le da una magia más profunda.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">8</span>
+            <strong>Aplicaciones y usos actuales</strong>
+            <p>La pirámide holográfica y tecnologías similares (como las pantallas "Cheoptics 360" o los visualizadores de reflexión) se usan en múltiples campos:</p>
+            <div class="mini-card azul">
+                <h4>📢 Publicidad y escaparatismo</h4>
+                <p>Empresas y centros comerciales usan pirámides holográficas grandes para mostrar productos en 3D. Capta mucho más la atención que una pantalla plana.</p>
+            </div>
+            <div class="mini-card verde">
+                <h4>🏥 Formación y medicina</h4>
+                <p>Se han desarrollado dispositivos de visualización 3D para formación en enfermería, prevención de riesgos laborales y estudios ergonómicos. Permiten ver procedimientos y posturas desde cualquier ángulo[reference:2].</p>
+            </div>
+            <div class="mini-card naranja">
+                <h4>🏛️ Museos y patrimonio</h4>
+                <p>Sistemas interactivos que muestran piezas arqueológicas o modelos históricos en 3D, permitiendo al visitante verlos desde múltiples perspectivas[reference:3].</p>
+            </div>
+            <div class="mini-card rojo">
+                <h4>🎓 Educación</h4>
+                <p>Es una herramienta didáctica excelente para enseñar geometría, óptica, percepción visual y hasta programación (creando los vídeos). También se ha usado para mejorar la inteligencia espacial en estudiantes de ingeniería[reference:4].</p>
+            </div>
+            <div class="mini-card morado">
+                <h4>🕺 Entretenimiento y eventos</h4>
+                <p>Conciertos, ferias, presentaciones de productos, bodas... El efecto "wow" está garantizado.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN MATERIALES Y PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y procedimiento experimental</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Materiales</strong>
+            <ul>
+                <li>Lámina de <strong>acetato transparente</strong>, <strong>metacrilato</strong> fino o la tapa de una <strong>caja de CD/DVD</strong>.</li>
+                <li><strong>Plantilla de papel</strong> con la forma de los cuatro trapecios.</li>
+                <li><strong>Rotulador permanente</strong> y <strong>regla</strong>.</li>
+                <li><strong>Tijeras o cúter</strong> (con cuidado).</li>
+                <li><strong>Cinta adhesiva transparente</strong> o <strong>pegamento</strong>.</li>
+                <li>Un <strong>móvil o tablet</strong> con un <strong>vídeo de holograma</strong> (los hay en YouTube buscando "holograma 3D para móvil").</li>
+                <li>Una <strong>habitación oscura</strong>.</li>
+            </ul>
+            <div class="danger">
+                <strong>⚠️ Seguridad:</strong> el cúter y las tijeras cortan. Corta siempre sobre una superficie protegida y en dirección alejada de los dedos. Los bordes del plástico pueden ser afilados: lijalos ligeramente si es necesario. No mires directamente a la pantalla del móvil a oscuras durante mucho tiempo: fatiga la vista.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Construcción de la pirámide</strong>
+            <ol>
+                <li>Dibuja en el papel un trapecio con las siguientes medidas (para un móvil típico):
+                    <ul>
+                        <li>Base mayor (abajo): <strong>6 cm</strong>.</li>
+                        <li>Base menor (arriba): <strong>1 cm</strong>.</li>
+                        <li>Altura: <strong>4 cm</strong>.</li>
+                    </ul>
+                </li>
+                <li>Recorta el trapecio de papel. Es tu <strong>plantilla</strong>.</li>
+                <li>Coloca la plantilla sobre el plástico transparente y dibuja con el rotulador <strong>cuatro trapecios idénticos</strong>.</li>
+                <li>Recorta los cuatro trapecios con tijeras o cúter.</li>
+                <li>Une los cuatro trapecios por sus bordes laterales con cinta adhesiva, formando una <strong>pirámide truncada</strong> (sin la punta).</li>
+                <li>Asegúrate de que las bases mayores queden abajo y las menores arriba. La pirámide debe quedar "abierta" por arriba y por abajo.</li>
+            </ol>
+            <div class="note">
+                <strong>Truco:</strong> si usas una caja de CD, el plástico ya tiene una cara brillante y otra mate. La cara brillante refleja mejor. Si es posible, orienta las caras brillantes hacia el interior de la pirámide.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Montaje y prueba</strong>
+            <ol>
+                <li>Busca en YouTube un vídeo de "holograma 3D para móvil". Estos vídeos muestran <strong>cuatro imágenes idénticas</strong> del objeto, dispuestas en cruz, con el centro en negro (para que no haya luz parásita).</li>
+                <li>Reproduce el vídeo en el móvil o la tablet. Sube el <strong>brillo al máximo</strong>.</li>
+                <li>Coloca la pirámide sobre la pantalla, con la <strong>base menor hacia arriba</strong>, centrada sobre el grupo de cuatro imágenes.</li>
+                <li>Apaga las luces de la habitación. Espera unos segundos a que tus ojos se adapten.</li>
+                <li>Observa el interior de la pirámide: aparecerá la imagen flotante. Muévete alrededor para verla desde distintos ángulos.</li>
+                <li>Si la imagen no se ve bien, ajusta la posición de la pirámide o prueba con otro vídeo.</li>
+            </ol>
+            <div class="highlight-box">
+                <strong>Esquema:</strong><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ Pirámide truncada ]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑<br>
+                &nbsp;&nbsp;&nbsp;[ Imagen flotante ] ← convergencia de las 4 reflexiones<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+                &nbsp;&nbsp;[ Móvil con 4 imágenes en cruz ]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Variantes para investigar</strong>
+            <ul>
+                <li><strong>Cambiar el tamaño de la pirámide:</strong> ¿qué pasa si la haces más grande o más pequeña? ¿Mejora o empeora la imagen?</li>
+                <li><strong>Probar con distintos vídeos:</strong> algunos objetos se ven mejor que otros. Prueba con figuras geométricas, personajes, planetas...</li>
+                <li><strong>Usar una tablet:</strong> la imagen será más grande, pero necesitarás una pirámide proporcionalmente mayor.</li>
+                <li><strong>Probar con luz ambiental:</strong> ¿se ve mejor a oscuras o con luz tenue?</li>
+                <li><strong>Construir la pirámide con otros materiales:</strong> vidrio, metacrilato grueso, etc. ¿Cambia la calidad?</li>
+                <li><strong>Diseñar tu propio vídeo:</strong> con un editor de vídeo, puedes crear tu propia animación de cuatro vistas.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>El papel del ángulo de 45°</strong>
+            <p>¿Por qué las caras deben estar a 45°? La razón es geométrica. La luz que sale de la pantalla viaja horizontalmente (o casi). Para que se refleje hacia el ojo del observador, que está mirando desde arriba, el ángulo de incidencia y el de reflexión deben ser de 45° respecto a la normal de la cara. Si la cara estuviera menos inclinada, la luz saldría hacia otro lado; si estuviera más inclinada, el ojo no la captaría.</p>
+            <div class="formula-box">
+                \[ \theta_i = \theta_r = 45° \]
+            </div>
+            <p>Por eso la pirámide funciona: su geometría está optimizada para dirigir la luz reflejada justo hacia donde está el observador.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has demostrado?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>La pirámide holográfica es una ilusión óptica basada en la reflexión de la luz, no un holograma real.</strong></p>
+            <p>Cuatro imágenes planas en la pantalla se reflejan en cuatro caras inclinadas 45° y convergen en el centro de la pirámide. Tu cerebro fusiona esas cuatro vistas y las interpreta como un objeto 3D flotante.</p>
+        </div>
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>La <strong>ley de la reflexión</strong> (\( \theta_i = \theta_r \)) explica por qué la luz llega a tus ojos desde el centro de la pirámide.</li>
+            <li>La <strong>geometría</strong> (trapecios a 45°) es crítica para que la ilusión funcione.</li>
+            <li>El efecto es un descendiente directo del <strong>Fantasma de Pepper</strong> (1862), una técnica de ilusionismo del siglo XIX.</li>
+            <li>La técnica se usa hoy en <strong>publicidad, museos, medicina, educación y entretenimiento</strong>.</li>
+            <li>Un holograma real y una pirámide holográfica <strong>no son lo mismo</strong>: el primero usa interferencia de luz coherente; la segunda, reflexión de imágenes planas.</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que en el centro de la pirámide hay un objeto real o una proyección láser. No hay nada físico ahí: solo luz reflejada. Si metes la mano, la atraviesas. La imagen no existe en el espacio; existe en tu cerebro.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO la pirámide holográfica</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Ley de la reflexión</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un rayo de luz sale de la pantalla del móvil y llega a una de las caras de la pirámide formando un ángulo de 45° con la normal a esa cara. ¿Con qué ángulo se refleja? ¿Hacia dónde va el rayo reflejado?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Ley de la reflexión:</strong> \( \theta_i = \theta_r \).</div>
+                    <div class="paso"><strong>Paso 2 — Sustituimos:</strong> si \( \theta_i = 45° \), entonces \( \theta_r = 45° \).</div>
+                    <div class="paso"><strong>Paso 3 — Dirección:</strong> como la cara está inclinada 45° respecto a la horizontal, un rayo que llega horizontalmente se refleja verticalmente hacia arriba. Por eso el observador, mirando desde arriba, ve la luz reflejada.</div>
+                    <div class="paso"><strong>Resultado:</strong> el rayo se refleja a 45° y sale hacia el ojo del observador. Esa es la clave de la ilusión.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>¿Por qué se necesitan cuatro imágenes?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El vídeo de la pirámide holográfica muestra cuatro imágenes idénticas del objeto, dispuestas en cruz. ¿Por qué no funciona con una sola imagen? ¿Qué pasaría si el vídeo tuviera solo una imagen central?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Qué hace cada cara?</strong> Cada cara de la pirámide refleja la imagen que tiene justo debajo. Si solo hubiera una imagen, solo una cara la reflejaría, y el efecto sería incompleto: verías la imagen desde un solo ángulo.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué aportan las cuatro imágenes?</strong> Cada una de las cuatro imágenes está orientada hacia una cara distinta. Al reflejarse, las cuatro convergen en el centro. Tu cerebro recibe cuatro vistas del objeto desde ángulos ligeramente diferentes, lo que le permite reconstruir la tridimensionalidad.</div>
+                    <div class="paso"><strong>Paso 3 — Conclusión:</strong> con una sola imagen, no habría convergencia ni efecto 3D. Se necesitan las cuatro vistas para que el cerebro "componga" el objeto flotante. Es un truco de percepción: cuatro vistas planas → una imagen 3D.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>¿Por qué la pirámide debe estar truncada?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La pirámide holográfica no tiene vértice: está truncada (cortada por arriba). ¿Qué pasaría si tuviera un vértice puntiagudo? ¿Por qué el diseño truncado es mejor?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Función de la abertura superior:</strong> la abertura permite que la luz reflejada de las cuatro caras salga hacia arriba, donde está el ojo del observador. Si la pirámide tuviera vértice, la luz quedaría atrapada dentro o se reflejaría de forma caótica.</div>
+                    <div class="paso"><strong>Paso 2 — Geometría:</strong> una pirámide truncada tiene caras trapezoidales, que reflejan la luz de forma ordenada. Un vértice añadiría superficies curvas o ángulos que distorsionarían la imagen.</div>
+                    <div class="paso"><strong>Paso 3 — Conclusión:</strong> el truncamiento es esencial para que la luz salga y para que las cuatro reflexiones converjan limpiamente en el centro. Además, facilita la construcción con cuatro trapecios idénticos.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>El Fantasma de Pepper y la pirámide</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica en qué se parecen el Fantasma de Pepper (1862) y la pirámide holográfica actual. ¿Qué principio óptico comparten? ¿En qué se diferencian?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Parecidos:</strong> ambos usan una <strong>superficie semitransparente inclinada</strong> para reflejar la luz de un objeto o imagen y hacer que aparezca "flotando" en otro lugar. En ambos casos, el observador ve algo que no está físicamente donde parece estar.</div>
+                    <div class="paso"><strong>Paso 2 — Diferencias:</strong></div>
+                    <ul>
+                        <li>Pepper usaba <strong>una sola lámina de vidrio</strong> y un actor real; la pirámide usa <strong>cuatro caras</strong> y una pantalla digital.</li>
+                        <li>Pepper creaba una imagen <strong>bidimensional</strong> (aunque con sensación de profundidad); la pirámide crea una imagen que se ve desde <strong>360°</strong>.</li>
+                        <li>Pepper era <strong>analógico</strong>; la pirámide es <strong>digital</strong>.</li>
+                    </ul>
+                    <div class="paso"><strong>Paso 3 — Principio común:</strong> la <strong>reflexión de la luz</strong> en superficies inclinadas. La ley de la reflexión es la misma en 1862 y en 2024.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la pirámide holográfica es una evolución tecnológica del Fantasma de Pepper, pero el fundamento físico no ha cambiado.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>¿Es un holograma real? Diferencia técnica</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un compañero dice: "La pirámide holográfica es un holograma porque se ve en 3D". ¿Es correcta esa afirmación? Explica la diferencia entre un holograma real y una ilusión tipo pirámide.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Qué es un holograma real?</strong> Es una imagen tridimensional creada por <strong>interferencia de haces de luz coherente</strong> (normalmente de un láser) grabada en una placa fotosensible. Al iluminarla, reproduce la onda de luz original, con paralaje completo (vertical y horizontal).</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué hace la pirámide?</strong> Solo refleja cuatro imágenes planas en caras inclinadas. No hay interferencia, no hay láser, no hay grabación de fase. La sensación de 3D es una interpretación del cerebro.</div>
+                    <div class="paso"><strong>Paso 3 — Conclusión:</strong> la afirmación es <strong>incorrecta</strong>. La pirámide produce una <strong>ilusión óptica</strong>, no un holograma. Por eso se llama "pirámide holográfica" entre comillas: es un nombre comercial, no científico.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>Aplicación en formación médica</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Se ha desarrollado un dispositivo de pirámide holográfica para formar a personal de enfermería en la manipulación de pacientes. ¿Qué ventajas tiene esta tecnología frente a un vídeo normal o un maniquí?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Ventajas frente a un vídeo:</strong> un vídeo normal es plano. La pirámide permite ver la escena desde <strong>cualquier ángulo</strong>, como si estuvieras presente. Eso ayuda a comprender mejor las posturas y los movimientos.</div>
+                    <div class="paso"><strong>Paso 2 — Ventajas frente a un maniquí:</strong> un maniquí es estático y solo se puede usar una vez. La pirámide puede reproducir <strong>múltiples escenarios</strong>, repetir el procedimiento, mostrar diferentes pacientes virtuales, etc.</div>
+                    <div class="paso"><strong>Paso 3 — Conclusión:</strong> la pirámide holográfica combina la <strong>realidad visual</strong> de un maniquí con la <strong>flexibilidad</strong> de un vídeo. Es una herramienta de formación muy potente para prevención de riesgos laborales y ergonomía[reference:5].</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>La magia y la ciencia: el ilusionismo óptico</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Los magos del siglo XIX usaban el Fantasma de Pepper para hacer aparecer "espíritus" en el escenario. Hoy, la pirámide holográfica se usa en conciertos para "resucitar" a artistas fallecidos. ¿Qué relación existe entre magia, ilusionismo y ciencia en estos casos? ¿Es ético usar estas técnicas para engañar al público?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — La magia como ciencia oculta:</strong> los magos usaban principios ópticos (reflexión, espejos, luz) que el público no conocía. Lo que parecía sobrenatural era física aplicada. La ciencia "desenmascara" la magia, pero también la hace posible.</div>
+                    <div class="paso"><strong>Paso 2 — El caso de los conciertos:</strong> el "holograma" de Tupac en Coachella (2012) usó una técnica similar al Fantasma de Pepper, no un holograma real. El público lo sabía y lo aceptó como un homenaje, no como un engaño.</div>
+                    <div class="paso"><strong>Paso 3 — Ética:</strong> el uso es ético si <strong>no se engaña deliberadamente</strong> sobre la naturaleza del efecto. En espectáculos y publicidad, se presenta como una ilusión. En contextos educativos, se explica el fundamento. El problema surgiría si se usara para hacer creer que algo sobrenatural está ocurriendo (por ejemplo, en un contexto religioso o de estafa).</div>
+                    <div class="paso"><strong>Conclusión:</strong> la ciencia y la magia no son enemigas. La magia usa la ciencia para crear asombro; la ciencia usa la magia para enseñar. La clave está en la <strong>transparencia</strong> sobre cómo funciona.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> La pirámide holográfica es una lección magistral de óptica y percepción. Las tres ideas clave son: (1) la <strong>ley de la reflexión</strong> explica cómo la luz llega a tus ojos desde el centro de la pirámide; (2) la <strong>geometría</strong> (trapecios a 45°) y las <strong>cuatro imágenes</strong> son imprescindibles para que la ilusión funcione; (3) <strong>no es un holograma real</strong>, sino una ilusión óptica descendiente del Fantasma de Pepper. Entender esto te permite disfrutar del efecto sin dejar de apreciar la ciencia que hay detrás.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Cuatro trapecios, un móvil y un vídeo bien diseñado: la magia de la óptica al alcance de tu mano.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>

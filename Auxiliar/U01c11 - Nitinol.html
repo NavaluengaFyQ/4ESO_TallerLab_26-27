@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c11 - Nitinol: el metal con memoria</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .seguridad { background: #fff5f5; border-color: #e53e3e; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .seguridad h2 { color: #c53030; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+
+        /* Tabla de materiales */
+        .tabla-materiales {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.92em;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+        }
+        .tabla-materiales thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .tabla-materiales th {
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        .tabla-materiales td {
+            padding: 9px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        .tabla-materiales tbody tr:nth-child(even) { background: #f9fafc; }
+        .tabla-materiales tbody tr:hover { background: #ebf4ff; }
+
+        /* Bloque destacado de "aplicaciones" */
+        .aplicaciones {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .app-card {
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            border-left: 4px solid #667eea;
+            transition: transform 0.2s;
+        }
+        .app-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+        .app-card .app-icon {
+            font-size: 1.6em;
+            margin-bottom: 8px;
+            color: #667eea;
+        }
+        .app-card h4 {
+            margin: 0 0 6px 0;
+            color: #2d3748;
+            font-size: 1em;
+        }
+        .app-card p {
+            margin: 0;
+            font-size: 0.88em;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+
+        /* Bloque de fases cristalinas */
+        .fases-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .fase-card {
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+            color: white;
+        }
+        .fase-card.austenita {
+            background: linear-gradient(135deg, #e53e3e, #c53030);
+        }
+        .fase-card.martensita {
+            background: linear-gradient(135deg, #3182ce, #2b6cb0);
+        }
+        .fase-card h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.2em;
+        }
+        .fase-card .estructura {
+            font-family: 'Courier New', monospace;
+            background: rgba(255,255,255,0.2);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        .fase-card p {
+            margin: 0;
+            font-size: 0.9em;
+            line-height: 1.5;
+            color: rgba(255,255,255,0.95);
+        }
+
+        /* Bloque de aviso grande */
+        .aviso-grande {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #fff5f5;
+            border: 2px solid #fc8181;
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin: 15px 0;
+        }
+        .aviso-grande .icono {
+            font-size: 2.2em;
+            color: #c53030;
+        }
+        .aviso-grande .texto {
+            color: #742a2a;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        .aviso-grande .texto strong { color: #9b2c2c; }
+
+        /* Bloque destacado de "truco" */
+        .truco {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 6px solid #d97706;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 18px 0;
+            color: #78350f;
+        }
+        .truco strong { color: #92400e; }
+
+        /* Estilos para el bloque desplegable */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c11.- </span>
+                <span class="texto">Nitinol: el metal con memoria</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 Enunciado</h2>
+        <p>Imagina un metal que, después de haber sido doblado, retorcido o estirado, <strong>recupera su forma original</strong> simplemente al calentarlo. Ese metal existe y se llama <strong>Nitinol</strong>, una aleación de níquel y titanio con propiedades asombrosas: el <strong>efecto memoria de forma</strong> y la <strong>superelasticidad</strong>.</p>
+        <div class="formula-box">\[ \text{Deformación} \;\xrightarrow{\text{calor}}\; \text{Forma original} \]</div>
+        <p>En esta práctica vamos a comprobar experimentalmente este fenómeno con un alambre de Nitinol. Lo deformaremos a temperatura ambiente, lo sumergiremos en agua caliente y observaremos cómo, ante nuestros ojos, el metal "recuerda" su forma. Además, descubriremos por qué ocurre a nivel atómico y exploraremos las numerosas aplicaciones de este material "inteligente".</p>
+    </div>
+
+    <!-- OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 Objetivo</h2>
+        <ul>
+            <li>Observar experimentalmente el <strong>efecto de memoria de forma</strong> en un alambre de Nitinol.</li>
+            <li>Comprender el origen microscópico del fenómeno: la <strong>transformación reversible entre las fases cristalinas austenita y martensita</strong>.</li>
+            <li>Diferenciar entre <strong>efecto memoria de forma</strong> (inducido por temperatura) y <strong>superelasticidad</strong> (inducido por tensión mecánica).</li>
+            <li>Conocer las aplicaciones más relevantes del Nitinol en medicina, ingeniería y tecnología aeroespacial.</li>
+            <li>Reflexionar sobre cómo la estructura atómica de un material determina sus propiedades macroscópicas.</li>
+        </ul>
+    </div>
+
+    <!-- SEGURIDAD -->
+    <div class="section seguridad">
+        <h2>⚠️ Seguridad en el laboratorio</h2>
+        <div class="aviso-grande">
+            <div class="icono"><i class="fas fa-exclamation-triangle"></i></div>
+            <div class="texto">
+                <strong>PRECAUCIONES:</strong> El agua caliente puede provocar quemaduras. Usa pinzas o guantes para manipular el alambre caliente. No calientes el alambre de Nitinol por encima de <strong>90 °C</strong> con una llama directa, ya que puede dañarse de forma irreversible. No ingieras ni muerdas el alambre. Lávate las manos después de la práctica (el níquel puede causar alergias en pieles sensibles).
+            </div>
+        </div>
+    </div>
+
+    <!-- PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>🧰 Materiales y procedimiento</h2>
+
+        <h3 style="color:#276749; margin-top:0;">Materiales necesarios</h3>
+        <table class="tabla-materiales">
+            <thead>
+                <tr>
+                    <th>Material</th>
+                    <th>Detalle / Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Alambre de Nitinol recto</td>
+                    <td>1 (diámetro ~0,5 mm, longitud 15-20 cm, temperatura de activación ~50 °C)</td>
+                </tr>
+                <tr>
+                    <td>Alambre de Nitinol en espiral (muelle)</td>
+                    <td>1 (temperatura de activación ~37 °C, se activa con el calor de la mano)</td>
+                </tr>
+                <tr>
+                    <td>Vaso de precipitados de 250 cm³</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Agua caliente</td>
+                    <td>Aprox. 60-70 °C (no hirviendo)</td>
+                </tr>
+                <tr>
+                    <td>Recipiente con agua a temperatura ambiente</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Pinzas o guantes</td>
+                    <td>1 par</td>
+                </tr>
+                <tr>
+                    <td>Secador de pelo (opcional)</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Lápiz o varilla cilíndrica</td>
+                    <td>1 (para enrollar el alambre)</td>
+                </tr>
+                <tr>
+                    <td>Clip de metal común (para comparación)</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3 style="color:#276749;">Procedimiento experimental</h3>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Deformación en frío</strong>
+            <p>Toma el alambre de Nitinol recto (a temperatura ambiente, por debajo de su temperatura de transición) y <strong>dóblalo</strong> dándole una forma arbitraria: una espiral alrededor de un lápiz, la letra "S", un nudo, etc. Observa que el alambre se deforma con relativa facilidad, como si fuera un alambre de cobre o estaño.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Activación por calor</strong>
+            <p>Sumerge el alambre deformado en el vaso con <strong>agua caliente</strong> (60-70 °C). Sujétalo con las pinzas. Observa cómo, en cuestión de segundos, el alambre <strong>recupera su forma recta original</strong>. ¡Ha "recordado" su forma!</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Enfriamiento y repetición</strong>
+            <p>Saca el alambre del agua caliente y sumérgelo en agua a temperatura ambiente. Vuelve a doblarlo. Verás que puedes deformarlo de nuevo. Calienta otra vez y comprueba que recupera la forma recta. El fenómeno es <strong>reversible</strong> y puede repetirse muchas veces.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>El muelle que se contrae</strong>
+            <p>Toma el alambre de Nitinol en espiral (muelle) y estíralo suavemente. A continuación, sostenlo con la mano. El calor de tu cuerpo (~37 °C) es suficiente para activarlo: las espiras se <strong>juntan</strong> y el muelle se contrae visiblemente. Al soltarlo, se enfría y vuelve a expandirse.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Comparación con un clip común</strong>
+            <p>Repite el paso 1 con un clip de metal común (acero). Deformado y sumérgelo en agua caliente. El clip <strong>no recuperará su forma</strong>: permanecerá doblado. Esto demuestra que la memoria de forma es una propiedad específica del Nitinol y de otras aleaciones con memoria, no de todos los metales.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>Observación y registro</strong>
+            <p>Anota en tu cuaderno: la forma inicial del alambre, la forma deformada, la temperatura aproximada del agua, el tiempo que tarda en recuperar la forma y cualquier otra observación (sonido, cambio de color, etc.).</p>
+        </div>
+
+        <!-- Truco del profesor -->
+        <div class="truco">
+            <i class="fas fa-magic" style="margin-right: 8px;"></i>
+            <strong>Consejo didáctico:</strong> Para aumentar el factor sorpresa, entrega a los alumnos un alambre de Nitinol ya deformado (por ejemplo, en forma de espiral) y pídeles que predigan qué ocurrirá al sumergirlo en agua caliente. Muchos esperarán que simplemente se caliente, no que recupere una forma "perdida". También puedes pedirles que investiguen cómo se "programa" la forma que el Nitinol debe recordar: calentándolo a ~500 °C mientras se mantiene sujeto en la forma deseada.
+        </div>
+    </div>
+
+    <!-- RESULTADO Y EXPLICACIÓN -->
+    <div class="section resultado">
+        <h2>📊 ¿Por qué ocurre? Explicación del fenómeno</h2>
+
+        <p>La clave está en la <strong>estructura cristalina</strong> del Nitinol. Esta aleación puede existir en dos fases cristalinas diferentes según la temperatura:</p>
+
+        <div class="fases-grid">
+            <div class="fase-card austenita">
+                <h3>🔥 Austenita</h3>
+                <div class="estructura">Cúbica simple (B2)</div>
+                <p>Fase estable a <strong>alta temperatura</strong>. Los átomos están ordenados de forma rígida y simétrica. El material es fuerte y recupera su forma.</p>
+            </div>
+            <div class="fase-card martensita">
+                <h3>❄️ Martensita</h3>
+                <div class="estructura">Monoclínica (B19')</div>
+                <p>Fase estable a <strong>baja temperatura</strong>. Los átomos se reorganizan en una estructura menos simétrica. El material es más blando y fácil de deformar.</p>
+            </div>
+        </div>
+
+        <p>A temperatura ambiente (por debajo de la temperatura de transición), el Nitinol se encuentra en fase <strong>martensita</strong>. En esta fase, los planos atómicos pueden desplazarse fácilmente (deformación por maclaje), lo que permite doblar el alambre sin que se rompa. Al calentarlo por encima de la temperatura de transición, la estructura cristalina cambia a <strong>austenita</strong>, y los átomos vuelven a su posición original, recuperando la forma macroscópica.</p>
+
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            \[ \text{Martensita (fría, deformable)} \;\xrightarrow{\text{calor}}\; \text{Austenita (caliente, rígida)} \]
+        </div>
+
+        <p>Este cambio de fase es <strong>reversible</strong> y no implica difusión de átomos (es una transformación martensítica). Por eso el Nitinol puede "recordar" su forma una y otra vez.</p>
+
+        <div class="note">
+            <strong>Nota:</strong> Existe un segundo fenómeno llamado <strong>superelasticidad</strong>. Si el Nitinol está en fase austenita (a temperatura corporal, por ejemplo), al aplicarle una tensión mecánica se transforma en martensita inducida por tensión. Al retirar la tensión, vuelve a austenita y recupera su forma. Esto permite deformaciones enormes (hasta un 8-10 %) sin daño permanente, algo impensable en metales convencionales.
+        </div>
+
+        <h3 style="color:#2b6cb0; margin-top: 25px;">Aplicaciones del Nitinol</h3>
+        <p>Las propiedades únicas del Nitinol lo han convertido en un material estratégico en multitud de campos:</p>
+
+        <div class="aplicaciones">
+            <div class="app-card">
+                <div class="app-icon">🩺</div>
+                <h4>Stents vasculares</h4>
+                <p>Se introducen comprimidos en un catéter y, al llegar a la arteria, se expanden con la temperatura corporal, abriendo la vena obstruida.</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">🦷</div>
+                <h4>Ortodoncia</h4>
+                <p>Los alambres de las brackets aplican una fuerza constante gracias a la superelasticidad, corrigiendo los dientes con menos ajustes.</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">🛩️</div>
+                <h4>Aeronáutica</h4>
+                <p>Conectores hidráulicos que se sellan al calentarse y sistemas de despliegue de paneles solares en satélites.</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">🤖</div>
+                <h4>Robótica y actuadores</h4>
+                <p>Músculos artificiales y microactuadores que se contraen al aplicar corriente eléctrica (calentamiento por efecto Joule).</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">🏗️</div>
+                <h4>Ingeniería civil</h4>
+                <p>Dispositivos de disipación de energía en puentes y edificios para resistir terremotos, aprovechando su superelasticidad.</p>
+            </div>
+            <div class="app-card">
+                <div class="app-icon">🔬</div>
+                <h4>Investigación y espacio</h4>
+                <p>Antenas que se despliegan automáticamente en el espacio y microválvulas para laboratorios en chip.</p>
+            </div>
+        </div>
+
+        <div class="note" style="margin-top: 20px;">
+            <strong>¿Sabías que...?</strong> El Nitinol fue descubierto por casualidad en 1959 en el <em>Naval Ordnance Laboratory</em> (EE. UU.) por William J. Buehler y Frederick Wang. Su nombre proviene de <strong>Ni</strong>quel, <strong>Ti</strong>tanio y <strong>NOL</strong> (Naval Ordnance Laboratory). Se estaba investigando para la punta de misiles cuando se observó que una tira doblada recuperaba su forma al calentarla.
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- BLOQUE DESPLEGABLE CON EJERCICIOS RESUELTOS               -->
+    <!-- ========================================================= -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO Nitinol: el metal con memoria</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Deformación recuperable del Nitinol</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un alambre de Nitinol tiene una longitud inicial de 20,0 cm. Se estira hasta 21,8 cm en fase martensita. Al calentarlo, recupera su longitud original. Calcula la deformación unitaria (<em>strain</em>) que ha sufrido el alambre. ¿Es esta deformación mayor o menor que la de un acero convencional, cuyo límite elástico es de aproximadamente 0,2 %?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> La deformación unitaria se define como \(\varepsilon = \frac{\Delta L}{L_0}\).</div>
+                    <div class="paso"><strong>Paso 2:</strong> \(\Delta L = 21{,}8 - 20{,}0 = 1{,}8\ \text{cm}\).</div>
+                    <div class="paso"><strong>Paso 3:</strong> \(\varepsilon = \frac{1{,}8}{20{,}0} = 0{,}09 = 9\,\%\).</div>
+                    <div class="paso"><strong>Paso 4:</strong> Comparación: el acero convencional solo recupera deformaciones elásticas de hasta ~0,2 %. El Nitinol recupera un 9 %, es decir, <strong>45 veces más</strong>.</div>
+                    <div class="paso"><strong>Resultado:</strong> La deformación recuperable del Nitinol (9 %) es muy superior a la del acero (0,2 %). Esto se debe a la transformación martensítica reversible.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Fuerza recuperada por un muelle de Nitinol</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un muelle de Nitinol tiene una constante elástica de \(k = 12\ \text{N/m}\). Se estira 5,0 cm en fase martensita. Al calentarlo, recupera su longitud original ejerciendo una fuerza. Calcula la fuerza que ejerce el muelle al recuperar su forma (suponiendo que la recuperación es completamente elástica en la fase austenita).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> La fuerza elástica de un muelle viene dada por la ley de Hooke: \(F = k \cdot \Delta x\).</div>
+                    <div class="paso"><strong>Paso 2:</strong> Convertimos la deformación a unidades SI: \(\Delta x = 5{,}0\ \text{cm} = 0{,}050\ \text{m}\).</div>
+                    <div class="paso"><strong>Paso 3:</strong> \(F = 12\ \text{N/m} \cdot 0{,}050\ \text{m} = 0{,}60\ \text{N}\).</div>
+                    <div class="paso"><strong>Resultado:</strong> El muelle ejerce una fuerza de \(0{,}60\ \text{N}\) al recuperar su forma. Esta fuerza, aunque pequeña, es constante durante gran parte de la recuperación, lo que es muy útil en actuadores.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>Diferencia entre efecto memoria y superelasticidad</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica con tus propias palabras la diferencia entre el <strong>efecto memoria de forma</strong> y la <strong>superelasticidad</strong> en el Nitinol. Indica en qué situación se manifiesta cada uno y una aplicación práctica de cada fenómeno.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1: Efecto memoria de forma.</strong> Se manifiesta cuando el Nitinol está en fase martensita (frío), se deforma y luego se calienta por encima de su temperatura de transición. La deformación se "recuerda" y se recupera al calentar.</div>
+                    <div class="paso"><strong>Aplicación:</strong> Stents vasculares que se despliegan con el calor corporal; conectores hidráulicos que se sellan al calentarse.</div>
+                    <div class="paso"><strong>Paso 2: Superelasticidad.</strong> Se manifiesta cuando el Nitinol está en fase austenita (caliente, p. ej. a temperatura corporal) y se le aplica una tensión mecánica. La tensión induce la transformación a martensita, que desaparece al retirar la carga, recuperando la forma original.</div>
+                    <div class="paso"><strong>Aplicación:</strong> Alambres de ortodoncia que ejercen fuerza constante; dispositivos antivibración en edificios.</div>
+                    <div class="paso"><strong>Resultado:</strong> El efecto memoria requiere un cambio de temperatura; la superelasticidad requiere una carga mecánica. Ambos se basan en la misma transformación cristalina reversible.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>Temperatura de transición y composición</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La temperatura de transición del Nitinol depende de su composición. Un Nitinol con 55 % de níquel y 45 % de titanio tiene una temperatura de transición de ~30 °C. Otro con 56 % de níquel la tiene de ~60 °C. ¿Por qué crees que pequeñas variaciones en la composición afectan tanto a la temperatura de transición? ¿Qué implicación tiene esto para las aplicaciones médicas (temperatura corporal ~37 °C)?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> La temperatura de transición es muy sensible a la composición atómica. Un pequeño aumento en el porcentaje de níquel (que tiene un radio atómico ligeramente distinto al titanio) altera las energías de enlace y, por tanto, la temperatura a la que la fase austenita se vuelve estable.</div>
+                    <div class="paso"><strong>Paso 2:</strong> Para aplicaciones médicas, interesa que la temperatura de transición esté por debajo de 37 °C, de modo que el dispositivo esté en fase austenita (superelástico) a temperatura corporal.</div>
+                    <div class="paso"><strong>Paso 3:</strong> El Nitinol con 55 % Ni (transición ~30 °C) estaría en fase austenita a 37 °C y sería superelástico. El de 56 % Ni (transición ~60 °C) estaría en fase martensita a 37 °C y no mostraría superelasticidad.</div>
+                    <div class="paso"><strong>Resultado:</strong> La composición debe ajustarse con precisión (típicamente 54,5-56 % Ni) para que la temperatura de transición sea la adecuada para cada aplicación. Esto es un ejemplo de cómo el control a escala atómica determina el comportamiento macroscópico.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>Comparación de módulos elásticos</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El módulo de Young del Nitinol en fase austenita es de aproximadamente \(E_A \approx 75\ \text{GPa}\), mientras que en fase martensita es \(E_M \approx 30\ \text{GPa}\). Un alambre de Nitinol de 1,0 mm² de sección se somete a una tensión de 100 N. Calcula la deformación elástica en cada fase usando la ley de Hooke (\(\sigma = E \cdot \varepsilon\)). ¿En qué fase es más fácil deformarlo elásticamente?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> La tensión es \(\sigma = \frac{F}{A} = \frac{100\ \text{N}}{1{,}0 \times 10^{-6}\ \text{m}^2} = 1{,}0 \times 10^8\ \text{Pa} = 100\ \text{MPa}\).</div>
+                    <div class="paso"><strong>Paso 2:</strong> En fase austenita: \(\varepsilon_A = \frac{\sigma}{E_A} = \frac{100\ \text{MPa}}{75\ \text{GPa}} = \frac{100 \times 10^6}{75 \times 10^9} \approx 1{,}33 \times 10^{-3} = 0{,}133\,\%\).</div>
+                    <div class="paso"><strong>Paso 3:</strong> En fase martensita: \(\varepsilon_M = \frac{\sigma}{E_M} = \frac{100\ \text{MPa}}{30\ \text{GPa}} \approx 3{,}33 \times 10^{-3} = 0{,}333\,\%\).</div>
+                    <div class="paso"><strong>Resultado:</strong> El Nitinol es <strong>2,5 veces más deformable elásticamente</strong> en fase martensita que en austenita. Esto explica por qué es más fácil doblar el alambre cuando está frío (martensita).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>¿Por qué no se puede calentar el Nitinol en exceso?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En las instrucciones de la práctica se indica que no se debe calentar el Nitinol por encima de 90 °C con una llama directa. Investiga y explica qué le ocurre al material si se sobrecalienta y por qué se dice que el daño es "irreversible".</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> El Nitinol "recuerda" una forma que se le ha programado previamente mediante un tratamiento térmico a alta temperatura (~500 °C) mientras se mantiene sujeto en la forma deseada.</div>
+                    <div class="paso"><strong>Paso 2:</strong> Si se calienta el Nitinol por encima de ~90-100 °C de forma descontrolada (por ejemplo, con una llama), se pueden producir cambios en la microestructura (precipitación de fases, recocido) que modifican su temperatura de transición.</div>
+                    <div class="paso"><strong>Paso 3:</strong> El material puede perder total o parcialmente su capacidad de recuperar la forma original, o su temperatura de activación puede desplazarse a valores no deseados.</div>
+                    <div class="paso"><strong>Resultado:</strong> El sobrecalentamiento altera la estructura cristalina y las propiedades del Nitinol. El daño es irreversible porque no se puede "reprogramar" la forma original sin un nuevo tratamiento térmico controlado. Por eso se recomienda usar agua caliente (no llama) en la práctica escolar.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>El stent que se despliega solo</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un stent de Nitinol se fabrica con una forma expandida (diámetro 5 mm) y se comprime a un diámetro de 1,5 mm para introducirlo en un catéter. Al llegar a la arteria (37 °C), se despliega hasta su forma original. Calcula la deformación unitaria que sufre el stent al comprimirse. ¿Por qué el Nitinol es ideal para esta aplicación en comparación con un acero inoxidable?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> La deformación relevante es el cambio relativo en la longitud circunferencial o en el diámetro. Usamos el diámetro: \(\varepsilon = \frac{\Delta D}{D_0} = \frac{5 - 1{,}5}{5} = \frac{3{,}5}{5} = 0{,}70 = 70\,\%\).</div>
+                    <div class="paso"><strong>Paso 2:</strong> Una deformación del 70 % es enorme. Ningún metal convencional podría recuperarla elásticamente (el acero recupera ~0,2 %).</div>
+                    <div class="paso"><strong>Paso 3:</strong> El Nitinol, gracias a la transformación martensítica inducida por tensión (superelasticidad) o al efecto memoria (si se activa por temperatura), puede recuperar esa forma.</div>
+                    <div class="paso"><strong>Resultado:</strong> El Nitinol permite comprimir el stent para su inserción mínimamente invasiva y desplegarlo dentro del cuerpo, algo imposible con acero inoxidable. Esto ha revolucionado la cardiología intervencionista.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 8 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 8</span>
+                    <span>Energía disipada en un ciclo de histéresis</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La curva tensión-deformación del Nitinol superelástico presenta un ciclo de histéresis. Esto significa que parte de la energía mecánica se disipa como calor en cada ciclo. ¿Por qué esta propiedad es útil en dispositivos de disipación de energía para edificios en zonas sísmicas?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> Cuando el Nitinol se deforma y recupera, la curva de carga y la de descarga no coinciden: forman un ciclo de histéresis.</div>
+                    <div class="paso"><strong>Paso 2:</strong> El área encerrada por el ciclo representa la energía disipada como calor en cada ciclo. Cuanto mayor es el área, más energía absorbe el material.</div>
+                    <div class="paso"><strong>Paso 3:</strong> En un terremoto, las estructuras sufren ciclos de carga y descarga. Un dispositivo de Nitinol puede absorber gran parte de esa energía vibratoria, reduciendo las fuerzas que llegan a la estructura principal.</div>
+                    <div class="paso"><strong>Resultado:</strong> La alta capacidad de amortiguamiento del Nitinol (gracias a su histéresis) lo hace ideal para aisladores sísmicos y disipadores de energía en puentes y edificios.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 9 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 9</span>
+                    <span>¿Por qué el clip común no recupera su forma?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica, en términos de estructura cristalina y deformación plástica, por qué un clip de acero común doblado no recupera su forma al calentarlo, mientras que el Nitinol sí lo hace.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1:</strong> En el acero, al doblarlo, se produce una <strong>deformación plástica</strong> mediante el movimiento de dislocaciones (defectos lineales en la red cristalina).</div>
+                    <div class="paso"><strong>Paso 2:</strong> Los átomos se desplazan de forma permanente a nuevas posiciones. Al calentar, la energía térmica no es suficiente para revertir ese movimiento: los átomos no "saben" dónde estaban originalmente.</div>
+                    <div class="paso"><strong>Paso 3:</strong> En el Nitinol, la deformación en fase martensita se produce por <strong>maclaje</strong>: los planos atómicos se desplazan sin romper enlaces, y la transformación a austenita al calentar hace que los átomos vuelvan a su posición original.</div>
+                    <div class="paso"><strong>Resultado:</strong> La diferencia clave es que el acero sufre deformación plástica irreversible, mientras que el Nitinol sufre una transformación cristalina reversible. La estructura atómica determina el comportamiento macroscópico.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 10 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 10</span>
+                    <span>Diseña una aplicación original del Nitinol</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Piensa en un problema cotidiano o tecnológico que podría resolverse con las propiedades del Nitinol (efecto memoria o superelasticidad). Describe brevemente tu idea, indica qué propiedad del material usarías y qué ventajas tendría frente a otros materiales.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 (Ejemplo):</strong> <strong>Cierre automático para ventanas de invernadero.</strong> Usar un muelle de Nitinol que, al alcanzar una temperatura umbral (~25 °C), se contraiga y abra una ventana para ventilar.</div>
+                    <div class="paso"><strong>Paso 2:</strong> Propiedad utilizada: <strong>efecto memoria de forma</strong> (activación térmica).</div>
+                    <div class="paso"><strong>Paso 3:</strong> Ventajas: no necesita electricidad ni sensores; funciona de forma autónoma con la temperatura ambiente; es duradero y no requiere mantenimiento.</div>
+                    <div class="paso"><strong>Paso 4:</strong> Otras ideas posibles: juguetes que cambian de forma con el calor de la mano, sujetadores de cables que se aprietan al calentarse, sistemas de liberación de medicamentos controlados por temperatura.</div>
+                    <div class="paso"><strong>Resultado:</strong> El Nitinol permite diseñar sistemas "inteligentes" que responden al entorno sin necesidad de electrónica compleja. La clave está en elegir la temperatura de activación adecuada para cada aplicación.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Observaciones claves:</strong> El Nitinol es una aleación de níquel y titanio que presenta dos fases cristalinas: <strong>martensita</strong> (fría, deformable) y <strong>austenita</strong> (caliente, rígida). La transformación reversible entre ambas explica el <strong>efecto memoria de forma</strong> (deformar en frío, recuperar al calentar) y la <strong>superelasticidad</strong> (deformar bajo tensión en fase austenita y recuperar al retirarla). Sus aplicaciones son enormes: stents, ortodoncia, actuadores, aeroespacial, ingeniería sísmica... Un ejemplo perfecto de cómo la estructura atómica determina las propiedades macroscópicas y de cómo la ciencia de materiales puede cambiar el mundo.
+            </div>
+        </div>
+    </details>
+
+    <!-- ============================================
+         BLOQUE "ES HORA DE"
+         ============================================ -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br> Este metal es más "inteligente" de lo que parece.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- fin container -->
+</body>
+</html>

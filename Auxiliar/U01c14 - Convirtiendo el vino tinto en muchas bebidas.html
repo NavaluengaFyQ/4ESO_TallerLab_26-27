@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c14 - Convirtiendo el vino tinto en agua</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        /* ---------- SECCIONES PRINCIPALES ---------- */
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .materiales { background: #faf5ff; border-color: #9f7aea; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .analisis  { background: #fff5f5; border-color: #fc8181; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .materiales h2 { color: #553c9a; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .analisis h2 { color: #c53030; }
+        /* ---------- CAJA DE FÓRMULA ---------- */
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+            overflow-x: auto;
+        }
+        /* ---------- PASOS DEL PROCEDIMIENTO ---------- */
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        /* ---------- NOTA DESTACADA ---------- */
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        /* ---------- TABLAS ---------- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 10px 12px;
+            text-align: left;
+        }
+        th {
+            background: #edf2f7;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        tr:nth-child(even) td {
+            background: #f7fafc;
+        }
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+        .badge-redox { background: #e53e3e !important; }
+        .badge-acidobase { background: #38a169 !important; }
+        .badge-precip { background: #3182ce !important; }
+        .color-tag {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            color: white;
+        }
+        .tag-purpura { background: #805ad5; }
+        .tag-incoloro { background: #a0aec0; }
+        .tag-blanco { background: #cbd5e0; color: #2d3748; }
+        .tag-marron { background: #975a16; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA OBLIGATORIA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto" alt="Icono">
+                <span class="codigo">#U01c14.- </span>
+                <span class="texto">Convirtiendo el vino tinto en muchas bebidas</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 Enunciado</h2>
+        <p>Se prepara una disolución ácida de permanganato de potasio, de color púrpura intenso, que simula <strong>“vino tinto”</strong>. Se sirve en cinco copas que contienen pequeñas cantidades de distintas disoluciones incoloras. Según la copa, el “vino tinto” se transformará en <em>“agua”</em>, <em>“leche”</em>, <em>“batido de frambuesa”</em> o <em>“limonada gaseosa”</em>.</p>
+        <div class="formula-box">
+            <strong>Disolución A</strong> (KMnO₄ + H₂SO₄) → <span class="color-tag tag-purpura">Púrpura</span> “vino tinto”
+        </div>
+        <p>La idea es una demostración visual de reacciones <strong>redox</strong>, de <strong>precipitación</strong> y <strong>ácido-base</strong>, con cambios de color muy llamativos.</p>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 Objetivo</h2>
+        <p>Observar experimentalmente cómo una misma disolución de permanganato de potasio puede experimentar transformaciones muy distintas según el reactivo con el que se mezcle, identificando cada tipo de reacción química implicada (redox, precipitación y ácido-base) y explicando el origen de los cambios de color observados.</p>
+    </div>
+
+    <!-- SECCIÓN MATERIALES Y REACTIVOS -->
+    <div class="section materiales">
+        <h2>🧪 Materiales y reactivos</h2>
+
+        <h3>Materiales</h3>
+        <ul>
+            <li>5 copas de vino o vasos pequeños.</li>
+            <li>1 botella de vino de 750 cm³ (o un matraz, aunque la botella da más efecto).</li>
+            <li>Vasos de precipitados, probetas, pipetas o cuentagotas.</li>
+            <li>Balanza.</li>
+            <li>Agua desionizada.</li>
+            <li>Guantes y gafas de seguridad.</li>
+            <li>Opcional: bandeja para derrames, etiquetas.</li>
+        </ul>
+
+        <h3>Reactivos</h3>
+        <table>
+            <thead>
+                <tr><th>Reactivo</th><th>Fórmula</th><th>Función</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Permanganato potásico</td><td>KMnO₄</td><td>Colorante “vino tinto” y oxidante</td></tr>
+                <tr><td>Ácido sulfúrico 96%</td><td>H₂SO₄</td><td>Acidificar el medio</td></tr>
+                <tr><td>Cloruro de bario 2-hidrato</td><td>BaCl₂·2H₂O</td><td>Precipitado blanco</td></tr>
+                <tr><td>Tiosulfato sódico 5-hidrato</td><td>Na₂S₂O₃·5H₂O</td><td>Reductor (decolora)</td></tr>
+                <tr><td>Carbonato sódico anhidro</td><td>Na₂CO₃</td><td>Burbujas de CO₂</td></tr>
+                <tr><td>Agua desionizada</td><td>H₂O</td><td>Disolvente</td></tr>
+            </tbody>
+        </table>
+        <div class="note">
+            <strong>Nota:</strong> Si usas carbonato sódico decahidratado, Na₂CO₃·10H₂O, necesitas unos <strong>59 g</strong> en lugar de 22 g para obtener una disolución ~2 M. En el inventario tienes “Sodio carbonato anhidro” y “Carbonato sódico”; usa el anhidro si es posible.
+        </div>
+    </div>
+
+    <!-- SECCIÓN PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Procedimiento</h2>
+
+        <h3>Preparación de disoluciones</h3>
+
+        <div class="step">
+            <span class="step-num">A</span>
+            <strong>DISOLUCIÓN A — Disolución de KMnO₄ acidificada (“vino tinto”)</strong>
+            <p>(permanganato de potasio, KMnO₄ + ácido sulfúrico, H₂SO₄)</p>
+            <ol>
+                <li>Prepara <strong>100 cm³ de H₂SO₄ 2 M</strong>: añade <strong>unos 11 cm³ de H₂SO₄ concentrado</strong> lentamente sobre unos 80 cm³ de agua desionizada. Deja enfriar y completa hasta 100 cm³ con agua desionizada.
+                    <div class="danger">⚠️ <strong>Nunca añadas agua sobre el ácido concentrado.</strong></div>
+                </li>
+                <li>Disuelve <strong>0,4 g de KMnO₄</strong> en esos 100 cm³ de H₂SO₄ 2 M.</li>
+                <li>Completa hasta <strong>1 dm³ (1 L)</strong> con agua desionizada.</li>
+                <li>Guarda en la botella de vino etiquetada como <strong>NO BEBER</strong>. Color: púrpura intenso.</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <span class="step-num">B</span>
+            <strong>DISOLUCIÓN B — Disolución de tiosulfato de sodio ~1 M</strong>
+            <p>(tiosulfato sódico 5-hidrato, Na₂S₂O₃·5H₂O)</p>
+            <ul>
+                <li>Disuelve <strong>25 g de Na₂S₂O₃·5H₂O</strong> en agua desionizada y completa hasta <strong>100 cm³</strong>.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">C</span>
+            <strong>DISOLUCIÓN C — Disolución de cloruro de bario ~1 M</strong>
+            <p>(cloruro de bario 2-hidrato, BaCl₂·2H₂O)</p>
+            <ul>
+                <li>Disuelve <strong>24 g de BaCl₂·2H₂O</strong> en agua desionizada y completa hasta <strong>100 cm³</strong>.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">D</span>
+            <strong>DISOLUCIÓN D — Disolución de carbonato de sodio ~2 M</strong>
+            <p>(carbonato sódico anhidro, Na₂CO₃)</p>
+            <ul>
+                <li>Disuelve <strong>22 g de Na₂CO₃ anhidro</strong> en agua desionizada y completa hasta <strong>100 cm³</strong>.</li>
+                <li>Si usas decahidratado: <strong>~59 g</strong> y completar a 100 cm³.</li>
+            </ul>
+        </div>
+
+        <h3>Montaje de las copas</h3>
+        <p>Prepara las copas <strong>fuera de la vista de los alumnos</strong>. Añade:</p>
+
+        <table>
+            <thead>
+                <tr><th>Copa</th><th>Contenido añadido antes de servir</th><th>Efecto esperado</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Nada (control)</td><td>“Vino tinto”</td></tr>
+                <tr><td>2</td><td>1 cm³ de <strong>DISOLUCIÓN B</strong> (Na₂S₂O₃·5H₂O)</td><td>“Agua”</td></tr>
+                <tr><td>3</td><td>1 cm³ de <strong>DISOLUCIÓN B</strong> + 3 cm³ de <strong>DISOLUCIÓN C</strong></td><td>“Leche”</td></tr>
+                <tr><td>4</td><td>3 cm³ de <strong>DISOLUCIÓN C</strong></td><td>“Batido de frambuesa”</td></tr>
+                <tr><td>5</td><td>1 cm³ de <strong>DISOLUCIÓN B</strong> + 3 cm³ de <strong>DISOLUCIÓN D</strong></td><td>“Limonada gaseosa”</td></tr>
+            </tbody>
+        </table>
+        <p>Los volúmenes no son críticos. Las gotas pasan desapercibidas.</p>
+
+        <h3>Demostración paso a paso</h3>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Preparar el escenario</strong>
+            <p>Coloca las cinco copas en fila sobre la mesa, con un fondo blanco detrás si es posible.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Servir el “vino tinto”</strong>
+            <p>Con la botella de “vino tinto” (<strong>DISOLUCIÓN A</strong>: KMnO₄ acidificado), sirve <strong>unos 50 cm³</strong> en cada copa. No llenes demasiado: si echas más de ~80 cm³, el permanganato puede quedar en exceso y no decolorarse bien.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Observar y narrar los cambios</strong>
+            <ul>
+                <li><strong>Copa 1:</strong> queda púrpura → “vino tinto”.</li>
+                <li><strong>Copa 2:</strong> se vuelve incolora → “agua” o “vino blanco”.</li>
+                <li><strong>Copa 3:</strong> se decolora y aparece un sólido blanco → “leche”.</li>
+                <li><strong>Copa 4:</strong> sigue púrpura y aparece sólido blanco → “batido de frambuesa”.</li>
+                <li><strong>Copa 5:</strong> se decolora y salen burbujas → “limonada gaseosa”.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Mostrar rápidamente</strong>
+            <p>Muestra las copas rápidamente, porque con el tiempo los precipitados sedimentan o el exceso de tiosulfato con ácido puede enturbiar.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 Resultado</h2>
+        <p>Tras servir la <strong>DISOLUCIÓN A</strong> en cada copa, se observan los siguientes cambios:</p>
+        <table>
+            <thead>
+                <tr><th>Copa</th><th>Color final</th><th>Apariencia</th><th>Nombre “mágico”</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td><span class="color-tag tag-purpura">Púrpura</span></td><td>Transparente</td><td>“Vino tinto”</td></tr>
+                <tr><td>2</td><td><span class="color-tag tag-incoloro">Incoloro</span></td><td>Transparente</td><td>“Agua”</td></tr>
+                <tr><td>3</td><td><span class="color-tag tag-incoloro">Incoloro</span> + <span class="color-tag tag-blanco">Blanco</span></td><td>Precipitado blanco</td><td>“Leche”</td></tr>
+                <tr><td>4</td><td><span class="color-tag tag-purpura">Púrpura</span> + <span class="color-tag tag-blanco">Blanco</span></td><td>Precipitado blanco en medio púrpura</td><td>“Batido de frambuesa”</td></tr>
+                <tr><td>5</td><td><span class="color-tag tag-incoloro">Incoloro</span> + burbujas</td><td>Efervescencia</td><td>“Limonada gaseosa”</td></tr>
+            </tbody>
+        </table>
+        <div class="note">
+            <strong>Observación clave:</strong> La <strong>DISOLUCIÓN A</strong> (KMnO₄ acidificado) actúa como reactivo común. Según la copa, se produce una reducción (decoloración), una precipitación, o ambas simultáneamente, además de un posible desprendimiento de gas.
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- BLOQUE DESPLEGABLE: DESMITIFICANDO                        -->
+    <!-- ========================================================= -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO “Convirtiendo el vino tinto en muchas bebidas</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- ANÁLISIS: REACCIONES REDOX -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge badge-redox">Redox</span>
+                    <span>Reacciones de oxidación-reducción (copas 2, 3 y 5)</span>
+                </div>
+                <div class="enunciado">
+                    <p>El ion permanganato, MnO₄⁻, es un oxidante fuerte en medio ácido. El ion tiosulfato, S₂O₃²⁻, actúa como reductor. La reacción global es:</p>
+                    <div class="formula-box">
+                        \[ 2\,MnO_4^- + 16\,H^+ + 10\,S_2O_3^{2-} \rightarrow 2\,Mn^{2+} + 5\,S_4O_6^{2-} + 8\,H_2O \]
+                    </div>
+                    <p><strong>Semirreacciones:</strong></p>
+                    <div class="formula-box">
+                        Reducción: \[ MnO_4^- + 8H^+ + 5e^- \rightarrow Mn^{2+} + 4H_2O \]
+                        Oxidación: \[ 2S_2O_3^{2-} \rightarrow S_4O_6^{2-} + 2e^- \]
+                    </div>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>¿Dónde ocurre?</strong> En las copas 2, 3 y 5, donde hay tiosulfato (DISOLUCIÓN B).</div>
+                    <div class="paso"><strong>Cambio de color:</strong> El MnO₄⁻ es <span class="color-tag tag-purpura">púrpura</span>; el Mn²⁺ es <span class="color-tag tag-incoloro">incoloro</span>. Por eso la disolución se decolora.</div>
+                    <div class="paso"><strong>Estequiometría:</strong> 2 moles de MnO₄⁻ consumen 10 moles de S₂O₃²⁻ y 16 moles de H⁺.</div>
+                </div>
+            </div>
+
+            <!-- ANÁLISIS: REACCIONES ÁCIDO-BASE -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge badge-acidobase">Ácido-Base</span>
+                    <span>Reacción con carbonato (copa 5)</span>
+                </div>
+                <div class="enunciado">
+                    <p>El carbonato de sodio (DISOLUCIÓN D) reacciona con el ácido sulfúrico presente en la DISOLUCIÓN A:</p>
+                    <div class="formula-box">
+                        \[ CO_3^{2-}(ac) + 2H^+(ac) \rightarrow H_2O(l) + CO_2(g) \]
+                    </div>
+                    <p>Es una reacción ácido-base con desprendimiento de gas.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>¿Dónde ocurre?</strong> En la copa 5, donde hay carbonato sódico (DISOLUCIÓN D).</div>
+                    <div class="paso"><strong>Cambio observado:</strong> Aparecen burbujas de CO₂ → “limonada gaseosa”.</div>
+                    <div class="paso"><strong>Doble efecto:</strong> El tiosulfato también reduce el MnO₄⁻ (decoloración), y el carbonato produce la efervescencia.</div>
+                </div>
+            </div>
+
+            <!-- ANÁLISIS: PRECIPITACIÓN -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge badge-precip">Precipitación</span>
+                    <span>Formación de sulfato de bario (copas 3 y 4)</span>
+                </div>
+                <div class="enunciado">
+                    <p>El ion bario, Ba²⁺, procedente del cloruro de bario (DISOLUCIÓN C), reacciona con el ion sulfato, SO₄²⁻, presente en el ácido sulfúrico de la DISOLUCIÓN A:</p>
+                    <div class="formula-box">
+                        \[ Ba^{2+}(ac) + SO_4^{2-}(ac) \rightarrow BaSO_4(s) \]
+                    </div>
+                    <p>El BaSO₄ es un sólido blanco muy insoluble.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>¿Dónde ocurre?</strong> En las copas 3 y 4, donde hay cloruro de bario (DISOLUCIÓN C).</div>
+                    <div class="paso"><strong>Copa 3:</strong> El tiosulfato decolora el MnO₄⁻ y el BaSO₄ precipita → “leche” (blanco).</div>
+                    <div class="paso"><strong>Copa 4:</strong> No hay tiosulfato, así que el MnO₄⁻ sigue púrpura y el BaSO₄ precipita → “batido de frambuesa” (púrpura + blanco).</div>
+                </div>
+            </div>
+
+            <!-- ANÁLISIS: ¿POR QUÉ CAMBIAN LOS COLORES? -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">🎨</span>
+                    <span>¿Por qué cambian los colores? Explicación detallada</span>
+                </div>
+                <div class="enunciado">
+                    <p>Los cambios de color se deben a transformaciones químicas que alteran las especies presentes en disolución. Vamos a analizarlos uno por uno:</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso">
+                        <strong>1. Color púrpura inicial (DISOLUCIÓN A):</strong> El ion permanganato, MnO₄⁻, tiene una configuración electrónica con orbitales d vacíos que permiten transiciones electrónicas en el visible. Absorbe luz verde-amarilla y transmite el color complementario: <span class="color-tag tag-purpura">púrpura</span>.
+                    </div>
+                    <div class="paso">
+                        <strong>2. Decoloración (copas 2, 3 y 5):</strong> El MnO₄⁻ se reduce a Mn²⁺. El ion Mn²⁺ tiene una configuración d⁵ con transiciones prohibidas por espín, por lo que absorbe muy poco en el visible. Resultado: <span class="color-tag tag-incoloro">incoloro</span> (rosa muy pálido en disoluciones concentradas).
+                    </div>
+                    <div class="paso">
+                        <strong>3. Precipitado blanco (copas 3 y 4):</strong> El BaSO₄(s) es un sólido iónico con una red cristalina muy estable. Su banda prohibida es tan grande que no absorbe luz visible: dispersa toda la luz, por lo que se ve <span class="color-tag tag-blanco">blanco</span>.
+                    </div>
+                    <div class="paso">
+                        <strong>4. Copa 4 (“batido de frambuesa”):</strong> Aquí no hay tiosulfato, así que el MnO₄⁻ permanece <span class="color-tag tag-purpura">púrpura</span>, pero el BaSO₄ precipita como sólido <span class="color-tag tag-blanco">blanco</span>. La mezcla da un aspecto rosado-púrpura con sólido blanco en suspensión.
+                    </div>
+                    <div class="paso">
+                        <strong>5. Burbujas (copa 5):</strong> El CO₂(g) forma burbujas que ascienden. No tiene color propio, pero su presencia da el aspecto de “limonada gaseosa”. La decoloración simultánea se debe al tiosulfato.
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESUMEN DE REACCIONES POR COPA -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">📋</span>
+                    <span>Resumen: tipo de reacción en cada copa</span>
+                </div>
+                <table>
+                    <thead>
+                        <tr><th>Copa</th><th>Reactivo añadido</th><th>Tipo de reacción</th><th>Ecuación principal</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Nada</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><strong>DISOLUCIÓN B</strong> (Na₂S₂O₃)</td>
+                            <td><span class="badge-redox" style="color:white;padding:2px 8px;border-radius:10px;font-size:0.8em;">REDOX</span></td>
+                            <td>\( 2MnO_4^- + 16H^+ + 10S_2O_3^{2-} \rightarrow 2Mn^{2+} + 5S_4O_6^{2-} + 8H_2O \)</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><strong>DISOLUCIÓN B</strong> + <strong>DISOLUCIÓN C</strong></td>
+                            <td><span class="badge-redox" style="color:white;padding:2px 8px;border-radius:10px;font-size:0.8em;">REDOX</span> + <span class="badge-precip" style="color:white;padding:2px 8px;border-radius:10px;font-size:0.8em;">PRECIPITACIÓN</span></td>
+                            <td>Redox + \( Ba^{2+} + SO_4^{2-} \rightarrow BaSO_4(s) \)</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><strong>DISOLUCIÓN C</strong> (BaCl₂)</td>
+                            <td><span class="badge-precip" style="color:white;padding:2px 8px;border-radius:10px;font-size:0.8em;">PRECIPITACIÓN</span></td>
+                            <td>\( Ba^{2+} + SO_4^{2-} \rightarrow BaSO_4(s) \)</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><strong>DISOLUCIÓN B</strong> + <strong>DISOLUCIÓN D</strong></td>
+                            <td><span class="badge-redox" style="color:white;padding:2px 8px;border-radius:10px;font-size:0.8em;">REDOX</span> + <span class="badge-acidobase" style="color:white;padding:2px 8px;border-radius:10px;font-size:0.8em;">ÁCIDO-BASE</span></td>
+                            <td>Redox + \( CO_3^{2-} + 2H^+ \rightarrow H_2O + CO_2(g) \)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Observaciones clave:</strong> Una misma disolución (KMnO₄ acidificado) puede dar lugar a fenómenos muy distintos según el reactivo con el que se mezcle. La clave está en identificar qué tipo de transformación ocurre en cada caso: redox (cambio de estado de oxidación del Mn), precipitación (formación de un sólido insoluble) o ácido-base (neutralización con desprendimiento de gas). Los colores son la “huella” visible de estas transformaciones.
+            </div>
+        </div>
+    </details>
+
+    <!-- ============================================
+         BLOQUE "ES HORA DE"
+         ============================================ -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br> La química es color, sorpresa y reacción. <br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+            <div style="text-align:center;">
+                <a href="../index.html" target="_blank" style="
+                    display:inline-block;
+                    padding:12px 24px;
+                    background:#0078D4;
+                    color:white;
+                    text-decoration:none;
+                    border-radius:12px;
+                    font-weight:bold;
+                ">
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>
