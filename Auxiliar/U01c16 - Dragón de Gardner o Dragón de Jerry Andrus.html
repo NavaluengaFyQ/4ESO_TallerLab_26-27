@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c16 - Dragón de Gardner: la ilusión que te sigue con la mirada</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+        .mini-card.morado { border-top-color: #805ad5; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c16.- </span>
+                <span class="texto">Dragón de Gardner: la ilusión que te sigue con la mirada</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>Vamos a construir y observar el <strong>Dragón de Gardner</strong> (también llamado <em>Dragón de Jerry Andrus</em> o <em>Dragón Thinky</em>), una figura de papel o cartulina que, al mirarla con un solo ojo y movernos frente a ella, parece <strong>girar la cabeza y seguirnos con la mirada</strong>. La figura no se mueve, pero nuestro cerebro la interpreta como si fuera una cabeza tridimensional que nos observa.</p>
+        <p>Este efecto fue diseñado por el mago e ilusionista estadounidense <strong>Jerry Andrus</strong> (1918-2007) en honor al escritor y matemático <strong>Martin Gardner</strong>, y presentado en la conferencia <em>Gathering for Gardner</em> de 1998[reference:0]. Es un ejemplo perfecto de la <strong>ilusión de la máscara hueca</strong> (<em>hollow-face illusion</em>), un fenómeno que ha fascinado a científicos y magos durante siglos[reference:1].</p>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Por qué una figura de papel que no se mueve parece girar la cabeza y seguirnos con la mirada?
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué es la <strong>ilusión de la máscara hueca</strong> y por qué nuestro cerebro la interpreta mal.</li>
+            <li>La diferencia entre <strong>convexo y cóncavo</strong>, y cómo nuestro cerebro prefiere ver caras convexas.</li>
+            <li>El papel de la <strong>perspectiva forzada</strong> y la <strong>anamorfosis</strong> en la ilusión.</li>
+            <li>Los <strong>precursores históricos</strong>: el trampantojo, el Fantasma de Pepper, El Turco y el ilusionismo del siglo XIX.</li>
+            <li>Las <strong>aplicaciones y utilidades</strong> de esta ilusión en magia, publicidad, arte y neurociencia.</li>
+            <li>Cómo construir tu propio Dragón de Gardner y diseñar variantes.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>🔬 Fundamento teórico</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>La geometría del Dragón: una cabeza cóncava</strong>
+            <p>El Dragón de Gardner está construido de manera que su cabeza es <strong>cóncava</strong>: la nariz, los ojos y las orejas están <strong>hacia dentro</strong>, no hacia fuera. Pero al mirarla, nuestro cerebro la interpreta como si fuera <strong>convexa</strong>, es decir, como una cabeza normal que sobresale[reference:2].</p>
+            <p>La figura está diseñada con una <strong>perspectiva forzada</strong>: las proporciones y la disposición de los rasgos están distorsionadas para que, desde un punto de vista concreto, parezcan normales. Es una forma de <strong>anamorfosis</strong>: una imagen deformada que solo se ve "correctamente" desde un ángulo determinado[reference:3].</p>
+            <div class="formula-box">
+                <strong>Idea clave:</strong> la cabeza del dragón es en realidad un hueco, pero nuestro cerebro la "reconstruye" como una cara normal porque está programado para ver caras convexas.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Por qué el cerebro se equivoca: convexo vs. cóncavo</strong>
+            <p>Nuestro sistema visual está acostumbrado a tratar las caras como superficies <strong>convexas</strong>: cuando miramos a alguien, su nariz está más cerca de nosotros que sus orejas. Además, nuestro cerebro tiene una tendencia natural a <strong>detectar caras</strong> en cualquier patrón (fenómeno llamado <em>pareidolia</em>)[reference:4].</p>
+            <p>Cuando miramos el Dragón de Gardner, recibimos señales contradictorias:</p>
+            <ul>
+                <li>La forma general parece una cara.</li>
+                <li>Pero la geometría real es cóncava.</li>
+                <li>El cerebro, que "quiere" ver una cara convexa, <strong>ignora</strong> la información de profundidad real y construye una interpretación errónea.</li>
+            </ul>
+            <p>El resultado es que, al movernos, las pistas de perspectiva cambian de una manera que solo tiene sentido si la cabeza estuviera <strong>girando</strong> para mirarnos. El cerebro "resuelve" la contradicción inventando un movimiento que no existe[reference:5].</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>El papel de la visión monocular</strong>
+            <p>La ilusión es mucho más intensa si se mira con <strong>un solo ojo</strong> (o a través de la cámara del móvil). Con los dos ojos, la visión binocular proporciona información de profundidad que "delata" que la cabeza es cóncava. Al tapar un ojo, perdemos esa información y el cerebro se queda solo con las pistas de perspectiva, que son las que generan la ilusión[reference:6].</p>
+            <div class="note">
+                <strong>Truco:</strong> si no consigues ver el efecto a simple vista, usa la cámara de tu móvil. La cámara también ve con "un solo ojo" y la ilusión suele ser más evidente en la pantalla.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>La iluminación y el sombreado</strong>
+            <p>La ilusión depende mucho de cómo incide la luz sobre la figura. Si la luz es muy frontal o muy difusa, el cerebro puede "leer" correctamente la concavidad y la ilusión se debilita. La iluminación lateral o desde arriba suele funcionar mejor, porque crea sombras que refuerzan la interpretación de una cara convexa[reference:7].</p>
+            <p>Por eso, si construyes tu propio dragón, prueba a iluminarlo desde distintos ángulos hasta encontrar el punto en que el efecto es más fuerte.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Precursores históricos: el arte del engaño visual</strong>
+            <p>La ilusión del Dragón de Gardner no es nueva: es la culminación de una larga tradición de técnicas para engañar al ojo.</p>
+            <div class="mini-card azul">
+                <h4>🏛️ El trampantojo (siglos XV-XVIII)</h4>
+                <p>El <em>trompe-l'œil</em> es una técnica pictórica que juega con la perspectiva y el sombreado para hacer creer que una superficie plana tiene profundidad o que las figuras sobresalen del muro[reference:8]. Los pintores del Renacimiento y el Barroco usaban estas técnicas en techos, paredes y muebles para "abrir" espacios falsos.</p>
+            </div>
+            <div class="mini-card rojo">
+                <h4>👻 El Fantasma de Pepper (1862)</h4>
+                <p>John Henry Pepper popularizó una ilusión teatral en la que un actor reflejado en un cristal inclinado aparecía "flotando" en el escenario. Era una aplicación de la óptica al espectáculo, precursora de todas las ilusiones modernas de "hologramas"[reference:9].</p>
+            </div>
+            <div class="mini-card naranja">
+                <h4>♟️ El Turco (1769)</h4>
+                <p>El autómata de Wolfgang von Kempelen parecía jugar al ajedrez solo, pero en realidad escondía a un maestro de ajedrez en su interior. La cabina estaba diseñada como una <strong>ilusión óptica</strong> que impedía ver al operador humano[reference:10].</p>
+            </div>
+            <div class="mini-card morado">
+                <h4>🎩 Jerry Andrus (1918-2007)</h4>
+                <p>Andrus fue un mago, inventor y escéptico estadounidense famoso por sus ilusiones ópticas y sus "cajas paradójicas". El Dragón de Gardner fue uno de sus últimos diseños, creado en 1998 para honrar a Martin Gardner[reference:11].</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>La magia y el ilusionismo: la ciencia oculta</strong>
+            <p>Durante siglos, los magos han usado principios ópticos para crear efectos que parecían sobrenaturales. En el siglo XIX, el ilusionismo se profesionalizó y muchos magos se convirtieron en divulgadores de la ciencia óptica. El libro <em>Letters on Natural Magic</em> (1831) de Sir David Brewster explicaba cómo producir "fantasmas" con espejos y linternas mágicas, y sirvió de inspiración a generaciones de ilusionistas[reference:12].</p>
+            <p>El Dragón de Gardner es un ejemplo moderno de esta tradición: un efecto que parece "mágico" pero que se basa en cómo funciona nuestro cerebro. No hay truco, no hay movimiento, no hay espejos: solo geometría y percepción.</p>
+            <div class="highlight-box">
+                <strong>Reflexión:</strong> la magia y la ciencia no son enemigas. La magia usa la ciencia para crear asombro; la ciencia usa la magia para enseñar cómo funciona la percepción. El Dragón de Gardner es ambas cosas a la vez.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">7</span>
+            <strong>Aplicaciones y utilidades</strong>
+            <p>Aunque parezca un simple juguete, la ilusión del Dragón de Gardner tiene aplicaciones en varios campos:</p>
+            <ul>
+                <li><strong>Neurociencia y psicología:</strong> se usa para estudiar cómo el cerebro procesa la profundidad, las caras y el movimiento. La ilusión de la máscara hueca es un tema clásico de investigación en percepción visual.</li>
+                <li><strong>Educación:</strong> es una herramienta excelente para enseñar geometría, perspectiva, óptica y percepción. Se ha utilizado en talleres de matemáticas y ciencia en institutos de todo el mundo[reference:13].</li>
+                <li><strong>Diseño y arte:</strong> los artistas usan técnicas de perspectiva forzada y anamorfosis para crear obras que cambian según el punto de vista. El Dragón de Gardner es un ejemplo de "arte interactivo" que requiere la participación del espectador.</li>
+                <li><strong>Magia y entretenimiento:</strong> los magos lo usan en espectáculos para asombrar al público. También se ha adaptado a versiones con otros animales (T-Rex, gatos, etc.) que se han vuelto virales en internet[reference:14].</li>
+                <li><strong>Publicidad:</strong> algunas campañas han usado el efecto de "seguir con la mirada" para llamar la atención sobre un producto o un mensaje.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECCIÓN MATERIALES Y PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y procedimiento experimental</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Materiales</strong>
+            <ul>
+                <li>Plantilla del Dragón de Gardner impresa en papel o cartulina (puedes encontrar plantillas gratuitas en internet buscando "Gardner's Dragon template" o "paper dragon illusion")[reference:15].</li>
+                <li>Tijeras o cúter.</li>
+                <li>Pegamento o cinta adhesiva.</li>
+                <li>Rotuladores o lápices de colores (opcional, para decorar).</li>
+                <li>Un soporte para la figura (un trozo de cartón o una base).</li>
+                <li>Una cámara de móvil o una cámara fotográfica (opcional, pero recomendable para ver mejor el efecto).</li>
+            </ul>
+            <div class="danger">
+                <strong>⚠️ Seguridad:</strong> el cúter y las tijeras cortan. Corta siempre sobre una superficie protegida y en dirección alejada de los dedos. Si usas pegamento, evita inhalar los vapores y lávate las manos al terminar.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Construcción del Dragón</strong>
+            <ol>
+                <li>Imprime la plantilla en papel grueso o cartulina. Si no tienes impresora, puedes proyectarla en una pared y calcar el contorno.</li>
+                <li>Recorta la figura por las líneas continuas.</li>
+                <li>Dobla por las líneas discontinuas y pega las pestañas para dar volumen a la cabeza. La cabeza debe quedar <strong>cóncava</strong>: las orejas y los cuernos deben apuntar hacia dentro.</li>
+                <li>Si quieres, colorea el dragón antes de montarlo. Los colores vivos y los contrastes ayudan a que la ilusión sea más llamativa.</li>
+                <li>Pega la figura a una base de cartón para que se mantenga de pie.</li>
+            </ol>
+            <div class="note">
+                <strong>Consejo:</strong> si es la primera vez que lo construyes, elige una plantilla sencilla. Las más complejas tienen muchas pestañas y pueden resultar difíciles de montar.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Cómo observar la ilusión</strong>
+            <ol>
+                <li>Coloca el dragón sobre una mesa, a la altura de tus ojos.</li>
+                <li><strong>Tapa un ojo</strong> con la mano o mira a través de la cámara del móvil.</li>
+                <li>Mueve la cabeza lentamente de izquierda a derecha, o camina alrededor del dragón.</li>
+                <li>Observa cómo la cabeza del dragón parece girar para seguirte. Cuanto más te muevas, más evidente será el efecto.</li>
+                <li>Prueba también a moverte hacia arriba y hacia abajo: el dragón parecerá levantar o bajar la cabeza.</li>
+            </ol>
+            <div class="highlight-box">
+                <strong>Esquema de la ilusión:</strong><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ Dragón (cabeza cóncava) ]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑<br>
+                &nbsp;&nbsp;&nbsp;[ Observador mueve la cabeza ]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+                &nbsp;&nbsp;&nbsp;[ El cerebro interpreta que el dragón gira ]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Variantes para investigar</strong>
+            <ul>
+                <li><strong>Probar con los dos ojos:</strong> ¿es igual de intenso el efecto? ¿Por qué?</li>
+                <li><strong>Cambiar la iluminación:</strong> prueba a iluminar el dragón desde arriba, desde un lado, desde abajo. ¿En qué caso se ve mejor la ilusión?</li>
+                <li><strong>Construir otros animales:</strong> busca plantillas de T-Rex, gatos u otros animales con el mismo principio. ¿Funcionan igual de bien?</li>
+                <li><strong>Grabar un vídeo:</strong> mueve la cámara alrededor del dragón y reproduce el vídeo. ¿Se ve el efecto en la pantalla?</li>
+                <li><strong>Diseñar tu propio dragón:</strong> con un programa de dibujo, puedes crear tu propia figura con cabeza cóncava y perspectiva forzada.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>La geometría de la perspectiva forzada</strong>
+            <p>El Dragón de Gardner está diseñado para que, desde un punto de vista concreto, la cabeza cóncava parezca convexa. Para lograrlo, las proporciones de los rasgos están distorsionadas: los ojos, la nariz y la boca están colocados de manera que, al proyectarse en el plano, imitan la perspectiva de una cara normal.</p>
+            <div class="formula-box">
+                <strong>Perspectiva forzada:</strong> uso de dimensiones y ángulos no realistas para "forzar" al cerebro a interpretar una imagen plana como si tuviera profundidad[reference:16].
+            </div>
+            <p>Cuando te mueves, la relación entre los rasgos cambia de una manera que no es coherente con una cara convexa. El cerebro, para resolver la incoherencia, "decide" que la cabeza está girando. Es una solución de compromiso: prefiere inventar un movimiento antes que aceptar que está viendo una cara cóncava.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has demostrado?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>El Dragón de Gardner es una ilusión óptica basada en la interpretación errónea de una cabeza cóncava como convexa.</strong></p>
+            <p>Nuestro cerebro está programado para ver caras convexas y utiliza la perspectiva y el sombreado para reconstruir la profundidad. Cuando la geometría real es cóncava, el cerebro se confunde y "inventa" un movimiento de giro que no existe.</p>
+        </div>
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>La ilusión es más intensa con <strong>visión monocular</strong> (un solo ojo).</li>
+            <li>La <strong>iluminación</strong> influye mucho en la fuerza del efecto.</li>
+            <li>El Dragón de Gardner es un descendiente moderno de técnicas antiguas como el <strong>trampantojo</strong>, el <strong>Fantasma de Pepper</strong> y las ilusiones de los magos del siglo XIX.</li>
+            <li>La ilusión se usa en <strong>neurociencia, educación, arte y magia</strong>.</li>
+            <li>No hay ningún truco oculto: todo se basa en la <strong>geometría</strong> y en cómo funciona nuestro sistema visual.</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que el dragón está "animado" o que tiene algún mecanismo. No lo está. La figura es completamente estática. Todo el movimiento ocurre en tu cerebro. Si grabas un vídeo y lo reproduces, verás que el efecto se mantiene: la ilusión no depende de tus ojos, sino de cómo tu cerebro procesa la información visual.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO el Dragón de Gardner</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>¿Por qué la cabeza es cóncava?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica con tus palabras por qué la cabeza del Dragón de Gardner está diseñada para ser cóncava y no convexa.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Qué es convexo y qué es cóncavo?</strong> Convexo: la superficie sobresale hacia fuera (como una nariz normal). Cóncavo: la superficie se hunde hacia dentro (como un cuenco).</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué prefiere ver el cerebro?</strong> El cerebro está programado para interpretar las caras como convexas. Cuando ve una forma que parece una cara, asume que sobresale hacia fuera.</div>
+                    <div class="paso"><strong>Paso 3 — ¿Por qué cóncava?</strong> Si la cabeza fuera convexa, no habría contradicción: el cerebro vería una cara normal y no pasaría nada. Al hacerla cóncava, se crea una <strong>contradicción</strong> entre la forma real y la interpretación del cerebro. Esa contradicción es la que genera la ilusión de movimiento.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la concavidad es imprescindible para que la ilusión funcione.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Visión monocular vs. binocular</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> ¿Por qué la ilusión del Dragón de Gardner es más intensa si se mira con un solo ojo? ¿Qué información adicional aporta la visión binocular que "estropea" el efecto?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Qué aporta la visión binocular?</strong> La visión con dos ojos proporciona <strong>estereopsis</strong>: el cerebro compara las imágenes ligeramente distintas de cada ojo para calcular la profundidad con precisión.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué pasa con el dragón?</strong> Con dos ojos, el cerebro recibe información de profundidad que le dice que la cabeza es cóncava. Esa información "delata" la verdadera geometría y debilita la ilusión.</div>
+                    <div class="paso"><strong>Paso 3 — ¿Y con un ojo?</strong> Al tapar un ojo, se elimina la estereopsis. El cerebro solo dispone de las pistas de perspectiva (el sombreado, el tamaño de los rasgos), que son las que generan la ilusión. Por eso el efecto es mucho más fuerte.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la visión binocular nos "protege" de la ilusión porque nos da información de profundidad más fiable que la perspectiva.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>El papel de la iluminación</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un compañero construye el Dragón de Gardner pero no consigue ver la ilusión. Al cambiar la posición de la lámpara, el efecto aparece de repente. Explica por qué la iluminación es tan importante.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Cómo usa el cerebro las sombras?</strong> El cerebro utiliza el sombreado para inferir la forma de los objetos. Una sombra en un sitio u otro puede hacer que una superficie parezca convexa o cóncava.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué pasa con luz frontal?</strong> Si la luz viene de frente, no hay sombras y el cerebro no tiene pistas de forma. Puede "leer" correctamente la concavidad y la ilusión no aparece.</div>
+                    <div class="paso"><strong>Paso 3 — ¿Qué pasa con luz lateral o superior?</strong> La luz lateral o desde arriba crea sombras que refuerzan la interpretación de una cara convexa. El cerebro "ve" lo que espera ver y la ilusión se activa.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la iluminación no crea la ilusión, pero puede reforzarla o debilitarla. Es un factor crítico.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>El trampantojo y el Dragón de Gardner</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica qué relación existe entre el trampantojo (trompe-l'œil) y el Dragón de Gardner. ¿En qué se parecen y en qué se diferencian?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Qué es el trampantojo?</strong> Es una técnica pictórica que usa la perspectiva y el sombreado para hacer creer que una superficie plana tiene profundidad o que las figuras sobresalen del muro[reference:17].</div>
+                    <div class="paso"><strong>Paso 2 — Parecidos:</strong> ambos engañan al ojo usando <strong>perspectiva forzada</strong> y <strong>sombreado</strong> para crear una ilusión de profundidad. Ambos explotan la tendencia del cerebro a interpretar ciertas pistas visuales de una manera concreta.</div>
+                    <div class="paso"><strong>Paso 3 — Diferencias:</strong></div>
+                    <ul>
+                        <li>El trampantojo es <strong>estático</strong>: la ilusión se mantiene desde un punto de vista fijo. El Dragón de Gardner es <strong>dinámico</strong>: la ilusión aparece cuando el observador se mueve.</li>
+                        <li>El trampantojo se pinta en <strong>superficies planas</strong>; el Dragón de Gardner es una <strong>figura tridimensional</strong> (aunque su cabeza sea cóncava).</li>
+                        <li>El trampantojo busca <strong>realismo</strong>; el Dragón de Gardner busca <strong>sorpresa</strong> y <strong>movimiento aparente</strong>.</li>
+                    </ul>
+                    <div class="paso"><strong>Conclusión:</strong> el Dragón de Gardner es una evolución del trampantojo: mismo principio (engañar al ojo con perspectiva), pero aplicado a un objeto tridimensional y con un efecto dinámico.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>Magia y ciencia: el ilusionismo óptico</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Los magos del siglo XIX usaban el Fantasma de Pepper para hacer aparecer "espíritus" en el escenario. Hoy, el Dragón de Gardner se usa en talleres de ciencia y en vídeos virales. ¿Qué relación existe entre magia, ilusionismo y ciencia? ¿Es ético usar estas técnicas para engañar al público?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — La magia como ciencia oculta:</strong> los magos usaban principios ópticos (reflexión, espejos, perspectiva) que el público no conocía. Lo que parecía sobrenatural era física aplicada[reference:18].</div>
+                    <div class="paso"><strong>Paso 2 — El caso del Dragón de Gardner:</strong> no hay engaño deliberado. El efecto se presenta como una ilusión óptica, y el público sabe que es un truco de percepción. Se usa en educación para enseñar cómo funciona el cerebro.</div>
+                    <div class="paso"><strong>Paso 3 — Ética:</strong> el uso es ético si <strong>no se engaña sobre la naturaleza del efecto</strong>. En espectáculos de magia, el público paga por ser engañado. En educación, se explica el fundamento. El problema surgiría si se usara para hacer creer que algo sobrenatural está ocurriendo (por ejemplo, en contextos de estafa o superstición).</div>
+                    <div class="paso"><strong>Conclusión:</strong> magia y ciencia no son enemigas. La magia usa la ciencia para crear asombro; la ciencia usa la magia para enseñar. La clave está en la <strong>transparencia</strong>.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>Otras ilusiones de máscara hueca</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Además del Dragón de Gardner, existen otras ilusiones de "máscara hueca", como la máscara de Einstein que parece girar para mirarte. Explica qué tienen en común y en qué se diferencian del Dragón.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — La máscara de Einstein:</strong> es una máscara cóncava (el interior de un molde de la cara de Einstein). Al mirarla, el cerebro la interpreta como una cara convexa y, al movernos, parece girar para seguirnos[reference:19].</div>
+                    <div class="paso"><strong>Paso 2 — Parecidos con el Dragón:</strong> ambos explotan la <strong>ilusión de la máscara hueca</strong>: el cerebro prefiere ver una cara convexa aunque la geometría real sea cóncava. Ambos se intensifican con visión monocular y con iluminación adecuada.</div>
+                    <div class="paso"><strong>Paso 3 — Diferencias:</strong></div>
+                    <ul>
+                        <li>La máscara de Einstein es una <strong>cara humana</strong>; el Dragón es una <strong>criatura fantástica</strong>.</li>
+                        <li>La máscara es un <strong>molde completo</strong>; el Dragón es una <strong>figura de papel plegada</strong>.</li>
+                        <li>El Dragón tiene un <strong>cuerpo</strong> además de la cabeza, lo que añade contexto y hace la ilusión más elaborada.</li>
+                    </ul>
+                    <div class="paso"><strong>Conclusión:</strong> el Dragón de Gardner es una versión más compleja y elaborada de la ilusión de la máscara hueca, aplicada a una figura con cuerpo y con un diseño específico para maximizar el efecto.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Diseña tu propio dragón</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Imagina que quieres diseñar tu propia versión del Dragón de Gardner, pero con un animal diferente (por ejemplo, un lobo o un búho). ¿Qué elementos tendrías que modificar para que la ilusión funcione? ¿Qué rasgos son imprescindibles?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Rasgos imprescindibles:</strong></div>
+                    <ul>
+                        <li>La <strong>cabeza debe ser cóncava</strong> (los rasgos hacia dentro).</li>
+                        <li>Los <strong>ojos</strong> deben estar colocados de manera que, en perspectiva forzada, parezcan mirar al frente.</li>
+                        <li>Debe haber <strong>rasgos distintivos</strong> (orejas, cuernos, pico) que ayuden al cerebro a reconocer una "cara".</li>
+                        <li>La <strong>iluminación</strong> debe crear sombras que refuercen la convexidad.</li>
+                    </ul>
+                    <div class="paso"><strong>Paso 2 — Elementos a modificar:</strong> la forma de la cabeza, la posición de los ojos y la disposición de los rasgos. Todo debe diseñarse para que, desde un punto de vista concreto, parezca una cara normal.</div>
+                    <div class="paso"><strong>Paso 3 — Prueba y error:</strong> el diseño de estas ilusiones es iterativo. Hay que construir el prototipo, mirarlo con un ojo, moverse y ajustar hasta que el efecto sea convincente.</div>
+                    <div class="paso"><strong>Conclusión:</strong> diseñar tu propio dragón es un ejercicio excelente de geometría, percepción y creatividad. Requiere entender cómo el cerebro interpreta las caras y la profundidad.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> El Dragón de Gardner es una lección magistral de percepción visual. Las tres ideas clave son: (1) nuestro cerebro está programado para ver caras convexas, aunque la geometría real sea cóncava; (2) la <strong>perspectiva forzada</strong> y el sombreado engañan al cerebro; (3) el movimiento aparente es una <strong>solución de compromiso</strong> que inventa el cerebro para resolver la contradicción. Además, es un ejemplo perfecto de cómo la magia, el arte y la ciencia comparten las mismas raíces: la comprensión de cómo funciona la percepción humana.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Un dragón de papel que te sigue con la mirada: la magia de la percepción al alcance de tu mano.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>

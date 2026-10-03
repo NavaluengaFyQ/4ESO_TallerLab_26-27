@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#F08.04-A - Ampliación: Cálculo de errores en la determinación de densidades</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .ampliacion { background: #faf5ff; border-color: #9f7aea; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .ampliacion h2 { color: #6b46c1; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.morado { border-top-color: #9f7aea; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+        .badge-subir {
+            display: inline-block;
+            background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.85em;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 6px rgba(237,137,54,0.4);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#F08.04-A.- </span>
+                <span class="texto">Ampliación: Cálculo de errores en densidades</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN DE PRESENTACIÓN -->
+    <div class="section ampliacion">
+        <h2>⭐ Con cálculo de errores </h2>
+
+        <p>En esta sección aprenderás a realizar el <strong>cálculo de errores</strong>. Así es cómo realmente se tratan los datos experimentales </strong> en la práctica de densidades. Aquí descubrirás cómo expresar tus resultados como un buen científico: con su <strong>incertidumbre</strong>.</p>
+        <p>No se trata solo de calcular un número, sino de <strong>saber cuánto de fiable es ese número</strong>. Es lo que diferencia una medida "de andar por casa" de una medida de laboratorio de verdad.</p>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Cuánto vale realmente la densidad de mis cuerpos? ¿Y cuánto puede desviarse mi resultado?
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVOS -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender en esta ampliación?</h2>
+        <ul>
+            <li>Qué es la <strong>incertidumbre</strong> de una medida y por qué es imprescindible.</li>
+            <li>A identificar la <strong>precisión de cada instrumento</strong> de laboratorio.</li>
+            <li>A calcular la incertidumbre de medidas <strong>repetidas</strong> (diámetros, alturas…).</li>
+            <li>A <strong>propagar</strong> esa incertidumbre cuando se combinan varias medidas (volumen, densidad).</li>
+            <li>A expresar correctamente un resultado experimental: \(x = (\bar{x} \pm \Delta x)\ \text{unidades}\).</li>
+            <li>A decidir si dos resultados son <strong>compatibles</strong> (comparación de métodos).</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN CONCEPTOS BÁSICOS -->
+    <div class="section resultado">
+        <h2>📚 Conceptos básicos: error, incertidumbre y precisión</h2>
+
+        <p>Cuando medimos algo, nunca obtenemos el valor <em>verdadero</em>. Obtenemos un <strong>valor experimental</strong> que se parece mucho, pero no es exacto. La diferencia entre ambos puede venir de:</p>
+
+        <div class="mini-card azul">
+            <h4>🔧 Errores sistemáticos</h4>
+            <p>Siempre van en la misma dirección. Por ejemplo, una balanza mal calibrada, o el agua que queda adherida al cuerpo al pesarlo.</p>
+        </div>
+        <div class="mini-card rojo">
+            <h4>🎲 Errores aleatorios</h4>
+            <p>Unas veces por exceso, otras por defecto. Por ejemplo, la posición de la aguja del calibre o la lectura del menisco.</p>
+        </div>
+
+        <p>La <strong>incertidumbre</strong> (\(\Delta x\)) es una estimación de cuánto puede desviarse nuestra medida del valor verdadero. Se expresa con las mismas unidades que la medida y <strong>siempre va acompañando al resultado</strong>:</p>
+
+        <div class="formula-box">
+            \[ x = (\bar{x} \pm \Delta x)\ \text{unidades} \]
+        </div>
+
+        <p>Por ejemplo: \(m = (37{,}80 \pm 0{,}01)\ \text{g}\). Esto significa que el valor verdadero está muy probablemente entre 37,79 g y 37,81 g.</p>
+
+        <div class="note">
+            <strong>Idea clave:</strong> un resultado experimental sin incertidumbre está incompleto. Es como decir "el coche iba a 80" sin decir "km/h" ni "±5 km/h".
+        </div>
+    </div>
+
+    <!-- SECCIÓN 1: INCERTIDUMBRE INSTRUMENTAL -->
+    <div class="section procedimiento">
+        <h2>🔬 Paso 1 — Incertidumbre de los instrumentos</h2>
+        <p>Cada aparato de laboratorio tiene una precisión limitada. Como norma general, se toma como incertidumbre instrumental:</p>
+
+        <table>
+            <tr>
+                <th>Instrumento</th>
+                <th>Magnitud que mide</th>
+                <th>Incertidumbre \(\Delta x\)</th>
+            </tr>
+            <tr><td>Balanza (0,01 g)</td><td>Masa</td><td>± 0,01 g</td></tr>
+            <tr><td>Balanza (0,001 g)</td><td>Masa</td><td>± 0,001 g</td></tr>
+            <tr><td>Calibre (pie de rey)</td><td>Longitud</td><td>± 0,02 mm</td></tr>
+            <tr><td>Regla graduada</td><td>Longitud</td><td>± 0,5 mm (la mitad de la división más pequeña)</td></tr>
+            <tr><td>Probeta de 100 mL</td><td>Volumen</td><td>± 1 mL</td></tr>
+            <tr><td>Probeta de 250 mL</td><td>Volumen</td><td>± 2 mL</td></tr>
+        </table>
+
+        <div class="note">
+            <strong>Truco:</strong> en general, la incertidumbre instrumental es <strong>la mitad de la división más pequeña</strong> de la escala. Si el calibre tiene divisiones de 0,02 mm, la incertidumbre es ±0,01 mm… pero como no siempre es fácil verlo, en esta práctica usaremos los valores de la tabla.
+        </div>
+    </div>
+
+    <!-- SECCIÓN 2: MEDIDAS REPETIDAS -->
+    <div class="section procedimiento">
+        <h2>📏 Paso 2 — Incertidumbre de medidas repetidas</h2>
+        <p>Cuando hacemos varias medidas de la misma magnitud (por ejemplo, 3 diámetros del cilindro), podemos estimar la incertidumbre de dos formas:</p>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Valor medio</strong>
+            <p>El resultado de la medida es la media aritmética de todas las medidas:</p>
+            <div class="formula-box">
+                \[ \bar{x} = \frac{x_1 + x_2 + x_3 + \dots + x_n}{n} \]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Incertidumbre por el recorrido</strong>
+            <p>Una estimación sencilla y muy usada en el laboratorio es la <strong>mitad del recorrido</strong> (mitad de la diferencia entre el valor máximo y el mínimo):</p>
+            <div class="formula-box">
+                \[ \Delta x = \frac{x_{\text{máx}} - x_{\text{mín}}}{2} \]
+            </div>
+            <p>Si este valor sale <strong>más pequeño</strong> que la precisión del instrumento, tomamos como incertidumbre la del instrumento (porque no podemos afinar más de lo que permite el aparato).</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Resultado</strong>
+            <p>Expresamos la medida como:</p>
+            <div class="formula-box">
+                \[ D = (\bar{D} \pm \Delta D)\ \text{mm} \]
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <strong>Ejemplo:</strong><br>
+            Tres medidas del diámetro de un cilindro: 20,02 mm · 20,04 mm · 20,00 mm<br>
+            Media: \(\bar{D} = \dfrac{20{,}02 + 20{,}04 + 20{,}00}{3} = 20{,}02\ \text{mm}\)<br>
+            Recorrido: \(20{,}04 - 20{,}00 = 0{,}04\ \text{mm}\) → \(\Delta D = 0{,}02\ \text{mm}\)<br>
+            Resultado: \(D = (20{,}02 \pm 0{,}02)\ \text{mm}\)
+        </div>
+    </div>
+
+    <!-- SECCIÓN 3: PROPAGACIÓN AL VOLUMEN -->
+    <div class="section procedimiento">
+        <h2>🧮 Paso 3 — Propagación de la incertidumbre al volumen</h2>
+        <p>Cuando el volumen se calcula combinando varias medidas (radio, altura…), la incertidumbre se <strong>propaga</strong>. La idea es: si cada medida tiene un pequeño error, el volumen tendrá un error que depende de todos ellos.</p>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Volumen de un cilindro</strong>
+            <p>Fórmula: \(V = \pi \cdot r^2 \cdot h\). La incertidumbre relativa del volumen es:</p>
+            <div class="formula-box">
+                \[ \frac{\Delta V}{V} = \sqrt{\left(2\,\frac{\Delta r}{r}\right)^2 + \left(\frac{\Delta h}{h}\right)^2} \]
+            </div>
+            <p>Y después la incertidumbre absoluta: \(\Delta V = V \cdot \dfrac{\Delta V}{V}\).</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Volumen de una esfera</strong>
+            <p>Fórmula: \(V = \dfrac{4}{3}\pi \cdot r^3\). La incertidumbre relativa es:</p>
+            <div class="formula-box">
+                \[ \frac{\Delta V}{V} = 3\,\frac{\Delta r}{r} \]
+            </div>
+            <p>Y después la incertidumbre absoluta: \(\Delta V = V \cdot \dfrac{\Delta V}{V}\).</p>
+        </div>
+
+        <div class="note">
+            <strong>Ojo con las unidades:</strong> \(r\), \(h\), \(\Delta r\) y \(\Delta h\) deben estar todos en <strong>cm</strong> antes de aplicar las fórmulas. Y recuerda que \(\Delta r = \Delta D\), porque el radio es la mitad del diámetro y el error se divide igual: si \(r = D/2\), entonces \(\Delta r = \Delta D / 2\). En esta práctica trabajaremos con \(\Delta r = \Delta D\) por simplicidad (la diferencia es despreciable).
+        </div>
+
+        <div class="highlight-box">
+            <strong>Ejemplo resuelto (cilindro):</strong><br>
+            \(r = (1{,}00 \pm 0{,}01)\ \text{cm}\) &nbsp;·&nbsp; \(h = (4{,}50 \pm 0{,}02)\ \text{cm}\)<br><br>
+            <strong>Volumen:</strong> \(V = \pi \cdot 1{,}00^2 \cdot 4{,}50 \approx 14{,}14\ \text{cm}^3\)<br><br>
+            <strong>Incertidumbre relativa:</strong>
+            \[ \frac{\Delta V}{V} = \sqrt{\left(2\cdot\frac{0{,}01}{1{,}00}\right)^2 + \left(\frac{0{,}02}{4{,}50}\right)^2} = \sqrt{0{,}0004 + 0{,}00002} \approx 0{,}0205 \]<br><br>
+            <strong>Incertidumbre absoluta:</strong> \(\Delta V = 14{,}14 \times 0{,}0205 \approx 0{,}29\ \text{cm}^3\)<br><br>
+            <strong>Resultado:</strong> \(V = (14{,}1 \pm 0{,}3)\ \text{cm}^3\)
+        </div>
+    </div>
+
+    <!-- SECCIÓN 4: PROPAGACIÓN A LA DENSIDAD -->
+    <div class="section procedimiento">
+        <h2>⚖️ Paso 4 — Propagación de la incertidumbre a la densidad</h2>
+        <p>La densidad combina la masa y el volumen: \(\rho = m / V\). Su incertidumbre relativa se calcula así:</p>
+
+        <div class="formula-box">
+            \[ \frac{\Delta \rho}{\rho} = \sqrt{\left(\frac{\Delta m}{m}\right)^2 + \left(\frac{\Delta V}{V}\right)^2} \]
+        </div>
+
+        <p>Y después:</p>
+
+        <div class="formula-box">
+            \[ \Delta \rho = \rho \cdot \frac{\Delta \rho}{\rho} \]
+        </div>
+
+        <p>El resultado final se escribe como:</p>
+
+        <div class="formula-box">
+            \[ \rho = (\rho \pm \Delta \rho)\ \text{g/cm}^3 \]
+        </div>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Reglas de redondeo</strong>
+            <ul>
+                <li>La incertidumbre se redondea siempre a <strong>una cifra significativa</strong> (a lo sumo dos si empieza por 1 o 2).</li>
+                <li>El valor de la densidad se redondea al <strong>mismo número de decimales</strong> que la incertidumbre.</li>
+                <li>Nunca escribas más cifras de las que tu medida permite: \(2{,}68345 \pm 0{,}0472\) es un sinsentido.</li>
+            </ul>
+        </div>
+
+        <div class="highlight-box">
+            <strong>Ejemplo resuelto:</strong><br>
+            \(m = (37{,}80 \pm 0{,}01)\ \text{g}\) &nbsp;·&nbsp; \(V = (14{,}1 \pm 0{,}3)\ \text{cm}^3\)<br><br>
+            <strong>Densidad:</strong> \(\rho = \dfrac{37{,}80}{14{,}1} = 2{,}681\ \text{g/cm}^3\)<br><br>
+            <strong>Incertidumbre relativa:</strong>
+            \[ \frac{\Delta \rho}{\rho} = \sqrt{\left(\frac{0{,}01}{37{,}80}\right)^2 + \left(\frac{0{,}3}{14{,}1}\right)^2} \approx \sqrt{7\cdot 10^{-8} + 4{,}5\cdot 10^{-4}} \approx 0{,}021 \]<br><br>
+            <strong>Incertidumbre absoluta:</strong> \(\Delta \rho = 2{,}681 \times 0{,}021 \approx 0{,}06\ \text{g/cm}^3\)<br><br>
+            <strong>Resultado:</strong> \(\rho = (2{,}68 \pm 0{,}06)\ \text{g/cm}^3\)
+        </div>
+    </div>
+
+    <!-- SECCIÓN 5: COMPARACIÓN DE MÉTODOS -->
+    <div class="section resultado">
+        <h2>🤝 Paso 5 — ¿Son compatibles los dos métodos?</h2>
+        <p>Una vez calculadas las dos densidades con sus incertidumbres (la del método geométrico y la del desplazamiento), podemos compararlas.</p>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Escribimos los dos intervalos</strong>
+            <p>Por ejemplo:</p>
+            <div class="formula-box">
+                \[ \rho_{\text{geom}} = (2{,}68 \pm 0{,}06)\ \text{g/cm}^3 \quad\rightarrow\quad [2{,}62\ ;\ 2{,}74] \]
+                \[ \rho_{\text{despl}} = (2{,}75 \pm 0{,}10)\ \text{g/cm}^3 \quad\rightarrow\quad [2{,}65\ ;\ 2{,}85] \]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Comprobamos si se solapan</strong>
+            <p>Si los dos intervalos tienen <strong>al menos un trozo en común</strong>, los resultados son <strong>compatibles</strong>: las diferencias se explican por los errores experimentales.</p>
+            <div class="highlight-box">
+                En el ejemplo anterior, los intervalos [2,62 – 2,74] y [2,65 – 2,85] <strong>se solapan</strong> entre 2,65 y 2,74 → ✅ <strong>Resultados compatibles</strong>.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Si no se solapan</strong>
+            <p>Entonces hay una <strong>discrepancia real</strong> entre los dos métodos. Hay que investigar qué ha pasado:</p>
+            <ul>
+                <li>¿Había burbujas adheridas al cuerpo al sumergirlo?</li>
+                <li>¿El cuerpo estaba mojado cuando lo pesamos?</li>
+                <li>¿La línea del menisco se leyó mal?</li>
+                <li>¿El cuerpo tocaba las paredes de la probeta?</li>
+                <li>¿El cuerpo no era perfectamente cilíndrico o esférico?</li>
+            </ul>
+        </div>
+
+        <div class="note">
+            <strong>Valor final:</strong> si los dos métodos son compatibles, se suele dar como resultado final la <strong>media ponderada</strong> (o, de forma más sencilla, la media aritmética) de los dos valores, con una incertidumbre combinada. En esta práctica, basta con dar el <strong>valor medio</strong> como resultado final.
+        </div>
+    </div>
+
+    <!-- SECCIÓN: EJEMPLO COMPLETO -->
+    <div class="section objetivo">
+        <h2>🧾 Ejemplo resuelto completo</h2>
+        <p>Vamos a ver todo el proceso desde el principio hasta el final con un cilindro de aluminio.</p>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Datos experimentales</strong>
+            <table>
+                <tr><th>Magnitud</th><th>Medida 1</th><th>Medida 2</th><th>Medida 3</th><th>Media</th><th>\(\Delta x\)</th></tr>
+                <tr><td>Diámetro \(D\) (mm)</td><td>20,02</td><td>20,04</td><td>20,00</td><td>20,02</td><td>±0,02</td></tr>
+                <tr><td>Altura \(h\) (mm)</td><td>45,00</td><td>44,96</td><td>45,02</td><td>44,99</td><td>±0,03</td></tr>
+                <tr><td>Masa \(m\) (g)</td><td colspan="3">37,80</td><td>—</td><td>±0,01</td></tr>
+                <tr><td>\(V_0\) (mL)</td><td colspan="3">50,0</td><td>—</td><td>±1</td></tr>
+                <tr><td>Con cilindro (mL)</td><td colspan="3">64,1</td><td>—</td><td>±1</td></tr>
+            </table>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Paso a cm y cálculo del radio</strong>
+            <p>\(D = (2{,}002 \pm 0{,}002)\ \text{cm}\) &nbsp;→&nbsp; \(r = (1{,}001 \pm 0{,}002)\ \text{cm}\)</p>
+            <p>\(h = (4{,}499 \pm 0{,}003)\ \text{cm}\)</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Volumen geométrico y su incertidumbre</strong>
+            <p>\(V_{\text{geom}} = \pi \cdot (1{,}001)^2 \cdot 4{,}499 \approx 14{,}17\ \text{cm}^3\)</p>
+            <div class="formula-box">
+                \[ \frac{\Delta V}{V} = \sqrt{\left(2\cdot\frac{0{,}002}{1{,}001}\right)^2 + \left(\frac{0{,}003}{4{,}499}\right)^2} \approx 0{,}0041 \]
+            </div>
+            <p>\(\Delta V_{\text{geom}} = 14{,}17 \times 0{,}0041 \approx 0{,}06\ \text{cm}^3\)</p>
+            <p><strong>\(V_{\text{geom}} = (14{,}17 \pm 0{,}06)\ \text{cm}^3\)</strong></p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Volumen por desplazamiento y su incertidumbre</strong>
+            <p>\(V_{\text{despl}} = 64{,}1 - 50{,}0 = 14{,}1\ \text{mL} = 14{,}1\ \text{cm}^3\)</p>
+            <p>\(\Delta V_{\text{despl}} = \sqrt{(\Delta V_0)^2 + (\Delta V_{\text{lect}})^2} = \sqrt{1^2 + 1^2} \approx 1{,}4\ \text{cm}^3\)</p>
+            <p><strong>\(V_{\text{despl}} = (14{,}1 \pm 1{,}4)\ \text{cm}^3\)</strong></p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Densidad geométrica</strong>
+            <p>\(\rho_{\text{geom}} = \dfrac{37{,}80}{14{,}17} \approx 2{,}668\ \text{g/cm}^3\)</p>
+            <div class="formula-box">
+                \[ \frac{\Delta \rho}{\rho} = \sqrt{\left(\frac{0{,}01}{37{,}80}\right)^2 + \left(\frac{0{,}06}{14{,}17}\right)^2} \approx 0{,}0043 \]
+            </div>
+            <p>\(\Delta \rho_{\text{geom}} = 2{,}668 \times 0{,}0043 \approx 0{,}01\ \text{g/cm}^3\)</p>
+            <p><strong>\(\rho_{\text{geom}} = (2{,}67 \pm 0{,}01)\ \text{g/cm}^3\)</strong></p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>Densidad por desplazamiento</strong>
+            <p>\(\rho_{\text{despl}} = \dfrac{37{,}80}{14{,}1} \approx 2{,}681\ \text{g/cm}^3\)</p>
+            <div class="formula-box">
+                \[ \frac{\Delta \rho}{\rho} = \sqrt{\left(\frac{0{,}01}{37{,}80}\right)^2 + \left(\frac{1{,}4}{14{,}1}\right)^2} \approx 0{,}099 \]
+            </div>
+            <p>\(\Delta \rho_{\text{despl}} = 2{,}681 \times 0{,}099 \approx 0{,}27\ \text{g/cm}^3\)</p>
+            <p><strong>\(\rho_{\text{despl}} = (2{,}7 \pm 0{,}3)\ \text{g/cm}^3\)</strong></p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">7</span>
+            <strong>Comparación de métodos</strong>
+            <p>Intervalos: \([2{,}66 – 2{,}68]\) y \([2{,}4 – 3{,}0]\) → <strong>se solapan ampliamente</strong> → ✅ compatibles.</p>
+            <p><strong>Resultado final:</strong> \(\rho \approx 2{,}67\ \text{g/cm}^3\) → compatible con <strong>aluminio</strong> (2,70 g/cm³).</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN: TABLA DE TRABAJO -->
+    <div class="section resultado">
+        <h2>📊 Tabla de trabajo para tu ampliación</h2>
+        <p>Copia esta tabla en tu libreta y rellénala con tus datos. Repite el proceso para cada uno de los cuatro cuerpos.</p>
+
+        <table>
+            <tr>
+                <th>Magnitud</th>
+                <th>Valor</th>
+                <th>Incertidumbre</th>
+            </tr>
+            <tr><td>Masa \(m\) (g)</td><td></td><td>± 0,01</td></tr>
+            <tr><td>Diámetro \(D\) (cm)</td><td></td><td></td></tr>
+            <tr><td>Altura \(h\) (cm) <em>(solo cilindros)</em></td><td></td><td></td></tr>
+            <tr><td>Radio \(r\) (cm)</td><td></td><td></td></tr>
+            <tr><td>Volumen geométrico \(V_{\text{geom}}\) (cm³)</td><td></td><td></td></tr>
+            <tr><td>Volumen por desplazamiento \(V_{\text{despl}}\) (cm³)</td><td></td><td></td></tr>
+            <tr><td>Densidad geométrica \(\rho_{\text{geom}}\) (g/cm³)</td><td></td><td></td></tr>
+            <tr><td>Densidad por desplazamiento \(\rho_{\text{despl}}\) (g/cm³)</td><td></td><td></td></tr>
+        </table>
+
+        <div class="note">
+            <strong>Recuerda:</strong> en la columna de incertidumbre debes escribir el valor \(\Delta x\) que has calculado, no el del instrumento (salvo cuando la incertidumbre del instrumento sea mayor).
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE CON EJERCICIOS -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧠 EJERCICIOS de ampliación: entrena el cálculo de errores</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Media e incertidumbre por recorrido</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Se mide tres veces la altura de un cilindro y se obtienen: 45,02 mm, 44,98 mm y 45,00 mm. Calcula el valor medio, la incertidumbre por recorrido y expresa el resultado correctamente.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Media:</strong> \(\bar{h} = \dfrac{45{,}02 + 44{,}98 + 45{,}00}{3} = 45{,}00\ \text{mm}\).</div>
+                    <div class="paso"><strong>Paso 2 — Recorrido:</strong> \(h_{\text{máx}} - h_{\text{mín}} = 45{,}02 - 44{,}98 = 0{,}04\ \text{mm}\)</div>
+                    <div class="formula-box">\[ \Delta h = \frac{0{,}04}{2} = 0{,}02\ \text{mm} \]</div>
+                    <div class="paso"><strong>Paso 3 — Resultado:</strong> \(h = (45{,}00 \pm 0{,}02)\ \text{mm}\).</div>
+                    <div class="paso"><strong>Comprobación:</strong> la incertidumbre es igual a la precisión del calibre (± 0,02 mm), así que el resultado es coherente.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Incertidumbre del volumen de una esfera</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Una esfera tiene un radio \(r = (1{,}25 \pm 0{,}02)\ \text{cm}\). Calcula su volumen y su incertidumbre. Expresa el resultado final correctamente.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Volumen:</strong> \(V = \dfrac{4}{3}\pi \cdot r^3 = \dfrac{4}{3}\pi \cdot (1{,}25)^3 \approx 8{,}18\ \text{cm}^3\).</div>
+                    <div class="paso"><strong>Paso 2 — Incertidumbre relativa:</strong></div>
+                    <div class="formula-box">\[ \frac{\Delta V}{V} = 3\cdot\frac{\Delta r}{r} = 3 \cdot \frac{0{,}02}{1{,}25} = 0{,}048 \]</div>
+                    <div class="paso"><strong>Paso 3 — Incertidumbre absoluta:</strong> \(\Delta V = 8{,}18 \times 0{,}048 \approx 0{,}39\ \text{cm}^3\).</div>
+                    <div class="paso"><strong>Paso 4 — Redondeo:</strong> \(\Delta V \approx 0{,}4\ \text{cm}^3\).</div>
+                    <div class="formula-box">\[ V = (8{,}2 \pm 0{,}4)\ \text{cm}^3 \]</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>Incertidumbre del volumen de un cilindro</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un cilindro tiene \(r = (1{,}50 \pm 0{,}02)\ \text{cm}\) y \(h = (5{,}00 \pm 0{,}03)\ \text{cm}\). Calcula su volumen y su incertidumbre.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Volumen:</strong> \(V = \pi \cdot (1{,}50)^2 \cdot 5{,}00 \approx 35{,}34\ \text{cm}^3\).</div>
+                    <div class="paso"><strong>Paso 2 — Incertidumbre relativa:</strong></div>
+                    <div class="formula-box">\[ \frac{\Delta V}{V} = \sqrt{\left(2\cdot\frac{0{,}02}{1{,}50}\right)^2 + \left(\frac{0{,}03}{5{,}00}\right)^2} = \sqrt{0{,}00071 + 0{,}000036} \approx 0{,}027 \]</div>
+                    <div class="paso"><strong>Paso 3 — Incertidumbre absoluta:</strong> \(\Delta V = 35{,}34 \times 0{,}027 \approx 0{,}95\ \text{cm}^3\).</div>
+                    <div class="formula-box">\[ V = (35{,}3 \pm 1{,}0)\ \text{cm}^3 \]</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>Incertidumbre de la densidad</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un cuerpo tiene \(m = (85{,}60 \pm 0{,}01)\ \text{g}\) y \(V = (35{,}3 \pm 1{,}0)\ \text{cm}^3\). Calcula la densidad y su incertidumbre. Expresa el resultado correctamente.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Densidad:</strong> \(\rho = \dfrac{85{,}60}{35{,}3} \approx 2{,}425\ \text{g/cm}^3\).</div>
+                    <div class="paso"><strong>Paso 2 — Incertidumbre relativa:</strong></div>
+                    <div class="formula-box">\[ \frac{\Delta \rho}{\rho} = \sqrt{\left(\frac{0{,}01}{85{,}60}\right)^2 + \left(\frac{1{,}0}{35{,}3}\right)^2} \approx \sqrt{1{,}4\cdot10^{-8} + 8{,}0\cdot10^{-4}} \approx 0{,}028 \]</div>
+                    <div class="paso"><strong>Paso 3 — Incertidumbre absoluta:</strong> \(\Delta \rho = 2{,}425 \times 0{,}028 \approx 0{,}07\ \text{g/cm}^3\).</div>
+                    <div class="formula-box">\[ \rho = (2{,}43 \pm 0{,}07)\ \text{g/cm}^3 \]</div>
+                    <div class="paso"><strong>Comentario:</strong> comparando con la tabla, podría tratarse de <strong>vidrio</strong> (2,50 g/cm³) o de una <strong>aleación ligera</strong>. El margen de error no permite asegurarlo con total certeza.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>Compatibilidad entre dos métodos</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Para un cuerpo se obtiene \(\rho_{\text{geom}} = (2{,}43 \pm 0{,}07)\ \text{g/cm}^3\) y \(\rho_{\text{despl}} = (2{,}60 \pm 0{,}15)\ \text{g/cm}^3\). ¿Son compatibles los dos métodos? Justifica la respuesta.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Intervalo geométrico:</strong> \([2{,}36\ ;\ 2{,}50]\).</div>
+                    <div class="paso"><strong>Paso 2 — Intervalo desplazamiento:</strong> \([2{,}45\ ;\ 2{,}75]\).</div>
+                    <div class="paso"><strong>Paso 3 — Solapamiento:</strong> los intervalos comparten la zona \([2{,}45\ ;\ 2{,}50]\).</div>
+                    <div class="paso"><strong>Conclusión:</strong> ✅ <strong>Resultados compatibles</strong>. Las diferencias se explican por los errores experimentales. El valor final sería aproximadamente \(\rho \approx 2{,}5\ \text{g/cm}^3\).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>¿Por qué no son compatibles?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Para otro cuerpo se obtiene \(\rho_{\text{geom}} = (7{,}85 \pm 0{,}05)\ \text{g/cm}^3\) y \(\rho_{\text{despl}} = (6{,}50 \pm 0{,}20)\ \text{g/cm}^3\). ¿Son compatibles? Si no lo son, propón dos posibles causas del desacuerdo.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Intervalos:</strong> \([7{,}80\ ;\ 7{,}90]\) y \([6{,}30\ ;\ 6{,}70]\).</div>
+                    <div class="paso"><strong>Paso 2 — Solapamiento:</strong> no se solapan. Los resultados <strong>NO son compatibles</strong>.</div>
+                    <div class="paso"><strong>Paso 3 — Causas posibles:</strong></div>
+                    <ul>
+                        <li>Había <strong>burbujas de aire</strong> adheridas al cuerpo al sumergirlo → el volumen por desplazamiento sale mayor y la densidad menor.</li>
+                        <li>El cuerpo era <strong>poroso</strong> o absorbía agua → el volumen aparente aumenta con el tiempo.</li>
+                        <li>Error en la <strong>lectura de la probeta</strong> (menisco mal leído).</li>
+                        <li>El cuerpo tocaba las <strong>paredes o el fondo</strong> de la probeta, desplazando más agua de la debida.</li>
+                    </ul>
+                    <div class="paso"><strong>Conclusión:</strong> hay que repetir la medida por el método del desplazamiento con más cuidado.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Redondeo correcto</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un compañero escribe como resultado final \(\rho = (2{,}68347 \pm 0{,}0472)\ \text{g/cm}^3\). Explica qué está mal y escribe el resultado correctamente.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Error:</strong> la incertidumbre tiene <strong>demasiadas cifras significativas</strong>. La incertidumbre siempre se redondea a <strong>una cifra</strong> (a lo sumo dos si empieza por 1 o 2).</div>
+                    <div class="paso"><strong>Paso 2 — Redondeo:</strong> \(\Delta \rho = 0{,}0472 \rightarrow 0{,}05\ \text{g/cm}^3\).</div>
+                    <div class="paso"><strong>Paso 3 — Ajuste del valor:</strong> el valor se redondea al mismo número de decimales que la incertidumbre: \(2{,}68347 \rightarrow 2{,}68\).</div>
+                    <div class="formula-box">\[ \rho = (2{,}68 \pm 0{,}05)\ \text{g/cm}^3 \]</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> El cálculo de errores es lo que convierte una práctica de laboratorio en una <em>medida científica</em>. No basta con decir "la densidad es 2,68 g/cm³": hay que decir <em>cuánto de fiable es ese número</em>. Aprender a propagar incertidumbres y a comparar métodos es una habilidad fundamental en cualquier carrera científica o técnica.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Medir no es solo obtener un número, arrastra también el cálculo de errores.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>
