@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas - IES Valle del Alberche</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO GENERAL (heredado de la plantilla)
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        /* ============================================
+           SECCIONES INFORMATIVAS
+           ============================================ */
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+
+        /* =========================================================
+           BLOQUE DESPLEGABLE  →  aquí van las TAREAS
+           ========================================================= */
+        details {
+            margin: 22px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary:hover {
+            background: #e4ebff;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .titulo-tarea {
+            flex: 1;
+            line-height: 1.35;
+        }
+        details summary .fecha {
+            background: #ffecb0;
+            color: #744210;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 0.8rem;
+            border-radius: 40px;
+            white-space: nowrap;
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.15rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        details .details-content {
+            padding: 0.5rem 1.6rem 1.4rem 1.6rem;
+        }
+        details[open] summary .icon-pulsame {
+            display: none;
+        }
+
+        .enunciado-tarea {
+            background: #f1f6fd;
+            border-left: 4px solid #667eea;
+            border-radius: 12px;
+            padding: 1rem 1.4rem;
+            margin: 1rem 0;
+        }
+        .enunciado-tarea p:last-child {
+            margin-bottom: 0;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ================= CABECERA ================= -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto" alt="Cápsula">
+                <span class="codigo">TAREAS</span>
+                <span class="texto">Laboratorio de ciencias</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- ================= INTRO ================= -->
+    <div class="section enunciado">
+        <h2>📌 Tareas propuestas</h2>
+        <p>En esta página se irán publicando las tareas del curso. Cada tarea aparece en un <strong>desplegable</strong>: pulsa sobre su título para leer el enunciado completo.</p>
+        <p>En la cabecera de cada desplegable encontrarás el <strong>número y código de la tarea</strong>, su <strong>título</strong> y la <strong>fecha límite de entrega (todas las tareas se pueden entregar también después de la fecha límite)</strong>.</p>
+    </div>
+
+    <!-- ============================================================
+         TAREA #01
+         ============================================================ -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span class="titulo-tarea">#01 - U01c01 - La química de los olores (Infografía)</span>
+            <span class="fecha">Lím. 02/10/26</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Púlsame</span>
+        </summary>
+        <div class="details-content">
+            <div class="enunciado-tarea">
+                <p>Realiza en un folio en blanco una infografía donde aparezcan las <strong>familias funcionales estudiadas</strong>, indicando para cada una:</p>
+                <ul>
+                    <li>El <strong>grupo funcional</strong> que la caracteriza.</li>
+                    <li><strong>Cuatro compuestos de ejemplo</strong> con su fórmula semidesarrollada.</li>
+                    <li>El <strong>tipo de olor</strong> que les corresponde.</li>
+                </ul>
+                <p>Comenta sobre la existencia de compuestos que <strong>pueden oler de forma agradable o desagradable según su concentración</strong>, y pon ejemplos concretos.</p>
+            </div>
+
+            <div class="note">
+                <strong>Recuerda:</strong> cuida la presentación, la limpieza y la ortografía. La infografía debe ser visualmente clara: usa títulos, dibujos o esquemas y mantén una estructura ordenada.
+            </div>
+        </div>
+    </details>
+    
+    
+<!-- ============================================================
+     TAREA #02
+     ============================================================ -->
+<details>
+    <summary>
+        <i class="fas fa-chevron-circle-down"></i>
+        <span class="titulo-tarea">#02 - U01c01 - La química de los olores (tabla - Compuesto/Fórmula/Olor/Observaciones)</span>
+        <span class="fecha">Lím. 02/10/26</span>
+        <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Púlsame</span>
+    </summary>
+    <div class="details-content">
+        <div class="enunciado-tarea">
+            <p>Realiza en un folio en blanco una tabla en la que se indique, para cada uno de los siguientes compuestos, su nombre, fórmula química, si se debe o no oler directamente, su grado de peligrosidad y las características de su olor:</p>
+            <ul>
+                <li>Mercurio (Hg)</li>
+                <li>Ácido nítrico (HNO₃)</li>
+                <li>Ácido sulfúrico (H₂SO₄)</li>
+                <li>Ácido clorhídrico (HCl)</li>
+                <li>Formaldehído</li>
+                <li>Acetona</li>
+                <li>Amoniaco (NH₃)</li>
+                <li>Sales (en general)</li>
+                <li>Sales de amonio</li>
+            </ul>
+        </div>
+
+        <div class="note">
+            <strong>Recuerda:</strong> cuida la presentación, la limpieza y la ortografía. La tabla debe ser clara: usa columnas bien definidas y sé preciso con los datos de seguridad.
+        </div>
+    </div>
+</details>
+
+<!-- ============================================================
+     TAREA #03
+     ============================================================ -->
+<details>
+    <summary>
+        <i class="fas fa-chevron-circle-down"></i>
+        <span class="titulo-tarea">#03 - U01c02 - Calibre-Nonius</span>
+        <span class="fecha">Lím. 09/10/26</span>
+        <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Púlsame</span>
+    </summary>
+    <div class="details-content">
+        <div class="enunciado-tarea">
+            <p>Realiza en un folio en blanco una infografía del calibre o nonius en la que se dibuje el calibre indicando sus partes, su funcionamiento y cómo se realiza la lectura de una medida, añadiendo además una breve referencia a Pierre Vernier, su contexto histórico y alguna curiosidad.</p>
+        </div>
+        <div class="note">
+            <strong>Recuerda:</strong> cuida la presentación, la limpieza y la ortografía. La infografía debe ser visualmente clara: usa títulos, dibujos o esquemas y mantén una estructura ordenada.
+        </div>
+    </div>
+</details>
+
+<!-- ============================================================
+     TAREA #04
+     ============================================================ -->
+<details>
+    <summary>
+        <i class="fas fa-chevron-circle-down"></i>
+        <span class="titulo-tarea">#04 - U01c03 - Pirámide holográfica (Infografía)</span>
+        <span class="fecha">Lím. 13/10/26</span>
+        <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Púlsame</span>
+    </summary>
+    <div class="details-content">
+        <div class="enunciado-tarea">
+            <p>Realiza en un folio en blanco una infografía sobre la <strong>pirámide holográfica</strong>. Debe explicar de forma visual y ordenada:</p>
+            <ul>
+                <li>Qué es y por qué se llama “holograma” aunque no sea un holograma real.</li>
+                <li>Cómo funciona: la diferencia entre un holograma real (interferencia láser) y esta ilusión óptica (reflexión de cuatro imágenes planas).</li>
+                <li>Una breve referencia histórica al <strong>Fantasma de Pepper</strong> (John Henry Pepper, 1862; Henry Dircks) y alguna curiosidad.</li>
+                <li>Aplicaciones actuales: publicidad, medicina, museos, educación, entretenimiento.</li>
+            </ul>
+        </div>
+
+        <div class="note">
+            <strong>Recuerda:</strong> cuida la presentación, la limpieza y la ortografía. La infografía debe ser visualmente clara: títulos, dibujos, flechas y estructura ordenada.
+        </div>
+    </div>
+</details>
+
+<!-- ============================================================
+     TAREA #05
+     ============================================================ -->
+<details>
+    <summary>
+        <i class="fas fa-chevron-circle-down"></i>
+        <span class="titulo-tarea">#05 - Práctica del cálculo de las densidades (geométricamente y por volumen desplazado)</span>
+        <span class="fecha">Lím. 16/10/26</span>
+        <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Púlsame</span>
+    </summary>
+    <div class="details-content">
+        <div class="enunciado-tarea">
+            <p><strong>Entrega:</strong> folios en blanco con la práctica del cálculo de densidades.</p>
+            <p><strong>Guía:</strong> se proporcionan PDFs adjuntos como material de apoyo (disponibles en la página principal del sitio).</p>
+            <p><strong>Estructura recomendada de la práctica:</strong></p>
+            <ul>
+                <li><strong>Objetivo:</strong> qué se pretende medir y por qué.</li>
+                <li><strong>Materiales:</strong> lista de instrumentos y sustancias utilizadas.</li>
+                <li><strong>Procedimiento:</strong> descripción de los dos métodos (geométrico y por volumen desplazado).</li>
+                <li><strong>Cálculos:</strong> fórmulas empleadas, datos obtenidos y operaciones realizadas.</li>
+                <li><strong>Resultados:</strong> tabla comparativa de densidades obtenidas por ambos métodos.</li>
+                <li><strong>Conclusiones:</strong> análisis de discrepancias, posibles errores y reflexión final.</li>
+            </ul>
+            <p><strong>Criterios de evaluación:</strong></p>
+            <ul>
+                <li>Contenido, desarrollo y justificación.</li>
+                <li>Presentación formal: limpieza, ortografía, márgenes, uso de colores y dibujos.</li>
+                <li>Empeño, dedicación y originalidad (esfuerzo más allá de lo mínimo).</li>
+            </ul>
+        </div>
+        <div class="note">
+            <strong>Recuerda:</strong> los PDFs con las guías están en la página principal del sitio. Cuida la presentación y justifica adecuadamente todos los pasos y resultados. Los PDFs son una guía no una escusa para ponerle raíles a vuestra creatividad.
+        </div>
+    </div>
+</details>
+    <!-- ============================================================
+         AQUÍ IRÁN LAS SIGUIENTES TAREAS
+         Copia el bloque <details> ... </details> completo
+         y cambia el título, la fecha y el enunciado.
+         ============================================================ -->
+
+    <!--
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span class="titulo-tarea">#02 - U01c02 - Título de la tarea</span>
+            <span class="fecha">Lím. DD/MM/AA</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Púlsame</span>
+        </summary>
+        <div class="details-content">
+            <div class="enunciado-tarea">
+                <p>Enunciado de la tarea...</p>
+            </div>
+        </div>
+    </details>
+    -->
+
+    <!-- ================= PIE ================= -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Trabajo constante, curiosidad y buenas preguntas.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- fin container -->
+</body>
+</html>

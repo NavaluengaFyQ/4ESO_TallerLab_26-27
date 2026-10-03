@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c04 - Práctica: Determinación de la densidad de sólidos (dos métodos)</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+            font-size: 1em;
+            flex-wrap: wrap;
+        }
+        .header-sub img {
+            max-height: 28px;
+            width: auto;
+            border-radius: 4px;
+        }
+        .codigo {
+            font-weight: 700;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.95em;
+        }
+        .texto {
+            font-weight: 500;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        p { line-height: 1.7; margin-bottom: 10px; }
+        ul, ol { margin-left: 20px; line-height: 1.7; }
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .comparison-box {
+            background: #f7fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+        .comparison-box .title {
+            font-weight: 700;
+            color: #4a5568;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        /* ============================================
+           TABLAS DE DATOS
+           ============================================ */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.95em;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+        th {
+            background: #667eea;
+            color: white;
+            padding: 10px 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        td {
+            padding: 8px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        tr:nth-child(even) td {
+            background: #f8fafc;
+        }
+        tr:hover td {
+            background: #edf2f7;
+        }
+        td.media {
+            font-weight: 700;
+            color: #2d3748;
+            background: #edf2f7 !important;
+        }
+
+        /* ============================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ============================================ */
+        details {
+            margin: 20px 30px 30px 30px;
+            background: #fefefe;
+            border-radius: 12px;
+            border: 1px solid #d1d5db;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.2s ease;
+        }
+        details summary {
+            padding: 16px 24px;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            user-select: none;
+            border-radius: 12px;
+            background: #f8fafc;
+            transition: background 0.2s;
+        }
+        details summary:hover {
+            background: #f1f5f9;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            transition: transform 0.3s ease;
+            font-size: 1.2em;
+            color: #667eea;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        .details-content {
+            padding: 0 24px 24px 24px;
+        }
+        .ejercicio-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            overflow: hidden;
+        }
+        .ejercicio-card .card-header {
+            background: #edf2f7;
+            padding: 12px 20px;
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #2d3748;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ejercicio-card .card-header .badge {
+            background: #4a5568;
+            color: white;
+            border-radius: 30px;
+            padding: 2px 12px;
+            font-size: 0.8em;
+        }
+        .ejercicio-card .card-body {
+            padding: 18px 20px;
+        }
+        .ejercicio-card .card-body .enunciado-ej {
+            background: #f7fafc;
+            padding: 12px 16px;
+            border-radius: 8px;
+            border-left: 4px solid #4299e1;
+            margin-bottom: 15px;
+        }
+        .ejercicio-card .card-body .resolucion {
+            background: #f0fff4;
+            padding: 14px 18px;
+            border-radius: 8px;
+            border-left: 4px solid #48bb78;
+            margin-top: 10px;
+        }
+        .ejercicio-card .card-body .resolucion .paso {
+            margin: 8px 0;
+        }
+        .pie-didactico {
+            background: #fef9e7;
+            border-left: 6px solid #f59e0b;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+            font-size: 0.95em;
+            color: #78350f;
+        }
+        .pie-didactico strong {
+            color: #92400e;
+        }
+
+        @media (max-width: 600px) {
+            .header { flex-direction: column; align-items: flex-start; }
+            .header-right { align-self: flex-end; }
+            .section { padding: 18px; margin: 10px; }
+            .comparison { grid-template-columns: 1fr; }
+            details { margin: 10px; }
+            .details-content { padding: 0 16px 16px 16px; }
+            table { font-size: 0.8em; }
+            th, td { padding: 5px 3px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c04 </span>
+                <span class="texto">Práctica de laboratorio: Determinación de la densidad de sólidos</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📘 Enunciado</h2>
+        <p>Se dispone de cuatro sólidos de forma regular: dos cilindros (uno pesado y otro ligero) y dos esferas (una pesada y otra ligera). Se pretende determinar la densidad de cada uno de ellos empleando <strong>dos métodos independientes</strong>:</p>
+        <ul>
+            <li><strong>Método 1 (geométrico):</strong> calcular el volumen a partir de las dimensiones medidas con el calibre (diámetro, altura) y aplicar las fórmulas geométricas correspondientes.</li>
+            <li><strong>Método 2 (desplazamiento):</strong> medir el volumen del sólido por inmersión en agua dentro de una probeta graduada, aplicando el principio de Arquímedes (volumen desalojado).</li>
+        </ul>
+        <p>A continuación, se debe calcular la densidad con cada método, propagar los errores correspondientes y comparar los resultados experimentales con los valores de referencia de la literatura para identificar el material de cada pieza.</p>
+
+        <div class="formula-box">
+            \[ \rho = \frac{m}{V} \qquad \text{con} \qquad \Delta\rho = \rho \cdot \left( \frac{\Delta m}{m} + \frac{\Delta V}{V} \right) \]
+        </div>
+
+        <div style="text-align:center; margin-top: 15px;">
+            <img src="../imagenes/Practica_Densidad_Montaje.png" alt="Montaje de la práctica: calibre, balanza, probeta y sólidos" style="width:100%; max-width:700px; height:auto; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.12);">
+        </div>
+    </div>
+
+    <!-- OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 Objetivo</h2>
+        <p>Al finalizar esta práctica, el estudiante debe ser capaz de:</p>
+        <ul>
+            <li>Medir magnitudes fundamentales (diámetro, altura, masa y volumen) con distintos instrumentos, indicando en cada caso el error instrumental.</li>
+            <li>Aplicar correctamente las fórmulas de los volúmenes del cilindro y la esfera a partir de sus dimensiones medidas.</li>
+            <li>Determinar el volumen de un sólido por el método de desplazamiento de líquido en una probeta.</li>
+            <li>Calcular la densidad de dos cilindros y dos esferas por dos métodos distintos y comparar los resultados.</li>
+            <li>Propagar errores y expresar el volumen y la densidad con su error correspondiente (valor ± error).</li>
+        </ul>
+    </div>
+
+    <!-- FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Fundamento teórico y procedimiento</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>La densidad.</strong> La densidad es una magnitud intensiva que indica la cantidad de masa contenida en un determinado volumen. Se calcula como \( \rho = m/V \) y se expresa habitualmente en g/cm³ o en kg/m³ (1 g/cm³ = 1000 kg/m³). Es una propiedad característica de cada material que permite, por ejemplo, identificar de qué sustancia está hecho un objeto o averiguar si flotará en un líquido.
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Volumen geométrico.</strong> Si el sólido tiene una forma regular podemos calcular su volumen a partir de sus dimensiones medidas con calibre o regla:
+            <div class="formula-box" style="text-align: left;">
+                <strong>Cilindro:</strong> \( V = \dfrac{\pi \cdot d^2 \cdot h}{4} \) (a partir del diámetro \( d \) y la altura \( h \))<br>
+                <strong>Esfera:</strong> \( V = \dfrac{\pi \cdot d^3}{6} \) (a partir del diámetro \( d \))
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Volumen desplazado (método de la probeta).</strong> Si sumergimos un sólido en un líquido dentro de una probeta graduada, el nivel del líquido sube. El volumen desalojado (la diferencia entre las dos lecturas, \( V_f - V_i \)) coincide con el volumen del sólido. Este método funciona con cualquier forma, pero es menos preciso porque la probeta tiene una escala más gruesa que el calibre.
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Medidas y errores.</strong> Toda medida experimental lleva asociado un error. En esta práctica usaremos el error instrumental: la menor división de la escala del aparato (por ejemplo ±0,01 cm en el calibre o ±1 mL en la probeta). Toda medida se anota como (valor ± error). Cuando se opera con medidas, los errores se propagan:
+            <div class="formula-box" style="text-align: left;">
+                <strong>• Si la fórmula contiene productos, cocientes o potencias, se SUMAN los errores relativos:</strong><br>
+                – Cilindro: \( \Delta V = V \cdot \left( \dfrac{2\Delta d}{d} + \dfrac{\Delta h}{h} \right) \)<br>
+                – Esfera: \( \Delta V = V \cdot \left( \dfrac{3\Delta d}{d} \right) \)<br>
+                – Densidad: \( \Delta\rho = \rho \cdot \left( \dfrac{\Delta m}{m} + \dfrac{\Delta V}{V} \right) \)
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Material y equipo.</strong>
+            <ul>
+                <li>2 cilindros (uno pesado de acero/hierro y otro ligero de aluminio)</li>
+                <li>2 esferas (una pesada de acero/hierro y otra ligera de plástico)</li>
+                <li>Calibre o pie de rey (error instrumental: ±0,01 cm)</li>
+                <li>Balanza digital de precisión (error instrumental: ±0,01 g)</li>
+                <li>Probeta graduada de 100 mL (error instrumental: ±1 mL)</li>
+                <li>Agua destilada</li>
+                <li>Calculadora científica / Hoja de cálculo</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>Procedimiento experimental.</strong>
+            <ol>
+                <li>Mide el diámetro y la altura de cada cilindro (y el diámetro de cada esfera) con el calibre. Repite cada medida tres veces.</li>
+                <li>Mide la masa de cada objeto con la balanza. Repite la medida tres veces.</li>
+                <li>Llena la probeta con agua hasta un nivel inicial \( V_i \) y anota la lectura. Sumerge el primer objeto y anota el nivel final \( V_f \). El volumen desplazado es \( V_f - V_i \). Repite la operación tres veces.</li>
+                <li>Repite el paso 3 con los otros tres objetos.</li>
+                <li>Calcula la media de cada magnitud y exprésala como (media ± error instrumental).</li>
+                <li>Calcula el volumen geométrico de cada objeto y su error mediante las fórmulas del apartado 4.</li>
+                <li>Calcula la densidad de cada objeto por los dos métodos y compara los resultados.</li>
+            </ol>
+        </div>
+
+        <div class="note">
+            <strong>Observaciones:</strong> Es importante que el sólido quede completamente sumergido y que no se formen burbujas de aire adheridas a su superficie. El menisco del agua debe leerse a la altura de los ojos para evitar el error de paralaje. El método geométrico es más preciso para cuerpos regulares, mientras que el método de desplazamiento es más versátil pero menos preciso.
+        </div>
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="section resultado">
+        <h2>✅ Resultado</h2>
+        <div class="formula-box">
+            <strong>Densidad determinada por dos métodos independientes</strong>
+            <p style="font-size: 1.05em; margin: 10px 0 0 0;">
+                \[ \boxed{\rho = \dfrac{m}{V} \quad \text{con} \quad \Delta\rho = \rho \cdot \left( \dfrac{\Delta m}{m} + \dfrac{\Delta V}{V} \right)} \]
+            </p>
+        </div>
+        <div class="comparison">
+            <div class="comparison-box" style="border-color: #48bb78;">
+                <div class="title" style="color: #276749;">Método 1: Geométrico</div>
+                <p>Calibre (±0,01 cm)</p>
+                <p>Error relativo ~1%</p>
+                <p><strong>Más preciso</strong> para cuerpos regulares</p>
+            </div>
+            <div class="comparison-box" style="border-color: #4299e1;">
+                <div class="title" style="color: #2b6cb0;">Método 2: Desplazamiento</div>
+                <p>Probeta (±1 mL)</p>
+                <p>Error relativo ~6-7%</p>
+                <p><strong>Más versátil</strong> para cualquier forma</p>
+            </div>
+        </div>
+        <p>La comparación de ambos métodos permite verificar la coherencia de las medidas dentro de los márgenes de error. Al contrastar las densidades experimentales con los valores de referencia de la literatura, se puede identificar el material de cada pieza con alta certeza.</p>
+        <div style="background: #e6fffa; border-radius: 8px; padding: 10px; margin-top: 12px; border-left: 4px solid #319795;">
+            <p style="margin: 0;"><strong>📌 Conclusión:</strong> El método geométrico con calibre proporciona una determinación más precisa de la densidad en sólidos regulares (error ~1%), mientras que el método de desplazamiento en probeta es más versátil pero menos preciso (error ~7%). Ambos métodos conducen a resultados compatibles dentro de sus incertidumbres, lo que valida el procedimiento experimental.</p>
+        </div>
+    </div>
+
+    <!-- ==================================================
+         BLOQUE DESPLEGABLE: TOMA DE DATOS Y CÁLCULOS RESUELTOS
+         ================================================== -->
+    <details id="ejerciciosDesplegable">
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO la práctica: datos y cálculos resueltos</span>
+            <span style="margin-left: auto; font-size: 0.8em; color: #64748b; font-weight: 400;">
+                <i class="fas fa-hand-pointer"></i> Pulsame
+            </span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1: TOMA DE DATOS -->
+            <div class="ejercicio-card">
+                <div class="card-header">
+                    <span class="badge">Ejercicio 1</span>
+                    Toma de datos experimentales
+                </div>
+                <div class="card-body">
+                    <div class="enunciado-ej">
+                        <strong>Enunciado:</strong> Anota cada medida como (valor ± error). Después calcula la media de las tres medidas para cada magnitud y objeto.
+                    </div>
+                    <div class="resolucion">
+                        <strong>Resolución paso a paso:</strong>
+                        <div class="paso" style="margin-bottom:10px;"><strong>5.1 Cilindros</strong></div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Magnitud</th>
+                                    <th>Medida</th>
+                                    <th>Instrumento</th>
+                                    <th>Cilindro pesado</th>
+                                    <th>Cilindro ligero</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Diámetro</td><td>Medida 1</td><td>Calibre</td><td>2,00 ± 0,01 cm</td><td>2,00 ± 0,01 cm</td></tr>
+                                <tr><td>Diámetro</td><td>Medida 2</td><td>Calibre</td><td>2,01 ± 0,01 cm</td><td>1,99 ± 0,01 cm</td></tr>
+                                <tr><td>Diámetro</td><td>Medida 3</td><td>Calibre</td><td>1,99 ± 0,01 cm</td><td>2,01 ± 0,01 cm</td></tr>
+                                <tr><td class="media">Diámetro</td><td class="media">Media</td><td class="media">Calibre</td><td class="media">2,00 ± 0,01 cm</td><td class="media">2,00 ± 0,01 cm</td></tr>
+                                <tr><td>Altura</td><td>Medida 1</td><td>Calibre</td><td>5,00 ± 0,01 cm</td><td>5,00 ± 0,01 cm</td></tr>
+                                <tr><td>Altura</td><td>Medida 2</td><td>Calibre</td><td>5,01 ± 0,01 cm</td><td>5,00 ± 0,01 cm</td></tr>
+                                <tr><td>Altura</td><td>Medida 3</td><td>Calibre</td><td>4,99 ± 0,01 cm</td><td>5,00 ± 0,01 cm</td></tr>
+                                <tr><td class="media">Altura</td><td class="media">Media</td><td class="media">Calibre</td><td class="media">5,00 ± 0,01 cm</td><td class="media">5,00 ± 0,01 cm</td></tr>
+                                <tr><td>Masa</td><td>Medida 1</td><td>Balanza</td><td>123,61 ± 0,01 g</td><td>42,40 ± 0,01 g</td></tr>
+                                <tr><td>Masa</td><td>Medida 2</td><td>Balanza</td><td>123,63 ± 0,01 g</td><td>42,42 ± 0,01 g</td></tr>
+                                <tr><td>Masa</td><td>Medida 3</td><td>Balanza</td><td>123,62 ± 0,01 g</td><td>42,41 ± 0,01 g</td></tr>
+                                <tr><td class="media">Masa</td><td class="media">Media</td><td class="media">Balanza</td><td class="media">123,62 ± 0,01 g</td><td class="media">42,41 ± 0,01 g</td></tr>
+                                <tr><td>Vol. desalojado</td><td>Medida 1</td><td>Probeta</td><td>16,0 ± 1,0 mL</td><td>16,0 ± 1,0 mL</td></tr>
+                                <tr><td>Vol. desalojado</td><td>Medida 2</td><td>Probeta</td><td>15,0 ± 1,0 mL</td><td>16,0 ± 1,0 mL</td></tr>
+                                <tr><td>Vol. desalojado</td><td>Medida 3</td><td>Probeta</td><td>16,0 ± 1,0 mL</td><td>15,0 ± 1,0 mL</td></tr>
+                                <tr><td class="media">Vol. desalojado</td><td class="media">Media</td><td class="media">Probeta</td><td class="media">15,7 ± 1,0 cm³</td><td class="media">15,7 ± 1,0 cm³</td></tr>
+                            </tbody>
+                        </table>
+
+                        <div class="paso" style="margin:15px 0 10px 0;"><strong>5.2 Esferas</strong></div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Magnitud</th>
+                                    <th>Medida</th>
+                                    <th>Instrumento</th>
+                                    <th>Esfera pesada</th>
+                                    <th>Esfera ligera</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Diámetro</td><td>Medida 1</td><td>Calibre</td><td>3,00 ± 0,01 cm</td><td>3,00 ± 0,01 cm</td></tr>
+                                <tr><td>Diámetro</td><td>Medida 2</td><td>Calibre</td><td>3,01 ± 0,01 cm</td><td>3,00 ± 0,01 cm</td></tr>
+                                <tr><td>Diámetro</td><td>Medida 3</td><td>Calibre</td><td>2,99 ± 0,01 cm</td><td>3,00 ± 0,01 cm</td></tr>
+                                <tr><td class="media">Diámetro</td><td class="media">Media</td><td class="media">Calibre</td><td class="media">3,00 ± 0,01 cm</td><td class="media">3,00 ± 0,01 cm</td></tr>
+                                <tr><td>Masa</td><td>Medida 1</td><td>Balanza</td><td>110,97 ± 0,01 g</td><td>16,95 ± 0,01 g</td></tr>
+                                <tr><td>Masa</td><td>Medida 2</td><td>Balanza</td><td>110,99 ± 0,01 g</td><td>16,97 ± 0,01 g</td></tr>
+                                <tr><td>Masa</td><td>Medida 3</td><td>Balanza</td><td>110,98 ± 0,01 g</td><td>16,96 ± 0,01 g</td></tr>
+                                <tr><td class="media">Masa</td><td class="media">Media</td><td class="media">Balanza</td><td class="media">110,98 ± 0,01 g</td><td class="media">16,96 ± 0,01 g</td></tr>
+                                <tr><td>Vol. desalojado</td><td>Medida 1</td><td>Probeta</td><td>14,0 ± 1,0 mL</td><td>14,0 ± 1,0 mL</td></tr>
+                                <tr><td>Vol. desalojado</td><td>Medida 2</td><td>Probeta</td><td>14,0 ± 1,0 mL</td><td>14,0 ± 1,0 mL</td></tr>
+                                <tr><td>Vol. desalojado</td><td>Medida 3</td><td>Probeta</td><td>15,0 ± 1,0 mL</td><td>14,0 ± 1,0 mL</td></tr>
+                                <tr><td class="media">Vol. desalojado</td><td class="media">Media</td><td class="media">Probeta</td><td class="media">14,3 ± 1,0 cm³</td><td class="media">14,0 ± 1,0 cm³</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="paso" style="margin-top: 8px; font-weight: 500; color: #2b6cb0;">
+                            ✔ Todas las medidas han sido registradas con su error instrumental y se ha calculado la media aritmética de las tres repeticiones.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2: VOLUMEN GEOMÉTRICO CILINDROS -->
+            <div class="ejercicio-card">
+                <div class="card-header">
+                    <span class="badge">Ejercicio 2</span>
+                    Cálculo del volumen geométrico de los cilindros
+                </div>
+                <div class="card-body">
+                    <div class="enunciado-ej">
+                        <strong>Enunciado:</strong> Usa las medias del diámetro (\( d \pm \Delta d \)) y la altura (\( h \pm \Delta h \)) para calcular el volumen geométrico de cada cilindro y su error. Fórmula: \( V = \pi \cdot d^2 \cdot h / 4 \).
+                    </div>
+                    <div class="resolucion">
+                        <strong>Resolución paso a paso:</strong>
+                        <div class="paso"><strong>1. Cilindro pesado:</strong></div>
+                        <div class="paso">Sustitución: \( V = \pi \cdot (2,00)^2 \cdot (5,00) / 4 = 15,71 \; \text{cm}^3 \)</div>
+                        <div class="paso">Error: \( \Delta V = 15,71 \cdot \left( \dfrac{2 \cdot 0,01}{2,00} + \dfrac{0,01}{5,00} \right) = 0,19 \; \text{cm}^3 \)</div>
+                        <div class="paso"><strong>Resultado: \( V = (15,71 \pm 0,19) \; \text{cm}^3 \)</strong></div>
+
+                        <div class="paso" style="margin-top:12px;"><strong>2. Cilindro ligero:</strong></div>
+                        <div class="paso">Sustitución: \( V = \pi \cdot (2,00)^2 \cdot (5,00) / 4 = 15,71 \; \text{cm}^3 \)</div>
+                        <div class="paso">Error: \( \Delta V = 15,71 \cdot \left( \dfrac{2 \cdot 0,01}{2,00} + \dfrac{0,01}{5,00} \right) = 0,19 \; \text{cm}^3 \)</div>
+                        <div class="paso"><strong>Resultado: \( V = (15,71 \pm 0,19) \; \text{cm}^3 \)</strong></div>
+
+                        <div class="paso" style="margin-top: 8px; font-weight: 500; color: #2b6cb0;">
+                            ✔ Ambos cilindros tienen el mismo volumen geométrico porque sus dimensiones medias coinciden.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3: VOLUMEN GEOMÉTRICO ESFERAS -->
+            <div class="ejercicio-card">
+                <div class="card-header">
+                    <span class="badge">Ejercicio 3</span>
+                    Cálculo del volumen geométrico de las esferas
+                </div>
+                <div class="card-body">
+                    <div class="enunciado-ej">
+                        <strong>Enunciado:</strong> Usa la media del diámetro (\( d \pm \Delta d \)) para calcular el volumen geométrico de cada esfera y su error. Fórmula: \( V = \pi \cdot d^3 / 6 \).
+                    </div>
+                    <div class="resolucion">
+                        <strong>Resolución paso a paso:</strong>
+                        <div class="paso"><strong>1. Esfera pesada:</strong></div>
+                        <div class="paso">Sustitución: \( V = \pi \cdot (3,00)^3 / 6 = 14,14 \; \text{cm}^3 \)</div>
+                        <div class="paso">Error: \( \Delta V = 14,14 \cdot \left( \dfrac{3 \cdot 0,01}{3,00} \right) = 0,14 \; \text{cm}^3 \)</div>
+                        <div class="paso"><strong>Resultado: \( V = (14,14 \pm 0,14) \; \text{cm}^3 \)</strong></div>
+
+                        <div class="paso" style="margin-top:12px;"><strong>2. Esfera ligera:</strong></div>
+                        <div class="paso">Sustitución: \( V = \pi \cdot (3,00)^3 / 6 = 14,14 \; \text{cm}^3 \)</div>
+                        <div class="paso">Error: \( \Delta V = 14,14 \cdot \left( \dfrac{3 \cdot 0,01}{3,00} \right) = 0,14 \; \text{cm}^3 \)</div>
+                        <div class="paso"><strong>Resultado: \( V = (14,14 \pm 0,14) \; \text{cm}^3 \)</strong></div>
+
+                        <div class="paso" style="margin-top: 8px; font-weight: 500; color: #2b6cb0;">
+                            ✔ Ambas esferas tienen el mismo volumen geométrico porque sus diámetros medios coinciden.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4: TABLA RESUMEN VOLÚMENES -->
+            <div class="ejercicio-card">
+                <div class="card-header">
+                    <span class="badge">Ejercicio 4</span>
+                    Tabla resumen de volúmenes y comparación
+                </div>
+                <div class="card-body">
+                    <div class="enunciado-ej">
+                        <strong>Enunciado:</strong> Compara el volumen geométrico con el volumen desplazado para cada objeto e indica si coinciden dentro del margen de error.
+                    </div>
+                    <div class="resolucion">
+                        <strong>Resolución paso a paso:</strong>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Objeto</th>
+                                    <th>Volumen geométrico (V ± ΔV)</th>
+                                    <th>Volumen desplazado (V ± ΔV)</th>
+                                    <th>¿Coinciden dentro del error?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Cilindro pesado</td><td>(15,71 ± 0,19) cm³</td><td>(15,7 ± 1,0) cm³</td><td><strong>Sí</strong> (15,71 ∈ [14,7; 16,7])</td></tr>
+                                <tr><td>Cilindro ligero</td><td>(15,71 ± 0,19) cm³</td><td>(15,7 ± 1,0) cm³</td><td><strong>Sí</strong> (15,71 ∈ [14,7; 16,7])</td></tr>
+                                <tr><td>Esfera pesada</td><td>(14,14 ± 0,14) cm³</td><td>(14,3 ± 1,0) cm³</td><td><strong>Sí</strong> (14,14 ∈ [13,3; 15,3])</td></tr>
+                                <tr><td>Esfera ligera</td><td>(14,14 ± 0,14) cm³</td><td>(14,0 ± 1,0) cm³</td><td><strong>Sí</strong> (14,14 ∈ [13,0; 15,0])</td></tr>
+                            </tbody>
+                        </table>
+                        <div class="paso" style="margin-top: 8px; font-weight: 500; color: #2b6cb0;">
+                            ✔ Todos los volúmenes geométricos caen dentro del intervalo de confianza del volumen desplazado. La concordancia es excelente.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5: CÁLCULO DE LA DENSIDAD -->
+            <div class="ejercicio-card">
+                <div class="card-header">
+                    <span class="badge">Ejercicio 5</span>
+                    Cálculo de la densidad por los dos métodos
+                </div>
+                <div class="card-body">
+                    <div class="enunciado-ej">
+                        <strong>Enunciado:</strong> Calcula la densidad de cada objeto con los DOS métodos y propaga el error con \( \Delta\rho = \rho \cdot ( \Delta m/m + \Delta V/V ) \). Expresa el resultado como (\( \rho \pm \Delta\rho \)).
+                    </div>
+                    <div class="resolucion">
+                        <strong>Resolución paso a paso:</strong>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Objeto</th>
+                                    <th>Método 1: ρ = m / V_geométrico</th>
+                                    <th>Método 2: ρ = m / V_desplazado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Cilindro pesado</td>
+                                    <td>ρ = 123,62 / 15,71 = 7,87 g/cm³<br>Δρ = 7,87 · (0,01/123,62 + 0,19/15,71) = 0,10 g/cm³<br><strong>ρ = (7,87 ± 0,10) g/cm³</strong></td>
+                                    <td>ρ = 123,62 / 15,7 = 7,87 g/cm³<br>Δρ = 7,87 · (0,01/123,62 + 1,0/15,7) = 0,50 g/cm³<br><strong>ρ = (7,87 ± 0,50) g/cm³</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Cilindro ligero</td>
+                                    <td>ρ = 42,41 / 15,71 = 2,70 g/cm³<br>Δρ = 2,70 · (0,01/42,41 + 0,19/15,71) = 0,03 g/cm³<br><strong>ρ = (2,70 ± 0,03) g/cm³</strong></td>
+                                    <td>ρ = 42,41 / 15,7 = 2,70 g/cm³<br>Δρ = 2,70 · (0,01/42,41 + 1,0/15,7) = 0,17 g/cm³<br><strong>ρ = (2,70 ± 0,17) g/cm³</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Esfera pesada</td>
+                                    <td>ρ = 110,98 / 14,14 = 7,85 g/cm³<br>Δρ = 7,85 · (0,01/110,98 + 0,14/14,14) = 0,08 g/cm³<br><strong>ρ = (7,85 ± 0,08) g/cm³</strong></td>
+                                    <td>ρ = 110,98 / 14,3 = 7,76 g/cm³<br>Δρ = 7,76 · (0,01/110,98 + 1,0/14,3) = 0,54 g/cm³<br><strong>ρ = (7,76 ± 0,54) g/cm³</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Esfera ligera</td>
+                                    <td>ρ = 16,96 / 14,14 = 1,20 g/cm³<br>Δρ = 1,20 · (0,01/16,96 + 0,14/14,14) = 0,01 g/cm³<br><strong>ρ = (1,20 ± 0,01) g/cm³</strong></td>
+                                    <td>ρ = 16,96 / 14,0 = 1,21 g/cm³<br>Δρ = 1,21 · (0,01/16,96 + 1,0/14,0) = 0,09 g/cm³<br><strong>ρ = (1,21 ± 0,09) g/cm³</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="paso" style="margin-top: 10px;"><strong>Conversión a kg/m³:</strong></div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Objeto</th>
+                                    <th>ρ método 1 (g/cm³)</th>
+                                    <th>ρ método 2 (g/cm³)</th>
+                                    <th>ρ en kg/m³</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Cilindro pesado</td><td>7,87</td><td>7,87</td><td><strong>7870 kg/m³</strong></td></tr>
+                                <tr><td>Cilindro ligero</td><td>2,70</td><td>2,70</td><td><strong>2700 kg/m³</strong></td></tr>
+                                <tr><td>Esfera pesada</td><td>7,85</td><td>7,76</td><td><strong>7850 kg/m³</strong></td></tr>
+                                <tr><td>Esfera ligera</td><td>1,20</td><td>1,21</td><td><strong>1200 kg/m³</strong></td></tr>
+                            </tbody>
+                        </table>
+                        <div class="paso" style="margin-top: 8px; font-weight: 500; color: #2b6cb0;">
+                            ✔ Las densidades obtenidas por ambos métodos son compatibles dentro de sus márgenes de error. El método geométrico presenta menor incertidumbre.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6: ANÁLISIS DE RESULTADOS -->
+            <div class="ejercicio-card">
+                <div class="card-header">
+                    <span class="badge">Ejercicio 6</span>
+                    Comparación, análisis e identificación de materiales
+                </div>
+                <div class="card-body">
+                    <div class="enunciado-ej">
+                        <strong>Enunciado:</strong> Responde razonadamente a las siguientes cuestiones:<br>
+                        a) ¿Coinciden las densidades obtenidas por los dos métodos dentro del margen de error? ¿A qué se deben las diferencias?<br>
+                        b) ¿Qué método es más preciso para determinar el volumen? ¿Por qué?<br>
+                        c) Ordena los cuatro objetos de mayor a menor densidad.<br>
+                        d) Compara con valores de referencia e identifica el material de cada objeto.<br>
+                        e) ¿Flotarían en agua? ¿Y en mercurio (ρ = 13,6 g/cm³)?
+                    </div>
+                    <div class="resolucion">
+                        <strong>Resolución paso a paso:</strong>
+                        <div class="paso"><strong>a) Coincidencia de métodos:</strong> Sí, las densidades obtenidas por ambos métodos coinciden plenamente dentro de los rangos definidos por sus márgenes de error (ρ ± Δρ). Las pequeñas desviaciones en el valor medio se deben a la menor apreciación de la probeta graduada (±1 mL) frente a la del calibre (±0,01 cm), al error de paralaje al observar el menisco del agua y a pequeñas imperfecciones geométricas de las piezas.</div>
+                        <div class="paso"><strong>b) Precisión:</strong> El método del volumen geométrico (usando calibre) es sustancialmente más preciso para cuerpos regulares. El calibre permite medir longitudes con una incertidumbre de solo ±0,01 cm (error relativo de ~0,2%), lo que propaga un error en volumen de apenas el ~1%. En cambio, la probeta graduada tiene un error de ±1 mL, representando una incertidumbre relativa mucho mayor (~6–7%).</div>
+                        <div class="paso"><strong>c) Orden de densidad decreciente:</strong> Cilindro pesado (7,87 g/cm³) ≈ Esfera pesada (7,85 g/cm³) > Cilindro ligero (2,70 g/cm³) > Esfera ligera (1,20 g/cm³). Coincide plenamente con la percepción táctil al manipularlos: las piezas pesadas de acero transmiten mucha más masa por unidad de volumen que el cilindro de aluminio y la esfera de plástico.</div>
+                        <div class="paso"><strong>d) Identificación de materiales:</strong>
+                            <ul style="margin-top:5px;">
+                                <li><strong>Cilindro pesado:</strong> Hierro o acero (7,87 g/cm³, muy próximo al valor de referencia de 7,9 g/cm³).</li>
+                                <li><strong>Cilindro ligero:</strong> Aluminio (2,70 g/cm³, idéntico al valor de referencia de 2,7 g/cm³).</li>
+                                <li><strong>Esfera pesada:</strong> Hierro o acero (7,85 g/cm³, muy cercano a 7,9 g/cm³).</li>
+                                <li><strong>Esfera ligera:</strong> Plástico sintético como metacrilato o PVC (1,20 g/cm³, dentro del rango 0,9–1,4 g/cm³).</li>
+                            </ul>
+                        </div>
+                        <div class="paso"><strong>e) Flotación:</strong> Un cuerpo flota si su densidad es estrictamente menor que la del fluido.
+                            <ul style="margin-top:5px;">
+                                <li><strong>En agua (ρ = 1,0 g/cm³):</strong> Ninguno de los cuatro objetos flotará, ya que todas las densidades halladas (7,87; 7,85; 2,70 y 1,20 g/cm³) superan la densidad del agua y se irán al fondo.</li>
+                                <li><strong>En mercurio (ρ = 13,6 g/cm³):</strong> Los cuatro objetos flotarán perfectamente, puesto que todas sus densidades son considerablemente menores que 13,6 g/cm³.</li>
+                            </ul>
+                        </div>
+                        <div class="paso" style="margin-top: 8px; font-weight: 500; color: #2b6cb0;">
+                            ✔ Los resultados son coherentes con los valores de referencia y permiten identificar con alta certeza los materiales de cada pieza.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIE DIDÁCTICO -->
+            <div class="pie-didactico">
+                <strong>🧠 Observaciones claves:</strong> La densidad es una propiedad característica de cada material y permite identificarlo. El método geométrico con calibre es más preciso para cuerpos regulares (error ~1%), mientras que el método de desplazamiento en probeta es más versátil pero menos preciso (error ~7%). La propagación de errores es fundamental para expresar correctamente los resultados experimentales y evaluar la concordancia entre métodos. Como valoración crítica para futuras prácticas, se recomienda sustituir la probeta de 100 mL por una de 25 mL o emplear un picnómetro para reducir sustancialmente el error instrumental en sólidos de pequeño volumen.
+            </div>
+
+        </div><!-- fin details-content -->
+    </details>
+
+</div><!-- fin container -->
+
+<script>
+    // Forzar la re-renderización de MathJax cuando se abre el desplegable
+    document.addEventListener('DOMContentLoaded', function() {
+        const details = document.getElementById('ejerciciosDesplegable');
+        if (details) {
+            details.addEventListener('toggle', function() {
+                if (this.open && window.MathJax && window.MathJax.typesetPromise) {
+                    MathJax.typesetPromise();
+                }
+            });
+        }
+    });
+</script>
+
+<!-- ============================================
+     BLOQUE "ES HORA DE" (versión fija, sin desplegar)
+     ============================================ -->
+
+<div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+    <div style="
+        max-width: 100%;
+        padding: 15px;
+        margin: 10px auto;
+        text-align: center;
+        background: #f8fafc;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    ">
+        <p style="
+            font-size: clamp(0.95rem, 3vw, 1.2rem);
+            color: #2d3748;
+            margin-top: 0;
+            margin-bottom: 12px;
+            padding: 0 10px;
+        ">
+            <br> Tratando los datos de un modo un poco más rigurosos.<br>
+            <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+        </p>
+
+        <div style="text-align:center;">
+            <a
+                href="../index.html"
+                target="_blank"
+                style="
+                    display:inline-block;
+                    padding:12px 24px;
+                    background:#0078D4;
+                    color:white;
+                    text-decoration:none;
+                    border-radius:12px;
+                    font-weight:bold;
+                "
+            >
+                Volver al inicio
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- ===================FIN DE ES HORA DE ==================== -->
+
+</body>
+</html>
