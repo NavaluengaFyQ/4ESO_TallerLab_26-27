@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c07 - Transformando el vino en agua</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+        .mini-card.morado { border-top-color: #805ad5; }
+        .color-box {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            vertical-align: middle;
+            margin-right: 8px;
+            border: 2px solid #cbd5e0;
+        }
+        .c-violeta { background: #7b1fa2; }
+        .c-blanco { background: #f5f5f5; }
+        .c-rosa { background: #e91e63; }
+        .c-transparente { background: linear-gradient(135deg, #e3f2fd 50%, #ffffff 50%); }
+
+        /* =========================================================
+           DIAGRAMA DE LOS CINCO VASOS (FILA DE VASOS)
+           ========================================================= */
+        .beaker-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            margin: 20px 0;
+        }
+        .beaker-card {
+            flex: 1 1 150px;
+            max-width: 175px;
+            background: white;
+            border-radius: 14px;
+            padding: 16px 12px 12px 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+        .beaker-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+        .beaker-num {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9em;
+            box-shadow: 0 2px 6px rgba(102,126,234,0.5);
+        }
+        .beaker {
+            width: 70px;
+            height: 90px;
+            margin: 8px auto;
+            border: 3px solid #cbd5e0;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            position: relative;
+            overflow: hidden;
+            background: #f7fafc;
+        }
+        .beaker::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #cbd5e0;
+            z-index: 2;
+        }
+        .liquid {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 78%;
+            background: var(--liq, #7c3aed);
+            border-radius: 0 0 9px 9px;
+        }
+        .liquid.turbio {
+            background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+            position: relative;
+        }
+        .liquid.turbio::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), transparent 40%),
+                        radial-gradient(circle at 70% 60%, rgba(255,255,255,0.6), transparent 35%),
+                        radial-gradient(circle at 50% 80%, rgba(255,255,255,0.5), transparent 30%);
+            border-radius: 0 0 9px 9px;
+        }
+        .liquid.lechoso {
+            background: #f8fafc;
+            position: relative;
+        }
+        .liquid.lechoso::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 25% 35%, rgba(255,255,255,0.9), transparent 50%),
+                        radial-gradient(circle at 75% 65%, rgba(255,255,255,0.7), transparent 45%);
+            border-radius: 0 0 9px 9px;
+        }
+        .liquid.rosa-turbio {
+            background: linear-gradient(180deg, #f3c4e0 0%, #d99bc4 100%);
+            position: relative;
+        }
+        .liquid.rosa-turbio::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.7), transparent 45%),
+                        radial-gradient(circle at 70% 65%, rgba(255,255,255,0.5), transparent 40%);
+            border-radius: 0 0 9px 9px;
+        }
+        .liquid.burbujas {
+            background: linear-gradient(180deg, #e8f4fb 0%, #d0e8f5 100%);
+            position: relative;
+        }
+        .liquid.burbujas::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 75%, rgba(255,255,255,0.9) 2px, transparent 3px),
+                radial-gradient(circle at 45% 60%, rgba(255,255,255,0.85) 2.5px, transparent 3.5px),
+                radial-gradient(circle at 65% 80%, rgba(255,255,255,0.9) 2px, transparent 3px),
+                radial-gradient(circle at 35% 45%, rgba(255,255,255,0.8) 1.5px, transparent 2.5px),
+                radial-gradient(circle at 75% 50%, rgba(255,255,255,0.85) 2px, transparent 3px),
+                radial-gradient(circle at 55% 30%, rgba(255,255,255,0.7) 1.5px, transparent 2.5px);
+            border-radius: 0 0 9px 9px;
+        }
+        .beaker-label {
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 0.9em;
+            margin-bottom: 4px;
+        }
+        .beaker-desc {
+            font-size: 0.76em;
+            color: #4a5568;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            min-height: 44px;
+        }
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: 600;
+            margin: 2px 0;
+        }
+        .tag-bad { background: #fed7d7; color: #822727; }
+        .tag-warn { background: #fefcbf; color: #744210; }
+        .tag-ok { background: #c6f6d5; color: #22543d; }
+        .tipo-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.68em;
+            font-weight: 500;
+            margin: 2px 2px;
+        }
+        .tipo-redox { background: #bee3f8; color: #2a4365; }
+        .tipo-precip { background: #e9d8fd; color: #44337a; }
+        .tipo-acidobase { background: #c6f6d5; color: #22543d; }
+        .tipo-despro { background: #feebc8; color: #7b341e; }
+        .tipo-ninguna { background: #e2e8f0; color: #4a5568; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+
+        /* =========================================================
+           SECCIONES PLEGABLES CON EL ASPECTO DE .section
+           ========================================================= */
+        details.section-details {
+            margin: 15px;
+            padding: 0;
+            background: #f7fafc;
+            border: none;
+            border-left: 5px solid #a0aec0;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+            transition: box-shadow 0.2s;
+        }
+        details.section-details[open] {
+            box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+        }
+        details.section-details.enunciado     { background: #f7fafc; border-left-color: #a0aec0; }
+        details.section-details.objetivo      { background: #fffaf0; border-left-color: #ed8936; }
+        details.section-details.procedimiento { background: #f0fff4; border-left-color: #48bb78; }
+        details.section-details.resultado     { background: #ebf8ff; border-left-color: #4299e1; }
+
+        details.section-details > summary {
+            padding: 18px 24px;
+            background: transparent;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            color: #2d3748;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        details.section-details[open] > summary {
+            border-bottom: 1px dashed rgba(0,0,0,0.12);
+            border-radius: 12px 12px 0 0;
+        }
+        details.section-details > summary h2 {
+            font-size: 1.25em;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            text-align: left;
+        }
+        details.section-details > summary .icon-pulsame {
+            margin-left: auto;
+            white-space: nowrap;
+        }
+        details.section-details > .details-body {
+            padding: 22px 26px 26px 26px;
+        }
+
+        /* =========================================================
+           SUB-DESPLEGABLES (COPA A COPA, APARTADOS DEL ANÁLISIS)
+           ========================================================= */
+        details.inner-details {
+            margin: 14px 0;
+            padding: 0;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid #a0aec0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: box-shadow 0.2s;
+        }
+        details.inner-details[open] {
+            box-shadow: 0 5px 14px rgba(0,0,0,0.09);
+        }
+        details.inner-details > summary {
+            padding: 12px 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: transparent;
+            border-radius: 10px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        details.inner-details[open] > summary {
+            border-bottom: 1px dashed #e2e8f0;
+            border-radius: 10px 10px 0 0;
+        }
+        details.inner-details > summary .fa-chevron-circle-down {
+            font-size: 1.15rem;
+        }
+        details.inner-details > summary .step-num {
+            margin-right: 0;
+            flex: 0 0 auto;
+        }
+        details.inner-details > summary .summary-badge {
+            margin-left: auto;
+            white-space: nowrap;
+        }
+        details.inner-details > .details-body {
+            padding: 16px 20px 20px 20px;
+        }
+
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c07.- </span>
+                <span class="texto">Transformando el vino en agua</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la demostración?</h2>
+        <p>Se parte de una disolución violeta intensa, preparada con <strong>permanganato de potasio</strong> en medio ácido sulfúrico, que se asemeja al "vino tinto". Esta disolución se vierte en cinco copas que contienen pequeñas cantidades de otras disoluciones incoloras. En cada copa, el "vino" se transforma en algo distinto: <strong>agua</strong>, <strong>leche</strong>, <strong>batido de frambuesa</strong> y <strong>limonada gaseosa</strong>.</p>
+        <p>Detrás de este espectáculo visual hay una combinación de tres tipos de reacciones químicas: <strong>redox</strong>, <strong>precipitación</strong> y <strong>ácido-base</strong>. En esta ficha vamos a analizar qué ocurre en cada copa, por qué cambia el color y qué tipo de reacción se da en cada caso.</p>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Por qué la misma disolución violeta se vuelve incolora, blanca, rosa o con burbujas según la copa?
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Identificar los <strong>tres tipos de reacciones</strong> que ocurren en la demostración: redox, precipitación y ácido-base.</li>
+            <li>Explicar el <strong>cambio de color</strong> del permanganato al reducirse a \( \mathrm{Mn^{2+}} \) incoloro.</li>
+            <li>Justificar la aparición de un <strong>precipitado blanco</strong> (sulfato de bario) y de <strong>burbujas</strong> (dióxido de carbono).</li>
+            <li>Escribir y ajustar las <strong>ecuaciones iónicas</strong> de cada proceso.</li>
+            <li>Comprender por qué la misma disolución de partida puede dar resultados tan distintos según los reactivos presentes.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN NOMENCLATURA (PLEGABLE) -->
+    <details class="section-details procedimiento">
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <h2>🧪 Nomenclatura de las disoluciones</h2>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Desplegar</span>
+        </summary>
+        <div class="details-body">
+            <p>Para simplificar el análisis, vamos a nombrar las disoluciones de la siguiente forma:</p>
+            <table>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Composición</th>
+                    <th>Concentración aproximada</th>
+                    <th>Función</th>
+                </tr>
+                <tr>
+                    <td><strong>Disolución BOTELLA</strong></td>
+                    <td>\( \mathrm{KMnO_4} \) + \( \mathrm{H_2SO_4} \) 2 M</td>
+                    <td>\( \sim 0{,}0025\ \mathrm{M} \) en \( \mathrm{KMnO_4} \)</td>
+                    <td>La que simula el "vino tinto" (violeta)</td>
+                </tr>
+                <tr>
+                    <td><strong>Disolución A</strong></td>
+                    <td>\( \mathrm{BaCl_2 \cdot 2H_2O} \) en agua</td>
+                    <td>\( \sim 1\ \mathrm{M} \)</td>
+                    <td>Aporta iones \( \mathrm{Ba^{2+}} \) (precipitante)</td>
+                </tr>
+                <tr>
+                    <td><strong>Disolución B</strong></td>
+                    <td>\( \mathrm{Na_2S_2O_3 \cdot 5H_2O} \) en agua</td>
+                    <td>\( \sim 1\ \mathrm{M} \)</td>
+                    <td>Reductor (decolora el permanganato)</td>
+                </tr>
+                <tr>
+                    <td><strong>Disolución C</strong></td>
+                    <td>\( \mathrm{Na_2CO_3} \) en agua</td>
+                    <td>\( \sim 2\ \mathrm{M} \)</td>
+                    <td>Base (reacciona con el ácido, libera \( \mathrm{CO_2} \))</td>
+                </tr>
+            </table>
+        </div>
+    </details>
+
+    <!-- ================================================= -->
+    <!-- DIAGRAMA DE LOS CINCO VASOS (FILA DE VASOS)      -->
+    <!-- ================================================= -->
+    <div class="section procedimiento">
+        <h2>🧪 Los cinco vasos de un vistazo</h2>
+
+        <div class="beaker-row">
+
+            <!-- VASO 1 -->
+            <div class="beaker-card">
+                <div class="beaker-num">1</div>
+                <div class="beaker">
+                    <div class="liquid" style="--liq:#7c3aed;"></div>
+                </div>
+                <div class="beaker-label">"El vino intacto"</div>
+                <div class="beaker-desc">Violeta intenso, translúcido. No hay cambio.</div>
+                <span class="tag tag-bad">Copa vacía</span><br>
+                <span class="tipo-badge tipo-ninguna">Sin reacción</span>
+            </div>
+
+            <!-- VASO 2 -->
+            <div class="beaker-card">
+                <div class="beaker-num">2</div>
+                <div class="beaker">
+                    <div class="liquid" style="--liq:#e8f4fb;"></div>
+                </div>
+                <div class="beaker-label">"Agua clara"</div>
+                <div class="beaker-desc">Incoloro y transparente. Decoloración total.</div>
+                <span class="tag tag-ok">Exceso S₂O₃²⁻</span><br>
+                <span class="tipo-badge tipo-redox">Redox</span>
+            </div>
+
+            <!-- VASO 3 -->
+            <div class="beaker-card">
+                <div class="beaker-num">3</div>
+                <div class="beaker">
+                    <div class="liquid lechoso"></div>
+                </div>
+                <div class="beaker-label">"Leche"</div>
+                <div class="beaker-desc">Blanco lechoso. Precipitado fino en suspensión.</div>
+                <span class="tag tag-ok">Exceso S₂O₃²⁻ + Ba²⁺</span><br>
+                <span class="tipo-badge tipo-redox">Redox</span>
+                <span class="tipo-badge tipo-precip">Precipitación</span>
+            </div>
+
+            <!-- VASO 4 -->
+            <div class="beaker-card">
+                <div class="beaker-num">4</div>
+                <div class="beaker">
+                    <div class="liquid rosa-turbio"></div>
+                </div>
+                <div class="beaker-label">"Batido de frambuesa"</div>
+                <div class="beaker-desc">Rosa‑violeta turbio. El violeta permanece.</div>
+                <span class="tag tag-warn">Exceso MnO₄⁻ + Ba²⁺</span><br>
+                <span class="tipo-badge tipo-precip">Precipitación</span>
+            </div>
+
+            <!-- VASO 5 -->
+            <div class="beaker-card">
+                <div class="beaker-num">5</div>
+                <div class="beaker">
+                    <div class="liquid burbujas"></div>
+                </div>
+                <div class="beaker-label">"Limonada gaseosa"</div>
+                <div class="beaker-desc">Incoloro con burbujas de CO₂ ascendiendo.</div>
+                <span class="tag tag-ok">Exceso S₂O₃²⁻ + CO₃²⁻</span><br>
+                <span class="tipo-badge tipo-redox">Redox</span>
+                <span class="tipo-badge tipo-acidobase">Ácido-base</span>
+            </div>
+
+        </div>
+
+        <div class="note">
+            <strong>Idea clave:</strong> el cambio de color no depende del vaso, sino de <em>qué reductor o reactivo</em> se ha añadido. Los vasos 2, 3 y 5 contienen <strong>tiosulfato</strong> (reductor) y el permanganato se reduce a \( \mathrm{Mn^{2+}} \) incoloro. El vaso 4 <strong>no contiene tiosulfato</strong>, por lo que el violeta permanece, y solo se forma el precipitado blanco de \( \mathrm{BaSO_4} \). El vaso 3 combina ambas cosas: decoloración + precipitado. El vaso 5 añade, además, la reacción ácido-base del carbonato que libera \( \mathrm{CO_2} \). El tipo de reacción que domina es siempre <strong>REDOX en medio ácido</strong>, complementada con <strong>precipitación</strong> o <strong>ácido-base</strong> según la copa.
+        </div>
+    </div>
+
+    <!-- SECCIÓN PREPARACIÓN DE LA BOTELLA (PLEGABLE) -->
+    <details class="section-details procedimiento">
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <h2>⚙️ Preparación de la disolución BOTELLA ("vino tinto")</h2>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Desplegar</span>
+        </summary>
+        <div class="details-body">
+
+            <div class="step">
+                <span class="step-num">1</span>
+                <strong>Pesada del permanganato</strong>
+                <p>Pesar aproximadamente <strong>0,4 g de \( \mathrm{KMnO_4} \)</strong>. Es un sólido cristalino de color púrpura oscuro, oxidante fuerte. Mancha la piel y la ropa.</p>
+            </div>
+
+            <div class="step">
+                <span class="step-num">2</span>
+                <strong>Disolución en ácido sulfúrico</strong>
+                <p>Disolver el \( \mathrm{KMnO_4} \) en <strong>100 mL de disolución de \( \mathrm{H_2SO_4} \) 2 M</strong>. El ácido sulfúrico proporciona el medio ácido necesario para que el permanganato actúe como oxidante fuerte.</p>
+                <div class="note">
+                    <strong>¡Atención!</strong> Añadir siempre el ácido sobre el agua, nunca al revés, y hacerlo lentamente. Usar guantes y gafas de seguridad.
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-num">3</span>
+                <strong>Enrase y trasvase</strong>
+                <p>Completar hasta <strong>1 litro</strong> con agua desionizada. Trasvasar la disolución violeta a una <strong>botella de vino</strong> (previamente limpia y sin etiqueta de bebida). La botella aporta realismo a la demostración.</p>
+                <div class="formula-box">
+                    <strong>Disolución BOTELLA:</strong> \( \mathrm{KMnO_4} \approx 0{,}0025\ \mathrm{M} \) en \( \mathrm{H_2SO_4} \)
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-num">4</span>
+                <strong>Preparación de las otras disoluciones</strong>
+                <ul>
+                    <li><strong>Disolución A:</strong> 24 g de \( \mathrm{BaCl_2 \cdot 2H_2O} \) en 100 mL de agua desionizada (\( \sim 1\ \mathrm{M} \)).</li>
+                    <li><strong>Disolución B:</strong> 25 g de \( \mathrm{Na_2S_2O_3 \cdot 5H_2O} \) en 100 mL de agua desionizada (\( \sim 1\ \mathrm{M} \)).</li>
+                    <li><strong>Disolución C:</strong> 21 g de \( \mathrm{Na_2CO_3} \) en 100 mL de agua desionizada (\( \sim 2\ \mathrm{M} \)).</li>
+                </ul>
+                <p>Todas son incoloras y transparentes, lo que permite "esconderlas" en el fondo de las copas sin que se perciba.</p>
+            </div>
+
+            <div class="step">
+                <span class="step-num">5</span>
+                <strong>Montaje de las copas (fuera de la vista del público)</strong>
+                <p>Colocar cinco copas en fila. Añadir en cada una las cantidades indicadas:</p>
+                <table>
+                    <tr><th>Copa</th><th>Contenido previo</th><th>Volumen</th></tr>
+                    <tr><td>N.º 1</td><td>Vacía</td><td>—</td></tr>
+                    <tr><td>N.º 2</td><td>Disolución B (tiosulfato)</td><td>1 mL</td></tr>
+                    <tr><td>N.º 3</td><td>Disolución B + Disolución A</td><td>1 mL + 3 mL</td></tr>
+                    <tr><td>N.º 4</td><td>Disolución A (cloruro de bario)</td><td>3 mL</td></tr>
+                    <tr><td>N.º 5</td><td>Disolución B + Disolución C</td><td>1 mL + 3 mL</td></tr>
+                </table>
+                <div class="note">
+                    Los volúmenes son tan pequeños que, en el fondo de la copa, pasan desapercibidos. Ninguna concentración es crítica.
+                </div>
+            </div>
+
+        </div>
+    </details>
+
+    <!-- SECCIÓN ANÁLISIS COPA A COPA (PLEGABLE CON SUB-DESPLEGABLES) -->
+    <details class="section-details procedimiento">
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <h2>🍷 Análisis esquemático de lo que ocurre en cada copa</h2>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Desplegar</span>
+        </summary>
+        <div class="details-body">
+
+            <!-- COPA 1 -->
+            <details class="inner-details">
+                <summary>
+                    <span class="step-num">1</span>
+                    <span>Copa n.º 1: "vino tinto" (sin cambios)</span>
+                    <span class="tag tag-bad summary-badge">Sin reacción</span>
+                </summary>
+                <div class="details-body">
+                    <p><strong>Contenido previo:</strong> nada.</p>
+                    <p><strong>Al verter la disolución BOTELLA:</strong> la copa queda llena de líquido violeta intenso. No ocurre ninguna reacción.</p>
+                    <table>
+                        <tr><th>Observación</th><th>Resultado</th></tr>
+                        <tr>
+                            <td><span class="color-box c-violeta"></span>Color</td>
+                            <td>Violeta intenso (permanece)</td>
+                        </tr>
+                        <tr><td>Precipitado</td><td>No</td></tr>
+                        <tr><td>Efervescencia</td><td>No</td></tr>
+                        <tr><td>Tipo de reacción</td><td>Ninguna</td></tr>
+                    </table>
+                    <p><strong>Explicación:</strong> no hay ningún reactivo que pueda reducir el \( \mathrm{MnO_4^-} \) ni reaccionar con él. El permanganato queda tal cual, disuelto y violeta.</p>
+                </div>
+            </details>
+
+            <!-- COPA 2 -->
+            <details class="inner-details">
+                <summary>
+                    <span class="step-num">2</span>
+                    <span>Copa n.º 2: "vino" → "agua" (o "vino blanco")</span>
+                    <span class="tag tag-ok summary-badge">Redox</span>
+                </summary>
+                <div class="details-body">
+                    <p><strong>Contenido previo:</strong> 1 mL de Disolución B (tiosulfato de sodio).</p>
+                    <p><strong>Al verter la disolución BOTELLA:</strong> el color violeta desaparece rápidamente. La copa queda completamente incolora.</p>
+                    <table>
+                        <tr><th>Observación</th><th>Resultado</th></tr>
+                        <tr>
+                            <td><span class="color-box c-transparente"></span>Color</td>
+                            <td>Incoloro (transparente)</td>
+                        </tr>
+                        <tr><td>Precipitado</td><td>No</td></tr>
+                        <tr><td>Efervescencia</td><td>No</td></tr>
+                        <tr><td>Tipo de reacción</td><td><strong>REDOX</strong></td></tr>
+                    </table>
+                    <div class="formula-box">
+                        <strong>Reacción redox:</strong><br>
+                        \[
+                        \mathrm{2\,MnO_4^- + 16\,H^+ + 10\,S_2O_3^{2-} \rightarrow 2\,Mn^{2+} + 5\,S_4O_6^{2-} + 8\,H_2O}
+                        \]
+                    </div>
+                    <p><strong>Explicación:</strong> el ion tiosulfato \( \mathrm{S_2O_3^{2-}} \) actúa como <strong>reductor</strong> y cede electrones al permanganato. El Mn pasa de +7 (violeta) a +2 (incoloro). El azufre pasa de +2 a +2,5 (en el tetrationato \( \mathrm{S_4O_6^{2-}} \)). La desaparición del color violeta se debe a la desaparición del ion \( \mathrm{MnO_4^-} \).</p>
+                </div>
+            </details>
+
+            <!-- COPA 3 -->
+            <details class="inner-details">
+                <summary>
+                    <span class="step-num">3</span>
+                    <span>Copa n.º 3: "vino" → "leche"</span>
+                    <span class="tag tag-ok summary-badge">Redox + Precipitación</span>
+                </summary>
+                <div class="details-body">
+                    <p><strong>Contenido previo:</strong> 1 mL de Disolución B (tiosulfato) + 3 mL de Disolución A (cloruro de bario).</p>
+                    <p><strong>Al verter la disolución BOTELLA:</strong> el color violeta desaparece y aparece un precipitado blanco fino que enturbia la disolución.</p>
+                    <table>
+                        <tr><th>Observación</th><th>Resultado</th></tr>
+                        <tr>
+                            <td><span class="color-box c-blanco"></span>Color</td>
+                            <td>Blanco lechoso (precipitado en suspensión)</td>
+                        </tr>
+                        <tr><td>Precipitado</td><td>Sí, \( \mathrm{BaSO_4} \) blanco</td></tr>
+                        <tr><td>Efervescencia</td><td>No</td></tr>
+                        <tr><td>Tipo de reacción</td><td><strong>REDOX + PRECIPITACIÓN</strong></td></tr>
+                    </table>
+                    <div class="formula-box">
+                        <strong>Reacción redox (la misma de la copa 2):</strong><br>
+                        \[
+                        \mathrm{2\,MnO_4^- + 16\,H^+ + 10\,S_2O_3^{2-} \rightarrow 2\,Mn^{2+} + 5\,S_4O_6^{2-} + 8\,H_2O}
+                        \]
+                    </div>
+                    <div class="formula-box">
+                        <strong>Reacción de precipitación:</strong><br>
+                        \[
+                        \mathrm{Ba^{2+} + SO_4^{2-} \rightarrow BaSO_4\,(s)}
+                        \]
+                    </div>
+                    <p><strong>Explicación:</strong> ocurren dos cosas a la vez. Por un lado, el tiosulfato reduce el permanganato (igual que en la copa 2), por lo que desaparece el violeta. Por otro lado, los iones \( \mathrm{Ba^{2+}} \) de la Disolución A reaccionan con los iones \( \mathrm{SO_4^{2-}} \) procedentes del ácido sulfúrico de la disolución BOTELLA, formando un precipitado blanco de <strong>sulfato de bario</strong> \( \mathrm{BaSO_4} \), que es muy insoluble. El resultado es un líquido blanco lechoso, como la leche.</p>
+                </div>
+            </details>
+
+            <!-- COPA 4 -->
+            <details class="inner-details">
+                <summary>
+                    <span class="step-num">4</span>
+                    <span>Copa n.º 4: "vino" → "batido de frambuesa"</span>
+                    <span class="tag tag-warn summary-badge">Precipitación</span>
+                </summary>
+                <div class="details-body">
+                    <p><strong>Contenido previo:</strong> 3 mL de Disolución A (cloruro de bario).</p>
+                    <p><strong>Al verter la disolución BOTELLA:</strong> se forma un precipitado blanco, pero el color violeta del permanganato <strong>permanece</strong>. El resultado es una mezcla de blanco y violeta: un rosa turbio que recuerda a un batido de frambuesa.</p>
+                    <table>
+                        <tr><th>Observación</th><th>Resultado</th></tr>
+                        <tr>
+                            <td><span class="color-box c-rosa"></span>Color</td>
+                            <td>Rosa-violeta turbio</td>
+                        </tr>
+                        <tr><td>Precipitado</td><td>Sí, \( \mathrm{BaSO_4} \) blanco</td></tr>
+                        <tr><td>Efervescencia</td><td>No</td></tr>
+                        <tr><td>Tipo de reacción</td><td><strong>PRECIPITACIÓN</strong></td></tr>
+                    </table>
+                    <div class="formula-box">
+                        <strong>Reacción de precipitación:</strong><br>
+                        \[
+                        \mathrm{Ba^{2+} + SO_4^{2-} \rightarrow BaSO_4\,(s)}
+                        \]
+                    </div>
+                    <p><strong>Explicación:</strong> en esta copa <strong>no hay tiosulfato</strong>, por lo que el permanganato no se reduce y conserva su color violeta. Sin embargo, los iones \( \mathrm{Ba^{2+}} \) siguen reaccionando con los iones \( \mathrm{SO_4^{2-}} \) del ácido sulfúrico, formando el precipitado blanco. La mezcla del blanco del precipitado con el violeta del permanganato da ese tono rosado turbio característico.</p>
+                    <div class="note">
+                        <strong>Clave:</strong> esta copa demuestra que el precipitado se forma independientemente de la redox. Si no hay reductor, el color violeta se mantiene.
+                    </div>
+                </div>
+            </details>
+
+            <!-- COPA 5 -->
+            <details class="inner-details">
+                <summary>
+                    <span class="step-num">5</span>
+                    <span>Copa n.º 5: "vino" → "limonada gaseosa"</span>
+                    <span class="tag tag-ok summary-badge">Redox + Ácido-base</span>
+                </summary>
+                <div class="details-body">
+                    <p><strong>Contenido previo:</strong> 1 mL de Disolución B (tiosulfato) + 3 mL de Disolución C (carbonato de sodio).</p>
+                    <p><strong>Al verter la disolución BOTELLA:</strong> el color violeta desaparece y se desprenden abundantes burbujas de gas.</p>
+                    <table>
+                        <tr><th>Observación</th><th>Resultado</th></tr>
+                        <tr>
+                            <td><span class="color-box c-transparente"></span>Color</td>
+                            <td>Incoloro (transparente)</td>
+                        </tr>
+                        <tr><td>Precipitado</td><td>No</td></tr>
+                        <tr><td>Efervescencia</td><td>Sí, burbujas de \( \mathrm{CO_2} \)</td></tr>
+                        <tr><td>Tipo de reacción</td><td><strong>REDOX + ÁCIDO-BASE</strong></td></tr>
+                    </table>
+                    <div class="formula-box">
+                        <strong>Reacción redox (la misma de la copa 2):</strong><br>
+                        \[
+                        \mathrm{2\,MnO_4^- + 16\,H^+ + 10\,S_2O_3^{2-} \rightarrow 2\,Mn^{2+} + 5\,S_4O_6^{2-} + 8\,H_2O}
+                        \]
+                    </div>
+                    <div class="formula-box">
+                        <strong>Reacción ácido-base:</strong><br>
+                        \[
+                        \mathrm{CO_3^{2-} + 2\,H^+ \rightarrow H_2O + CO_2\,(g)}
+                        \]
+                    </div>
+                    <p><strong>Explicación:</strong> de nuevo, el tiosulfato reduce el permanganato y el color violeta desaparece. Además, el carbonato de sodio \( \mathrm{CO_3^{2-}} \) reacciona con los iones \( \mathrm{H^+} \) del ácido sulfúrico, liberando dióxido de carbono gaseoso \( \mathrm{CO_2} \). Ese gas forma las burbujas que dan el aspecto de "limonada gaseosa".</p>
+                </div>
+            </details>
+
+            <!-- RESUMEN -->
+            <details class="inner-details">
+                <summary>
+                    <span class="step-num">6</span>
+                    <span>Resumen esquemático de las cinco copas</span>
+                    <span class="tag tag-ok summary-badge">Tabla resumen</span>
+                </summary>
+                <div class="details-body">
+                    <table>
+                        <tr>
+                            <th>Copa</th>
+                            <th>Contenido previo</th>
+                            <th>Color final</th>
+                            <th>Precipitado</th>
+                            <th>Burbujas</th>
+                            <th>Tipo de reacción</th>
+                        </tr>
+                        <tr>
+                            <td>N.º 1</td>
+                            <td>Vacía</td>
+                            <td><span class="color-box c-violeta"></span>Violeta</td>
+                            <td>No</td>
+                            <td>No</td>
+                            <td>Ninguna</td>
+                        </tr>
+                        <tr>
+                            <td>N.º 2</td>
+                            <td>Disolución B (tiosulfato)</td>
+                            <td><span class="color-box c-transparente"></span>Incoloro</td>
+                            <td>No</td>
+                            <td>No</td>
+                            <td>Redox</td>
+                        </tr>
+                        <tr>
+                            <td>N.º 3</td>
+                            <td>Disolución B + Disolución A</td>
+                            <td><span class="color-box c-blanco"></span>Blanco</td>
+                            <td>Sí (BaSO₄)</td>
+                            <td>No</td>
+                            <td>Redox + Precipitación</td>
+                        </tr>
+                        <tr>
+                            <td>N.º 4</td>
+                            <td>Disolución A (BaCl₂)</td>
+                            <td><span class="color-box c-rosa"></span>Rosa turbio</td>
+                            <td>Sí (BaSO₄)</td>
+                            <td>No</td>
+                            <td>Precipitación</td>
+                        </tr>
+                        <tr>
+                            <td>N.º 5</td>
+                            <td>Disolución B + Disolución C</td>
+                            <td><span class="color-box c-transparente"></span>Incoloro</td>
+                            <td>No</td>
+                            <td>Sí (CO₂)</td>
+                            <td>Redox + Ácido-base</td>
+                        </tr>
+                    </table>
+                </div>
+            </details>
+
+        </div>
+    </details>
+
+    <!-- SECCIÓN ANÁLISIS PROFUNDO (PLEGABLE CON SUB-DESPLEGABLES) -->
+    <details class="section-details procedimiento">
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <h2>🔬 Análisis profundo de las reacciones</h2>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Desplegar</span>
+        </summary>
+        <div class="details-body">
+
+            <details class="inner-details">
+                <summary>
+                    <span class="step-num">1</span>
+                    <span>La reacción redox: el cambio de color</span>
+                    <span class="tag tag-ok summary-badge">Redox</span>
+                </summary>
+                <div class="details-body">
+                    <p>La reacción principal de la demostración es la reducción del ion permanganato por el ion tiosulfato en medio ácido:</p>
+                    <div class="formula-box">
+                        \[
+                        \mathrm{2\,MnO_4^- + 16\,H^+ + 10\,S_2O_3^{2-} \rightarrow 2\,Mn^{2+} + 5\,S_4O_6^{2-} + 8\,H_2O}
+                        \]
+                    </div>
+                    <p><strong>Semirreacción de reducción:</strong></p>
+                    <div class="formula-box">
+                        \[
+                        \mathrm{MnO_4^- + 8\,H^+ + 5\,e^- \rightarrow Mn^{2+} + 4\,H_2O}
+                        \]
+                    </div>
+                    <p>El manganeso pasa de número de oxidación <strong>+7</strong> (en \( \mathrm{MnO_4^-} \)) a <strong>+2</strong> (en \( \mathrm{Mn^{2+}} \)). El ion \( \mathrm{MnO_4^-} \) tiene una configuración electrónica con orbitales \( d \) vacíos que absorben fuertemente en la zona visible del espectro (aproximadamente 500-550 nm), lo que le da su color violeta intenso. El ion \( \mathrm{Mn^{2+}} \), en cambio, tiene los orbitales \( d \) semillenos (\( d^5 \)), y sus transiciones electrónicas son prohibidas por espín: absorbe muy poco en el visible. Por eso es prácticamente <strong>incoloro</strong> en disolución diluida.</p>
+                    <p><strong>Semirreacción de oxidación:</strong></p>
+                    <div class="formula-box">
+                        \[
+                        \mathrm{2\,S_2O_3^{2-} \rightarrow S_4O_6^{2-} + 2\,e^-}
+                        \]
+                    </div>
+                    <p>El azufre del tiosulfato tiene un estado de oxidación promedio de +2. En el tetrationato \( \mathrm{S_4O_6^{2-}} \), el estado promedio es +2,5. Cada dos iones tiosulfato pierden dos electrones. El tiosulfato actúa como <strong>reductor</strong> (se oxida) y el permanganato como <strong>oxidante</strong> (se reduce).</p>
+                    <div class="highlight-box">
+                        <strong>Conclusión:</strong> la desaparición del color violeta es la consecuencia visible de la reducción del Mn(+7) a Mn(+2). El tiosulfato no aporta color: es incoloro antes y después.
+                    </div>
+                </div>
+            </details>
+
+            <details class="inner-details">
+                <summary>
+                    <span class="step-num">2</span>
+                    <span>La reacción de precipitación: el color blanco</span>
+                    <span class="tag tag-warn summary-badge">Precipitación</span>
+                </summary>
+                <div class="details-body">
+                    <p>En las copas 3 y 4, los iones bario \( \mathrm{Ba^{2+}} \) (de la Disolución A) reaccionan con los iones sulfato \( \mathrm{SO_4^{2-}} \) (del ácido sulfúrico de la Disolución BOTELLA) para formar sulfato de bario:</p>
+                    <div class="formula-box">
+                        \[
+                        \mathrm{Ba^{2+} + SO_4^{2-} \rightarrow BaSO_4\,(s)}
+                        \]
+                    </div>
+                    <p>El \( \mathrm{BaSO_4} \) es una sal muy insoluble (\( K_{ps} \approx 1{,}1 \times 10^{-10} \)). Al formarse, precipita como un sólido blanco muy fino que queda en suspensión, dando a la disolución un aspecto lechoso.</p>
+                    <table>
+                        <tr><th>Ion</th><th>Origen</th></tr>
+                        <tr><td>\( \mathrm{Ba^{2+}} \)</td><td>Disolución A (\( \mathrm{BaCl_2} \))</td></tr>
+                        <tr><td>\( \mathrm{SO_4^{2-}} \)</td><td>Disolución BOTELLA (\( \mathrm{H_2SO_4} \))</td></tr>
+                    </table>
+                    <div class="note">
+                        <strong>Diferencia entre copas 3 y 4:</strong> en la copa 3 hay tiosulfato, por lo que el permanganato se reduce y desaparece el violeta. En la copa 4 no hay tiosulfato, por lo que el violeta permanece y se mezcla con el blanco del precipitado, dando el tono rosa.
+                    </div>
+                </div>
+            </details>
+
+            <details class="inner-details">
+                <summary>
+                    <span class="step-num">3</span>
+                    <span>La reacción ácido-base: las burbujas</span>
+                    <span class="tag tag-ok summary-badge">Ácido-base</span>
+                </summary>
+                <div class="details-body">
+                    <p>En la copa 5, el carbonato de sodio \( \mathrm{Na_2CO_3} \) (Disolución C) reacciona con el ácido sulfúrico (Disolución BOTELLA):</p>
+                    <div class="formula-box">
+                        \[
+                        \mathrm{CO_3^{2-} + 2\,H^+ \rightarrow H_2O + CO_2\,(g)}
+                        \]
+                    </div>
+                    <p>El \( \mathrm{CO_2} \) es un gas poco soluble en agua, por lo que se desprende en forma de burbujas. Esa efervescencia es la que da el aspecto de "limonada gaseosa".</p>
+                    <p>Además, el carbonato consume iones \( \mathrm{H^+} \), lo que podría afectar a la redox. Sin embargo, como el ácido sulfúrico está en exceso (la disolución BOTELLA tiene \( \mathrm{H_2SO_4} \) 2 M y el carbonato es solo 3 mL de 2 M), la reducción del permanganato sigue produciéndose sin problemas.</p>
+                </div>
+            </details>
+
+            <details class="inner-details">
+                <summary>
+                    <span class="step-num">4</span>
+                    <span>¿Por qué el mismo "vino" da resultados tan distintos?</span>
+                    <span class="tag tag-warn summary-badge">Idea clave</span>
+                </summary>
+                <div class="details-body">
+                    <p>La clave está en qué reactivo está presente en cada copa antes de verter la disolución BOTELLA. La disolución BOTELLA contiene tres especies potencialmente reactivas:</p>
+                    <ul>
+                        <li>\( \mathrm{MnO_4^-} \): oxidante, violeta.</li>
+                        <li>\( \mathrm{H^+} \): ácido, necesario para la redox y para la efervescencia.</li>
+                        <li>\( \mathrm{SO_4^{2-}} \): ion espectador para la redox, pero precipitante con \( \mathrm{Ba^{2+}} \).</li>
+                    </ul>
+                    <p>Según lo que haya en la copa, se activa una combinación distinta de reacciones:</p>
+                    <table>
+                        <tr>
+                            <th>Copa</th>
+                            <th>Reactivo activo</th>
+                            <th>Reacción que provoca</th>
+                        </tr>
+                        <tr>
+                            <td>N.º 2</td>
+                            <td>Tiosulfato</td>
+                            <td>Redox (decolora)</td>
+                        </tr>
+                        <tr>
+                            <td>N.º 3</td>
+                            <td>Tiosulfato + Ba²⁺</td>
+                            <td>Redox + precipitación</td>
+                        </tr>
+                        <tr>
+                            <td>N.º 4</td>
+                            <td>Ba²⁺</td>
+                            <td>Precipitación (mantiene violeta)</td>
+                        </tr>
+                        <tr>
+                            <td>N.º 5</td>
+                            <td>Tiosulfato + CO₃²⁻</td>
+                            <td>Redox + ácido-base (burbujas)</td>
+                        </tr>
+                    </table>
+                    <div class="highlight-box">
+                        <strong>Conclusión:</strong> la demostración es un ejemplo elegante de cómo una misma disolución puede dar resultados espectacularmente distintos según los reactivos presentes. No hay "magia": hay química bien planificada.
+                    </div>
+                </div>
+            </details>
+
+            <details class="inner-details">
+                <summary>
+                    <span class="step-num">5</span>
+                    <span>Recomendaciones visuales y problemas</span>
+                    <span class="tag tag-bad summary-badge">Puesta en escena</span>
+                </summary>
+                <div class="details-body">
+                    <p>Para que la ilusión funcione bien:</p>
+                    <ul>
+                        <li><strong>No dejar reposar las copas demasiado tiempo:</strong> en las copas 2 y 5 puede aparecer turbidez por la formación de azufre coloidal (del exceso de tiosulfato en medio ácido). En las copas 3 y 4, el precipitado de \( \mathrm{BaSO_4} \) decanta y el efecto "leche" o "batido" se pierde.</li>
+                        <li><strong>Alternativa:</strong> se puede usar una disolución saturada de metabisulfito de sodio \( \mathrm{Na_2S_2O_5} \) en lugar de tiosulfato. Tiene la ventaja de que no forma azufre coloidal, pero la desventaja de que en la copa 3 la mezcla con \( \mathrm{BaCl_2} \) es turbia y de que puede liberar \( \mathrm{SO_2} \), un gas irritante.</li>
+                        <li><strong>Retirar las copas rápidamente</strong> una vez terminada la demostración, para evitar que se vea la decantación o la turbidez.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <details class="inner-details">
+                <summary>
+                    <span class="step-num">6</span>
+                    <span>Ampliaciones: "champán rosa"</span>
+                    <span class="tag tag-ok summary-badge">Variantes</span>
+                </summary>
+                <div class="details-body">
+                    <p>Se puede conseguir una nueva "bebida" manipulando la cantidad de tiosulfato en la copa 5 para que el permanganato quede en ligero exceso. Así, la disolución queda incolora pero con un tono rosado muy suave, como el champán rosado.</p>
+                    <div class="note">
+                        <strong>Idea:</strong> la demostración es modular. Cambiando las cantidades y los reactivos, se pueden diseñar otras "bebidas" con efectos visuales distintos.
+                    </div>
+                </div>
+            </details>
+
+        </div>
+    </details>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 Resumen final</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>La demostración "vino tinto → agua" combina tres tipos de reacciones químicas:</strong></p>
+            <p><strong>1. REDOX:</strong> el tiosulfato reduce el permanganato (Mn +7 → +2), desapareciendo el color violeta.</p>
+            <p><strong>2. PRECIPITACIÓN:</strong> el \( \mathrm{Ba^{2+}} \) reacciona con el \( \mathrm{SO_4^{2-}} \) formando un precipitado blanco de \( \mathrm{BaSO_4} \).</p>
+            <p><strong>3. ÁCIDO-BASE:</strong> el carbonato reacciona con el ácido sulfúrico liberando \( \mathrm{CO_2} \) gaseoso.</p>
+        </div>
+        <p>El resultado final en cada copa depende de qué reactivos estén presentes antes de verter la disolución BOTELLA. La misma disolución violeta puede dar:</p>
+        <ul>
+            <li><strong>Copa 1:</strong> vino tinto (sin cambios).</li>
+            <li><strong>Copa 2:</strong> agua (solo redox).</li>
+            <li><strong>Copa 3:</strong> leche (redox + precipitación).</li>
+            <li><strong>Copa 4:</strong> batido de frambuesa (solo precipitación, mantiene el violeta).</li>
+            <li><strong>Copa 5:</strong> limonada gaseosa (redox + ácido-base).</li>
+        </ul>
+
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO el "vino que se convierte en agua"</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Identifica el tipo de reacción en cada copa</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Indica qué tipo de reacción (redox, precipitación, ácido-base o ninguna) ocurre en cada copa y justifica brevemente tu respuesta.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Copa 1:</strong> ninguna. No hay reactivos que puedan reaccionar con el permanganato.</div>
+                    <div class="paso"><strong>Copa 2:</strong> redox. El tiosulfato reduce el \( \mathrm{MnO_4^-} \) a \( \mathrm{Mn^{2+}} \).</div>
+                    <div class="paso"><strong>Copa 3:</strong> redox + precipitación. El tiosulfato reduce el permanganato y el \( \mathrm{Ba^{2+}} \) precipita con el \( \mathrm{SO_4^{2-}} \).</div>
+                    <div class="paso"><strong>Copa 4:</strong> precipitación. Solo se forma \( \mathrm{BaSO_4} \); no hay reductor, así que el permanganato no se reduce.</div>
+                    <div class="paso"><strong>Copa 5:</strong> redox + ácido-base. El tiosulfato reduce el permanganato y el carbonato libera \( \mathrm{CO_2} \).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Ajuste de la reacción redox</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Ajusta por el método del ion-electrón la reacción entre el permanganato y el tiosulfato en medio ácido, sabiendo que el producto de oxidación del azufre es el ion tetrationato \( \mathrm{S_4O_6^{2-}} \).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Semirreducción:</strong></div>
+                    <div class="formula-box">\[ \mathrm{MnO_4^- + 8H^+ + 5e^- \rightarrow Mn^{2+} + 4H_2O} \]</div>
+                    <div class="paso"><strong>Paso 2 — Semioxidación:</strong></div>
+                    <div class="formula-box">\[ \mathrm{2S_2O_3^{2-} \rightarrow S_4O_6^{2-} + 2e^-} \]</div>
+                    <div class="paso"><strong>Paso 3 — Igualamos electrones:</strong> m.c.m.(5,2) = 10. Multiplicamos la reducción por 2 y la oxidación por 5.</div>
+                    <div class="formula-box">\[ \mathrm{2MnO_4^- + 16H^+ + 10e^- \rightarrow 2Mn^{2+} + 8H_2O} \]</div>
+                    <div class="formula-box">\[ \mathrm{10S_2O_3^{2-} \rightarrow 5S_4O_6^{2-} + 10e^-} \]</div>
+                    <div class="paso"><strong>Paso 4 — Suma global:</strong></div>
+                    <div class="formula-box">\[ \mathrm{2MnO_4^- + 16H^+ + 10S_2O_3^{2-} \rightarrow 2Mn^{2+} + 5S_4O_6^{2-} + 8H_2O} \]</div>
+                    <div class="paso"><strong>Comprobación de cargas:</strong> izquierda \( -2 + 16 - 20 = -6 \); derecha \( +4 - 10 = -6 \). ✔</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>La precipitación del sulfato de bario</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Se mezclan 3 mL de disolución de \( \mathrm{BaCl_2} \) 1 M con 200 mL de disolución de \( \mathrm{H_2SO_4} \) 2 M. Calcula la masa de \( \mathrm{BaSO_4} \) que se forma. Datos: \( M(\mathrm{BaSO_4}) = 233{,}4\ \mathrm{g/mol} \).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Moles de \( \mathrm{Ba^{2+}} \):</strong></div>
+                    <div class="formula-box">\[ n(\mathrm{Ba^{2+}}) = 0{,}003\ \mathrm{L} \times 1\ \mathrm{M} = 3{,}0 \times 10^{-3}\ \mathrm{mol} \]</div>
+                    <div class="paso"><strong>Paso 2 — Moles de \( \mathrm{SO_4^{2-}} \):</strong> el \( \mathrm{H_2SO_4} \) está en exceso, así que todo el \( \mathrm{Ba^{2+}} \) precipita.</div>
+                    <div class="formula-box">\[ n(\mathrm{BaSO_4}) = n(\mathrm{Ba^{2+}}) = 3{,}0 \times 10^{-3}\ \mathrm{mol} \]</div>
+                    <div class="paso"><strong>Paso 3 — Masa de \( \mathrm{BaSO_4} \):</strong></div>
+                    <div class="formula-box">\[ m = 3{,}0 \times 10^{-3} \times 233{,}4 = 0{,}70\ \mathrm{g} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> se forman aproximadamente 0,70 g de sulfato de bario, que quedan en suspensión dando el aspecto lechoso.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>El desprendimiento de CO₂</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En la copa 5 hay 3 mL de \( \mathrm{Na_2CO_3} \) 2 M. Al verter 200 mL de disolución BOTELLA (que contiene \( \mathrm{H_2SO_4} \) 2 M), se produce efervescencia. Calcula el volumen de \( \mathrm{CO_2} \) desprendido en condiciones normales (1 mol de gas ocupa 22,4 L).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Moles de \( \mathrm{CO_3^{2-}} \):</strong></div>
+                    <div class="formula-box">\[ n(\mathrm{CO_3^{2-}}) = 0{,}003\ \mathrm{L} \times 2\ \mathrm{M} = 6{,}0 \times 10^{-3}\ \mathrm{mol} \]</div>
+                    <div class="paso"><strong>Paso 2 — Relación estequiométrica:</strong> \( \mathrm{CO_3^{2-} + 2H^+ \rightarrow H_2O + CO_2} \). Por cada mol de carbonato se libera 1 mol de \( \mathrm{CO_2} \).</div>
+                    <div class="formula-box">\[ n(\mathrm{CO_2}) = 6{,}0 \times 10^{-3}\ \mathrm{mol} \]</div>
+                    <div class="paso"><strong>Paso 3 — Volumen en condiciones normales:</strong></div>
+                    <div class="formula-box">\[ V = 6{,}0 \times 10^{-3} \times 22{,}4 = 0{,}134\ \mathrm{L} = 134\ \mathrm{mL} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> se desprenden unos 134 mL de \( \mathrm{CO_2} \), suficientes para crear una efervescencia visible.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>¿Por qué el permanganato es violeta?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica por qué el ion permanganato \( \mathrm{MnO_4^-} \) es violeta intenso mientras que el ion \( \mathrm{Mn^{2+}} \) es prácticamente incoloro. Relaciónalo con las transiciones electrónicas.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Configuración electrónica del Mn:</strong> el manganeso neutro es \( [\mathrm{Ar}]\,3d^5\,4s^2 \).</div>
+                    <div class="paso"><strong>Paso 2 — En \( \mathrm{MnO_4^-} \):</strong> el Mn está en estado de oxidación +7, es decir, ha perdido todos sus electrones de valencia. No tiene electrones d. Las transiciones electrónicas son de <strong>transferencia de carga ligando-metal</strong> (del oxígeno al manganeso), que son muy intensas y absorben en el verde-amarillo. La luz que no se absorbe (violeta) es la que vemos.</div>
+                    <div class="paso"><strong>Paso 3 — En \( \mathrm{Mn^{2+}} \):</strong> el Mn está en estado +2, con configuración \( d^5 \). Las transiciones entre orbitales d están <strong>prohibidas por la regla de espín</strong> (todos los electrones están desapareados). Por eso absorbe muy poco en el visible y la disolución es prácticamente incolora.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el color violeta del permanganato se debe a transiciones de transferencia de carga muy intensas. Al reducirse a \( \mathrm{Mn^{2+}} \), esas transiciones desaparecen y el ion se vuelve incoloro.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>¿Por qué no se usa HCl en lugar de H₂SO₄?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En esta demostración se usa ácido sulfúrico \( \mathrm{H_2SO_4} \) y no ácido clorhídrico \( \mathrm{HCl} \). Explica por qué. ¿Qué relación tiene esto con la copa 4?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — El problema con el HCl:</strong> el ion cloruro \( \mathrm{Cl^-} \) es un reductor que puede ser oxidado por el permanganato a cloro gas \( \mathrm{Cl_2} \). Esto consumiría parte del oxidante y generaría un gas tóxico.</div>
+                    <div class="paso"><strong>Paso 2 — Relación con la copa 4:</strong> si usáramos HCl, no habría iones \( \mathrm{SO_4^{2-}} \) disponibles para precipitar con el \( \mathrm{Ba^{2+}} \). La copa 4 no daría el precipitado blanco. Además, el HCl interferiría en la redox.</div>
+                    <div class="paso"><strong>Paso 3 — Conclusión:</strong> el \( \mathrm{H_2SO_4} \) cumple una doble función: aporta los iones \( \mathrm{H^+} \) necesarios para la redox y los iones \( \mathrm{SO_4^{2-}} \) necesarios para la precipitación. Es el ácido ideal para esta demostración.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Diseña una nueva "bebida"</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Quieres conseguir una nueva "bebida" que sea incolora pero que desprenda un precipitado amarillo. ¿Qué reactivo añadirías a una copa antes de verter la disolución BOTELLA? Justifica tu elección.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Qué precipitados amarillos se pueden formar?</strong> El yoduro de plomo(II) \( \mathrm{PbI_2} \) es un precipitado amarillo intenso. También el cromato de plomo \( \mathrm{PbCrO_4} \) o el yoduro de plata \( \mathrm{AgI} \).</div>
+                    <div class="paso"><strong>Paso 2 — ¿Cómo conseguirlo?</strong> Habría que añadir a la copa una disolución que contenga iones \( \mathrm{Pb^{2+}} \) o \( \mathrm{Ag^+} \) y, además, tiosulfato para reducir el permanganato y que desaparezca el violeta. Pero el tiosulfato también precipita con la plata y el plomo, así que habría que ajustar las cantidades con cuidado.</div>
+                    <div class="paso"><strong>Paso 3 — Alternativa más sencilla:</strong> usar una disolución de yoduro de potasio \( \mathrm{KI} \) en la copa. El tiosulfato reduce el permanganato a \( \mathrm{Mn^{2+}} \) (incoloro) y el yoduro se oxida a yodo \( \mathrm{I_2} \), que en presencia de exceso de yoduro forma el ion triyoduro \( \mathrm{I_3^-} \) de color amarillo-marrón. El resultado sería una "bebida" amarillenta.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la demostración es muy versátil. Con distintos reactivos se pueden conseguir colores y efectos muy variados.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> La demostración "vino tinto → agua" es una lección magistral de química en estado puro. Las tres ideas clave son: (1) una misma disolución puede dar resultados espectacularmente distintos según los reactivos presentes; (2) los cambios de color, la aparición de precipitados y las burbujas son manifestaciones visibles de tres tipos de reacciones: redox, precipitación y ácido-base; (3) el cambio de color se debe a la reducción del Mn(+7) a Mn(+2), que pasa de tener transiciones electrónicas intensas a no tenerlas. Es una demostración perfecta para introducir la química a cualquier público, y también para que los alumnos de Bachillerato ajusten las ecuaciones y razonen los mecanismos.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  No hay milagro: solo química. Una botella de "vino" y cinco copas que se transforman en agua, leche, batido y limonada.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+
+<!-- Re-renderizado de MathJax al abrir cualquier desplegable -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('details').forEach(function (detalle) {
+            detalle.addEventListener('toggle', function () {
+                if (detalle.open && window.MathJax && MathJax.typesetPromise) {
+                    MathJax.typesetPromise([detalle]).catch(function () {});
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
