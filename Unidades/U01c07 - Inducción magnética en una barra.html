@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c07 - Inducción magnética en una barra: el imán que cae a cámara lenta</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+        .mini-card.morado { border-top-color: #805ad5; }
+
+        /* =========================================================
+           ESQUEMAS VISUALES DE LAS BARRAS
+           ========================================================= */
+        .bar-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 22px;
+            margin: 25px 0;
+        }
+        .bar-card {
+            flex: 1 1 180px;
+            max-width: 210px;
+            background: white;
+            border-radius: 14px;
+            padding: 16px 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+        .bar-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+        .bar-label {
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 1em;
+            margin-bottom: 6px;
+        }
+        .bar-desc {
+            font-size: 0.8em;
+            color: #4a5568;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            min-height: 50px;
+        }
+        .bar-svg {
+            display: block;
+            margin: 0 auto 8px auto;
+            width: 100%;
+            max-width: 160px;
+            height: auto;
+        }
+        .bar-time {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.78em;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+        .time-fast { background: #c6f6d5; color: #22543d; }
+        .time-medium { background: #fefcbf; color: #744210; }
+        .time-slow { background: #fed7d7; color: #822727; }
+        .time-stuck { background: #e2e8f0; color: #4a5568; }
+
+        /* =========================================================
+           ESTILOS PARA LAS FIGURAS DIDÁCTICAS
+           ========================================================= */
+        .figure {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 18px 15px 12px 15px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        .figure svg {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 640px;
+            height: auto;
+        }
+        .figure-caption {
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-top: 12px;
+            line-height: 1.5;
+            font-style: italic;
+            padding: 0 10px;
+        }
+        .figure-caption strong {
+            color: #2d3748;
+            font-style: normal;
+        }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c07.- </span>
+                <span class="texto">Inducción magnética en una barra: el imán que cae a cámara lenta</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>Vamos a dejar caer un <strong>imán en forma de anillo</strong> (o varios imanes apilados) a lo largo de tres barras verticales distintas: una de <strong>madera</strong>, una de <strong>cobre</strong> y una de <strong>hierro</strong>. Aparentemente son tres tubos o barras iguales, y el imán debería comportarse igual en las tres. Pero no ocurre así:</p>
+        <ul>
+            <li>En la barra de <strong>madera</strong>, el imán cae rápidamente, como si no hubiera nada.</li>
+            <li>En la barra de <strong>hierro</strong>, el imán <strong>se queda pegado a la barra</strong> y no cae. La atracción magnética es tan fuerte que supera al peso.</li>
+            <li>En la barra de <strong>cobre</strong>, el imán <strong>cae a cámara lenta</strong>, como si flotara en un líquido viscoso. ¡Y el cobre no es magnético!</li>
+        </ul>
+        <p>Este sorprendente comportamiento es una manifestación directa de la <strong>inducción electromagnética</strong>, descubierta por Michael Faraday en 1831. Es una de las demostraciones más elegantes de la física clásica, y también una excelente forma de distinguir entre <strong>materiales magnéticos</strong> y <strong>materiales conductores no magnéticos</strong>.</p>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Por qué el imán se queda pegado en el hierro y, sin embargo, cae despacio por el cobre si el cobre no atrae imanes?
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué es la <strong>inducción electromagnética</strong> y la <strong>ley de Faraday-Lenz</strong>.</li>
+            <li>Por qué un material <strong>no magnético</strong> como el cobre puede frenar la caída de un imán.</li>
+            <li>La diferencia entre <strong>materiales magnéticos</strong> (hierro) y <strong>conductores no magnéticos</strong> (cobre).</li>
+            <li>Por qué el imán se queda <strong>pegado</strong> al hierro: la atracción ferromagnética.</li>
+            <li>Qué son las <strong>corrientes de Foucault</strong> (<em>eddy currents</em>) y cómo se generan.</li>
+            <li>Las principales <strong>aplicaciones tecnológicas</strong> de la inducción magnética: frenos, generadores, transformadores, cocinas de inducción...</li>
+            <li>Por qué el fenómeno es un ejemplo perfecto de <strong>conservación de la energía</strong>.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>🔬 Fundamento teórico</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>¿Qué es la inducción electromagnética?</strong>
+            <p>La <strong>inducción electromagnética</strong> es el fenómeno por el cual un <strong>campo magnético variable</strong> en el tiempo genera una <strong>fuerza electromotriz</strong> (fem) inducida en un conductor. Es decir: si el flujo magnético que atraviesa un circuito cambia, aparece una corriente eléctrica inducida en él.</p>
+            <p>Faraday lo demostró experimentalmente en 1831 con una bobina y un imán en movimiento. La ley que describe el fenómeno es la <strong>ley de Faraday-Lenz</strong>:</p>
+            <div class="formula-box">
+                \[
+                \varepsilon = -\frac{d\Phi_B}{dt}
+                \]
+                <p>donde \( \varepsilon \) es la fem inducida, \( \Phi_B \) es el flujo magnético y el signo negativo indica la oposición al cambio (ley de Lenz).</p>
+            </div>
+            <img src="../imagenes/Inducción-Ley de Faraday Lenz.jpg" alt="Ley de Faraday-Lenz">
+
+            <!-- ============ FIGURA 3: CORRIENTES DE FOUCAULT ============ -->
+            <div class="figure">
+                <svg viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Corrientes de Foucault generadas en la pared de un tubo de cobre por el imán que cae">
+                    <defs>
+                        <marker id="figC-rot" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto">
+                            <path d="M0,0 L7,3 L0,6 Z" fill="#c05621"/>
+                        </marker>
+                        <marker id="figC-fall" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto">
+                            <path d="M0,0 L10,4 L0,8 Z" fill="#742a2a"/>
+                        </marker>
+                        <linearGradient id="figC-Cu" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stop-color="#f6ad55"/>
+                            <stop offset="50%" stop-color="#dd6b20"/>
+                            <stop offset="100%" stop-color="#9c4221"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Título -->
+                    <text x="280" y="22" font-size="14" font-weight="bold" fill="#2d3748" text-anchor="middle">Sección longitudinal del tubo de cobre</text>
+
+                    <!-- Pared izquierda del tubo -->
+                    <rect x="130" y="50" width="38" height="300" fill="url(#figC-Cu)" stroke="#7b341e" stroke-width="2"/>
+                    <!-- Pared derecha del tubo -->
+                    <rect x="392" y="50" width="38" height="300" fill="url(#figC-Cu)" stroke="#7b341e" stroke-width="2"/>
+
+                    <!-- Interior del tubo -->
+                    <rect x="168" y="50" width="224" height="300" fill="#fffbeb" opacity="0.5"/>
+
+                    <!-- Corrientes de Foucault en la pared izquierda (por encima del imán) -->
+                    <g fill="none" stroke="#c05621" stroke-width="2.5">
+                        <path d="M 149 100 m -12 0 a 12 12 0 1 1 24 0 a 12 12 0 1 1 -24 0" marker-end="url(#figC-rot)"/>
+                        <path d="M 149 130 m -12 0 a 12 12 0 1 1 24 0 a 12 12 0 1 1 -24 0" marker-end="url(#figC-rot)"/>
+                        <path d="M 149 160 m -12 0 a 12 12 0 1 1 24 0 a 12 12 0 1 1 -24 0" marker-end="url(#figC-rot)"/>
+                        <path d="M 149 245 m -12 0 a 12 12 0 1 1 24 0 a 12 12 0 1 1 -24 0" marker-end="url(#figC-rot)"/>
+                        <path d="M 149 275 m -12 0 a 12 12 0 1 1 24 0 a 12 12 0 1 1 -24 0" marker-end="url(#figC-rot)"/>
+                        <path d="M 149 305 m -12 0 a 12 12 0 1 1 24 0 a 12 12 0 1 1 -24 0" marker-end="url(#figC-rot)"/>
+                    </g>
+
+                    <!-- Corrientes de Foucault en la pared derecha -->
+                    <g fill="none" stroke="#c05621" stroke-width="2.5">
+                        <path d="M 411 100 m -12 0 a 12 12 0 1 1 24 0 a 12 12 0 1 1 -24 0" marker-end="url(#figC-rot)"/>
+                        <path d="M 411 130 m -12 0 a 12 12 0 1 1 24 0 a 12 12 0 1 1 -24 0" marker-end="url(#figC-rot)"/>
+                        <path d="M 411 160 m -12 0 a 12 12 0 1 1 24 0 a 12 12 0 1 1 -24 0" marker-end="url(#figC-rot)"/>
+                        <path d="M 411 245 m -12 0 a 12 12 0 1 1 24 0 a 12 12 0 1 1 -24 0" marker-end="url(#figC-rot)"/>
+                        <path d="M 411 275 m -12 0 a 12 12 0 1 1 24 0 a 12 12 0 1 1 -24 0" marker-end="url(#figC-rot)"/>
+                        <path d="M 411 305 m -12 0 a 12 12 0 1 1 24 0 a 12 12 0 1 1 -24 0" marker-end="url(#figC-rot)"/>
+                    </g>
+
+                    <!-- Imán central -->
+                    <g>
+                        <rect x="235" y="180" width="90" height="50" fill="#e53e3e" stroke="#742a2a" stroke-width="2" rx="3"/>
+                        <rect x="235" y="205" width="90" height="25" fill="#3182ce" stroke="#1a365d" stroke-width="2" rx="3"/>
+                        <text x="280" y="200" font-size="16" fill="white" font-weight="bold" text-anchor="middle">N</text>
+                        <text x="280" y="223" font-size="16" fill="white" font-weight="bold" text-anchor="middle">S</text>
+                    </g>
+
+                    <!-- Flecha de caída del imán -->
+                    <line x1="280" y1="255" x2="280" y2="330" stroke="#742a2a" stroke-width="3" marker-end="url(#figC-fall)"/>
+
+                    <!-- Etiquetas -->
+                    <text x="60" y="120" font-size="12" fill="#7b341e" font-weight="bold" text-anchor="middle" transform="rotate(-90 60 120)">Pared de cobre</text>
+                    <text x="500" y="120" font-size="12" fill="#7b341e" font-weight="bold" text-anchor="middle" transform="rotate(90 500 120)">Pared de cobre</text>
+                    <text x="280" y="378" font-size="12" fill="#742a2a" font-weight="bold" text-anchor="middle">Caída del imán (frenada electromagnética)</text>
+
+                    <!-- Leyenda de remolinos -->
+                    <g transform="translate(45, 355)">
+                        <circle cx="10" cy="0" r="10" fill="none" stroke="#c05621" stroke-width="2.5"/>
+                        <text x="26" y="5" font-size="12" fill="#7b341e" font-weight="bold">Corrientes de Foucault</text>
+                    </g>
+                </svg>
+                <div class="figure-caption"><strong>Figura 3.</strong> Corrientes de Foucault. Al moverse el imán, el flujo magnético cambia en cada punto de la pared de cobre. Esas variaciones inducen remolinos de corriente cerrados (<em>eddy currents</em>) alrededor del metal, que a su vez generan un campo magnético opuesto al movimiento (ley de Lenz). El resultado: frenado sin contacto y calentamiento por efecto Joule.</div>
+            </div>
+            <img src="../imagenes/Indccuón-Corrientes en el tubo.webp" alt="Corrientes inducidas en el tubo">
+
+            <div class="formula-box">
+                <strong>Efecto neto:</strong> el imán se frena sin que haya contacto físico. Es un frenado <strong>electromagnético</strong>, no mecánico.
+            </div>
+            <img src="../imagenes/Inducción-Corrientes de foucault.jpg" alt="Corrientes de Foucault">
+            <p>La energía cinética que pierde el imán se disipa como <strong>calor</strong> en el cobre, por efecto Joule. Si tocas el tubo después de la experiencia, notarás que se ha calentado ligeramente.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>¿Por qué el hierro atrae y el cobre no?</strong>
+            <p>Aquí está la clave que distingue los tres materiales:</p>
+            <ul>
+                <li><strong>Madera:</strong> es un <strong>aislante eléctrico</strong> y <strong>no magnético</strong>. No tiene electrones libres para formar corrientes inducidas, ni momentos magnéticos que respondan al imán. El imán cae como si no hubiera nada.</li>
+                <li><strong>Cobre:</strong> es un <strong>excelente conductor eléctrico</strong> pero <strong>no es magnético</strong> (es diamagnético, prácticamente indiferente a los imanes). No atrae al imán cuando está quieto, pero cuando el imán se mueve, se generan corrientes de Foucault que lo frenan.</li>
+                <li><strong>Hierro:</strong> es un <strong>material ferromagnético</strong>. Sus átomos tienen momentos magnéticos que se alinean con el campo del imán, generando una fuerte <strong>atracción magnética</strong>. Esa atracción es tan intensa que <strong>el imán se queda pegado a la barra</strong> y no cae. El efecto es completamente distinto del frenado por corrientes de Foucault.</li>
+            </ul>
+
+    <!-- SECCIÓN ESQUEMAS VISUALES -->
+    <div class="section procedimiento">
+        <h2>📐 Esquemas visuales: las tres barras comparadas</h2>
+
+        <div class="bar-row">
+
+            <!-- BARRA DE MADERA -->
+            <div class="bar-card">
+                <div class="bar-label">🪵 Barra de MADERA</div>
+                <svg class="bar-svg" viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="45" y="20" width="30" height="180" fill="#d4a373" stroke="#a47148" stroke-width="2" rx="2"/>
+                    <line x1="52" y1="25" x2="52" y2="195" stroke="#a47148" stroke-width="1" opacity="0.5"/>
+                    <line x1="60" y1="25" x2="60" y2="195" stroke="#a47148" stroke-width="1" opacity="0.5"/>
+                    <line x1="68" y1="25" x2="68" y2="195" stroke="#a47148" stroke-width="1" opacity="0.5"/>
+                    <ellipse cx="60" cy="40" rx="20" ry="8" fill="none" stroke="#e53e3e" stroke-width="4"/>
+                    <ellipse cx="60" cy="40" rx="20" ry="8" fill="none" stroke="#3182ce" stroke-width="2" stroke-dasharray="6,4"/>
+                    <path d="M 95 40 L 95 180" stroke="#22543d" stroke-width="3" fill="none" marker-end="url(#arrowGreen)"/>
+                    <defs>
+                        <marker id="arrowGreen" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                            <path d="M0,0 L6,3 L0,6 Z" fill="#22543d"/>
+                        </marker>
+                    </defs>
+                    <text x="100" y="115" font-size="11" fill="#22543d" font-weight="bold" text-anchor="middle" transform="rotate(90 100 115)">rápido</text>
+                </svg>
+                <div class="bar-desc">El imán cae rápidamente. La madera es aislante y no magnética: no hay corrientes inducidas ni atracción.</div>
+                <span class="bar-time time-fast">⏱️ ~0,2 s</span>
+            </div>
+
+            <!-- BARRA DE HIERRO -->
+            <div class="bar-card">
+                <div class="bar-label">🔩 Barra de HIERRO</div>
+                <svg class="bar-svg" viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="45" y="20" width="30" height="180" fill="#718096" stroke="#4a5568" stroke-width="2" rx="2"/>
+                    <rect x="48" y="25" width="6" height="170" fill="#a0aec0" opacity="0.5"/>
+                    <ellipse cx="60" cy="45" rx="20" ry="8" fill="none" stroke="#e53e3e" stroke-width="4"/>
+                    <ellipse cx="60" cy="45" rx="20" ry="8" fill="none" stroke="#3182ce" stroke-width="2" stroke-dasharray="6,4"/>
+                    <path d="M 30 45 L 44 45" stroke="#e53e3e" stroke-width="3" fill="none" marker-end="url(#arrowRed)"/>
+                    <path d="M 90 45 L 76 45" stroke="#e53e3e" stroke-width="3" fill="none" marker-end="url(#arrowRed)"/>
+                    <defs>
+                        <marker id="arrowRed" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                            <path d="M0,0 L6,3 L0,6 Z" fill="#e53e3e"/>
+                        </marker>
+                    </defs>
+                    <line x1="32" y1="35" x2="43" y2="40" stroke="#e53e3e" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="32" y1="55" x2="43" y2="50" stroke="#e53e3e" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="88" y1="35" x2="77" y2="40" stroke="#e53e3e" stroke-width="1.5" opacity="0.7"/>
+                    <line x1="88" y1="55" x2="77" y2="50" stroke="#e53e3e" stroke-width="1.5" opacity="0.7"/>
+                    <text x="60" y="100" font-size="13" fill="#742a2a" font-weight="bold" text-anchor="middle">¡NO CAE!</text>
+                    <text x="60" y="118" font-size="10" fill="#742a2a" text-anchor="middle">se queda pegado</text>
+                </svg>
+                <div class="bar-desc">El imán es atraído con fuerza por el hierro ferromagnético. Se queda pegado a la barra y no cae.</div>
+                <span class="bar-time time-stuck">🧲 Pegado</span>
+            </div>
+
+            <!-- BARRA DE COBRE -->
+            <div class="bar-card">
+                <div class="bar-label">🟠 Barra de COBRE</div>
+                <svg class="bar-svg" viewBox="0 0 120 220" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="45" y="20" width="30" height="180" fill="#dd6b20" stroke="#9c4221" stroke-width="2" rx="2"/>
+                    <rect x="48" y="25" width="6" height="170" fill="#f6ad55" opacity="0.6"/>
+                    <ellipse cx="60" cy="100" rx="20" ry="8" fill="none" stroke="#e53e3e" stroke-width="4"/>
+                    <ellipse cx="60" cy="100" rx="20" ry="8" fill="none" stroke="#3182ce" stroke-width="2" stroke-dasharray="6,4"/>
+                    <circle cx="48" cy="130" r="6" fill="none" stroke="#f6ad55" stroke-width="1.5" opacity="0.8"/>
+                    <circle cx="72" cy="130" r="6" fill="none" stroke="#f6ad55" stroke-width="1.5" opacity="0.8"/>
+                    <circle cx="48" cy="150" r="6" fill="none" stroke="#f6ad55" stroke-width="1.5" opacity="0.8"/>
+                    <circle cx="72" cy="150" r="6" fill="none" stroke="#f6ad55" stroke-width="1.5" opacity="0.8"/>
+                    <path d="M 100 100 L 100 180" stroke="#822727" stroke-width="3" fill="none" marker-end="url(#arrowDarkRed)"/>
+                    <defs>
+                        <marker id="arrowDarkRed" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                            <path d="M0,0 L6,3 L0,6 Z" fill="#822727"/>
+                        </marker>
+                    </defs>
+                    <text x="105" y="140" font-size="11" fill="#822727" font-weight="bold" text-anchor="middle" transform="rotate(90 105 140)">lento</text>
+                </svg>
+                <div class="bar-desc">El cobre no atrae al imán, pero las corrientes de Foucault lo frenan. Cae a cámara lenta.</div>
+                <span class="bar-time time-slow">⏱️ ~3–8 s</span>
+            </div>
+
+        </div>
+
+        <div class="note">
+            <strong>Observación clave:</strong> los tiempos indicados para madera y cobre son orientativos y dependen del espesor del tubo, de la potencia del imán y de la longitud de la barra. Lo importante es la <strong>comparación entre los tres casos</strong>: madera (cae rápido) → hierro (se queda pegado) → cobre (cae a cámara lenta). Cuanto mejor conductor y más grueso sea el tubo de cobre, más lento caerá el imán. Y cuanto más ferromagnético sea el hierro, más fuerte será la atracción y más seguro que se quede pegado.
+        </div>
+    </div>
+
+    <!-- SECCIÓN MATERIALES Y PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y procedimiento experimental</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Materiales</strong>
+            <ul>
+                <li>Tres tubos o barras cilíndricas del mismo diámetro exterior, si es posible:
+                    <ul>
+                        <li>Un tubo o barra de <strong>madera</strong> (por ejemplo, un mango de escoba o un listón).</li>
+                        <li>Un tubo de <strong>cobre</strong> (los de fontanería funcionan muy bien; diámetro 15–22 mm, longitud 50–100 cm).</li>
+                        <li>Un tubo o barra de <strong>hierro</strong> o acero (los tubos de acero galvanizado funcionan muy bien).</li>
+                    </ul>
+                </li>
+                <li>Uno o varios <strong>imanes de neodimio en forma de anillo</strong>, que encajen holgadamente dentro del tubo (o alrededor de la barra).</li>
+                <li>Un cronómetro o el móvil para medir tiempos.</li>
+                <li>Cinta adhesiva o soportes para mantener las barras verticales.</li>
+                <li>Opcional: una cámara de vídeo para grabar la caída y analizarla a cámara lenta.</li>
+            </ul>
+            <div class="danger">
+                <strong>⚠️ Seguridad:</strong> los imanes de neodimio son muy potentes. Manténlos alejados de tarjetas de crédito, móviles, marcapasos y ordenadores. No los pongas cerca de objetos metálicos que puedan saltar hacia ellos. No dejes caer el imán sobre la mano: puede pellizcar. <strong>Especialmente en la barra de hierro, el imán se pegará con fuerza y puede costar despegarlo; ten cuidado de no pillarte los dedos.</strong> No calientes los imanes: pierden sus propiedades.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Montaje</strong>
+            <ol>
+                <li>Sujeta las tres barras (madera, cobre y hierro) en vertical, paralelas entre sí. Puedes hacerlo con un soporte, con cinta adhesiva o apoyándolas contra una pared.</li>
+                <li>Asegúrate de que las tres tienen la misma longitud y están a la misma altura para poder comparar.</li>
+                <li>Coloca el imán de anillo en la parte superior de la barra de madera y suéltalo. Cronometra el tiempo de caída.</li>
+                <li>Repite con la barra de hierro. <strong>Observa cómo el imán se queda pegado a la barra</strong> y no cae. Retíralo con cuidado.</li>
+                <li>Repite con el tubo de cobre. Suelta el imán y observa cómo cae a cámara lenta.</li>
+                <li>Anota los tiempos de caída de madera y cobre, y describe lo que ocurre con el hierro.</li>
+            </ol>
+            <div class="highlight-box">
+                <strong>Esquema del montaje:</strong><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ Imán de anillo ]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ Tubo vertical ]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ Base / suelo ]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Variantes para investigar</strong>
+            <ul>
+                <li><strong>Cambiar el espesor del tubo de cobre:</strong> un tubo de pared gruesa frena más que uno de pared fina.</li>
+                <li><strong>Cambiar la potencia del imán:</strong> un imán más potente cae más despacio por el cobre, pero también se pega con más fuerza al hierro.</li>
+                <li><strong>Apilar varios imanes:</strong> al apilar imanes de anillo, el frenado en el cobre se intensifica y la atracción en el hierro también.</li>
+                <li><strong>Probar con tubos de otros metales:</strong> aluminio, latón, acero inoxidable. ¿Cuál frena más? ¿Y cuál frena menos? Compara con su conductividad eléctrica y su magnetismo.</li>
+                <li><strong>Cortar el tubo de cobre:</strong> si le haces una ranura longitudinal, las corrientes de Foucault se interrumpen y el frenado desaparece casi por completo. Es una demostración de la ley de Lenz muy visual.</li>
+                <li><strong>Medir la temperatura del tubo:</strong> después de varias caídas, el tubo de cobre estará ligeramente más caliente. Es la energía que se ha disipado como calor.</li>
+                <li><strong>Grabar con el móvil a cámara lenta:</strong> verás cómo el imán cae suavemente por el cobre, sin sacudidas, como si estuviera flotando.</li>
+                <li><strong>Comparar con un imán más débil:</strong> un imán de ferrita no se pegará tan fuerte al hierro y quizá sí caiga (despacio). Es una forma de ver que la atracción depende de la potencia del imán.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>¿Por qué en el hierro el imán se queda pegado?</strong>
+            <p>El hierro es un material <strong>ferromagnético</strong>. Esto significa que sus átomos tienen momentos magnéticos que pueden alinearse fácilmente con un campo magnético externo. Cuando el imán se acerca al hierro, los dominios magnéticos del hierro se orientan en la misma dirección que el campo del imán, creando un campo magnético inducido muy intenso que atrae al imán con fuerza.</p>
+            <p>Esa fuerza de atracción es mucho mayor que el peso del imán. Por eso el imán <strong>no cae</strong>: se queda pegado a la barra. Si la barra fuera muy gruesa y el imán muy potente, incluso costaría trabajo despegarlo.</p>
+            <p>Las corrientes de Foucault también se generan en el hierro cuando el imán se mueve, pero como el imán no se mueve (está pegado), no contribuyen al frenado. La atracción magnética domina completamente.</p>
+            <div class="note">
+                <strong>Nota didáctica:</strong> si usas un tubo de acero inoxidable en lugar de hierro puro, verás que el imán cae más despacio que en la madera pero no se queda pegado. El acero inoxidable tiene una respuesta ferromagnética mucho más débil (o incluso nula, según el tipo), así que hay menos atracción y se aprecia mejor el efecto de las corrientes de Foucault. Prueba con distintos tipos de acero si tienes ocasión.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Análisis cuantitativo sencillo (para el cobre)</strong>
+            <p>Para el tubo de cobre, la fuerza de frenado electromagnético se puede aproximar como proporcional a la velocidad:</p>
+            <div class="formula-box">
+                \[
+                F_{\text{frenado}} = k \cdot v
+                \]
+                <p>donde \( k \) es una constante que depende de la geometría del tubo y de la potencia del imán.</p>
+            </div>
+            <p>Cuando el imán cae a velocidad constante (velocidad límite \( v_{\text{lim}} \)), se cumple:</p>
+            <div class="formula-box">
+                \[
+                m \cdot g = k \cdot v_{\text{lim}} \quad \Rightarrow \quad v_{\text{lim}} = \frac{m \cdot g}{k}
+                \]
+            </div>
+            <p>Esta velocidad límite es la que se observa experimentalmente: el imán cae a velocidad constante, sin acelerar, como si flotara.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN APLICACIONES -->
+    <div class="section resultado">
+        <h2>🌍 Aplicaciones de la inducción magnética</h2>
+        <p>La inducción electromagnética es uno de los fenómenos físicos con más aplicaciones prácticas en el mundo moderno. Prácticamente toda la electricidad que consumimos se genera gracias a ella. Estas son las aplicaciones más importantes:</p>
+
+        <div class="mini-card azul">
+            <h4>⚡ Generadores eléctricos</h4>
+            <p>Los <strong>alternadores</strong> de las centrales eléctricas (hidroeléctricas, térmicas, nucleares, eólicas) convierten energía mecánica en eléctrica haciendo girar una bobina dentro de un campo magnético. Es la aplicación más importante: toda la red eléctrica depende de ella. Los <strong>dinamos</strong> de las bicicletas funcionan igual.</p>
+        </div>
+
+        <div class="mini-card verde">
+            <h4>🔌 Transformadores</h4>
+            <p>Los transformadores permiten <strong>cambiar el voltaje</strong> de la corriente alterna. Son esenciales para transportar la electricidad a largas distancias (alta tensión) y para reducirla a niveles seguros en casa (220 V). Sin ellos, la red eléctrica moderna no existiría.</p>
+        </div>
+
+        <div class="mini-card naranja">
+            <h4>🚄 Frenos electromagnéticos</h4>
+            <p>Los <strong>trenes de alta velocidad</strong> (como el TGV o el AVE) y algunas atracciones usan frenos de corrientes de Foucault: no hay contacto, no hay desgaste, y el frenado es suave y progresivo. También se usan en camiones pesados y en bicicletas de spinning (freno magnético).</p>
+            <img src="../imagenes/Inducción-freno-magnetico-disco.jpg" alt="Freno magnético de disco">
+        </div>
+
+        <div class="mini-card rojo">
+            <h4>🍳 Cocinas de inducción</h4>
+            <p>Las cocinas de inducción generan un campo magnético variable que induce corrientes en el fondo metálico de la olla. Esas corrientes calientan la olla directamente, sin calentar la superficie de la cocina. Es una aplicación doméstica de las corrientes de Foucault.</p>
+            
+        
+                <img src="../imagenes/Inducción-Vitrocerámica.png" style="max-width: 100%; max-height: 100%; width: auto; height: auto; display: block;>
+            
+        </div>
+
+        <div class="mini-card morado">
+            <h4>🔍 Detectores de metales</h4>
+            <p>Los detectores de metales de aeropuertos, playas y arqueología usan una bobina emisora y otra receptora. Cuando un objeto metálico se acerca, cambia el flujo magnético y se induce una corriente que el aparato detecta.</p>
+        </div>
+
+        <div class="mini-card azul">
+            <h4>📱 Carga inalámbrica</h4>
+            <p>Los cargadores inalámbricos de móviles y cepillos eléctricos usan inducción magnética: una bobina en el cargador genera un campo variable que induce corriente en una bobina del dispositivo. Sin cables, sin contactos.</p>
+        </div>
+
+        <p style="margin-top: 15px;">Otras aplicaciones importantes:</p>
+        <ul>
+            <li><strong>Altavoces y micrófonos:</strong> convierten señales eléctricas en sonido (y viceversa) usando una bobina móvil dentro de un campo magnético.</li>
+            <li><strong>Lectores de tarjetas y discos duros:</strong> leen la información magnética inducida por el movimiento del soporte.</li>
+            <li><strong>Frenos de las montañas rusas:</strong> sistemas de frenado magnético sin contacto para detener los vagones con suavidad.</li>
+            <li><strong>Medidores de caudal:</strong> miden el flujo de líquidos conductores sin partes móviles.</li>
+            <li><strong>Amortiguadores magnéticos:</strong> en algunos sistemas de suspensión y en instrumentos de precisión.</li>
+            <li><strong>Calentamiento por inducción en la industria:</strong> para fundir metales o soldar sin llama.</li>
+            <li><strong>Motores eléctricos:</strong> aunque funcionan por fuerzas magnéticas, también están relacionados con el principio inverso de la inducción.</li>
+            <li><strong>Tarjetas RFID y NFC:</strong> se alimentan por inducción del lector.</li>
+            <li><strong>Bombas de sangre artificiales:</strong> algunos dispositivos médicos usan inducción para mover la sangre sin contacto mecánico.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <strong>Reflexión final:</strong> desde el imán que cae a cámara lenta por el cobre hasta el funcionamiento de la red eléctrica mundial, la inducción magnética es uno de los fenómenos más importantes de la física. Faraday no podía imaginar en 1831 que su descubrimiento iluminaría ciudades enteras. La física básica siempre acaba teniendo aplicaciones revolucionarias.
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has demostrado?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>Los materiales responden de formas muy distintas a un imán en movimiento.</strong></p>
+            <p>La <strong>madera</strong> (aislante y no magnética) deja caer el imán sin más. El <strong>hierro</strong> (ferromagnético) lo atrae con tanta fuerza que <strong>se queda pegado</strong>. El <strong>cobre</strong> (conductor no magnético) genera <strong>corrientes de Foucault</strong> que frenan la caída hasta hacerla "a cámara lenta".</p>
+        </div>
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>En la <strong>madera</strong>, el imán cae rápido porque no hay ni atracción ni corrientes inducidas.</li>
+            <li>En el <strong>hierro</strong>, el imán <strong>se queda pegado</strong> por atracción ferromagnética. La fuerza magnética supera al peso.</li>
+            <li>En el <strong>cobre</strong>, el frenado es puramente <strong>electromagnético</strong>: no hay atracción, solo oposición al movimiento.</li>
+            <li>La energía cinética del imán se disipa como <strong>calor</strong> en el cobre (efecto Joule).</li>
+            <li>La ley de Lenz es una consecuencia de la <strong>conservación de la energía</strong>.</li>
+            <li>La inducción magnética tiene aplicaciones <strong>revolucionarias</strong>: generadores, transformadores, frenos, cocinas, carga inalámbrica...</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que el cobre atrae al imán. No es así. Si dejas el imán quieto dentro del tubo de cobre, no ocurre nada. El frenado solo aparece cuando hay <strong>movimiento relativo</strong> entre el imán y el conductor. En cambio, en el hierro la atracción existe siempre, incluso con el imán quieto: por eso se queda pegado. Son dos fenómenos físicos completamente distintos.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO la inducción magnética en una barra</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>La ley de Faraday-Lenz</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Una espira circular de área \( A = 0{,}010\ \mathrm{m^2} \) está situada perpendicularmente a un campo magnético uniforme. El campo varía de \( 0{,}20\ \mathrm{T} \) a \( 0{,}80\ \mathrm{T} \) en \( 0{,}50\ \mathrm{s} \). Calcula la fem inducida en la espira.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Fórmula:</strong> \( \varepsilon = -\dfrac{\Delta\Phi_B}{\Delta t} \).</div>
+                    <div class="paso"><strong>Paso 2 — Variación del flujo:</strong></div>
+                    <div class="formula-box">\[ \Delta\Phi_B = A \cdot \Delta B = 0{,}010 \cdot (0{,}80 - 0{,}20) = 0{,}010 \cdot 0{,}60 = 6{,}0 \times 10^{-3}\ \mathrm{Wb} \]</div>
+                    <div class="paso"><strong>Paso 3 — Fem inducida:</strong></div>
+                    <div class="formula-box">\[ |\varepsilon| = \frac{6{,}0 \times 10^{-3}}{0{,}50} = 1{,}2 \times 10^{-2}\ \mathrm{V} = 12\ \mathrm{mV} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> la fem inducida es de 12 mV. El signo negativo indica que la corriente inducida se opone al aumento del flujo (ley de Lenz).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>¿Por qué la madera no frena al imán?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica, en términos de la ley de Faraday, por qué el imán cae tan rápido por la barra de madera como si no hubiera nada.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Qué necesita la inducción?</strong> La ley de Faraday requiere que exista un <strong>conductor</strong> donde se puedan inducir corrientes.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué es la madera?</strong> La madera es un <strong>aislante eléctrico</strong>: no tiene electrones libres que puedan moverse para formar corrientes. Además, no es magnética.</div>
+                    <div class="paso"><strong>Paso 3 — Consecuencia:</strong> aunque el flujo magnético cambie al caer el imán, no se genera ninguna corriente inducida en la madera. Sin corriente, no hay campo magnético inducido, y sin campo inducido, no hay fuerza de frenado. Tampoco hay atracción magnética.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el imán cae por la madera con la misma aceleración que caería en el aire (salvo el pequeño rozamiento mecánico). La madera es "transparente" al fenómeno electromagnético.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>¿Por qué el imán se queda pegado al hierro?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica por qué el imán se queda pegado a la barra de hierro mientras que en la barra de cobre cae (aunque sea despacio). ¿Qué diferencia fundamental hay entre el hierro y el cobre?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Qué es el hierro?</strong> El hierro es un material <strong>ferromagnético</strong>. Sus átomos tienen momentos magnéticos que se alinean con un campo externo, generando una fuerte atracción.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué es el cobre?</strong> El cobre es un material <strong>diamagnético</strong>: no tiene momentos magnéticos permanentes y no es atraído por los imanes. Es prácticamente indiferente al campo magnético.</div>
+                    <div class="paso"><strong>Paso 3 — ¿Qué ocurre en cada caso?</strong></div>
+                    <ul>
+                        <li>En el hierro, la atracción magnética es tan fuerte que <strong>supera al peso del imán</strong>. El imán se queda pegado.</li>
+                        <li>En el cobre, no hay atracción. Solo aparece el frenado por corrientes de Foucault cuando el imán se mueve. Como el frenado no supera al peso, el imán sigue cayendo, pero despacio.</li>
+                    </ul>
+                    <div class="paso"><strong>Conclusión:</strong> la diferencia fundamental es que el hierro es <strong>magnético</strong> (atrae) y el cobre <strong>no</strong> (solo frena cuando hay movimiento). Son dos fenómenos físicos distintos.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>Velocidad límite del imán en el cobre</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un imán de masa \( m = 20\ \mathrm{g} \) cae por un tubo de cobre y alcanza una velocidad límite constante de \( v = 0{,}15\ \mathrm{m/s} \). Sabiendo que la fuerza de frenado es \( F = k \cdot v \), calcula la constante \( k \). Dato: \( g = 9{,}8\ \mathrm{m/s^2} \).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Condición de velocidad límite:</strong> cuando la velocidad es constante, la fuerza neta es cero: \( F_{\text{peso}} = F_{\text{frenado}} \).</div>
+                    <div class="formula-box">\[ m \cdot g = k \cdot v \]</div>
+                    <div class="paso"><strong>Paso 2 — Despejamos \( k \):</strong></div>
+                    <div class="formula-box">\[ k = \frac{m \cdot g}{v} = \frac{0{,}020 \cdot 9{,}8}{0{,}15} = 1{,}31\ \mathrm{N \cdot s/m} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> la constante de frenado es \( k \approx 1{,}31\ \mathrm{N \cdot s/m} \). Cuanto mayor sea \( k \), más lento caerá el imán. En el hierro, \( k \) no aplica porque el imán se queda pegado: la fuerza de atracción supera al peso.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>Comparación de conductividades</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Se prueba el mismo imán en tres tubos: cobre, aluminio y acero inoxidable. Sabiendo que las conductividades eléctricas son aproximadamente \( \sigma_{\text{Cu}} = 5{,}96 \times 10^7\ \mathrm{S/m} \), \( \sigma_{\text{Al}} = 3{,}77 \times 10^7\ \mathrm{S/m} \) y \( \sigma_{\text{acero}} = 1{,}45 \times 10^6\ \mathrm{S/m} \), predice en qué tubo caerá el imán más despacio y en cuál más rápido.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Relación entre conductividad y frenado:</strong> cuanto mayor es la conductividad, más intensas son las corrientes de Foucault y mayor es el frenado.</div>
+                    <div class="paso"><strong>Paso 2 — Comparación:</strong></div>
+                    <ul>
+                        <li>Cobre: \( 5{,}96 \times 10^7\ \mathrm{S/m} \) → el mejor conductor → el más lento.</li>
+                        <li>Aluminio: \( 3{,}77 \times 10^7\ \mathrm{S/m} \) → buen conductor → también frena, pero menos que el cobre.</li>
+                        <li>Acero inoxidable: \( 1{,}45 \times 10^6\ \mathrm{S/m} \) → conductor mediocre → apenas frena (y además puede tener algo de ferromagnetismo).</li>
+                    </ul>
+                    <div class="paso"><strong>Resultado:</strong> el imán cae más despacio por el <strong>cobre</strong>, algo más rápido por el <strong>aluminio</strong> y mucho más rápido por el <strong>acero inoxidable</strong>. ¡La experiencia confirma la teoría!</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>El tubo de cobre con una ranura</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Si cortamos el tubo de cobre longitudinalmente y hacemos una ranura a lo largo de toda su longitud, el frenado desaparece casi por completo. Explica por qué.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Cómo circulan las corrientes de Foucault?</strong> En un tubo cerrado, las corrientes de Foucault forman anillos cerrados alrededor de la pared del tubo. Esos anillos permiten que la corriente circule libremente.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué hace la ranura?</strong> La ranura corta esos anillos. La corriente ya no puede circular por el camino cerrado: se ve obligada a dar vueltas alrededor de la ranura, lo que aumenta enormemente la resistencia del circuito.</div>
+                    <div class="paso"><strong>Paso 3 — Consecuencia:</strong> con mucha resistencia, las corrientes inducidas son muy débiles. Sin corrientes intensas, no hay campo magnético inducido, y sin campo inducido, no hay fuerza de frenado.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la ranura "abre" el circuito eléctrico y elimina el efecto. Es una demostración elegante de que las corrientes de Foucault necesitan un camino cerrado para circular.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Aplicación: el freno de corrientes de Foucault</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Los trenes de alta velocidad usan frenos de corrientes de Foucault. Explica cómo funcionan y qué ventajas tienen frente a los frenos mecánicos tradicionales.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Cómo funciona?</strong> Un electroimán situado en el tren genera un campo magnético variable sobre el carril (que es metálico y conductor). Al moverse el tren, el flujo magnético cambia y se inducen corrientes de Foucault en el carril. Esas corrientes generan una fuerza que se opone al movimiento del tren (ley de Lenz) y lo frenan.</div>
+                    <div class="paso"><strong>Paso 2 — Ventajas:</strong></div>
+                    <ul>
+                        <li><strong>Sin contacto:</strong> no hay desgaste de pastillas ni discos de freno.</li>
+                        <li><strong>Suave y progresivo:</strong> el frenado es gradual, no brusco.</li>
+                        <li><strong>Menos mantenimiento:</strong> al no haber partes móviles que se desgasten, los costes de mantenimiento bajan.</li>
+                        <li><strong>Silencioso:</strong> no produce el chirrido típico de los frenos mecánicos.</li>
+                        <li><strong>Recuperación de energía:</strong> en algunos sistemas, la energía se puede recuperar como electricidad.</li>
+                    </ul>
+                    <div class="paso"><strong>Paso 3 — Desventajas:</strong> el frenado electromagnético pierde eficacia a bajas velocidades (porque el flujo cambia más despacio). Por eso los trenes combinan frenos de corrientes de Foucault con frenos mecánicos para detenerse por completo.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el freno de corrientes de Foucault es una aplicación directa de la ley de Faraday-Lenz. El mismo principio que frena al imán en el tubo de cobre frena a un tren de 300 km/h.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 8 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 8</span>
+                    <span>Cocinas de inducción: ¿cómo calientan?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica cómo una cocina de inducción calienta la comida sin calentar la superficie de la cocina. ¿Por qué no funciona con una olla de vidrio o de cerámica?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Cómo funciona?</strong> La cocina de inducción tiene una bobina que genera un campo magnético alterno de alta frecuencia. Ese campo atraviesa el fondo metálico de la olla e induce corrientes de Foucault en él.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Por qué se calienta la olla?</strong> Las corrientes de Foucault circulan por el fondo de la olla, que tiene resistencia eléctrica. Esa resistencia disipa energía en forma de calor (efecto Joule). La olla se calienta <strong>desde dentro</strong>, y por conducción transmite el calor a la comida.</div>
+                    <div class="paso"><strong>Paso 3 — ¿Por qué no funciona con vidrio o cerámica?</strong> El vidrio y la cerámica son <strong>aislantes eléctricos</strong>. No tienen electrones libres, así que no se pueden formar corrientes de Foucault. Sin corrientes, no hay calentamiento.</div>
+                    <div class="paso"><strong>Paso 4 — ¿Por qué la superficie no se calienta?</strong> La superficie de la cocina (normalmente vitrocerámica) no es conductora, así que no se inducen corrientes en ella. Solo el fondo metálico de la olla se calienta.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la cocina de inducción es una aplicación doméstica muy elegante de las corrientes de Foucault. Eficiente (más del 85% de la energía va a la olla), rápida y segura.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> La caída del imán por las tres barras es una de las demostraciones más impactantes de la física. Las tres ideas clave son: (1) un campo magnético <strong>variable</strong> induce corrientes en un conductor; (2) según la <strong>ley de Lenz</strong>, esas corrientes se oponen al movimiento que las produce; (3) el efecto no depende de que el material sea magnético, sino de que sea <strong>buen conductor</strong>. Es importante distinguir los tres comportamientos: la <strong>madera</strong> (aislante y no magnética) no interacciona con el imán; el <strong>hierro</strong> (ferromagnético) lo atrae con tanta fuerza que <strong>se queda pegado</strong>; el <strong>cobre</strong> (conductor no magnético) lo frena por corrientes de Foucault. Son tres fenómenos físicos distintos, y esta experiencia los muestra de forma inolvidable.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Tres barras, un imán: pegado, rápido y a cámara lenta. La mejor manera de <em>ver</em> la ley de Faraday-Lenz en acción.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>
