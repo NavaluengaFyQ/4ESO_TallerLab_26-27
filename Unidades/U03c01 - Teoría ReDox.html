@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T08.01. Reacciones Redox: Oxidación y Reducción</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .container { max-width: 900px; width: 100%; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; margin: 20px auto; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .header-left { display: flex; flex-direction: column; justify-content: center; }
+        .header-left h1 { font-size: 1.8em; margin: 0; }
+        .header-left p { margin: 6px 0 0 0; font-size: 1em; }
+        .header-sub { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+        .header-sub img { max-height: 28px; width: auto; border-radius: 4px; background: white; padding: 2px; }
+        .header-sub .codigo { font-weight: 700; font-size: 1.1em; }
+        .header-sub .texto { font-size: 1.1em; }
+        .header-right img { max-height: 70px; max-width: 180px; object-fit: contain; display: block; }
+        .section { padding: 25px 30px; margin: 15px; border-radius: 12px; border-left: 5px solid; }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 { font-size: 1.3em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box { background: #edf2f7; border: 2px solid #cbd5e0; border-radius: 10px; padding: 15px; margin: 15px 0; text-align: center; font-size: 1.1em; }
+        .note { background: #fffbeb; border: 1px solid #f6e05e; border-radius: 8px; padding: 12px; margin-top: 15px; font-size: 0.95em; color: #744210; }
+        p { line-height: 1.7; margin-bottom: 10px; }
+        ul, ol { padding-left: 25px; line-height: 1.7; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #cbd5e0; padding: 8px 12px; text-align: left; }
+        th { background: #edf2f7; }
+
+        details.step-desplegable { background: white; border-left: 4px solid #48bb78; border-radius: 0 8px 8px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.06); margin: 12px 0; transition: box-shadow 0.3s ease; padding: 0; }
+        details.step-desplegable[open] { box-shadow: 0 4px 14px rgba(72,187,120,0.18); }
+        details.step-desplegable > summary { list-style: none; cursor: pointer; padding: 14px 18px; display: flex; align-items: center; gap: 12px; font-weight: 600; color: #22543d; user-select: none; border-radius: 0 8px 8px 0; transition: background 0.2s ease; }
+        details.step-desplegable > summary:hover { background: #f0fff4; }
+        details.step-desplegable > summary::-webkit-details-marker { display: none; }
+        details.step-desplegable > summary .chevron { margin-left: auto; font-size: 0.95rem; color: #48bb78; transition: transform 0.3s ease; }
+        details.step-desplegable[open] > summary .chevron { transform: rotate(180deg); }
+        details.step-desplegable > summary .step-num { display: inline-flex; align-items: center; justify-content: center; background: #48bb78; color: white; width: 30px; height: 30px; min-width: 30px; border-radius: 50%; font-weight: bold; font-size: 0.95em; margin: 0; }
+        details.step-desplegable > summary .titulo-paso { flex: 1; font-size: 1em; color: #22543d; }
+        details.step-desplegable .contenido-paso { padding: 6px 22px 20px 22px; border-top: 1px solid #e6fffa; margin-top: 0; }
+
+        .hl-rojo    { color: #c53030; font-weight: 800; }
+        .hl-azul    { color: #2b6cb0; font-weight: 800; }
+        .hl-verde   { color: #276749; font-weight: 800; }
+        .hl-naranja { color: #c05621; font-weight: 800; }
+        .hl-morado  { color: #6b46c1; font-weight: 800; }
+        .hl-rosa    { color: #b83280; font-weight: 800; }
+        .hl-teal    { color: #0f766e; font-weight: 800; }
+        .hl-amarillo{ color: #b7791f; font-weight: 800; }
+
+        details.grande { margin: 30px 15px 15px 15px; background: #f8fafc; border-radius: 20px; border: 2px solid #dbeafe; padding: 0.5rem 0.5rem 0.5rem 1.5rem; transition: all 0.3s ease; }
+        details.grande[open] { background: #ffffff; border-color: #3b82f6; box-shadow: 0 8px 20px rgba(59,130,246,0.12); }
+        details.grande > summary { list-style: none; cursor: pointer; font-size: 1.5rem; font-weight: 600; color: #1e3a8a; padding: 0.8rem 0.5rem 0.8rem 0; display: flex; align-items: center; gap: 12px; user-select: none; }
+        details.grande > summary::-webkit-details-marker { display: none; }
+        details.grande > summary i.fa-chevron-circle-down { font-size: 1.8rem; color: #2563eb; transition: transform 0.3s ease; }
+        details.grande[open] > summary i.fa-chevron-circle-down { transform: rotate(180deg); }
+        details.grande > summary .titulo-principal { flex: 1; }
+        details.grande > summary .badge-pulsa { background: #dbeafe; padding: 0.2rem 1rem; border-radius: 40px; font-size: 0.9rem; color: #1e40af; display: inline-flex; align-items: center; gap: 6px; }
+        .contenido-desplegable { padding: 0.5rem 0.8rem 1.8rem 0.8rem; border-top: 1px solid #e2e8f0; margin-top: 0.5rem; }
+        .tarjeta-ejercicio { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 1.5rem 1.8rem; margin-bottom: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .tarjeta-ejercicio .cabecera-ej { display: flex; align-items: baseline; gap: 10px; border-bottom: 2px dashed #bfdbfe; padding-bottom: 0.6rem; margin-bottom: 1rem; }
+        .cabecera-ej .num-ej { background: #2563eb; color: white; font-weight: 700; padding: 0.2rem 1rem; border-radius: 40px; font-size: 0.9rem; }
+        .cabecera-ej .titulo-ej { font-weight: 600; font-size: 1.2rem; color: #0b1e33; }
+        .enunciado-ej { margin-bottom: 1rem; background: #f9fafb; padding: 0.8rem 1.2rem; border-radius: 12px; border-left: 4px solid #94a3b8; }
+        .resolucion-ej { background: #f1f5f9; padding: 1.2rem 1.8rem; border-radius: 16px; border: 1px solid #cbd5e1; font-size: 0.98rem; }
+        .resolucion-ej .paso { margin: 0.6rem 0; }
+        .resolucion-ej .paso strong { color: #1e40af; }
+        .pie-clave { margin-top: 1.8rem; padding: 1rem 1.8rem; background: #eef2ff; border-radius: 40px; border-left: 6px solid #3b82f6; font-weight: 500; color: #1e3a8a; display: flex; align-items: center; gap: 12px; }
+        .pie-clave i { font-size: 1.6rem; color: #2563eb; }
+
+        .caja-oxidacion { background: #fff5f5; border: 2px solid #feb2b2; border-left: 6px solid #e53e3e; border-radius: 10px; padding: 14px 18px; margin: 14px 0; }
+        .caja-reduccion { background: #f0f9ff; border: 2px solid #90cdf4; border-left: 6px solid #3182ce; border-radius: 10px; padding: 14px 18px; margin: 14px 0; }
+        .caja-oxidacion h4, .caja-reduccion h4 { margin: 0 0 6px 0; font-size: 1.05em; }
+        .caja-oxidacion h4 { color: #c53030; }
+        .caja-reduccion h4 { color: #2b6cb0; }
+        .truco { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px dashed #d97706; border-radius: 12px; padding: 14px 18px; margin: 16px 0; color: #78350f; }
+        .truco strong { color: #92400e; }
+        .escala { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 16px 0; }
+        .escala .nivel { background: white; border: 2px solid #cbd5e0; border-radius: 10px; padding: 8px 14px; text-align: center; font-size: 0.9em; min-width: 90px; }
+        .escala .nivel .valor { display: block; font-weight: 700; color: #1e3a8a; font-size: 1.05em; }
+        .escala .nivel .comp { display: block; color: #4a5568; font-size: 0.85em; }
+        .regla-tabla td:first-child { font-weight: 600; color: #2d3748; width: 40%; }
+        .mini-diagrama { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 14px 0; font-size: 1.05em; }
+        .mini-diagrama .atomo { background: #edf2f7; border: 2px solid #a0aec0; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #2d3748; text-align: center; font-size: 0.8em; }
+        .mini-diagrama .flecha { font-size: 1.6em; color: #4a5568; }
+
+        /* Tabla redox (paso 6) */
+        .tabla-redox { font-size: 0.9em; }
+        .tabla-redox th, .tabla-redox td { padding: 6px 8px; vertical-align: middle; }
+        .tabla-redox td:first-child { font-weight: 600; }
+        .swatch { display:inline-block; width:14px; height:14px; border:1px solid #333; border-radius:3px; vertical-align:middle; margin-right:5px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto" alt="Cápsula">
+                <span class="codigo">#T08.01.- </span>
+                <span class="texto">Reacciones Redox: Oxidación y Reducción</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 Enunciado</h2>
+        <p>En química, muchas reacciones implican una <strong>transferencia de electrones</strong> entre las sustancias que intervienen. Para poder describir y predecir estas transferencias necesitamos una herramienta fundamental: el <strong>número de oxidación</strong>. A partir de él podremos entender qué es una <strong>oxidación</strong>, qué es una <strong>reducción</strong> y cómo ambas se integran en una <strong>reacción redox</strong>.</p>
+        <div class="formula-box">
+            \[ \text{Redox} = \text{Oxidación} + \text{Reducción} \]
+
+          <img src="../imagenes\U01c03 - Reacciones Redox.png" alt="_._._" width="400">
+          <br>
+          <img src="../imagenes\U0301-Oxidación-Cómic.png" alt="_._._" width="600">
+
+<div class="bloque-redox" style="
+  max-width: 520px;
+  margin: 20px auto;
+  padding: 22px 26px;
+  background: linear-gradient(135deg, #f9fafc 0%, #eef2f7 100%);
+  border-left: 6px solid #4a6cf7;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.6;
+">
+  <p style="margin: 0 0 12px 0; font-size: 1.05rem; color: #2b2d42;">
+    El <strong style="color: #d62828; font-weight: 800;">reductor</strong> de deudas 
+    <strong style="color: #2a9d8f; font-weight: 800;">paga</strong> y 
+    <strong style="color: #d62828; font-weight: 800;">se oxida</strong>
+    <span style="color: #d62828; font-weight: 700; font-style: italic;">(pierde €)</span>.
+  </p>
+  <p style="margin: 0; font-size: 1.05rem; color: #2b2d42;">
+    El <strong style="color: #1d3557; font-weight: 800;">oxidante</strong> endeudado 
+    <strong style="color: #2a9d8f; font-weight: 800;">cobra</strong> y 
+    <strong style="color: #1d3557; font-weight: 800;">se reduce</strong>
+    <span style="color: #1d3557; font-weight: 700; font-style: italic;">(gana €)</span>.
+  </p>
+</div>
+
+        </div>
+    </div>
+
+    <!-- OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 Objetivo</h2>
+        <p>Comprender qué es el número de oxidación de un elemento en un compuesto, saber calcularlo aplicando las reglas, relacionarlo con los electrones que el átomo "cede" o "captura", y ser capaz de identificar procesos de oxidación y reducción, así como de analizar una reacción redox completa tanto en forma molecular como en sus semirreacciones iónicas.</p>
+    </div>
+
+    <!-- PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>🔧 Procedimiento</h2>
+
+        <!-- PASO 1 -->
+        <details class="step-desplegable">
+            <summary>
+                <span class="step-num">1</span>
+                <span class="titulo-paso">¿Qué es el <span class="hl-morado">número de oxidación</span>?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>El <strong>número de oxidación (n.o.)</strong> es la <em>carga eléctrica formal</em> que tendría un átomo en un compuesto si los electrones de cada enlace se asignaran <strong>al átomo más electronegativo</strong>. Es una "contabilidad imaginaria" de electrones.</p>
+                <ul>
+                    <li>Se escribe con signo (+ o −) delante del número: \(+2\), \(-1\), \(0\)...</li>
+                    <li>Puede ser <strong>positivo, negativo o cero</strong>.</li>
+                    <li>Es un número <strong>formal</strong>: no tiene por qué coincidir con una carga real, pero es muy útil para entender la transferencia de electrones.</li>
+                </ul>
+                <div class="note">
+                    <strong>💡 Idea clave:</strong> El n.o. mide cuántos electrones "ha ganado o perdido formalmente" un átomo respecto a su estado elemental. Cuanto más positivo es, más electrones ha "cedido" (o mejor dicho, le han sido asignados al átomo más electronegativo vecino).
+                </div>
+            </div>
+        </details>
+
+        <!-- PASO 2 -->
+        <details class="step-desplegable">
+            <summary>
+                <span class="step-num">2</span>
+                <span class="titulo-paso"><span class="hl-naranja">Reglas</span> para calcular el <span class="hl-morado">número de oxidación</span></span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>Las reglas se aplican en orden de prioridad. Aquí tienes las más importantes:</p>
+                <table class="regla-tabla">
+                    <thead>
+                        <tr><th>Situación</th><th>Número de oxidación</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Elemento en estado libre (sin combinar)</td><td>0 &nbsp;(ej.: \( \mathrm{O_2} \), \( \mathrm{Fe} \), \( \mathrm{S_8} \))</td></tr>
+                        <tr><td>Ion monoatómico</td><td>Igual a la carga del ion (ej.: \( \mathrm{Na^+} \rightarrow +1 \); \( \mathrm{Cl^-} \rightarrow -1 \))</td></tr>
+                        <tr><td>Oxígeno (en general)</td><td>\(-2\) (excepto en peróxidos: \(-1\); con flúor: \(+2\))</td></tr>
+                        <tr><td>Hidrógeno (en general)</td><td>\(+1\) (excepto en hidruros metálicos: \(-1\))</td></tr>
+                        <tr><td>Metales alcalinos (Li, Na, K...)</td><td>\(+1\)</td></tr>
+                        <tr><td>Metales alcalinotérreos (Be, Mg, Ca...)</td><td>\(+2\)</td></tr>
+                        <tr><td>Flúor</td><td>\(-1\) (siempre, es el más electronegativo)</td></tr>
+                        <tr><td>Suma de n.o. en un compuesto neutro</td><td>\(= 0\)</td></tr>
+                        <tr><td>Suma de n.o. en un ion poliatómico</td><td>\(=\) carga del ion</td></tr>
+                    </tbody>
+                </table>
+                <div class="note">
+                    <strong>💡 Consejo práctico:</strong> Empieza siempre por los elementos que tienen regla fija (O, H, metales alcalinos...) y deja el elemento incógnita para el final, despejándolo de la suma total.
+                </div>
+            </div>
+        </details>
+
+        <!-- PASO 3 -->
+        <details class="step-desplegable">
+            <summary>
+                <span class="step-num">3</span>
+                <span class="titulo-paso">El <span class="hl-rojo">"esfuerzo"</span> del átomo: n.o. y <span class="hl-teal">electrones</span> ganados/perdidos</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>El número de oxidación nos dice cuántos electrones ha <em>cedido</em> o <em>capturado</em> formalmente un átomo respecto a su estado elemental (n.o. = 0). Es como el <strong>"sacrificio"</strong> que hace el átomo para formar el compuesto.</p>
+                <div class="mini-diagrama">
+                    <div class="atomo">Átomo<br>neutro</div>
+                    <div class="flecha">→</div>
+                    <div class="atomo">n.o. = \(+n\)</div>
+                    <div style="font-size:0.9em; color:#c53030;">perdió \(n\) e⁻</div>
+                </div>
+                <div class="mini-diagrama">
+                    <div class="atomo">Átomo<br>neutro</div>
+                    <div class="flecha">→</div>
+                    <div class="atomo">n.o. = \(-n\)</div>
+                    <div style="font-size:0.9em; color:#2b6cb0;">ganó \(n\) e⁻</div>
+                </div>
+                <div class="formula-box">
+                    \[ \text{Nº de electrones transferidos} = |\text{n.o. final} - \text{n.o. inicial}| \]
+                </div>
+                <p>Por tanto:</p>
+                <ul>
+                    <li>Si el n.o. del elemento <strong>aumenta</strong> (se hace más positivo o menos negativo) → el átomo ha <strong>perdido electrones</strong> → se ha <strong>oxidado</strong>.</li>
+                    <li>Si el n.o. del elemento <strong>disminuye</strong> (se hace más negativo o menos positivo) → el átomo ha <strong>ganado electrones</strong> → se ha <strong>reducido</strong>.</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- PASO 4 -->
+        <details class="step-desplegable">
+            <summary>
+                <span class="step-num">4</span>
+                <span class="titulo-paso">Ejemplo: un elemento con <span class="hl-rosa">DIFERENTES</span> números de oxidación</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>Tomemos el <strong>manganeso (Mn)</strong>. Puede aparecer en muchos compuestos con n.o. distintos:</p>
+                <div class="escala">
+                    <div class="nivel"><span class="valor">0</span><span class="comp">Mn</span></div>
+                    <div class="nivel"><span class="valor">+2</span><span class="comp">MnO</span></div>
+                    <div class="nivel"><span class="valor">+3</span><span class="comp">Mn₂O₃</span></div>
+                    <div class="nivel"><span class="valor">+4</span><span class="comp">MnO₂</span></div>
+                    <div class="nivel"><span class="valor">+6</span><span class="comp">MnO₄²⁻</span></div>
+                    <div class="nivel"><span class="valor">+7</span><span class="comp">MnO₄⁻</span></div>
+                </div>
+                <p>Observa cómo el "esfuerzo" del Mn cambia según el compuesto:</p>
+                <ul>
+                    <li>En <strong>MnO</strong> el Mn tiene n.o. \(+2\): ha "cedido" 2 electrones respecto al metal libre (n.o. 0).</li>
+                    <li>En <strong>MnO₄⁻</strong> el Mn tiene n.o. \(+7\): ha "cedido" 7 electrones formales. ¡Es su máximo "sacrificio"!</li>
+                </ul>
+                <p><strong>Otro ejemplo clásico: el azufre (S)</strong></p>
+                <div class="escala">
+                    <div class="nivel"><span class="valor">−2</span><span class="comp">H₂S</span></div>
+                    <div class="nivel"><span class="valor">0</span><span class="comp">S₈</span></div>
+                    <div class="nivel"><span class="valor">+4</span><span class="comp">SO₂</span></div>
+                    <div class="nivel"><span class="valor">+6</span><span class="comp">H₂SO₄</span></div>
+                </div>
+                <p>El azufre pasa de "ganar" 2 electrones (n.o. −2 en H₂S) a "ceder" 6 (n.o. +6 en H₂SO₄).</p>
+            </div>
+        </details>
+
+        <!-- PASO 5 -->
+        <details class="step-desplegable">
+            <summary>
+                <span class="step-num">5</span>
+                <span class="titulo-paso">Ejemplo: un elemento con el <span class="hl-verde">MISMO</span> número de oxidación en distintos compuestos</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>El <strong>sodio (Na)</strong> es un caso típico: como metal alcalino, <em>siempre</em> actúa con n.o. \(+1\) en sus compuestos (salvo en el metal libre, donde es 0).</p>
+                <table>
+                    <thead>
+                        <tr><th>Compuesto</th><th>n.o. del Na</th><th>¿Cuántos e⁻ "cede"?</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>NaCl (cloruro de sodio)</td><td>\(+1\)</td><td>1 electrón</td></tr>
+                        <tr><td>NaOH (hidróxido de sodio)</td><td>\(+1\)</td><td>1 electrón</td></tr>
+                        <tr><td>Na₂SO₄ (sulfato de sodio)</td><td>\(+1\)</td><td>1 electrón</td></tr>
+                        <tr><td>NaNO₃ (nitrato de sodio)</td><td>\(+1\)</td><td>1 electrón</td></tr>
+                        <tr><td>Na₂O (óxido de sodio)</td><td>\(+1\)</td><td>1 electrón</td></tr>
+                    </tbody>
+                </table>
+                <p>Aunque cambie el compañero (Cl, O, S...), el Na no cambia su n.o. Esto ocurre porque el Na tiene una gran tendencia a perder su único electrón de valencia y formar el ion \( \mathrm{Na^+} \).</p>
+                <div class="note">
+                    <strong>💡 Comparación útil:</strong> Algunos elementos tienen un n.o. "favorito" (Na: +1; Mg: +2; Al: +3; O: −2; F: −1) porque su configuración electrónica les hace muy favorable ganar o perder un número concreto de electrones. Otros, como los metales de transición, pueden tener varios (Fe: +2 y +3; Mn: +2, +4, +7...).
+                </div>
+            </div>
+        </details>
+
+        <!-- PASO 6 (NUEVO) -->
+        <details class="step-desplegable">
+            <summary>
+                <span class="step-num">6</span>
+                <span class="titulo-paso">Tabla de <span class="hl-morado">iones comunes</span>: átomo, n.o., color y comportamiento <span class="hl-rojo">redox</span></span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>Esta tabla recoge las <strong>especies iónicas y moleculares</strong> más habituales en las reacciones redox. Se indica el <strong>átomo</strong> al que corresponde el número de oxidación, si <strong>gana o pierde</strong> electrones, la <strong>semirreacción</strong> asociada y el <strong>color</strong> que presentan en disolución acuosa (cuando es relevante).</p>
+
+                <table class="tabla-redox">
+                    <thead>
+                        <tr style="background-color: #f0f0f0;">
+                            <th>Especie</th>
+                            <th>Átomo</th>
+                            <th>N.o.</th>
+                            <th>Electrones</th>
+                            <th>¿Qué le pasa?</th>
+                            <th>Semireacción</th>
+                            <th>Color en disolución</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Manganeso -->
+                        <tr>
+                            <td><strong>MnO₄⁻</strong> (permanganato)</td>
+                            <td>Mn</td>
+                            <td>+7</td>
+                            <td><strong>Gana</strong> electrones</td>
+                            <td>Se <strong>reduce</strong></td>
+                            <td>MnO₄⁻ + 8H⁺ + 5e⁻ → Mn²⁺ + 4H₂O</td>
+                            <td><span class="swatch" style="background-color:#8e44ad;"></span> Violeta</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MnO₄²⁻</strong> (manganato)</td>
+                            <td>Mn</td>
+                            <td>+6</td>
+                            <td>Puede ganar o perder</td>
+                            <td>Intermedio redox</td>
+                            <td>MnO₄²⁻ + e⁻ → MnO₄³⁻ (en medio básico)</td>
+                            <td><span class="swatch" style="background-color:#27ae60;"></span> Verde</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MnO₄³⁻</strong> (hipomanganato)</td>
+                            <td>Mn</td>
+                            <td>+5</td>
+                            <td>Puede ganar o perder</td>
+                            <td>Muy inestable</td>
+                            <td>MnO₄³⁻ + 2H₂O + 2e⁻ → MnO₂ + 4OH⁻</td>
+                            <td><span class="swatch" style="background-color:#2980b9;"></span> Azul</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MnO₂</strong> (dióxido de manganeso)</td>
+                            <td>Mn</td>
+                            <td>+4</td>
+                            <td>Puede ganar o perder</td>
+                            <td>Sólido</td>
+                            <td>MnO₂ + 4H⁺ + 2e⁻ → Mn²⁺ + 2H₂O</td>
+                            <td><span class="swatch" style="background-color:#8B4513;"></span> Marrón (sólido)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mn³⁺</strong></td>
+                            <td>Mn</td>
+                            <td>+3</td>
+                            <td>Puede ganar o perder</td>
+                            <td>Inestable en agua</td>
+                            <td>Mn³⁺ + e⁻ → Mn²⁺</td>
+                            <td><span class="swatch" style="background-color:#e84393;"></span> Rosa / Magenta</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mn²⁺</strong></td>
+                            <td>Mn</td>
+                            <td>+2</td>
+                            <td><strong>Pierde</strong> electrones</td>
+                            <td>Se <strong>oxida</strong></td>
+                            <td>Mn²⁺ + 4H₂O → MnO₄⁻ + 8H⁺ + 5e⁻</td>
+                            <td><span class="swatch" style="background-color:#f5b7c5;"></span> Rosa pálido (casi incoloro)</td>
+                        </tr>
+                        <!-- Hierro -->
+                        <tr>
+                            <td><strong>Fe³⁺</strong></td>
+                            <td>Fe</td>
+                            <td>+3</td>
+                            <td><strong>Gana</strong> electrones</td>
+                            <td>Se <strong>reduce</strong></td>
+                            <td>Fe³⁺ + e⁻ → Fe²⁺</td>
+                            <td><span class="swatch" style="background-color:#f39c12;"></span> Amarillo / Marrón</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fe²⁺</strong></td>
+                            <td>Fe</td>
+                            <td>+2</td>
+                            <td><strong>Pierde</strong> electrones</td>
+                            <td>Se <strong>oxida</strong></td>
+                            <td>Fe²⁺ → Fe³⁺ + e⁻</td>
+                            <td><span class="swatch" style="background-color:#a9dfbf;"></span> Verde pálido</td>
+                        </tr>
+                        <!-- Cobre -->
+                        <tr>
+                            <td><strong>Cu²⁺</strong></td>
+                            <td>Cu</td>
+                            <td>+2</td>
+                            <td><strong>Gana</strong> electrones</td>
+                            <td>Se <strong>reduce</strong></td>
+                            <td>Cu²⁺ + 2e⁻ → Cu</td>
+                            <td><span class="swatch" style="background-color:#3498db;"></span> Azul</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cu⁺</strong></td>
+                            <td>Cu</td>
+                            <td>+1</td>
+                            <td>Puede ganar o perder</td>
+                            <td>Se desproporciona</td>
+                            <td>2Cu⁺ → Cu + Cu²⁺</td>
+                            <td><span class="swatch" style="background-color:#d5dbdb;"></span> Incoloro (inestable)</td>
+                        </tr>
+                        <!-- Cromo -->
+                        <tr>
+                            <td><strong>Cr₂O₇²⁻</strong> (dicromato)</td>
+                            <td>Cr</td>
+                            <td>+6</td>
+                            <td><strong>Gana</strong> electrones</td>
+                            <td>Se <strong>reduce</strong></td>
+                            <td>Cr₂O₇²⁻ + 14H⁺ + 6e⁻ → 2Cr³⁺ + 7H₂O</td>
+                            <td><span class="swatch" style="background-color:#e67e22;"></span> Naranja</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cr³⁺</strong></td>
+                            <td>Cr</td>
+                            <td>+3</td>
+                            <td><strong>Pierde</strong> electrones</td>
+                            <td>Se <strong>oxida</strong></td>
+                            <td>2Cr³⁺ + 7H₂O → Cr₂O₇²⁻ + 14H⁺ + 6e⁻</td>
+                            <td><span class="swatch" style="background-color:#2ecc71;"></span> Verde</td>
+                        </tr>
+                        <!-- Nitrógeno -->
+                        <tr>
+                            <td><strong>NO₃⁻</strong> (nitrato)</td>
+                            <td>N</td>
+                            <td>+5</td>
+                            <td><strong>Gana</strong> electrones</td>
+                            <td>Se <strong>reduce</strong></td>
+                            <td>NO₃⁻ + 4H⁺ + 3e⁻ → NO + 2H₂O</td>
+                            <td><span class="swatch" style="background-color:#ecf0f1;"></span> Incoloro</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NH₄⁺</strong> (amonio)</td>
+                            <td>N</td>
+                            <td>-3</td>
+                            <td><strong>Pierde</strong> electrones</td>
+                            <td>Se <strong>oxida</strong></td>
+                            <td>2NH₄⁺ → N₂ + 8H⁺ + 6e⁻</td>
+                            <td><span class="swatch" style="background-color:#ecf0f1;"></span> Incoloro</td>
+                        </tr>
+                        <!-- Azufre -->
+                        <tr>
+                            <td><strong>SO₄²⁻</strong> (sulfato)</td>
+                            <td>S</td>
+                            <td>+6</td>
+                            <td><strong>Gana</strong> electrones</td>
+                            <td>Se <strong>reduce</strong> (débil)</td>
+                            <td>SO₄²⁻ + 4H⁺ + 2e⁻ → SO₂ + 2H₂O</td>
+                            <td><span class="swatch" style="background-color:#ecf0f1;"></span> Incoloro</td>
+                        </tr>
+                        <tr>
+                            <td><strong>H₂S</strong> (sulfuro de hidrógeno)</td>
+                            <td>S</td>
+                            <td>-2</td>
+                            <td><strong>Pierde</strong> electrones</td>
+                            <td>Se <strong>oxida</strong></td>
+                            <td>H₂S → S + 2H⁺ + 2e⁻</td>
+                            <td><span class="swatch" style="background-color:#ecf0f1;"></span> Incoloro (gas)</td>
+                        </tr>
+                        <!-- Cloro -->
+                        <tr>
+                            <td><strong>ClO₄⁻</strong> (perclorato)</td>
+                            <td>Cl</td>
+                            <td>+7</td>
+                            <td><strong>Gana</strong> electrones</td>
+                            <td>Se <strong>reduce</strong> (lento)</td>
+                            <td>ClO₄⁻ + 8H⁺ + 8e⁻ → Cl⁻ + 4H₂O</td>
+                            <td><span class="swatch" style="background-color:#ecf0f1;"></span> Incoloro</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cl₂</strong></td>
+                            <td>Cl</td>
+                            <td>0</td>
+                            <td>Puede ganar o perder</td>
+                            <td>Se desproporciona</td>
+                            <td>Cl₂ + 2e⁻ → 2Cl⁻</td>
+                            <td><span class="swatch" style="background-color:#f1c40f;"></span> Amarillo-verde (gas)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cl⁻</strong></td>
+                            <td>Cl</td>
+                            <td>-1</td>
+                            <td><strong>Pierde</strong> electrones</td>
+                            <td>Se <strong>oxida</strong> (débil)</td>
+                            <td>2Cl⁻ → Cl₂ + 2e⁻</td>
+                            <td><span class="swatch" style="background-color:#ecf0f1;"></span> Incoloro</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Nota manganeso -->
+                <div style="margin-top: 12px; padding: 10px; background-color: #eaf2f8; border-left: 4px solid #2980b9; border-radius: 4px;">
+                    <strong>💡 Nota sobre los iones de manganeso:</strong>
+                    <ul style="margin: 6px 0 0 0;">
+                        <li><strong>Mn²⁺:</strong> Es el estado más estable en medio ácido. Sus disoluciones son casi incoloras, aunque a concentraciones altas muestran un <strong>rosa pálido</strong> característico.</li>
+                        <li><strong>MnO₄⁻:</strong> El permanganato es un oxidante fuerte muy conocido. Su color <strong>violeta intenso</strong> es inconfundible incluso en disoluciones muy diluidas.</li>
+                        <li><strong>MnO₄²⁻:</strong> El manganato solo es estable en medio fuertemente alcalino. Su color <strong>verde oscuro</strong> es muy característico.</li>
+                        <li><strong>MnO₂:</strong> Es un sólido <strong>marrón</strong> o negro que precipita en las reducciones del permanganato en medio neutro o ligeramente alcalino.</li>
+                        <li><strong>Mn³⁺ y MnO₄³⁻:</strong> Son especies intermedias poco estables en agua. El Mn³⁺ presenta un color <strong>rosa o magenta</strong>, mientras que el hipomanganato (Mn(V)) es <strong>azul</strong>.</li>
+                    </ul>
+                </div>
+
+                <!-- Nota hierro y otros -->
+                <div style="margin-top: 12px; padding: 10px; background-color: #fef9e7; border-left: 4px solid #f1c40f; border-radius: 4px;">
+                    <strong>💡 Nota sobre el hierro y otros iones comunes:</strong>
+                    <ul style="margin: 6px 0 0 0;">
+                        <li><strong>Fe²⁺ (verde pálido):</strong> Actúa como reductor, oxidándose a Fe³⁺. Es la forma de hierro más soluble en agua.</li>
+                        <li><strong>Fe³⁺ (amarillo/marrón):</strong> Actúa como oxidante, reduciéndose a Fe²⁺. Forma hidróxidos poco solubles de color marrón rojizo.</li>
+                        <li><strong>Cu²⁺ (azul):</strong> Oxidante suave, se reduce a cobre metálico o a Cu⁺. Sus disoluciones son azuladas.</li>
+                        <li><strong>Cr₂O₇²⁻ (naranja):</strong> Fuerte oxidante en medio ácido, se reduce a Cr³⁺ (verde).</li>
+                        <li><strong>NO₃⁻ (incoloro):</strong> Oxidante en medio ácido, se reduce a NO, NO₂ o NH₄⁺ según las condiciones.</li>
+                        <li><strong>SO₄²⁻ (incoloro):</strong> Oxidante muy débil; solo se reduce en condiciones enérgicas.</li>
+                        <li><strong>Cl₂ (amarillo-verde):</strong> Puede actuar como oxidante (se reduce a Cl⁻) o desproporcionarse.</li>
+                    </ul>
+                </div>
+            </div>
+        </details>
+
+        <!-- PASO 7 (antes 6) -->
+        <details class="step-desplegable">
+            <summary>
+                <span class="step-num">7</span>
+                <span class="titulo-paso">¿Qué es la <span class="hl-rojo">oxidación</span> y qué es la <span class="hl-azul">reducción</span>?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <div class="caja-oxidacion">
+                    <h4>🔥 OXIDACIÓN</h4>
+                    <p>Es el proceso en el que un elemento <strong>PIERDE electrones</strong> y, por tanto, su <strong>número de oxidación AUMENTA</strong>.</p>
+                    <div class="formula-box" style="margin:8px 0;">
+                        \[ \text{Forma reducida} \longrightarrow \text{Forma oxidada} + n\,e^- \]
+                    </div>
+                    <p>Al elemento que se oxida se le llama <strong>reductor</strong> (porque provoca la reducción del otro).</p>
+                </div>
+                <div class="caja-reduccion">
+                    <h4>❄️ REDUCCIÓN</h4>
+                    <p>Es el proceso en el que un elemento <strong>GANA electrones</strong> y, por tanto, su <strong>número de oxidación DISMINUYE</strong>.</p>
+                    <div class="formula-box" style="margin:8px 0;">
+                        \[ \text{Forma oxidada} + n\,e^- \longrightarrow \text{Forma reducida} \]
+                    </div>
+                    <p>Al elemento que se reduce se le llama <strong>oxidante</strong> (porque provoca la oxidación del otro).</p>
+                </div>
+
+                <div class="truco">
+                    <div style="background-color: #fff3cd; border: 2px solid #ffc107; border-radius: 8px; padding: 12px; margin-bottom: 12px; text-align: center;">
+                        <strong style="font-size: 1.3em; color: #856404;">🧠 PEO GER</strong>
+                        <ul style="list-style: none; padding: 0; margin: 8px 0; color: #856404;">
+                            <li><strong>P</strong>érdida de <strong>E</strong>lectrones = <strong>O</strong>xidación</li>
+                            <li><strong>G</strong>anancia de <strong>E</strong>lectrones = <strong>R</strong>educción</li>
+                        </ul>
+                        <p style="margin: 8px 0 0 0; font-style: italic; color: #856404; font-weight: bold;">
+                            "Pierdo Electrones y me Oxido; Gano Electrones y me Reduzco."
+                        </p>
+                    </div>
+
+                    <table border="1" cellpadding="6" cellspacing="0" style="border-collapse: collapse; width: 100%; text-align: left;">
+                        <thead>
+                            <tr style="background-color: #f0f0f0;">
+                                <th>Especie</th>
+                                <th>Electrones</th>
+                                <th>¿Qué le pasa?</th>
+                                <th>Semireacción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Oxidante</strong></td>
+                                <td><strong>Gana</strong> electrones</td>
+                                <td>Se <strong>reduce</strong></td>
+                                <td>La semireacción del oxidante es la de <strong>reducción</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reductor</strong></td>
+                                <td><strong>Pierde</strong> electrones</td>
+                                <td>Se <strong>oxida</strong></td>
+                                <td>La semireacción del reductor es la de <strong>oxidación</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </details>
+
+        <!-- PASO 8 (antes 7) -->
+        <details class="step-desplegable">
+            <summary>
+                <span class="step-num">8</span>
+                <span class="titulo-paso">¿Qué es una reacción <span class="hl-rojo">RED</span><span class="hl-azul">OX</span>?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>Una <strong>reacción redox</strong> es aquella en la que <strong>se produce una transferencia de electrones</strong> entre las especies químicas: unos elementos se oxidan (pierden electrones) y otros se reducen (ganan electrones) al mismo tiempo.</p>
+                <p>Una oxidación y una reducción <strong>siempre van juntas</strong>: los electrones que pierde un elemento los gana otro. Por eso hablamos de <em>reacción redox</em> (reducción + oxidación).</p>
+
+                <p><strong>Ejemplo clásico (en forma molecular):</strong> la reacción entre el zinc metálico y el sulfato de cobre(II):</p>
+                <div class="formula-box">
+                    \[ \mathrm{Zn} + \mathrm{CuSO_4} \longrightarrow \mathrm{ZnSO_4} + \mathrm{Cu} \]
+                </div>
+                <p>Aquí el Zn pasa de n.o. 0 a +2 (se oxida) y el Cu pasa de +2 a 0 (se reduce).</p>
+
+                <p><strong>La misma reacción en forma iónica (semirreacciones):</strong></p>
+                <div class="caja-oxidacion">
+                    <h4>Semirreacción de OXIDACIÓN</h4>
+                    <div class="formula-box" style="margin:6px 0;">
+                        \[ \mathrm{Zn} \longrightarrow \mathrm{Zn^{2+}} + 2\,e^- \]
+                    </div>
+                    <p>El Zn pierde 2 electrones. Su n.o. pasa de 0 a +2. Actúa como <strong>reductor</strong>.</p>
+                </div>
+                <div class="caja-reduccion">
+                    <h4>Semirreacción de REDUCCIÓN</h4>
+                    <div class="formula-box" style="margin:6px 0;">
+                        \[ \mathrm{Cu^{2+}} + 2\,e^- \longrightarrow \mathrm{Cu} \]
+                    </div>
+                    <p>El Cu²⁺ gana 2 electrones. Su n.o. pasa de +2 a 0. Actúa como <strong>oxidante</strong>.</p>
+                </div>
+                <p><strong>Reacción iónica global</strong> (sumando ambas semirreacciones y cancelando los electrones):</p>
+                <div class="formula-box">
+                    \[ \mathrm{Zn} + \mathrm{Cu^{2+}} \longrightarrow \mathrm{Zn^{2+}} + \mathrm{Cu} \]
+                </div>
+                <div class="note">
+                    <strong>💡 Importante:</strong> Los electrones que aparecen en la oxidación y en la reducción deben ser los mismos (se cancelan al sumar). Si no coinciden, se multiplica cada semirreacción por el coeficiente adecuado.
+                </div>
+            </div>
+        </details>
+
+        <!-- PASO 9 (antes 8) -->
+        <details class="step-desplegable">
+            <summary>
+                <span class="step-num">9</span>
+                <span class="titulo-paso">Otro ejemplo: <span class="hl-amarillo">dicromato</span> + <span class="hl-verde">hierro(II)</span> en medio ácido</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>Este tipo de reacciones redox aparecen mucho en 1º de Bachillerato. Analicemos la reacción iónica:</p>
+                <div class="formula-box">
+                    \[ \mathrm{Cr_2O_7^{2-}} + \mathrm{Fe^{2+}} + \mathrm{H^+} \longrightarrow \mathrm{Cr^{3+}} + \mathrm{Fe^{3+}} + \mathrm{H_2O} \]
+                </div>
+                <p><strong>Semirreacción de oxidación:</strong></p>
+                <div class="caja-oxidacion">
+                    <div class="formula-box" style="margin:6px 0;">
+                        \[ \mathrm{Fe^{2+}} \longrightarrow \mathrm{Fe^{3+}} + 1\,e^- \]
+                    </div>
+                    <p>El Fe pasa de n.o. +2 a +3: pierde 1 electrón. Se oxida.</p>
+                </div>
+                <p><strong>Semirreacción de reducción:</strong></p>
+                <div class="caja-reduccion">
+                    <div class="formula-box" style="margin:6px 0;">
+                        \[ \mathrm{Cr_2O_7^{2-}} + 14\,\mathrm{H^+} + 6\,e^- \longrightarrow 2\,\mathrm{Cr^{3+}} + 7\,\mathrm{H_2O} \]
+                    </div>
+                    <p>Cada Cr pasa de n.o. +6 a +3: gana 3 electrones. Como hay 2 Cr, se ganan 6 electrones en total. Se reduce.</p>
+                </div>
+                <p><strong>Ajuste:</strong> para que los electrones cuadren, multiplicamos la oxidación por 6:</p>
+                <div class="formula-box">
+                    \[ \mathrm{Cr_2O_7^{2-}} + 6\,\mathrm{Fe^{2+}} + 14\,\mathrm{H^+} \longrightarrow 2\,\mathrm{Cr^{3+}} + 6\,\mathrm{Fe^{3+}} + 7\,\mathrm{H_2O} \]
+                </div>
+                <p>Comprobación: 6 electrones perdidos por los 6 Fe²⁺ = 6 electrones ganados por el dicromato. ¡Cuadra!</p>
+            </div>
+        </details>
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="section resultado">
+        <h2>✅ Resultado</h2>
+        <p>Hemos aprendido a:</p>
+        <ul>
+            <li><strong>Calcular el número de oxidación</strong> de un elemento en cualquier compuesto aplicando las reglas.</li>
+            <li><strong>Relacionar el n.o. con los electrones</strong> que el átomo ha ganado o perdido (su "esfuerzo" formal).</li>
+            <li><strong>Identificar oxidaciones y reducciones</strong> observando cómo cambia el n.o.</li>
+            <li><strong>Analizar una reacción redox</strong> tanto en forma molecular como iónica, separándola en sus semirreacciones.</li>
+        </ul>
+        <div class="formula-box">
+            \[ \boxed{\text{Oxidación: pierde e}^-\;(\text{n.o.}\uparrow) \quad\quad \text{Reducción: gana e}^-\;(\text{n.o.}\downarrow)} \]
+        </div>
+        <div class="note">
+            <strong>💡 Observaciones clave:</strong> El número de oxidación es una herramienta <em>formal</em>, no una carga real. En una reacción redox siempre se conserva el número total de electrones: los que pierde el reductor los gana el oxidante. El oxidante es la especie que se reduce, y el reductor es la que se oxida. Esta aparente contradicción es la fuente de muchos errores: <strong>¡grábatelo bien!</strong>
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE GRANDE -->
+    <details class="grande">
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span class="titulo-principal">🧪 <span class="hl-morado">DESMITIFICANDO</span> las <span class="hl-rojo">Reacciones</span> <span class="hl-azul">Redox</span></span>
+            <span class="badge-pulsa"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="contenido-desplegable">
+
+            <!-- EJERCICIO 1 -->
+            <div class="tarjeta-ejercicio">
+                <div class="cabecera-ej">
+                    <span class="num-ej">Ejercicio 1</span>
+                    <span class="titulo-ej">Calcular números de oxidación</span>
+                </div>
+                <div class="enunciado-ej">
+                    <p>Determina el número de oxidación de cada elemento en los siguientes compuestos e iones:</p>
+                    <ul>
+                        <li>a) \( \mathrm{H_2SO_4} \)</li>
+                        <li>b) \( \mathrm{KMnO_4} \)</li>
+                        <li>c) \( \mathrm{NO_3^-} \)</li>
+                        <li>d) \( \mathrm{Fe_2O_3} \)</li>
+                    </ul>
+                </div>
+                <div class="resolucion-ej">
+                    <p><strong>Resolución:</strong></p>
+                    <div class="paso">
+                        <strong>a) \( \mathrm{H_2SO_4} \):</strong> H: \(+1\) (×2 = \(+2\)); O: \(-2\) (×4 = \(-8\)). Suma: \(2 + x - 8 = 0 \Rightarrow x = +6\). <strong>S = +6</strong>.
+                    </div>
+                    <div class="paso">
+                        <strong>b) \( \mathrm{KMnO_4} \):</strong> K: \(+1\); O: \(-2\) (×4 = \(-8\)). Suma: \(1 + x - 8 = 0 \Rightarrow x = +7\). <strong>Mn = +7</strong>.
+                    </div>
+                    <div class="paso">
+                        <strong>c) \( \mathrm{NO_3^-} \):</strong> O: \(-2\) (×3 = \(-6\)). Suma: \(x - 6 = -1 \Rightarrow x = +5\). <strong>N = +5</strong>.
+                    </div>
+                    <div class="paso">
+                        <strong>d) \( \mathrm{Fe_2O_3} \):</strong> O: \(-2\) (×3 = \(-6\)). Suma: \(2x - 6 = 0 \Rightarrow 2x = +6 \Rightarrow x = +3\). <strong>Fe = +3</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="tarjeta-ejercicio">
+                <div class="cabecera-ej">
+                    <span class="num-ej">Ejercicio 2</span>
+                    <span class="titulo-ej">Del número de oxidación a los electrones transferidos</span>
+                </div>
+                <div class="enunciado-ej">
+                    <p>En la reacción:</p>
+                    <div class="formula-box">
+                        \[ \mathrm{2\,Al + 3\,Cl_2 \longrightarrow 2\,AlCl_3} \]
+                    </div>
+                    <p>a) ¿Cuál es el n.o. del Al en el metal y en el AlCl₃?</p>
+                    <p>b) ¿Cuántos electrones ha perdido <em>cada</em> átomo de Al?</p>
+                    <p>c) ¿Cuántos electrones ha ganado <em>cada</em> átomo de Cl?</p>
+                    <p>d) ¿Cuál es el oxidante y cuál el reductor?</p>
+                </div>
+                <div class="resolucion-ej">
+                    <p><strong>Resolución:</strong></p>
+                    <div class="paso">
+                        <strong>a)</strong> Al en estado libre: n.o. = 0. En AlCl₃: Cl = \(-1\) (×3 = \(-3\)), luego Al = \(+3\).
+                    </div>
+                    <div class="paso">
+                        <strong>b)</strong> Cada Al pasa de 0 a +3 → pierde <strong>3 electrones</strong>.
+                    </div>
+                    <div class="paso">
+                        <strong>c)</strong> Cada Cl pasa de 0 a \(-1\) → gana <strong>1 electrón</strong>.
+                    </div>
+                    <div class="paso">
+                        <strong>d)</strong> El Al se oxida (pierde e⁻) → es el <strong>reductor</strong>. El Cl₂ se reduce (gana e⁻) → es el <strong>oxidante</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="tarjeta-ejercicio">
+                <div class="cabecera-ej">
+                    <span class="num-ej">Ejercicio 3</span>
+                    <span class="titulo-ej">Identificar oxidación y reducción en una reacción iónica</span>
+                </div>
+                <div class="enunciado-ej">
+                    <p>Dada la reacción iónica:</p>
+                    <div class="formula-box">
+                        \[ \mathrm{2\,Fe^{3+} + Sn^{2+} \longrightarrow 2\,Fe^{2+} + Sn^{4+}} \]
+                    </div>
+                    <p>a) ¿Qué elemento se oxida? ¿Y cuál se reduce?</p>
+                    <p>b) Escribe las semirreacciones de oxidación y reducción.</p>
+                    <p>c) ¿Cuántos electrones se transfieren en total?</p>
+                </div>
+                <div class="resolucion-ej">
+                    <p><strong>Resolución:</strong></p>
+                    <div class="paso">
+                        <strong>a)</strong> El Fe pasa de +3 a +2: se reduce. El Sn pasa de +2 a +4: se oxida.
+                    </div>
+                    <div class="paso">
+                        <strong>b) Semirreacciones:</strong>
+                        <div class="caja-oxidacion" style="margin:8px 0;">
+                            <strong>Oxidación:</strong> \( \mathrm{Sn^{2+} \longrightarrow Sn^{4+} + 2\,e^-} \)
+                        </div>
+                        <div class="caja-reduccion" style="margin:8px 0;">
+                            <strong>Reducción:</strong> \( \mathrm{Fe^{3+} + 1\,e^- \longrightarrow Fe^{2+}} \) (pero hay 2 Fe³⁺, así que se ganan 2 e⁻ en total)
+                        </div>
+                    </div>
+                    <div class="paso">
+                        <strong>c)</strong> Se transfieren <strong>2 electrones</strong>: los 2 que pierde el Sn²⁺ los ganan los 2 Fe³⁺ (1 cada uno).
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="tarjeta-ejercicio">
+                <div class="cabecera-ej">
+                    <span class="num-ej">Ejercicio 4</span>
+                    <span class="titulo-ej">Ajuste de una reacción redox en medio ácido</span>
+                </div>
+                <div class="enunciado-ej">
+                    <p>Ajusta la siguiente reacción iónica en medio ácido por el método del ion-electrón:</p>
+                    <div class="formula-box">
+                        \[ \mathrm{MnO_4^- + Fe^{2+} \longrightarrow Mn^{2+} + Fe^{3+}} \]
+                    </div>
+                </div>
+                <div class="resolucion-ej">
+                    <p><strong>Resolución:</strong></p>
+                    <div class="paso">
+                        <strong>1) Semirreacción de oxidación:</strong>
+                        \[ \mathrm{Fe^{2+} \longrightarrow Fe^{3+} + 1\,e^-} \]
+                    </div>
+                    <div class="paso">
+                        <strong>2) Semirreacción de reducción (en medio ácido):</strong>
+                        \[ \mathrm{MnO_4^- + 8\,H^+ + 5\,e^- \longrightarrow Mn^{2+} + 4\,H_2O} \]
+                        (El Mn pasa de +7 a +2: gana 5 electrones.)
+                    </div>
+                    <div class="paso">
+                        <strong>3) Igualamos electrones:</strong> multiplicamos la oxidación por 5:
+                        \[ \mathrm{5\,Fe^{2+} \longrightarrow 5\,Fe^{3+} + 5\,e^-} \]
+                    </div>
+                    <div class="paso">
+                        <strong>4) Sumamos y cancelamos electrones:</strong>
+                        \[ \mathrm{MnO_4^- + 5\,Fe^{2+} + 8\,H^+ \longrightarrow Mn^{2+} + 5\,Fe^{3+} + 4\,H_2O} \]
+                    </div>
+                    <div class="paso">
+                        <strong>Comprobación:</strong> Cargas: reactivos \((-1) + 5(+2) + 8(+1) = +17\); productos \(2(+2) + 5(+3) = +17\). ✔
+                    </div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="tarjeta-ejercicio">
+                <div class="cabecera-ej">
+                    <span class="num-ej">Ejercicio 5</span>
+                    <span class="titulo-ej">¿Es redox o no?</span>
+                </div>
+                <div class="enunciado-ej">
+                    <p>Indica cuáles de las siguientes reacciones son redox y cuáles no, justificando con los números de oxidación:</p>
+                    <ul>
+                        <li>a) \( \mathrm{NaOH + HCl \longrightarrow NaCl + H_2O} \)</li>
+                        <li>b) \( \mathrm{2\,H_2 + O_2 \longrightarrow 2\,H_2O} \)</li>
+                        <li>c) \( \mathrm{AgNO_3 + NaCl \longrightarrow AgCl + NaNO_3} \)</li>
+                        <li>d) \( \mathrm{2\,KClO_3 \longrightarrow 2\,KCl + 3\,O_2} \)</li>
+                    </ul>
+                </div>
+                <div class="resolucion-ej">
+                    <p><strong>Resolución:</strong></p>
+                    <div class="paso">
+                        <strong>a)</strong> Ácido-base (neutralización). Na: +1 en ambos; O: −2; H: +1; Cl: −1. <strong>No es redox</strong> (ningún n.o. cambia).
+                    </div>
+                    <div class="paso">
+                        <strong>b)</strong> H pasa de 0 a +1 (se oxida); O pasa de 0 a −2 (se reduce). <strong>Sí es redox</strong>.
+                    </div>
+                    <div class="paso">
+                        <strong>c)</strong> Precipitación. Ag: +1 en ambos; Na: +1; Cl: −1; N: +5. <strong>No es redox</strong>.
+                    </div>
+                    <div class="paso">
+                        <strong>d)</strong> Cl pasa de +5 (en KClO₃) a −1 (en KCl): se reduce. O pasa de −2 a 0: se oxida. <strong>Sí es redox</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIE DIDÁCTICO -->
+            <div class="pie-clave">
+                <i class="fas fa-lightbulb"></i>
+                <span><strong>Observaciones clave:</strong> El número de oxidación es una <em>herramienta formal</em> que nos permite "contar" electrones en los compuestos. Recuerda que <strong>oxidación no siempre significa "reaccionar con oxígeno"</strong>: significa perder electrones. Y <strong>reducción no siempre implica "quitar oxígeno"</strong>: significa ganar electrones. En toda reacción redox, los electrones perdidos por unos son exactamente los ganados por otros: la materia y la carga se conservan. ¡Domina esto y las redox serán pan comido!</span>
+            </div>
+
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="max-width: 100%; padding: 15px; margin: 10px auto; text-align: center; background: #f8fafc; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+            <p style="font-size: clamp(0.95rem, 3vw, 1.2rem); color: #2d3748; margin-top: 0; margin-bottom: 12px; padding: 0 10px;">
+                <br>  Con un par de reglas y algo de práctica, las redox son más fáciles de lo que parecen.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+            <div style="text-align:center;">
+                <a href="../index.html" target="_blank" style="display:inline-block; padding:12px 24px; background:#0078D4; color:white; text-decoration:none; border-radius:12px; font-weight:bold;">
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

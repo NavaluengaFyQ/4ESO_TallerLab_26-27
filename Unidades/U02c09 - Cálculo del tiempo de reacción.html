@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U02c09 - Cálculo del tiempo de reacción</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+        .mini-card.morado { border-top-color: #805ad5; }
+
+        /* ============================================
+           VALORES DE EJEMPLO EN ROJO
+           ============================================ */
+        .valor-ejemplo {
+            color: #e53e3e;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           DIAGRAMAS SVG
+           ========================================================= */
+        .diagram-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            margin: 25px 0;
+        }
+        .diagram-card {
+            flex: 1 1 200px;
+            max-width: 260px;
+            background: white;
+            border-radius: 14px;
+            padding: 14px 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        .diagram-label {
+            font-weight: 700;
+            color: #2d3748;
+            font-size: 0.92em;
+            margin-top: 8px;
+        }
+        .diagram-desc {
+            font-size: 0.78em;
+            color: #4a5568;
+            line-height: 1.4;
+            margin-top: 4px;
+        }
+        .diagram-svg {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 220px;
+            height: auto;
+        }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U02c09.- </span>
+                <span class="texto">Cálculo del tiempo de reacción</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>Vamos a medir nuestro <strong>tiempo de reacción</strong> con un método muy sencillo: una regla que cae entre nuestros dedos. Un compañero sujeta la regla verticalmente por su extremo superior, con el <strong>cero</strong> justo a la altura de nuestra mano abierta. En un momento impredecible, la suelta. Nosotros debemos <strong>cerrar la mano lo más rápido posible</strong> para atraparla.</p>
+        <p>La distancia que ha caído la regla hasta que la atrapamos depende directamente de nuestro tiempo de reacción: si reaccionamos rápido, cae poco; si tardamos, cae mucho. Como la regla cae en <strong>caída libre</strong>, podemos calcular el tiempo a partir de la distancia.</p>
+        <div class="formula-box">
+            <strong>Idea clave:</strong> la regla cae en caída libre. Con la distancia recorrida \( d \) podemos calcular el tiempo \( t \) mediante:
+            \[
+            t = \sqrt{\frac{2d}{g}}
+            \]
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Aplicar las <strong>ecuaciones del movimiento rectilíneo uniformemente acelerado (MRUA)</strong> a un caso real.</li>
+            <li>Medir experimentalmente una magnitud <strong>no directamente observable</strong> (el tiempo) a partir de otra sí medible (la distancia).</li>
+            <li>Calcular un <strong>valor representativo</strong> a partir de varias medidas repetidas.</li>
+            <li>Calcular el <strong>error por propagación</strong> de una magnitud derivada.</li>
+            <li>Comprender qué es el <strong>tiempo de reacción</strong> y de qué factores depende.</li>
+            <li>Expresar correctamente un resultado experimental con su incertidumbre.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>🔬 Fundamento teórico</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>La caída libre: un MRUA</strong>
+            <p>Cuando soltamos un objeto desde el reposo y despreciamos el rozamiento con el aire, el objeto cae con una aceleración constante igual a la gravedad \( g \). Es un caso particular de movimiento rectilíneo uniformemente acelerado (MRUA).</p>
+            <p>Tomamos el origen en el punto donde se suelta la regla, el eje \( Oy \) vertical hacia abajo, y la velocidad inicial \( v_0 = 0 \). Las ecuaciones del movimiento son:</p>
+            <div class="formula-box">
+                \[
+                v = g \cdot t
+                \]
+                \[
+                y = \frac{1}{2}\,g \cdot t^2
+                \]
+            </div>
+            <p>La distancia caída \( d \) en un tiempo \( t \) vale, por tanto:</p>
+            <div class="formula-box">
+                \[
+                d = \frac{1}{2}\,g \cdot t^2
+                \]
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Despejamos el tiempo</strong>
+            <p>De la expresión anterior podemos despejar \( t \) en función de la distancia recorrida \( d \):</p>
+            <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+                \[
+                t = \sqrt{\frac{2d}{g}}
+                \]
+            </div>
+            <p>Esta es la ecuación clave de la práctica. Nos permite obtener el tiempo de reacción a partir de la distancia que ha caído la regla. Tomaremos \( g = 9{,}81\ \mathrm{m/s^2} \).</p>
+            <div class="note">
+                <strong>Ojo con las unidades:</strong> \( d \) debe estar en metros (no en centímetros) y \( g \) en \( \mathrm{m/s^2} \). Así, \( t \) sale directamente en segundos.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Propagación del error en la fórmula</strong>
+            <p>La regla tiene una precisión de \( 1\ \mathrm{mm} \), pero como es difícil decidir con exactitud el punto donde se ha atrapado, adoptaremos una incertidumbre de <span class="valor-ejemplo">\( \Delta d = 0{,}5\ \mathrm{cm} = 0{,}005\ \mathrm{m} \)</span> por medida.</p>
+            <p>El error en \( t \) debido al error en \( d \) se obtiene derivando (propagación de errores):</p>
+            <div class="formula-box">
+                \[
+                \frac{\Delta t}{t} = \frac{1}{2}\,\frac{\Delta d}{d} \quad\Rightarrow\quad \Delta t = \frac{t}{2d}\,\Delta d
+                \]
+            </div>
+            <p>Es decir, el <strong>error relativo en el tiempo es la mitad del error relativo en la distancia</strong>. Por ejemplo, si \( \Delta d / d \approx 3\% \), entonces \( \Delta t / t \approx 1{,}5\% \).</p>
+            <div class="note">
+                <strong>Importante:</strong> en esta práctica el error de \( t \) se calcula <strong>exclusivamente por propagación</strong> del error \( \Delta d \) de la distancia. No se hará tratamiento estadístico.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Valor representativo y error final</strong>
+            <p>Repetiremos el experimento <strong>5 veces</strong> para compensar las fluctuaciones naturales del tiempo de reacción (concentración, fatiga, etc.). Tomaremos como valor representativo de la distancia la <strong>media aritmética</strong> de las 5 medidas:</p>
+            <div class="formula-box">
+                \[
+                \bar{d} = \frac{\sum d_i}{5}
+                \]
+            </div>
+            <p>Con ese valor \( \bar{d} \) calculamos el tiempo \( t \) mediante \( t = \sqrt{2\bar{d}/g} \). El error \( \Delta t \) se obtiene <strong>únicamente por propagación</strong>, mediante la expresión deducida en el paso anterior:</p>
+            <div class="formula-box">
+                \[
+                \Delta t = \frac{t}{2\bar{d}}\,\Delta d
+                \]
+            </div>
+            <p>El resultado final se expresa como:</p>
+            <div class="formula-box">
+                \[
+                t = \bar{t} \pm \Delta t \quad (\text{en segundos})
+                \]
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN MATERIALES -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y montaje</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Materiales</strong>
+            <ul>
+                <li>Una <strong>regla</strong> rígida de 30 cm o más, con divisiones en milímetros.</li>
+                <li>Una superficie horizontal (mesa) o simplemente la altura de pie.</li>
+                <li>Un compañero/a que suelte la regla (o hazlo tú mismo con la otra mano si no tienes ayuda).</li>
+                <li>Una <strong>tabla de registro</strong> en papel o cuaderno para anotar los datos.</li>
+                <li>Calculadora (o el móvil).</li>
+            </ul>
+
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Montaje</strong>
+            <ol>
+                <li>Coloca la regla <strong>vertical</strong>, con el extremo inferior (el cero) alineado con el borde superior de tu mano abierta, a la altura de donde vas a cerrarla.</li>
+                <li>Tu compañero/a sujeta la regla por el extremo superior con los dedos, sin apretar demasiado.</li>
+                <li>Tú tienes la mano abierta, preparada para cerrarla en cuanto veas caer la regla. El pulgar y el índice deben estar separados unos 3–4 cm.</li>
+                <li>Tu compañero/a suelta la regla sin avisar, en un momento impredecible.</li>
+                <li>Tú cierras la mano lo más rápido que puedas.</li>
+                <li>Se mide la distancia \( d \) desde el <strong>cero de la regla hasta la posición del borde superior de tu dedo índice</strong> en el momento de la captura. Esa distancia es lo que ha caído la regla.</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Diagramas del experimento</strong>
+            <div class="diagram-row">
+
+                <!-- DIAGRAMA 1: POSICIÓN INICIAL -->
+                <div class="diagram-card">
+                    <svg class="diagram-svg" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="100" cy="20" rx="28" ry="12" fill="#fbd38d" stroke="#c05621" stroke-width="1.5"/>
+                        <text x="100" y="24" font-size="9" fill="#7b341e" text-anchor="middle" font-weight="bold">sujeta</text>
+                        <rect x="90" y="30" width="20" height="210" fill="#fef3c7" stroke="#92400e" stroke-width="1.5"/>
+                        <line x1="90" y1="40" x2="100" y2="40" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="60" x2="100" y2="60" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="80" x2="100" y2="80" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="100" x2="100" y2="100" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="120" x2="100" y2="120" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="140" x2="100" y2="140" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="160" x2="100" y2="160" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="180" x2="100" y2="180" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="200" x2="100" y2="200" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="220" x2="100" y2="220" stroke="#92400e" stroke-width="0.8"/>
+                        <text x="118" y="44" font-size="9" fill="#2d3748">0</text>
+                        <text x="118" y="84" font-size="9" fill="#2d3748">5</text>
+                        <text x="118" y="124" font-size="9" fill="#2d3748">10</text>
+                        <text x="118" y="164" font-size="9" fill="#2d3748">15</text>
+                        <text x="118" y="204" font-size="9" fill="#2d3748">20</text>
+                        <path d="M 40 200 Q 60 195 80 200 L 80 215 Q 60 220 40 215 Z" fill="#fbd38d" stroke="#c05621" stroke-width="1.5"/>
+                        <path d="M 140 200 Q 120 195 100 200 L 100 215 Q 120 220 140 215 Z" fill="#fbd38d" stroke="#c05621" stroke-width="1.5"/>
+                        <line x1="20" y1="200" x2="180" y2="200" stroke="#e53e3e" stroke-width="1" stroke-dasharray="4,3"/>
+                        <text x="100" y="252" font-size="10" fill="#2d3748" text-anchor="middle" font-weight="bold">Posición inicial: d = 0</text>
+                    </svg>
+                    <div class="diagram-label">1. Posición inicial</div>
+                    <div class="diagram-desc">El compañero sujeta la regla. El cero está alineado con la mano abierta.</div>
+                </div>
+
+                <!-- DIAGRAMA 2: CAÍDA -->
+                <div class="diagram-card">
+                    <svg class="diagram-svg" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+                        <ellipse cx="100" cy="20" rx="28" ry="12" fill="#fbd38d" stroke="#c05621" stroke-width="1.5"/>
+                        <rect x="90" y="90" width="20" height="150" fill="#fef3c7" stroke="#92400e" stroke-width="1.5"/>
+                        <line x1="90" y1="100" x2="100" y2="100" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="120" x2="100" y2="120" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="140" x2="100" y2="140" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="160" x2="100" y2="160" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="180" x2="100" y2="180" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="200" x2="100" y2="200" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="220" x2="100" y2="220" stroke="#92400e" stroke-width="0.8"/>
+                        <text x="118" y="104" font-size="9" fill="#2d3748">0</text>
+                        <text x="118" y="144" font-size="9" fill="#2d3748">5</text>
+                        <text x="118" y="184" font-size="9" fill="#2d3748">10</text>
+                        <text x="118" y="224" font-size="9" fill="#2d3748">15</text>
+                        <path d="M 40 200 Q 65 195 85 200 L 85 215 Q 65 220 40 215 Z" fill="#fbd38d" stroke="#c05621" stroke-width="1.5"/>
+                        <path d="M 140 200 Q 115 195 95 200 L 95 215 Q 115 220 140 215 Z" fill="#fbd38d" stroke="#c05621" stroke-width="1.5"/>
+                        <path d="M 60 60 L 60 90" stroke="#e53e3e" stroke-width="3" fill="none" marker-end="url(#arrowDown)"/>
+                        <defs>
+                            <marker id="arrowDown" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                                <path d="M0,0 L6,3 L0,6 Z" fill="#e53e3e"/>
+                            </marker>
+                        </defs>
+                        <line x1="20" y1="200" x2="180" y2="200" stroke="#e53e3e" stroke-width="1" stroke-dasharray="4,3"/>
+                        <line x1="170" y1="100" x2="170" y2="200" stroke="#3182ce" stroke-width="2"/>
+                        <line x1="165" y1="100" x2="175" y2="100" stroke="#3182ce" stroke-width="1.5"/>
+                        <line x1="165" y1="200" x2="175" y2="200" stroke="#3182ce" stroke-width="1.5"/>
+                        <text x="180" y="155" font-size="11" fill="#3182ce" font-weight="bold" text-anchor="start">d</text>
+                        <text x="100" y="252" font-size="10" fill="#2d3748" text-anchor="middle" font-weight="bold">Caída: d = distancia recorrida</text>
+                    </svg>
+                    <div class="diagram-label">2. La regla cae</div>
+                    <div class="diagram-desc">El compañero suelta la regla. Cae libremente mientras nuestro cerebro procesa y ordena cerrar la mano.</div>
+                </div>
+
+                <!-- DIAGRAMA 3: CAPTURA -->
+                <div class="diagram-card">
+                    <svg class="diagram-svg" viewBox="0 0 200 260" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="90" y="90" width="20" height="150" fill="#fef3c7" stroke="#92400e" stroke-width="1.5"/>
+                        <line x1="90" y1="100" x2="100" y2="100" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="120" x2="100" y2="120" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="140" x2="100" y2="140" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="160" x2="100" y2="160" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="180" x2="100" y2="180" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="200" x2="100" y2="200" stroke="#92400e" stroke-width="0.8"/>
+                        <line x1="90" y1="220" x2="100" y2="220" stroke="#92400e" stroke-width="0.8"/>
+                        <text x="118" y="104" font-size="9" fill="#2d3748">0</text>
+                        <text x="118" y="144" font-size="9" fill="#2d3748">5</text>
+                        <text x="118" y="184" font-size="9" fill="#2d3748">10</text>
+                        <text x="118" y="224" font-size="9" fill="#2d3748">15</text>
+                        <path d="M 40 195 Q 65 190 88 197 L 88 218 Q 65 225 40 220 Z" fill="#fbd38d" stroke="#c05621" stroke-width="1.5"/>
+                        <path d="M 140 195 Q 115 190 92 197 L 92 218 Q 115 225 140 220 Z" fill="#fbd38d" stroke="#c05621" stroke-width="1.5"/>
+                        <circle cx="90" cy="205" r="14" fill="none" stroke="#e53e3e" stroke-width="2"/>
+                        <line x1="20" y1="200" x2="180" y2="200" stroke="#e53e3e" stroke-width="1" stroke-dasharray="4,3"/>
+                        <line x1="170" y1="100" x2="170" y2="200" stroke="#3182ce" stroke-width="2"/>
+                        <line x1="165" y1="100" x2="175" y2="100" stroke="#3182ce" stroke-width="1.5"/>
+                        <line x1="165" y1="200" x2="175" y2="200" stroke="#3182ce" stroke-width="1.5"/>
+                        <text x="180" y="155" font-size="11" fill="#3182ce" font-weight="bold" text-anchor="start">d</text>
+                        <text x="100" y="252" font-size="10" fill="#2d3748" text-anchor="middle" font-weight="bold">Captura: se mide d</text>
+                    </svg>
+                    <div class="diagram-label">3. Captura</div>
+                    <div class="diagram-desc">La mano se cierra y atrapa la regla. La distancia \( d \) es lo que ha caído mientras reaccionábamos.</div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN TABLA DE DATOS -->
+    <div class="section procedimiento">
+        <h2>📊 Tabla de datos experimentales (5 medidas)</h2>
+
+        <div class="note" style="margin-bottom: 15px;">
+            <strong>Valores en rojo:</strong> todos los números marcados <span class="valor-ejemplo">en rojo</span> son <strong>ejemplos</strong> que te sirven de guía. Debes sustituirlos por tus propias medidas al hacer la práctica.
+        </div>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Registro de las 5 medidas</strong>
+            <p>Realiza el experimento 5 veces y anota la distancia <span class="valor-ejemplo">d</span> que ha caído la regla en cada intento. A continuación se muestra una <strong>tabla modelo</strong> con datos de ejemplo:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Medida \( n \)</th>
+                        <th>Distancia \( d_i \) (cm)</th>
+                        <th>Distancia \( d_i \) (m)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td><span class="valor-ejemplo">18,5</span></td><td><span class="valor-ejemplo">0,185</span></td></tr>
+                    <tr><td>2</td><td><span class="valor-ejemplo">22,0</span></td><td><span class="valor-ejemplo">0,220</span></td></tr>
+                    <tr><td>3</td><td><span class="valor-ejemplo">15,5</span></td><td><span class="valor-ejemplo">0,155</span></td></tr>
+                    <tr><td>4</td><td><span class="valor-ejemplo">20,0</span></td><td><span class="valor-ejemplo">0,200</span></td></tr>
+                    <tr><td>5</td><td><span class="valor-ejemplo">19,5</span></td><td><span class="valor-ejemplo">0,195</span></td></tr>
+                </tbody>
+            </table>
+            <div class="note">
+                <strong>Incertidumbre de cada medida:</strong> <span class="valor-ejemplo">\( \Delta d = 0{,}5\ \mathrm{cm} = 0{,}005\ \mathrm{m} \)</span>. No todas las capturas son igual de precisas: a veces la regla se coge justo en el borde, a veces se desliza un poco antes de frenar. 0,5 cm es una estimación razonable.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Valor medio de la distancia</strong>
+            <p>Calculamos la <strong>media aritmética</strong> de las 5 distancias:</p>
+            <div class="formula-box">
+                \[
+                \bar{d} = \frac{0{,}185 + 0{,}220 + 0{,}155 + 0{,}200 + 0{,}195}{5} = \frac{0{,}955}{5} = \textcolor{red}{0{,}191\ \mathrm{m}}
+                \]
+            </div>
+            <p>El valor representativo de la distancia caída es <span class="valor-ejemplo">\( \bar{d} = 0{,}191\ \mathrm{m} \)</span>.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Cálculo del tiempo de reacción</strong>
+            <p>Aplicamos la fórmula \( t = \sqrt{2\bar{d}/g} \) con \( g = 9{,}81\ \mathrm{m/s^2} \):</p>
+            <div class="formula-box">
+                \[
+                t = \sqrt{\frac{2 \cdot 0{,}191}{9{,}81}} = \sqrt{0{,}03894} = \textcolor{red}{0{,}197\ \mathrm{s}}
+                \]
+            </div>
+            <p>El tiempo de reacción correspondiente a la distancia media es <span class="valor-ejemplo">\( t = 0{,}197\ \mathrm{s} \)</span>.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Error por propagación</strong>
+            <p>El error \( \Delta t \) se obtiene <strong>únicamente por propagación</strong> del error \( \Delta d \) de la distancia:</p>
+            <div class="formula-box">
+                \[
+                \Delta t = \frac{t}{2\bar{d}}\,\Delta d = \frac{0{,}197}{2 \cdot 0{,}191} \cdot 0{,}005 = \textcolor{red}{0{,}0026\ \mathrm{s}} \approx \textcolor{red}{0{,}003\ \mathrm{s}}
+                \]
+            </div>
+            <p>Redondeamos el error a una cifra significativa y el valor del tiempo al mismo orden: <span class="valor-ejemplo">\( \Delta t = 0{,}003\ \mathrm{s} \)</span> y <span class="valor-ejemplo">\( t = 0{,}197\ \mathrm{s} \)</span>.</p>
+            <div class="note">
+                <strong>Recuerda:</strong> el error relativo en \( t \) es la mitad del error relativo en \( d \). Este es el único cálculo de error que hacemos: la propagación de la incertidumbre de la distancia al tiempo.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Expresión final del resultado</strong>
+            <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+                <p style="font-size: 1.2em;"><strong>\[
+                t = (\textcolor{red}{0{,}197} \pm \textcolor{red}{0{,}003})\ \mathrm{s}
+                \]</strong></p>
+            </div>
+            <p>O, de forma equivalente, expresado en milisegundos:</p>
+            <div class="formula-box" style="border-color: #38b2ac; border-width: 2px; background: #e6fffa;">
+                \[
+                t = (\textcolor{red}{197} \pm \textcolor{red}{3})\ \mathrm{ms}
+                \]
+            </div>
+            <div class="note">
+                <strong>Interpretación:</strong> podemos afirmar que el tiempo de reacción está comprendido, con un nivel de confianza aproximado del 68%, entre <strong>0,194 s y 0,200 s</strong>.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN ANÁLISIS DEL TIEMPO DE REACCIÓN -->
+    <div class="section resultado">
+        <h2>🧠 ¿A qué se refiere el tiempo de reacción?</h2>
+
+        <p>El <strong>tiempo de reacción</strong> es el intervalo de tiempo que transcurre desde que percibimos un estímulo (en este caso, la caída de la regla) hasta que ejecutamos una respuesta motora (cerrar la mano para atraparla). No es el tiempo que tarda la señal en llegar al cerebro ni el tiempo que tarda en salir la orden: es <strong>todo el proceso completo</strong>.</p>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Las etapas del tiempo de reacción</strong>
+            <p>El tiempo de reacción se puede descomponer en varias etapas:</p>
+            <ol>
+                <li><strong>Detección del estímulo:</strong> la luz reflejada en la regla llega a la retina. La retina convierte la luz en impulsos nerviosos. Tiempo aproximado: 20–40 ms.</li>
+                <li><strong>Transmisión al cerebro:</strong> los impulsos viajan por el nervio óptico hasta la corteza visual. Tiempo: 30–50 ms.</li>
+                <li><strong>Procesamiento y decisión:</strong> el cerebro identifica el estímulo (la regla cae), decide que hay que cerrar la mano y genera la orden motora. Tiempo: 50–80 ms.</li>
+                <li><strong>Transmisión de la orden motora:</strong> la señal viaja desde la corteza motora hasta los músculos de la mano. Tiempo: 20–40 ms.</li>
+                <li><strong>Contracción muscular:</strong> los músculos de la mano se contraen y cierran los dedos. Tiempo: 50–80 ms.</li>
+            </ol>
+            <p>La suma de todas estas etapas da un tiempo total que, en personas sanas, suele estar entre <strong>0,15 s y 0,30 s</strong>. Nuestro valor de <span class="valor-ejemplo">0,197 s</span> está dentro de ese rango: es un tiempo de reacción <strong>normal</strong>.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Tipos de tiempo de reacción</strong>
+            <ul>
+                <li><strong>Reacción simple:</strong> hay un solo estímulo y una sola respuesta. Es nuestro caso: la regla cae (estímulo), cerramos la mano (respuesta). Suele ser el más rápido (150–200 ms).</li>
+                <li><strong>Reacción de elección:</strong> hay varios estímulos posibles y respuestas distintas según cuál aparezca. Es más lento (250–500 ms), porque el cerebro debe decidir qué hacer.</li>
+                <li><strong>Reacción discriminativa:</strong> hay que responder a un estímulo y no a otros. También es más lento.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Factores que influyen en el tiempo de reacción</strong>
+            <table>
+                <tr><th>Factor</th><th>Efecto</th></tr>
+                <tr><td>Edad</td><td>Los jóvenes tienen tiempos más rápidos; empeoran a partir de los 60 años</td></tr>
+                <tr><td>Fatiga</td><td>El cansancio aumenta el tiempo de reacción</td></tr>
+                <tr><td>Alcohol o drogas</td><td>Lo aumentan considerablemente (peligro al volante)</td></tr>
+                <tr><td>Cafeína</td><td>Puede reducirlo ligeramente en dosis moderadas</td></tr>
+                <tr><td>Atención</td><td>Estar concentrado lo reduce; distraerse lo aumenta</td></tr>
+                <tr><td>Entrenamiento</td><td>La práctica y el deporte mejoran los tiempos</td></tr>
+                <tr><td>Modalidad sensorial</td><td>El sonido suele dar tiempos más rápidos que la luz; el tacto, aún más</td></tr>
+                <tr><td>Sexo</td><td>Diferencias muy pequeñas, con gran variabilidad individual</td></tr>
+                <tr><td>Temperatura corporal</td><td>Si baja, el tiempo de reacción aumenta</td></tr>
+            </table>
+            <div class="note">
+                <strong>Curiosidad:</strong> el tiempo de reacción de los pilotos de Fórmula 1 es de unos 0,15 s, y el de los jugadores de tenis o esgrima también es muy bajo, gracias al entrenamiento específico y a la anticipación. Los animales tienen tiempos aún más rápidos: una mosca reacciona en 0,03 s, y una serpiente puede atacar en menos de 0,05 s.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Importancia del tiempo de reacción</strong>
+            <p>El tiempo de reacción es crucial en muchos ámbitos de la vida cotidiana y profesional:</p>
+            <ul>
+                <li><strong>Conducción:</strong> si un conductor tarda 0,2 s en reaccionar, a 120 km/h (33,3 m/s) recorre \( 33{,}3 \times 0{,}2 \approx 6{,}7\ \mathrm{m} \) antes de empezar a frenar. ¡Casi dos coches de longitud! Esto se llama <strong>distancia de reacción</strong>.</li>
+                <li><strong>Deporte:</strong> en esgrima, boxeo, tenis o béisbol, una décima de segundo decide un punto o un combate.</li>
+                <li><strong>Medicina:</strong> el tiempo de reacción se usa para evaluar el estado neurológico, la fatiga o los efectos de fármacos.</li>
+                <li><strong>Ergonomía y seguridad:</strong> en el diseño de máquinas, aviones y vehículos se tiene en cuenta el tiempo de reacción humano para diseñar sistemas de alarma y frenado.</li>
+                <li><strong>Videojuegos:</strong> los jugadores profesionales entrenan su tiempo de reacción para mejorar su rendimiento.</li>
+            </ul>
+            <div class="highlight-box">
+                <strong>Conclusión:</strong> el tiempo de reacción no es "un número", es una <strong>ventana al funcionamiento del sistema nervioso</strong>. Medirlo con una regla es una forma sencilla y elegante de asomarse a la neurociencia, y a la vez de aplicar las ecuaciones de la caída libre.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO RESUMEN -->
+    <div class="section resultado">
+        <h2>📊 Resumen final</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>La regla cae en caída libre y la distancia recorrida está relacionada con el tiempo mediante:</strong></p>
+            \[
+            t = \sqrt{\frac{2d}{g}}
+            \]
+            <p>Con las 5 medidas y aplicando solo la propagación del error de \( d \):</p>
+            <p style="font-size: 1.2em;"><strong>\[
+            t = (\textcolor{red}{0{,}197} \pm \textcolor{red}{0{,}003})\ \mathrm{s} = (\textcolor{red}{197} \pm \textcolor{red}{3})\ \mathrm{ms}
+            \]</strong></p>
+        </div>
+        <p>El tiempo de reacción depende de:</p>
+        <ul>
+            <li>La <strong>detección sensorial</strong> del estímulo (visión, oído...).</li>
+            <li>El <strong>procesamiento cerebral</strong> y la toma de decisión.</li>
+            <li>La <strong>transmisión motora</strong> a los músculos.</li>
+            <li>La <strong>contracción muscular</strong> que ejecuta el movimiento.</li>
+        </ul>
+        <p>Los factores que más influyen son la edad, el estado de alerta, la fatiga, el consumo de sustancias y el entrenamiento. El valor obtenido (<span class="valor-ejemplo">0,197 s</span>) está dentro del rango normal para una persona joven y descansada.</p>
+        <div class="note">
+            <strong>Fuentes de error:</strong> la incertidumbre viene principalmente de la estimación de la distancia \( d \) (¿dónde estaba exactamente el dedo cuando la regla se detuvo?). También influye el tiempo que tarda el compañero en soltar la regla tras decidirlo, y la variabilidad natural del sistema nervioso.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO el tiempo de reacción</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Cálculo directo del tiempo</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En una medida, la regla ha caído \( d = 24\ \mathrm{cm} \). Calcula el tiempo de reacción correspondiente. Dato: \( g = 9{,}81\ \mathrm{m/s^2} \).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Convertimos unidades:</strong> \( d = 24\ \mathrm{cm} = 0{,}24\ \mathrm{m} \).</div>
+                    <div class="paso"><strong>Paso 2 — Aplicamos la fórmula:</strong></div>
+                    <div class="formula-box">\[ t = \sqrt{\frac{2d}{g}} = \sqrt{\frac{2 \cdot 0{,}24}{9{,}81}} = \sqrt{0{,}04893} \]</div>
+                    <div class="paso"><strong>Paso 3 — Resultado:</strong></div>
+                    <div class="formula-box">\[ t = 0{,}2212\ \mathrm{s} \approx 0{,}22\ \mathrm{s} \]</div>
+                    <div class="paso"><strong>Interpretación:</strong> un tiempo de 0,22 s es un poco lento, dentro del rango normal pero tirando a alto.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>¿Cuánto cae la regla si reaccionas en 0,15 s?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un deportista entrenado tiene un tiempo de reacción de 0,15 s. ¿Qué distancia caería la regla en su caso?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Despejamos \( d \) de la ecuación:</strong></div>
+                    <div class="formula-box">\[ d = \frac{1}{2}\,g\,t^2 \]</div>
+                    <div class="paso"><strong>Paso 2 — Sustituimos:</strong></div>
+                    <div class="formula-box">\[ d = \frac{1}{2} \cdot 9{,}81 \cdot (0{,}15)^2 = 4{,}905 \cdot 0{,}0225 = 0{,}110\ \mathrm{m} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> la regla caería solo 11,0 cm. ¡Un deportista entrenado atrapa la regla casi el doble de arriba que una persona media!</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>Valor medio y error por propagación</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Las 5 medidas de distancia de un alumno son: 18,5 cm; 19,2 cm; 18,8 cm; 19,6 cm; 18,9 cm. Calcula la distancia media, el tiempo de reacción y su error por propagación (toma \( \Delta d = 0{,}5\ \mathrm{cm} \)).</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Distancia media:</strong></div>
+                    <div class="formula-box">\[ \bar{d} = \frac{18{,}5+19{,}2+18{,}8+19{,}6+18{,}9}{5} = \frac{95{,}0}{5} = 19{,}0\ \mathrm{cm} = 0{,}190\ \mathrm{m} \]</div>
+                    <div class="paso"><strong>Paso 2 — Tiempo:</strong></div>
+                    <div class="formula-box">\[ t = \sqrt{\frac{2 \cdot 0{,}190}{9{,}81}} = \sqrt{0{,}03874} = 0{,}1968\ \mathrm{s} \]</div>
+                    <div class="paso"><strong>Paso 3 — Error por propagación:</strong></div>
+                    <div class="formula-box">\[ \Delta t = \frac{t}{2\bar{d}}\,\Delta d = \frac{0{,}1968}{0{,}380} \cdot 0{,}005 = 0{,}0026\ \mathrm{s} \approx 0{,}003\ \mathrm{s} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> \( t = (0{,}197 \pm 0{,}003)\ \mathrm{s} \). Este alumno es un poco más rápido que la media.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>Distancia de reacción al volante</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un conductor con un tiempo de reacción de 0,20 s circula a 120 km/h. ¿Qué distancia recorre el coche antes de que el conductor empiece a frenar?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Convertimos la velocidad:</strong></div>
+                    <div class="formula-box">\[ v = 120\ \mathrm{km/h} = \frac{120}{3{,}6} = 33{,}3\ \mathrm{m/s} \]</div>
+                    <div class="paso"><strong>Paso 2 — Distancia de reacción:</strong> el coche se mueve a velocidad constante durante el tiempo de reacción.</div>
+                    <div class="formula-box">\[ d_{\text{reacción}} = v \cdot t = 33{,}3 \cdot 0{,}20 = 6{,}67\ \mathrm{m} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> el coche recorre casi 7 metros <strong>antes de pisar el freno</strong>. A eso hay que sumarle la distancia de frenado propiamente dicha. Es una de las razones por las que la velocidad excesiva es tan peligrosa: el tiempo de reacción se convierte en metros.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>Propagación del error</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Si mides una distancia \( d = 20{,}0\ \mathrm{cm} \) con una incertidumbre \( \Delta d = 0{,}5\ \mathrm{cm} \), calcula el tiempo de reacción y estima el error \( \Delta t \) por propagación.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Convertimos:</strong> \( d = 0{,}200\ \mathrm{m} \), \( \Delta d = 0{,}005\ \mathrm{m} \).</div>
+                    <div class="paso"><strong>Paso 2 — Tiempo:</strong></div>
+                    <div class="formula-box">\[ t = \sqrt{\frac{2 \cdot 0{,}200}{9{,}81}} = \sqrt{0{,}04077} = 0{,}2019\ \mathrm{s} \]</div>
+                    <div class="paso"><strong>Paso 3 — Error relativo en d:</strong></div>
+                    <div class="formula-box">\[ \frac{\Delta d}{d} = \frac{0{,}005}{0{,}200} = 0{,}025 = 2{,}5\% \]</div>
+                    <div class="paso"><strong>Paso 4 — Error relativo en t:</strong> \( \dfrac{\Delta t}{t} = \dfrac{1}{2} \cdot 2{,}5\% = 1{,}25\% \).</div>
+                    <div class="paso"><strong>Paso 5 — Error absoluto:</strong></div>
+                    <div class="formula-box">\[ \Delta t = 0{,}2019 \cdot 0{,}0125 = 0{,}0025\ \mathrm{s} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> \( t = (0{,}202 \pm 0{,}003)\ \mathrm{s} \). El error en la distancia se propaga reducido a la mitad en el tiempo.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>¿Por qué repetir 5 veces?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica por qué es mejor repetir la medida 5 veces y promediar, en lugar de quedarse con una sola medida.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Una sola medida:</strong> cualquier medida individual puede verse afectada por errores aleatorios (una distracción, un mal día, un calambre...). El resultado sería poco fiable.</div>
+                    <div class="paso"><strong>Paso 2 — Promediar 5 medidas:</strong> el valor medio compensa las fluctuaciones aleatorias del tiempo de reacción. Cuantas más medidas, más representativo es el valor medio.</div>
+                    <div class="paso"><strong>Paso 3 — Compromiso:</strong> repetir 5 veces es un buen equilibrio entre fiabilidad y tiempo empleado. Para medidas muy precisas, se hacen más repeticiones.</div>
+                    <div class="paso"><strong>Conclusión:</strong> promediar reduce el efecto de las fluctuaciones aleatorias, pero el error final de \( t \) se calcula siempre por propagación del error de \( d \).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Estímulo visual vs. estímulo sonoro</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En lugar de ver caer la regla, un compañero la suelta tras hacer sonar un timbre. Si el tiempo de reacción visual de una persona es 0,20 s y el auditivo es 0,17 s, ¿cuál sería la distancia de caída en cada caso? ¿Por qué el sonido es más rápido que la luz?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Distancia con estímulo visual:</strong></div>
+                    <div class="formula-box">\[ d_v = \frac{1}{2}\,g\,t^2 = 4{,}905 \cdot (0{,}20)^2 = 4{,}905 \cdot 0{,}040 = 0{,}196\ \mathrm{m} \approx 19{,}6\ \mathrm{cm} \]</div>
+                    <div class="paso"><strong>Paso 2 — Distancia con estímulo auditivo:</strong></div>
+                    <div class="formula-box">\[ d_a = 4{,}905 \cdot (0{,}17)^2 = 4{,}905 \cdot 0{,}0289 = 0{,}142\ \mathrm{m} \approx 14{,}2\ \mathrm{cm} \]</div>
+                    <div class="paso"><strong>Paso 3 — ¿Por qué el sonido es más rápido?</strong> No es porque la señal viaje más rápido (ambas son ondas electromagnéticas o sonoras, y la luz es mucho más rápida), sino porque la <strong>vía nerviosa auditiva</strong> es más corta y directa que la visual. La información visual requiere más procesamiento en la corteza (formas, colores, movimiento), mientras que el sonido se procesa de forma más automática y con menos etapas.</div>
+                    <div class="paso"><strong>Conclusión:</strong> los tiempos de reacción auditivos son sistemáticamente 20–30 ms más rápidos que los visuales en la mayoría de las personas.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 8 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 8</span>
+                    <span>El tiempo de reacción en el deporte</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En un partido de tenis, una pelota llega a la raqueta del jugador a 50 m/s desde una distancia de 12 m. Si el jugador tiene un tiempo de reacción de 0,15 s, ¿cuánto tiempo le queda para decidir y golpear?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Tiempo total de vuelo de la pelota:</strong></div>
+                    <div class="formula-box">\[ t_{\text{vuelo}} = \frac{d}{v} = \frac{12}{50} = 0{,}24\ \mathrm{s} \]</div>
+                    <div class="paso"><strong>Paso 2 — Tiempo para decidir y golpear:</strong></div>
+                    <div class="formula-box">\[ t_{\text{disponible}} = 0{,}24 - 0{,}15 = 0{,}09\ \mathrm{s} \]</div>
+                    <div class="paso"><strong>Paso 3 — Interpretación:</strong> solo 90 ms para decidir dónde golpear, con qué efecto y ejecutar el movimiento. Es por eso que los tenistas profesionales entrenan su tiempo de reacción y su <strong>anticipación</strong>: a menudo empiezan a moverse <em>antes</em> de ver el golpe del contrario, basándose en la posición del cuerpo, el movimiento del brazo, etc.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el tiempo de reacción no lo es todo: la experiencia y la anticipación son fundamentales en el deporte de alto nivel.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> Esta práctica es un ejemplo perfecto de cómo medir una magnitud <em>no directamente observable</em> (el tiempo de reacción) a partir de otra que sí lo es (la distancia de caída). Las tres ideas clave son: (1) la regla cae en <strong>caída libre</strong>, así que \( d = \frac{1}{2} g t^2 \); (2) despejando, \( t = \sqrt{2d/g} \); (3) el error se calcula <strong>solo por propagación</strong> del error de \( d \): \( t = (\textcolor{red}{0{,}197} \pm \textcolor{red}{0{,}003})\ \mathrm{s} \). Y todo esto nos lleva a comprender que el tiempo de reacción es una ventana al funcionamiento del sistema nervioso, con aplicaciones en conducción, deporte, medicina y ergonomía.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Una regla, una mano abierta y cinco intentos: la física y la neurociencia unidas en un experimento sencillo.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>
