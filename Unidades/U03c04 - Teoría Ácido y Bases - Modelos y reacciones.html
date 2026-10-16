@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T08.02. Ácidos y Bases: modelos y reacciones</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .container { max-width: 900px; width: 100%; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; margin: 20px auto; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .header-left { display: flex; flex-direction: column; justify-content: center; }
+        .header-left h1 { font-size: 1.8em; margin: 0; }
+        .header-sub { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+        .header-sub img { max-height: 28px; width: auto; border-radius: 4px; background: white; padding: 2px; }
+        .header-sub .codigo { font-weight: 700; font-size: 1.1em; }
+        .header-sub .texto { font-size: 1.1em; }
+        .header-right img { max-height: 70px; max-width: 180px; object-fit: contain; display: block; }
+
+        .section { padding: 25px 30px; margin: 15px; border-radius: 12px; border-left: 5px solid; }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 { font-size: 1.3em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box { background: #edf2f7; border: 2px solid #cbd5e0; border-radius: 10px; padding: 15px; margin: 15px 0; text-align: center; font-size: 1.1em; }
+        .note { background: #fffbeb; border: 1px solid #f6e05e; border-radius: 8px; padding: 12px; margin-top: 15px; font-size: 0.95em; color: #744210; }
+        p { line-height: 1.7; margin-bottom: 10px; }
+        ul, ol { padding-left: 25px; line-height: 1.7; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #cbd5e0; padding: 8px 12px; text-align: left; }
+        th { background: #edf2f7; }
+
+        details.step-desplegable { background: white; border-left: 4px solid #48bb78; border-radius: 0 8px 8px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.06); margin: 12px 0; transition: box-shadow 0.3s ease; padding: 0; }
+        details.step-desplegable[open] { box-shadow: 0 4px 14px rgba(72,187,120,0.18); }
+        details.step-desplegable > summary { list-style: none; cursor: pointer; padding: 14px 18px; display: flex; align-items: center; gap: 12px; font-weight: 600; color: #22543d; user-select: none; border-radius: 0 8px 8px 0; transition: background 0.2s ease; }
+        details.step-desplegable > summary:hover { background: #f0fff4; }
+        details.step-desplegable > summary::-webkit-details-marker { display: none; }
+        details.step-desplegable > summary .chevron { margin-left: auto; font-size: 0.95rem; color: #48bb78; transition: transform 0.3s ease; }
+        details.step-desplegable[open] > summary .chevron { transform: rotate(180deg); }
+        details.step-desplegable > summary .step-num { display: inline-flex; align-items: center; justify-content: center; background: #48bb78; color: white; width: 30px; height: 30px; min-width: 30px; border-radius: 50%; font-weight: bold; font-size: 0.95em; margin: 0; }
+        details.step-desplegable > summary .titulo-paso { flex: 1; font-size: 1em; color: #22543d; }
+        details.step-desplegable .contenido-paso { padding: 6px 22px 20px 22px; border-top: 1px solid #e6fffa; margin-top: 0; }
+
+        /* Desplegable destacado */
+        details.step-desplegable-destacado {
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            border: 3px solid #48bb78;
+            border-left: 8px solid #2f855a;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(72,187,120,0.20);
+            margin: 22px 0;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+        details.step-desplegable-destacado[open] {
+            box-shadow: 0 10px 28px rgba(72,187,120,0.35);
+            border-color: #38a169;
+            background: #ffffff;
+        }
+        details.step-desplegable-destacado > summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 20px 22px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 700;
+            color: #22543d;
+            user-select: none;
+            border-radius: 11px;
+            transition: background 0.2s ease;
+        }
+        details.step-desplegable-destacado > summary:hover { background: #e6fffa; }
+        details.step-desplegable-destacado > summary::-webkit-details-marker { display: none; }
+        details.step-desplegable-destacado > summary .chevron { font-size: 1.15rem; color: #2f855a; transition: transform 0.3s ease; }
+        details.step-desplegable-destacado[open] > summary .chevron { transform: rotate(180deg); }
+        details.step-desplegable-destacado > summary .step-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #38a169, #2f855a); color: white;
+            width: 42px; height: 42px; min-width: 42px; border-radius: 50%;
+            font-weight: bold; font-size: 1.15em; margin: 0;
+            box-shadow: 0 3px 8px rgba(47,133,90,0.35);
+        }
+        details.step-desplegable-destacado > summary .titulo-paso { flex: 1; font-size: 1.12em; color: #22543d; }
+        details.step-desplegable-destacado > summary .badge-pulsa {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 2px solid #f59e0b;
+            white-space: nowrap;
+            animation: pulso-badge 1.6s ease-in-out infinite;
+        }
+        details.step-desplegable-destacado > summary .badge-pulsa i {
+            color: #d97706;
+            animation: pulso-mano 1.6s ease-in-out infinite;
+        }
+        @keyframes pulso-badge {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245,158,11,0.55); }
+            50% { transform: scale(1.06); box-shadow: 0 0 0 8px rgba(245,158,11,0); }
+        }
+        @keyframes pulso-mano {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(4px); }
+        }
+        details.step-desplegable-destacado .contenido-paso { padding: 10px 24px 24px 24px; border-top: 2px dashed #a7f3d0; margin-top: 0; }
+
+        details.step-ejemplo { background: white; border-left: 4px solid #4299e1; border-radius: 0 8px 8px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.05); margin: 10px 0; padding: 0; }
+        details.step-ejemplo[open] { box-shadow: 0 4px 14px rgba(66,153,225,0.18); }
+        details.step-ejemplo > summary { list-style: none; cursor: pointer; padding: 12px 16px; display: flex; align-items: center; gap: 12px; font-weight: 600; color: #1a365d; user-select: none; border-radius: 0 8px 8px 0; transition: background 0.2s ease; }
+        details.step-ejemplo > summary:hover { background: #ebf8ff; }
+        details.step-ejemplo > summary::-webkit-details-marker { display: none; }
+        details.step-ejemplo > summary .chevron { margin-left: auto; font-size: 0.9rem; color: #4299e1; transition: transform 0.3s ease; }
+        details.step-ejemplo[open] > summary .chevron { transform: rotate(180deg); }
+        details.step-ejemplo > summary .step-num { display: inline-flex; align-items: center; justify-content: center; background: #4299e1; color: white; width: 28px; height: 28px; min-width: 28px; border-radius: 50%; font-weight: bold; font-size: 0.85em; margin: 0; }
+        details.step-ejemplo > summary .titulo-paso { flex: 1; font-size: 0.98em; color: #1a365d; }
+        details.step-ejemplo .contenido-paso { padding: 6px 20px 18px 20px; border-top: 1px solid #ebf8ff; }
+
+        details.grupo-ejercicios { margin: 20px 0; background: #f8fafc; border-radius: 16px; border: 2px solid #dbeafe; padding: 0.3rem 0.3rem 0.3rem 1rem; transition: all 0.3s ease; }
+        details.grupo-ejercicios[open] { background: #ffffff; border-color: #60a5fa; box-shadow: 0 4px 14px rgba(59,130,246,0.10); }
+        details.grupo-ejercicios > summary { list-style: none; cursor: pointer; font-size: 1.2rem; font-weight: 700; color: #1e3a8a; padding: 0.9rem 0.8rem 0.9rem 0; display: flex; align-items: center; gap: 12px; user-select: none; }
+        details.grupo-ejercicios > summary::-webkit-details-marker { display: none; }
+        details.grupo-ejercicios > summary .chevron-grupo { font-size: 1.15rem; color: #2563eb; transition: transform 0.3s ease; margin-left: auto; }
+        details.grupo-ejercicios[open] > summary .chevron-grupo { transform: rotate(180deg); }
+        details.grupo-ejercicios > summary .badge-grupo { background: #dbeafe; padding: 0.15rem 0.8rem; border-radius: 40px; font-size: 0.8rem; color: #1e40af; display: inline-flex; align-items: center; gap: 5px; font-weight: 600; }
+        details.grupo-ejercicios > .contenido-grupo { padding: 0.4rem 0.6rem 1rem 0.6rem; border-top: 1px solid #e2e8f0; margin-top: 0.3rem; }
+
+        .regla-tabla td:first-child { font-weight: 600; color: #2d3748; width: 45%; }
+
+        .etiqueta-paso {
+            display: inline-block;
+            background: #fde68a;
+            color: #92400e;
+            font-weight: 800;
+            font-size: 0.7em;
+            padding: 2px 12px;
+            border-radius: 4px;
+            letter-spacing: 0.8px;
+            margin-right: 8px;
+            text-transform: uppercase;
+            border: 1px solid #f59e0b;
+            vertical-align: middle;
+        }
+
+        .tag-acido { background: #fed7d7; color: #9b2c2c; padding: 2px 10px; border-radius: 20px; font-size: 0.85em; font-weight: 700; white-space: nowrap; }
+        .tag-base  { background: #bee3f8; color: #2a4365; padding: 2px 10px; border-radius: 20px; font-size: 0.85em; font-weight: 700; white-space: nowrap; }
+        .tag-no    { background: #e2e8f0; color: #4a5568; padding: 2px 10px; border-radius: 20px; font-size: 0.85em; font-weight: 700; white-space: nowrap; }
+
+        .caja-modelo {
+            background: #f8fafc;
+            border: 2px solid #cbd5e0;
+            border-left: 6px solid #667eea;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 14px 0;
+        }
+        .caja-modelo h4 { margin: 0 0 8px 0; font-size: 1.02em; }
+        .caja-lavoisier   { border-left-color: #c05621; background: #fffaf0; }
+        .caja-lavoisier h4 { color: #c05621; }
+        .caja-arrhenius   { border-left-color: #3182ce; background: #f0f9ff; }
+        .caja-arrhenius h4 { color: #2b6cb0; }
+        .caja-bronsted    { border-left-color: #276749; background: #f0fff4; }
+        .caja-bronsted h4 { color: #276749; }
+        .caja-lewis       { border-left-color: #6b46c1; background: #faf5ff; }
+        .caja-lewis h4 { color: #6b46c1; }
+
+        .hl-rojo    { color: #c53030; font-weight: 800; }
+        .hl-azul    { color: #2b6cb0; font-weight: 800; }
+        .hl-verde   { color: #276749; font-weight: 800; }
+        .hl-naranja { color: #c05621; font-weight: 800; }
+        .hl-morado  { color: #6b46c1; font-weight: 800; }
+        .hl-rosa    { color: #b83280; font-weight: 800; }
+        .hl-teal    { color: #0f766e; font-weight: 800; }
+        .hl-amarillo{ color: #b7791f; font-weight: 800; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto" alt="Cápsula">
+                <span class="codigo">#T08.02.- </span>
+                <span class="texto">Ácidos y Bases: modelos y reacciones</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 Enunciado</h2>
+        <p>A lo largo de la historia, la química ha ido refinando qué significa que una sustancia sea <strong>ácida</strong> o <strong>básica</strong>. Cada modelo (Lavoisier, Arrhenius, Brønsted-Lowry, Lewis) añade matices y amplía el conjunto de sustancias que pueden clasificarse como ácidos o bases.</p>
+        <p>En este documento estudiaremos:</p>
+        <ul>
+            <li>La <strong>evolución histórica</strong> de los modelos de ácido-base.</li>
+            <li>Los <strong>criterios</strong> que emplea cada modelo para decidir qué es ácido y qué es base.</li>
+            <li><strong>10 ejemplos de reacciones</strong> analizados desde los <strong>cuatro modelos</strong>, indicando en cada caso qué especie actúa como ácido y cuál como base, y <em>por qué</em>.</li>
+        </ul>
+        <div class="formula-box">
+            \[ \text{Ácido} + \text{Base} \longrightarrow \text{Sal} + \text{Agua} \quad \text{(neutralización)} \]
+        </div>
+    </div>
+
+    <!-- OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 Objetivo</h2>
+        <p>Comprender qué es un ácido y una base según cada modelo, saber identificarlos en una reacción química, y ser capaz de analizar la misma reacción desde los cuatro modelos justificando el papel de cada especie (o indicando por qué un modelo no aplica).</p>
+    </div>
+
+    <!-- PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>🔧 Procedimiento</h2>
+
+        <!-- PASO 1: MODELOS (DESTACADO) -->
+        <details class="step-desplegable-destacado">
+            <summary>
+                <span class="step-num">1</span>
+                <span class="titulo-paso">Evolución histórica de los <span class="hl-morado">modelos ácido-base</span></span>
+                <span class="badge-pulsa"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>Pulsa en cada modelo para ver su definición, su criterio y sus limitaciones.</p>
+
+                <!-- MODELO LAVOISIER -->
+                <details class="grupo-ejercicios">
+                    <summary>
+                        <i class="fas fa-flask" style="color:#c05621;"></i>
+                        <span>🟠 Modelo de Lavoisier (1777) — el oxígeno como protagonista</span>
+                        <i class="fas fa-chevron-down chevron-grupo"></i>
+                    </summary>
+                    <div class="contenido-grupo">
+                        <div class="caja-modelo caja-lavoisier">
+                            <h4>Definición</h4>
+                            <p>Un <strong>ácido</strong> es una sustancia que contiene <strong>oxígeno</strong> en su composición. Las bases son sustancias que neutralizan a los ácidos.</p>
+                            <h4 style="margin-top:12px;">Criterio</h4>
+                            <p>La presencia de oxígeno en la fórmula. Lavoisier observó que muchos ácidos conocidos (HNO₃, H₂SO₄, H₃PO₄) contenían oxígeno, y de ahí el nombre "oxígeno" = "formador de ácidos".</p>
+                            <h4 style="margin-top:12px;">Limitaciones</h4>
+                            <ul>
+                                <li>El HCl (ácido clorhídrico) no contiene oxígeno y sin embargo es un ácido fuerte. Este hecho refutó el modelo.</li>
+                                <li>No explica el mecanismo de la reacción ácido-base.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- MODELO ARRHENIUS -->
+                <details class="grupo-ejercicios">
+                    <summary>
+                        <i class="fas fa-tint" style="color:#3182ce;"></i>
+                        <span>🔵 Modelo de Arrhenius (1884) — iones en disolución acuosa</span>
+                        <i class="fas fa-chevron-down chevron-grupo"></i>
+                    </summary>
+                    <div class="contenido-grupo">
+                        <div class="caja-modelo caja-arrhenius">
+                            <h4>Definición</h4>
+                            <ul>
+                                <li><strong>Ácido:</strong> sustancia que, en disolución acuosa, libera iones <strong>H⁺</strong> (protones).</li>
+                                <li><strong>Base:</strong> sustancia que, en disolución acuosa, libera iones <strong>OH⁻</strong> (hidroxilos).</li>
+                            </ul>
+                            <h4 style="margin-top:12px;">Criterio</h4>
+                            <p>El tipo de ion que se libera en agua. Los ácidos producen H⁺ y las bases OH⁻.</p>
+                            <div class="formula-box">
+                                \[ \mathrm{HA \xrightarrow{H_2O} H^+ + A^-} \quad\quad \mathrm{BOH \xrightarrow{H_2O} B^+ + OH^-} \]
+                            </div>
+                            <h4 style="margin-top:12px;">Neutralización</h4>
+                            <div class="formula-box">
+                                \[ \mathrm{H^+ + OH^- \longrightarrow H_2O} \]
+                            </div>
+                            <h4 style="margin-top:12px;">Limitaciones</h4>
+                            <ul>
+                                <li>Solo se aplica a disoluciones acuosas.</li>
+                                <li>No explica el comportamiento básico del NH₃ (no tiene OH⁻ en su fórmula).</li>
+                                <li>No contempla reacciones en fase gaseosa u otros disolventes.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- MODELO BRØNSTED-LOWRY -->
+                <details class="grupo-ejercicios">
+                    <summary>
+                        <i class="fas fa-exchange-alt" style="color:#276749;"></i>
+                        <span>🟢 Modelo de Brønsted-Lowry (1923) — transferencia de protones</span>
+                        <i class="fas fa-chevron-down chevron-grupo"></i>
+                    </summary>
+                    <div class="contenido-grupo">
+                        <div class="caja-modelo caja-bronsted">
+                            <h4>Definición</h4>
+                            <ul>
+                                <li><strong>Ácido:</strong> especie (molécula o ion) capaz de <strong>ceder</strong> un protón (H⁺).</li>
+                                <li><strong>Base:</strong> especie (molécula o ion) capaz de <strong>aceptar</strong> un protón (H⁺).</li>
+                            </ul>
+                            <h4 style="margin-top:12px;">Criterio</h4>
+                            <p>El intercambio de protones. No importa si hay agua o no; lo que importa es quién dona y quién acepta el H⁺.</p>
+                            <div class="formula-box">
+                                \[ \mathrm{HA + B \rightleftharpoons A^- + BH^+} \]
+                                \[ \text{Ácido} \quad \text{Base} \quad \text{Base conj.} \quad \text{Ácido conj.} \]
+                            </div>
+                            <h4 style="margin-top:12px;">Pares conjugados</h4>
+                            <p>Cada ácido tiene su base conjugada (lo que queda tras perder H⁺) y cada base su ácido conjugado (lo que queda tras ganar H⁺).</p>
+                            <h4 style="margin-top:12px;">Ventajas</h4>
+                            <ul>
+                                <li>Explica el carácter básico del NH₃ (acepta H⁺ del agua).</li>
+                                <li>Funciona en cualquier disolvente y en fase gaseosa.</li>
+                                <li>Introduce el concepto de sustancias <strong>anfóteras</strong> (como el H₂O), que pueden actuar como ácido o como base.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- MODELO LEWIS -->
+                <details class="grupo-ejercicios">
+                    <summary>
+                        <i class="fas fa-atom" style="color:#6b46c1;"></i>
+                        <span>🟣 Modelo de Lewis (1923) — pares de electrones</span>
+                        <i class="fas fa-chevron-down chevron-grupo"></i>
+                    </summary>
+                    <div class="contenido-grupo">
+                        <div class="caja-modelo caja-lewis">
+                            <h4>Definición</h4>
+                            <ul>
+                                <li><strong>Ácido:</strong> especie que puede <strong>aceptar</strong> un par de electrones (tiene un orbital vacío).</li>
+                                <li><strong>Base:</strong> especie que puede <strong>donar</strong> un par de electrones (tiene un par libre).</li>
+                            </ul>
+                            <h4 style="margin-top:12px;">Criterio</h4>
+                            <p>El intercambio de pares de electrones. El ácido es un <em>electrófilo</em> (le gustan los electrones) y la base es un <em>nucleófilo</em> (tiene electrones disponibles).</p>
+                            <div class="formula-box">
+                                \[ \mathrm{A + :B \longrightarrow A{:}B} \]
+                                \[ \text{Ácido} \quad \text{Base} \quad \text{Complejo/Adducto} \]
+                            </div>
+                            <h4 style="margin-top:12px;">Ventajas</h4>
+                            <ul>
+                                <li>Es el modelo más general: incluye todas las reacciones ácido-base de Brønsted-Lowry.</li>
+                                <li>Explica reacciones sin protones, como la formación de complejos: BF₃ + NH₃ → F₃B←NH₃.</li>
+                                <li>Base de la química organometálica y de la catálisis.</li>
+                            </ul>
+                            <h4 style="margin-top:12px;">Limitaciones</h4>
+                            <ul>
+                                <li>Es tan general que muchas reacciones pueden clasificarse como ácido-base, perdiendo especificidad.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- CUADRO RESUMEN -->
+                <div class="note" style="margin-top: 20px;">
+                    <strong>📊 Cuadro resumen comparativo</strong>
+                    <table style="margin-top: 10px;">
+                        <thead>
+                            <tr>
+                                <th>Modelo</th>
+                                <th>Ácido</th>
+                                <th>Base</th>
+                                <th>Medio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Lavoisier</strong></td>
+                                <td>Contiene O</td>
+                                <td>Neutraliza ácidos</td>
+                                <td>—</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Arrhenius</strong></td>
+                                <td>Libera H⁺</td>
+                                <td>Libera OH⁻</td>
+                                <td>Disolución acuosa</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Brønsted-Lowry</strong></td>
+                                <td>Cede H⁺</td>
+                                <td>Acepta H⁺</td>
+                                <td>Cualquiera</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lewis</strong></td>
+                                <td>Acepta par e⁻</td>
+                                <td>Dona par e⁻</td>
+                                <td>Cualquiera</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </details>
+
+        <!-- PASO 2: EJEMPLOS DE REACCIONES (DESTACADO) -->
+        <details class="step-desplegable-destacado">
+            <summary>
+                <span class="step-num">2</span>
+                <span class="titulo-paso"><span class="hl-verde">10 ejemplos de reacciones</span> analizados desde <strong>los 4 modelos</strong></span>
+                <span class="badge-pulsa"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>En cada ejemplo aplicamos <strong>los cuatro modelos</strong> (Lavoisier, Arrhenius, Brønsted-Lowry, Lewis), indicando qué especie actúa como <span class="tag-acido">ÁCIDO</span> y qué especie como <span class="tag-base">BASE</span>. Cuando un modelo <em>no puede aplicarse</em> a esa reacción, se indica claramente con <span class="tag-no">NO APLICA</span> y se explica el motivo.</p>
+
+                <!-- EJEMPLO 1 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">1</span><span class="titulo-paso">HCl + NaOH → NaCl + H₂O (neutralización clásica)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="formula-box">
+                            \[ \mathrm{HCl + NaOH \longrightarrow NaCl + H_2O} \]
+                        </div>
+
+                        <div class="caja-modelo caja-lavoisier">
+                            <h4>🟠 Interpretación según el modelo de Lavoisier</h4>
+                            <p><span class="tag-no">NO APLICA</span> El HCl <strong>no contiene oxígeno</strong> en su fórmula. Este es precisamente el contraejemplo clásico que refutó el modelo de Lavoisier. Si aplicáramos el criterio literal, el HCl no podría ser un ácido, pero experimentalmente sí lo es.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-arrhenius">
+                            <h4>🔵 Interpretación según el modelo de Arrhenius</h4>
+                            <p>En disolución acuosa:</p>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = HCl</span> porque se disocia liberando H⁺: \( \mathrm{HCl \rightarrow H^+ + Cl^-} \).</li>
+                                <li><span class="tag-base">BASE = NaOH</span> porque se disocia liberando OH⁻: \( \mathrm{NaOH \rightarrow Na^+ + OH^-} \).</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El HCl es ácido porque libera H⁺ en agua. El NaOH es base porque libera OH⁻ en agua. La reacción esencial es \( \mathrm{H^+ + OH^- \rightarrow H_2O} \).</p>
+                        </div>
+
+                        <div class="caja-modelo caja-bronsted">
+                            <h4>🟢 Interpretación según el modelo de Brønsted-Lowry</h4>
+                            <p>En forma iónica:</p>
+                            <div class="formula-box">
+                                \[ \mathrm{HCl + OH^- \rightleftharpoons Cl^- + H_2O} \]
+                            </div>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = HCl</span> porque <strong>cede un H⁺</strong> al ion hidróxido.</li>
+                                <li><span class="tag-base">BASE = OH⁻</span> porque <strong>acepta un H⁺</strong> del HCl.</li>
+                                <li>Par conjugado: HCl / Cl⁻ (ácido / base conjugada).</li>
+                                <li>Par conjugado: H₂O / OH⁻ (ácido conjugado / base).</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El HCl cede H⁺ y el OH⁻ lo acepta. Es una transferencia de protón.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-lewis">
+                            <h4>🟣 Interpretación según el modelo de Lewis</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = H⁺</span> (liberado por el HCl) porque acepta un par de electrones del OH⁻.</li>
+                                <li><span class="tag-base">BASE = OH⁻</span> porque dona un par de electrones (el oxígeno tiene pares libres) al H⁺.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El enlace O–H del agua se forma cuando el oxígeno del OH⁻ comparte uno de sus pares libres con el H⁺ (que tiene orbital vacío).</p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 2 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">2</span><span class="titulo-paso">NH₃ + H₂O ⇌ NH₄⁺ + OH⁻ (amoníaco en agua)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="formula-box">
+                            \[ \mathrm{NH_3 + H_2O \rightleftharpoons NH_4^+ + OH^-} \]
+                        </div>
+
+                        <div class="caja-modelo caja-lavoisier">
+                            <h4>🟠 Interpretación según el modelo de Lavoisier</h4>
+                            <p><span class="tag-no">NO APLICA</span> El NH₃ no contiene oxígeno, y el H₂O sí, pero como reactivo no "aporta acidez" en el sentido de Lavoisier. El modelo no tiene criterio para decidir quién es ácido y quién es base en esta reacción.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-arrhenius">
+                            <h4>🔵 Interpretación según el modelo de Arrhenius</h4>
+                            <p>El NH₃ <em>no tiene OH⁻ en su fórmula</em>, así que este modelo <strong>no explica directamente</strong> por qué el NH₃ es una base. Sin embargo, sí detecta que <strong>en el producto aparece OH⁻</strong>, lo cual es la "prueba" experimental de basicidad.</p>
+                            <ul>
+                                <li><span class="tag-base">BASE (empírica) = NH₃</span> porque su disolución acuosa da OH⁻.</li>
+                                <li><span class="tag-acido">ÁCIDO = H₂O</span> (implícito) porque al reaccionar con NH₃ genera OH⁻.</li>
+                            </ul>
+                        </div>
+
+                        <div class="caja-modelo caja-bronsted">
+                            <h4>🟢 Interpretación según el modelo de Brønsted-Lowry</h4>
+                            <p>Este modelo explica perfectamente la reacción:</p>
+                            <ul>
+                                <li><span class="tag-base">BASE = NH₃</span> porque <strong>acepta un H⁺</strong> del agua, transformándose en NH₄⁺.</li>
+                                <li><span class="tag-acido">ÁCIDO = H₂O</span> porque <strong>cede un H⁺</strong> al amoníaco, transformándose en OH⁻.</li>
+                                <li>Par conjugado: NH₄⁺ / NH₃ (ácido conjugado / base).</li>
+                                <li>Par conjugado: H₂O / OH⁻ (ácido / base conjugada).</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El NH₃ acepta H⁺ (tiene par libre en el N) y el H₂O lo cede. El agua actúa aquí como <strong>anfótera</strong>: esta vez como ácido.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-lewis">
+                            <h4>🟣 Interpretación según el modelo de Lewis</h4>
+                            <ul>
+                                <li><span class="tag-base">BASE = NH₃</span> porque el nitrógeno tiene un par de electrones libre que puede donar.</li>
+                                <li><span class="tag-acido">ÁCIDO = H⁺</span> (o el H₂O, considerado como ácido portador de H⁺) porque acepta ese par de electrones.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> Se forma un enlace covalente dativo N→H: el nitrógeno aporta el par y el H⁺ lo acepta.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 3 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">3</span><span class="titulo-paso">BF₃ + NH₃ → F₃B←NH₃ (aducto de Lewis)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="formula-box">
+                            \[ \mathrm{BF_3 + NH_3 \longrightarrow F_3B{\leftarrow}NH_3} \]
+                        </div>
+
+                        <div class="caja-modelo caja-lavoisier">
+                            <h4>🟠 Interpretación según el modelo de Lavoisier</h4>
+                            <p><span class="tag-no">NO APLICA</span> No hay oxígeno ni protones involucrados. El modelo de Lavoisier no tiene nada que decir sobre esta reacción.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-arrhenius">
+                            <h4>🔵 Interpretación según el modelo de Arrhenius</h4>
+                            <p><span class="tag-no">NO APLICA</span> No hay disolución acuosa, ni H⁺ ni OH⁻ libres. Arrhenius solo contempla reacciones en agua con liberación de iones H⁺ u OH⁻.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-bronsted">
+                            <h4>🟢 Interpretación según el modelo de Brønsted-Lowry</h4>
+                            <p><span class="tag-no">NO APLICA</span> No hay transferencia de H⁺ entre las especies. El H del NH₃ no se transfiere al BF₃; simplemente se forma un enlace B–N.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-lewis">
+                            <h4>🟣 Interpretación según el modelo de Lewis</h4>
+                            <p>Este es el caso paradigmático del modelo de Lewis:</p>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = BF₃</span> porque el boro tiene solo 6 electrones en su capa de valencia: tiene un <strong>orbital vacío</strong> y puede <strong>aceptar un par de electrones</strong>.</li>
+                                <li><span class="tag-base">BASE = NH₃</span> porque el nitrógeno tiene un <strong>par de electrones libre</strong> que puede <strong>donar</strong>.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El enlace B–N se forma cuando el nitrógeno aporta su par libre al orbital vacío del boro. Se denomina <strong>enlace covalente dativo o coordinado</strong>.</p>
+                            <div class="note">
+                                <strong>💡 Idea clave:</strong> sin el modelo de Lewis, esta reacción no podría clasificarse como ácido-base. Por eso Lewis amplía tanto el concepto.
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 4 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">4</span><span class="titulo-paso">CH₃COOH + H₂O ⇌ CH₃COO⁻ + H₃O⁺ (ácido acético en agua)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="formula-box">
+                            \[ \mathrm{CH_3COOH + H_2O \rightleftharpoons CH_3COO^- + H_3O^+} \]
+                        </div>
+
+                        <div class="caja-modelo caja-lavoisier">
+                            <h4>🟠 Interpretación según el modelo de Lavoisier</h4>
+                            <p>El CH₃COOH <strong>sí contiene oxígeno</strong>, así que según Lavoisier sería un ácido. Sin embargo, el criterio no permite distinguir <em>quién</em> es la base en la reacción (el H₂O también contiene oxígeno). El modelo es insuficiente: clasifica pero no explica el papel de cada especie.</p>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = CH₃COOH</span> (porque contiene O).</li>
+                                <li><span class="tag-base">BASE = ?</span> No hay criterio claro para asignar el papel de base. El H₂O contiene O también, y Lavoisier no distingue reactivos de productos.</li>
+                            </ul>
+                        </div>
+
+                        <div class="caja-modelo caja-arrhenius">
+                            <h4>🔵 Interpretación según el modelo de Arrhenius</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = CH₃COOH</span> porque libera H⁺ en agua.</li>
+                                <li><span class="tag-base">BASE = H₂O</span> (implícitamente) porque capta esos H⁺ y forma H₃O⁺. Arrhenius lo explica como una simple ionización del ácido en agua.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El ácido acético se ioniza liberando H⁺; el agua capta ese H⁺ formando H₃O⁺. Es un ácido débil, así que el equilibrio está desplazado a la izquierda.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-bronsted">
+                            <h4>🟢 Interpretación según el modelo de Brønsted-Lowry</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = CH₃COOH</span> porque <strong>cede un H⁺</strong> al agua.</li>
+                                <li><span class="tag-base">BASE = H₂O</span> porque <strong>acepta un H⁺</strong> del ácido acético, formando H₃O⁺ (ion hidronio).</li>
+                                <li>Par conjugado: CH₃COOH / CH₃COO⁻ (ácido / base conjugada).</li>
+                                <li>Par conjugado: H₃O⁺ / H₂O (ácido conjugado / base).</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El agua vuelve a actuar como <strong>base</strong> en este caso, igual que en el ejemplo 2 pero con roles invertidos.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-lewis">
+                            <h4>🟣 Interpretación según el modelo de Lewis</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = H⁺</span> (cedido por el ácido acético) porque acepta un par de electrones del oxígeno del agua.</li>
+                                <li><span class="tag-base">BASE = H₂O</span> porque dona un par de electrones al H⁺ para formar H₃O⁺.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El enlace O–H del H₃O⁺ se forma cuando el oxígeno del agua comparte un par libre con el H⁺.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 5 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">5</span><span class="titulo-paso">H₂O + H₂O ⇌ H₃O⁺ + OH⁻ (autoionización del agua)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="formula-box">
+                            \[ \mathrm{H_2O + H_2O \rightleftharpoons H_3O^+ + OH^-} \]
+                        </div>
+
+                        <div class="caja-modelo caja-lavoisier">
+                            <h4>🟠 Interpretación según el modelo de Lavoisier</h4>
+                            <p><span class="tag-no">NO APLICA</span> El agua contiene oxígeno, pero el modelo de Lavoisier no tiene criterio para distinguir entre dos moléculas idénticas que actúan de forma diferente (una como ácido, otra como base). El modelo no explica esta reacción.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-arrhenius">
+                            <h4>🔵 Interpretación según el modelo de Arrhenius</h4>
+                            <p>Es la base experimental del modelo: el agua pura, aunque en muy pequeña proporción, libera H⁺ y OH⁻. Esto explica por qué el agua pura es neutra: [H⁺] = [OH⁻].</p>
+                            <ul>
+                                <li>Una molécula de H₂O actúa como <span class="tag-acido">ácido</span> liberando H⁺.</li>
+                                <li>Otra molécula de H₂O actúa como <span class="tag-base">base</span> captando ese H⁺ y formando OH⁻ (implícitamente).</li>
+                            </ul>
+                        </div>
+
+                        <div class="caja-modelo caja-bronsted">
+                            <h4>🟢 Interpretación según el modelo de Brønsted-Lowry</h4>
+                            <p>El agua es la sustancia <strong>anfótera</strong> por excelencia: una molécula actúa como ácido y otra como base.</p>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = H₂O (la primera)</span> porque <strong>cede un H⁺</strong> a la segunda molécula de agua.</li>
+                                <li><span class="tag-base">BASE = H₂O (la segunda)</span> porque <strong>acepta un H⁺</strong> de la primera, formando H₃O⁺.</li>
+                                <li>Par conjugado: H₃O⁺ / H₂O (ácido conjugado / base).</li>
+                                <li>Par conjugado: H₂O / OH⁻ (ácido / base conjugada).</li>
+                            </ul>
+                            <div class="formula-box">
+                                \[ \underbrace{\mathrm{H_2O}}_{\text{Ácido}} + \underbrace{\mathrm{H_2O}}_{\text{Base}} \rightleftharpoons \underbrace{\mathrm{H_3O^+}}_{\text{Ác. conj.}} + \underbrace{\mathrm{OH^-}}_{\text{Base conj.}} \]
+                            </div>
+                            <p><strong>¿Por qué?</strong> Una molécula cede H⁺ (actúa como ácido) y la otra lo acepta (actúa como base). Es el ejemplo canónico de anfoterismo.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-lewis">
+                            <h4>🟣 Interpretación según el modelo de Lewis</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = H⁺</span> (cedido por la primera molécula de agua) porque acepta un par de electrones del oxígeno de la segunda.</li>
+                                <li><span class="tag-base">BASE = H₂O (la segunda)</span> porque su oxígeno dona un par de electrones al H⁺.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El enlace O–H del H₃O⁺ se forma cuando el oxígeno de la segunda molécula comparte un par libre con el H⁺.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 6 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">6</span><span class="titulo-paso">CO₂ + H₂O → H₂CO₃ (formación del ácido carbónico)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="formula-box">
+                            \[ \mathrm{CO_2 + H_2O \longrightarrow H_2CO_3} \]
+                        </div>
+
+                        <div class="caja-modelo caja-lavoisier">
+                            <h4>🟠 Interpretación según el modelo de Lavoisier</h4>
+                            <p>Todos los reactivos contienen oxígeno, y el producto también. El modelo diría que el H₂CO₃ es un ácido (contiene O), pero no puede distinguir el papel del CO₂ ni del H₂O en la reacción.</p>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = H₂CO₃</span> (producto final, contiene O).</li>
+                                <li><span class="tag-base">BASE = ?</span> No hay criterio para asignar el papel de base al CO₂ o al H₂O.</li>
+                            </ul>
+                            <p>El modelo es <em>insuficiente</em>: describe el producto como ácido pero no explica el mecanismo.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-arrhenius">
+                            <h4>🔵 Interpretación según el modelo de Arrhenius</h4>
+                            <p>El CO₂ no libera H⁺ por sí mismo, pero al reaccionar con agua forma H₂CO₃, que <em>sí</em> libera H⁺:</p>
+                            <div class="formula-box">
+                                \[ \mathrm{H_2CO_3 \rightleftharpoons H^+ + HCO_3^-} \]
+                            </div>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = H₂CO₃</span> (el producto, que libera H⁺ en agua).</li>
+                                <li><span class="tag-base">BASE = ?</span> Arrhenius no asigna un papel de base claro al CO₂ ni al H₂O en la formación del ácido.</li>
+                            </ul>
+                            <p>El modelo clásico diría que es el H₂CO₃ el ácido, no el CO₂.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-bronsted">
+                            <h4>🟢 Interpretación según el modelo de Brønsted-Lowry</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = H₂O</span> porque cede un H⁺ al CO₂ (el agua actúa como ácido).</li>
+                                <li><span class="tag-base">BASE = CO₂</span> porque acepta un H⁺ del agua para dar H₂CO₃.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El CO₂ no tiene H⁺ que ceder, así que el agua tiene que actuar como ácido. Es un caso en el que el agua NO es la base.</p>
+                            <div class="note">
+                                <strong>⚠️ Ojo:</strong> mucha gente piensa que el agua siempre es base, pero en presencia de un compuesto como el CO₂ (que no tiene H⁺ que ceder), el agua <em>cede</em> un H⁺ y actúa como ácido.
+                            </div>
+                        </div>
+
+                        <div class="caja-modelo caja-lewis">
+                            <h4>🟣 Interpretación según el modelo de Lewis</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = CO₂</span> porque el carbono tiene un orbital vacío y puede aceptar un par de electrones del oxígeno del agua.</li>
+                                <li><span class="tag-base">BASE = H₂O</span> porque su oxígeno dona un par de electrones al carbono del CO₂.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El carbono del CO₂ pasa de geometría lineal a triangular para formar el carbonato. El enlace C–O se forma por donación de un par libre del agua.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 7 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">7</span><span class="titulo-paso">H₂SO₄ + 2 NaOH → Na₂SO₄ + 2 H₂O (ácido diprótico)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="formula-box">
+                            \[ \mathrm{H_2SO_4 + 2\,NaOH \longrightarrow Na_2SO_4 + 2\,H_2O} \]
+                        </div>
+
+                        <div class="caja-modelo caja-lavoisier">
+                            <h4>🟠 Interpretación según el modelo de Lavoisier</h4>
+                            <p>El H₂SO₄ contiene oxígeno, así que según Lavoisier es un ácido. El NaOH también contiene oxígeno, lo que crea ambigüedad: ¿es también un ácido? El modelo no distingue entre ácido y base cuando ambos contienen oxígeno.</p>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = H₂SO₄</span> (contiene O).</li>
+                                <li><span class="tag-base">BASE = ?</span> El NaOH contiene O, pero Lavoisier no tiene criterio para clasificarlo como base.</li>
+                            </ul>
+                        </div>
+
+                        <div class="caja-modelo caja-arrhenius">
+                            <h4>🔵 Interpretación según el modelo de Arrhenius</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = H₂SO₄</span> porque libera 2 H⁺ en agua (es un ácido diprótico).</li>
+                                <li><span class="tag-base">BASE = NaOH</span> porque libera OH⁻. Se necesitan 2 mol de NaOH por cada mol de H₂SO₄ para neutralizar los dos H⁺.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> Cada H⁺ liberado por el ácido se combina con un OH⁻ liberado por la base para formar agua.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-bronsted">
+                            <h4>🟢 Interpretación según el modelo de Brønsted-Lowry</h4>
+                            <p>En dos etapas:</p>
+                            <div class="formula-box">
+                                \[ \mathrm{H_2SO_4 + OH^- \rightleftharpoons HSO_4^- + H_2O} \]
+                                \[ \mathrm{HSO_4^- + OH^- \rightleftharpoons SO_4^{2-} + H_2O} \]
+                            </div>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = H₂SO₄ (1ª etapa) y HSO₄⁻ (2ª etapa)</span>, porque cada uno cede un H⁺ al ion hidróxido.</li>
+                                <li><span class="tag-base">BASE = OH⁻</span> (en ambas etapas) porque acepta el H⁺.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El ion HSO₄⁻ actúa como ácido en la segunda etapa, mostrando que los iones también pueden ser ácidos o bases según Brønsted-Lowry.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-lewis">
+                            <h4>🟣 Interpretación según el modelo de Lewis</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = H⁺</span> (cada uno de los dos protones cedidos por el H₂SO₄) porque acepta un par de electrones del OH⁻.</li>
+                                <li><span class="tag-base">BASE = OH⁻</span> porque dona un par de electrones al H⁺ para formar agua.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> Cada enlace O–H del agua se forma cuando el oxígeno del OH⁻ comparte un par libre con un H⁺.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 8 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">8</span><span class="titulo-paso">AlCl₃ + Cl⁻ → AlCl₄⁻ (ácido de Lewis sin protones)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="formula-box">
+                            \[ \mathrm{AlCl_3 + Cl^- \longrightarrow AlCl_4^-} \]
+                        </div>
+
+                        <div class="caja-modelo caja-lavoisier">
+                            <h4>🟠 Interpretación según el modelo de Lavoisier</h4>
+                            <p><span class="tag-no">NO APLICA</span> No hay oxígeno en ninguna de las especies. El modelo de Lavoisier no tiene nada que decir sobre esta reacción.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-arrhenius">
+                            <h4>🔵 Interpretación según el modelo de Arrhenius</h4>
+                            <p><span class="tag-no">NO APLICA</span> No hay H⁺ ni OH⁻ involucrados. Arrhenius solo contempla reacciones con liberación de estos iones en agua.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-bronsted">
+                            <h4>🟢 Interpretación según el modelo de Brønsted-Lowry</h4>
+                            <p><span class="tag-no">NO APLICA</span> No hay transferencia de protones. El Cl⁻ no cede ni acepta H⁺; simplemente dona un par de electrones al aluminio.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-lewis">
+                            <h4>🟣 Interpretación según el modelo de Lewis</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = AlCl₃</span> porque el aluminio tiene un orbital vacío y puede <strong>aceptar un par de electrones</strong> del Cl⁻.</li>
+                                <li><span class="tag-base">BASE = Cl⁻</span> porque tiene pares de electrones libres y puede <strong>donar uno</strong> al aluminio.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> Se forma un enlace covalente dativo Al←Cl. Este tipo de reacciones son fundamentales en catálisis (por ejemplo, en la síntesis de Friedel-Crafts).</p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 9 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">9</span><span class="titulo-paso">HCN + H₂O ⇌ CN⁻ + H₃O⁺ (ácido débil)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="formula-box">
+                            \[ \mathrm{HCN + H_2O \rightleftharpoons CN^- + H_3O^+} \]
+                        </div>
+
+                        <div class="caja-modelo caja-lavoisier">
+                            <h4>🟠 Interpretación según el modelo de Lavoisier</h4>
+                            <p><span class="tag-no">NO APLICA</span> El HCN <strong>no contiene oxígeno</strong>. Es otro contraejemplo al modelo de Lavoisier: una sustancia sin oxígeno que se comporta como ácido.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-arrhenius">
+                            <h4>🔵 Interpretación según el modelo de Arrhenius</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = HCN</span> porque libera H⁺ en agua, aunque muy pocos (ácido débil).</li>
+                                <li><span class="tag-base">BASE = H₂O</span> (implícitamente) porque capta el H⁺ formando H₃O⁺.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El equilibrio está muy desplazado hacia la izquierda: la mayoría del HCN permanece sin disociar.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-bronsted">
+                            <h4>🟢 Interpretación según el modelo de Brønsted-Lowry</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = HCN</span> porque cede un H⁺ al agua.</li>
+                                <li><span class="tag-base">BASE = H₂O</span> porque acepta el H⁺, formando H₃O⁺.</li>
+                                <li>Par conjugado: HCN / CN⁻.</li>
+                                <li>Par conjugado: H₃O⁺ / H₂O.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> Cuanto más fuerte es un ácido, más débil es su base conjugada. Como el HCN es débil, el CN⁻ es una base relativamente fuerte.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-lewis">
+                            <h4>🟣 Interpretación según el modelo de Lewis</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = H⁺</span> (cedido por el HCN) porque acepta un par de electrones del oxígeno del agua.</li>
+                                <li><span class="tag-base">BASE = H₂O</span> porque dona un par de electrones al H⁺ para formar H₃O⁺.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El enlace O–H del H₃O⁺ se forma por donación de un par libre del oxígeno del agua al H⁺.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 10 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">10</span><span class="titulo-paso">Fe³⁺ + 6 H₂O → [Fe(H₂O)₆]³⁺ (catión metálico como ácido de Lewis)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="formula-box">
+                            \[ \mathrm{Fe^{3+} + 6\,H_2O \longrightarrow [Fe(H_2O)_6]^{3+}} \]
+                        </div>
+
+                        <div class="caja-modelo caja-lavoisier">
+                            <h4>🟠 Interpretación según el modelo de Lavoisier</h4>
+                            <p><span class="tag-no">NO APLICA</span> El Fe³⁺ no contiene oxígeno. El agua sí lo contiene, pero el modelo de Lavoisier no tiene criterio para asignar el papel de ácido o base en esta reacción de coordinación.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-arrhenius">
+                            <h4>🔵 Interpretación según el modelo de Arrhenius</h4>
+                            <p>No aplica directamente: el Fe³⁺ no libera H⁺ ni OH⁻. Sin embargo, los cationes metálicos en agua <em>generan</em> disoluciones ácidas porque polarizan las moléculas de agua, facilitando que cedan H⁺:</p>
+                            <div class="formula-box">
+                                \[ \mathrm{[Fe(H_2O)_6]^{3+} \rightleftharpoons [Fe(OH)(H_2O)_5]^{2+} + H^+} \]
+                            </div>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = [Fe(H₂O)₆]³⁺</span> (el complejo, que cede H⁺ en la hidrólisis).</li>
+                                <li><span class="tag-base">BASE = H₂O</span> (implícitamente, acepta el H⁺ liberado).</li>
+                            </ul>
+                        </div>
+
+                        <div class="caja-modelo caja-bronsted">
+                            <h4>🟢 Interpretación según el modelo de Brønsted-Lowry</h4>
+                            <p>En la hidrólisis posterior del complejo:</p>
+                            <div class="formula-box">
+                                \[ \mathrm{[Fe(H_2O)_6]^{3+} + H_2O \rightleftharpoons [Fe(OH)(H_2O)_5]^{2+} + H_3O^+} \]
+                            </div>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = [Fe(H₂O)₆]³⁺</span> porque cede un H⁺ al agua.</li>
+                                <li><span class="tag-base">BASE = H₂O</span> porque acepta el H⁺, formando H₃O⁺.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> El catión metálico polariza los enlaces O–H de las aguas coordinadas, debilitándolos y facilitando la cesión de H⁺.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-lewis">
+                            <h4>🟣 Interpretación según el modelo de Lewis</h4>
+                            <ul>
+                                <li><span class="tag-acido">ÁCIDO = Fe³⁺</span> porque tiene orbitales vacíos y puede <strong>aceptar pares de electrones</strong> de los oxígenos del agua.</li>
+                                <li><span class="tag-base">BASE = H₂O</span> porque el oxígeno tiene pares libres que <strong>dona</strong> al Fe³⁺.</li>
+                            </ul>
+                            <p><strong>¿Por qué?</strong> Se forman 6 enlaces covalentes dativos Fe←O. Este tipo de ácidos de Lewis (cationes metálicos) son muy comunes en química de coordinación.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- CUADRO RESUMEN FINAL -->
+                <div class="note" style="margin-top: 20px;">
+                    <strong>📊 Resumen: ¿qué modelo explica mejor cada caso?</strong>
+                    <table style="margin-top: 10px;">
+                        <thead>
+                            <tr>
+                                <th>Reacción</th>
+                                <th>Lavoisier</th>
+                                <th>Arrhenius (ácido / base)</th>
+                                <th>Brønsted (ácido / base)</th>
+                                <th>Lewis (ácido / base)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>HCl + NaOH</td>
+                                <td>No aplica</td>
+                                <td>HCl / NaOH</td>
+                                <td>HCl / OH⁻</td>
+                                <td>H⁺ / OH⁻</td>
+                            </tr>
+                            <tr>
+                                <td>NH₃ + H₂O</td>
+                                <td>No aplica</td>
+                                <td>H₂O / NH₃</td>
+                                <td>H₂O / NH₃</td>
+                                <td>H⁺ / NH₃</td>
+                            </tr>
+                            <tr>
+                                <td>BF₃ + NH₃</td>
+                                <td>No aplica</td>
+                                <td>No aplica</td>
+                                <td>No aplica</td>
+                                <td>BF₃ / NH₃</td>
+                            </tr>
+                            <tr>
+                                <td>CH₃COOH + H₂O</td>
+                                <td>CH₃COOH / —</td>
+                                <td>CH₃COOH / H₂O</td>
+                                <td>CH₃COOH / H₂O</td>
+                                <td>H⁺ / H₂O</td>
+                            </tr>
+                            <tr>
+                                <td>H₂O + H₂O</td>
+                                <td>No aplica</td>
+                                <td>H₂O / H₂O</td>
+                                <td>H₂O / H₂O</td>
+                                <td>H⁺ / H₂O</td>
+                            </tr>
+                            <tr>
+                                <td>CO₂ + H₂O</td>
+                                <td>H₂CO₃ / —</td>
+                                <td>H₂CO₃ / —</td>
+                                <td>H₂O / CO₂</td>
+                                <td>CO₂ / H₂O</td>
+                            </tr>
+                            <tr>
+                                <td>H₂SO₄ + NaOH</td>
+                                <td>H₂SO₄ / —</td>
+                                <td>H₂SO₄ / NaOH</td>
+                                <td>H₂SO₄ / OH⁻</td>
+                                <td>H⁺ / OH⁻</td>
+                            </tr>
+                            <tr>
+                                <td>AlCl₃ + Cl⁻</td>
+                                <td>No aplica</td>
+                                <td>No aplica</td>
+                                <td>No aplica</td>
+                                <td>AlCl₃ / Cl⁻</td>
+                            </tr>
+                            <tr>
+                                <td>HCN + H₂O</td>
+                                <td>No aplica</td>
+                                <td>HCN / H₂O</td>
+                                <td>HCN / H₂O</td>
+                                <td>H⁺ / H₂O</td>
+                            </tr>
+                            <tr>
+                                <td>Fe³⁺ + H₂O</td>
+                                <td>No aplica</td>
+                                <td>[Fe(H₂O)₆]³⁺ / H₂O</td>
+                                <td>[Fe(H₂O)₆]³⁺ / H₂O</td>
+                                <td>Fe³⁺ / H₂O</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="section resultado">
+        <h2>✅ Resultado</h2>
+        <p>Con este documento has aprendido a:</p>
+        <ul>
+            <li>Distinguir los <strong>cuatro modelos</strong> de ácido-base (Lavoisier, Arrhenius, Brønsted-Lowry, Lewis) y sus criterios.</li>
+            <li>Identificar qué especie actúa como <strong>ácido</strong> y cuál como <strong>base</strong> en una reacción según <strong>cada modelo</strong>.</li>
+            <li>Justificar <strong>por qué</strong> una especie es ácido o base: presencia de O, liberación de H⁺/OH⁻, cesión/aceptación de H⁺, o donación/aceptación de pares de electrones.</li>
+            <li>Reconocer cuándo un modelo <strong>no aplica</strong> a una reacción concreta y explicar el motivo.</li>
+            <li>Reconocer sustancias <strong>anfóteras</strong> como el agua, que pueden actuar como ácido o como base según su compañero de reacción.</li>
+        </ul>
+        <div class="formula-box">
+            \[ \boxed{\text{Ácido} \longrightarrow \text{cede H}^+ \text{ o acepta e}^- \quad\quad \text{Base} \longrightarrow \text{acepta H}^+ \text{ o dona e}^-} \]
+        </div>
+        <div class="note">
+            <strong>💡 Clave para el examen:</strong> ante una reacción ácido-base, pregúntate: ¿qué modelo aplica? Si hay protones, usa Brønsted-Lowry. Si no hay protones pero hay pares de electrones, usa Lewis. Y recuerda que <strong>el agua no siempre es base</strong>: frente al CO₂ o al NH₃ puede actuar como ácido. ¡Todo depende del compañero!
+        </div>
+    </div>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="max-width: 100%; padding: 15px; margin: 10px auto; text-align: center; background: #f8fafc; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+            <p style="font-size: clamp(0.95rem, 3vw, 1.2rem); color: #2d3748; margin-top: 0; margin-bottom: 12px; padding: 0 10px;">
+                <br>  Los ácidos y las bases están por todas partes: en la lluvia, en tu estómago y en la química de la vida.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+            <div style="text-align:center;">
+                <a href="../index.html" target="_blank" style="display:inline-block; padding:12px 24px; background:#0078D4; color:white; text-decoration:none; border-radius:12px; font-weight:bold;">
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

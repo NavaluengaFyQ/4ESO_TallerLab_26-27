@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T08.01b. Redox: Número de oxidación</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .container { max-width: 900px; width: 100%; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; margin: 20px auto; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .header-left { display: flex; flex-direction: column; justify-content: center; }
+        .header-left h1 { font-size: 1.8em; margin: 0; }
+        .header-sub { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+        .header-sub img { max-height: 28px; width: auto; border-radius: 4px; background: white; padding: 2px; }
+        .header-sub .codigo { font-weight: 700; font-size: 1.1em; }
+        .header-sub .texto { font-size: 1.1em; }
+        .header-right img { max-height: 70px; max-width: 180px; object-fit: contain; display: block; }
+
+        .section { padding: 25px 30px; margin: 15px; border-radius: 12px; border-left: 5px solid; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .section h2 { font-size: 1.3em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .procedimiento h2 { color: #276749; }
+        .formula-box { background: #edf2f7; border: 2px solid #cbd5e0; border-radius: 10px; padding: 15px; margin: 15px 0; text-align: center; font-size: 1.1em; }
+        .note { background: #fffbeb; border: 1px solid #f6e05e; border-radius: 8px; padding: 12px; margin-top: 15px; font-size: 0.95em; color: #744210; }
+        p { line-height: 1.7; margin-bottom: 10px; }
+        ul, ol { padding-left: 25px; line-height: 1.7; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #cbd5e0; padding: 8px 12px; text-align: left; }
+        th { background: #edf2f7; }
+
+        /* Desplegables de paso (reglas, info, etc.) */
+        details.step-desplegable { background: white; border-left: 4px solid #48bb78; border-radius: 0 8px 8px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.06); margin: 12px 0; transition: box-shadow 0.3s ease; padding: 0; }
+        details.step-desplegable[open] { box-shadow: 0 4px 14px rgba(72,187,120,0.18); }
+        details.step-desplegable > summary { list-style: none; cursor: pointer; padding: 14px 18px; display: flex; align-items: center; gap: 12px; font-weight: 600; color: #22543d; user-select: none; border-radius: 0 8px 8px 0; transition: background 0.2s ease; }
+        details.step-desplegable > summary:hover { background: #f0fff4; }
+        details.step-desplegable > summary::-webkit-details-marker { display: none; }
+        details.step-desplegable > summary .chevron { margin-left: auto; font-size: 0.95rem; color: #48bb78; transition: transform 0.3s ease; }
+        details.step-desplegable[open] > summary .chevron { transform: rotate(180deg); }
+        details.step-desplegable > summary .step-num { display: inline-flex; align-items: center; justify-content: center; background: #48bb78; color: white; width: 30px; height: 30px; min-width: 30px; border-radius: 50%; font-weight: bold; font-size: 0.95em; margin: 0; }
+        details.step-desplegable > summary .titulo-paso { flex: 1; font-size: 1em; color: #22543d; }
+        details.step-desplegable .contenido-paso { padding: 6px 22px 20px 22px; border-top: 1px solid #e6fffa; margin-top: 0; }
+
+        /* Desplegable de ejemplo individual (dentro de binarios/ternarios) */
+        details.step-ejemplo { background: white; border-left: 4px solid #4299e1; border-radius: 0 8px 8px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.05); margin: 10px 0; padding: 0; }
+        details.step-ejemplo[open] { box-shadow: 0 4px 14px rgba(66,153,225,0.18); }
+        details.step-ejemplo > summary { list-style: none; cursor: pointer; padding: 12px 16px; display: flex; align-items: center; gap: 12px; font-weight: 600; color: #1a365d; user-select: none; border-radius: 0 8px 8px 0; transition: background 0.2s ease; }
+        details.step-ejemplo > summary:hover { background: #ebf8ff; }
+        details.step-ejemplo > summary::-webkit-details-marker { display: none; }
+        details.step-ejemplo > summary .chevron { margin-left: auto; font-size: 0.9rem; color: #4299e1; transition: transform 0.3s ease; }
+        details.step-ejemplo[open] > summary .chevron { transform: rotate(180deg); }
+        details.step-ejemplo > summary .step-num { display: inline-flex; align-items: center; justify-content: center; background: #4299e1; color: white; width: 28px; height: 28px; min-width: 28px; border-radius: 50%; font-weight: bold; font-size: 0.85em; margin: 0; }
+        details.step-ejemplo > summary .titulo-paso { flex: 1; font-size: 0.98em; color: #1a365d; }
+        details.step-ejemplo .contenido-paso { padding: 6px 20px 18px 20px; border-top: 1px solid #ebf8ff; }
+
+        /* Desplegable de grupo (binarios / ternarios) */
+        details.grupo-ejercicios { margin: 20px 0; background: #f8fafc; border-radius: 16px; border: 2px solid #dbeafe; padding: 0.3rem 0.3rem 0.3rem 1rem; transition: all 0.3s ease; }
+        details.grupo-ejercicios[open] { background: #ffffff; border-color: #60a5fa; box-shadow: 0 4px 14px rgba(59,130,246,0.10); }
+        details.grupo-ejercicios > summary { list-style: none; cursor: pointer; font-size: 1.2rem; font-weight: 700; color: #1e3a8a; padding: 0.9rem 0.8rem 0.9rem 0; display: flex; align-items: center; gap: 12px; user-select: none; }
+        details.grupo-ejercicios > summary::-webkit-details-marker { display: none; }
+        details.grupo-ejercicios > summary .chevron-grupo { font-size: 1.15rem; color: #2563eb; transition: transform 0.3s ease; margin-left: auto; }
+        details.grupo-ejercicios[open] > summary .chevron-grupo { transform: rotate(180deg); }
+        details.grupo-ejercicios > summary .badge-grupo { background: #dbeafe; padding: 0.15rem 0.8rem; border-radius: 40px; font-size: 0.8rem; color: #1e40af; display: inline-flex; align-items: center; gap: 5px; font-weight: 600; }
+        details.grupo-ejercicios > .contenido-grupo { padding: 0.4rem 0.6rem 1rem 0.6rem; border-top: 1px solid #e2e8f0; margin-top: 0.3rem; }
+
+        .regla-tabla td:first-child { font-weight: 600; color: #2d3748; width: 45%; }
+
+        /* Caja de comprobación de carga */
+        .comprobacion {
+            background: #e6fffa;
+            border: 2px solid #38b2ac;
+            border-left: 6px solid #319795;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 12px 0 4px 0;
+            font-size: 0.95em;
+        }
+        .comprobacion .titulo-check {
+            font-weight: 700;
+            color: #234e52;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .comprobacion .linea {
+            margin: 4px 0;
+            color: #285e61;
+        }
+        .comprobacion .resultado-check {
+            margin-top: 8px;
+            padding: 6px 12px;
+            background: #c6f6d5;
+            border-radius: 6px;
+            font-weight: 700;
+            color: #22543d;
+            display: inline-block;
+        }
+
+        /* NUEVO: etiquetas de paso con color y formato diferente a los círculos */
+        .etiqueta-paso {
+            display: inline-block;
+            background: #fde68a;
+            color: #92400e;
+            font-weight: 800;
+            font-size: 0.7em;
+            padding: 2px 12px;
+            border-radius: 4px;
+            letter-spacing: 0.8px;
+            margin-right: 8px;
+            text-transform: uppercase;
+            border: 1px solid #f59e0b;
+            vertical-align: middle;
+        }
+
+        .hl-rojo    { color: #c53030; font-weight: 800; }
+        .hl-azul    { color: #2b6cb0; font-weight: 800; }
+        .hl-verde   { color: #276749; font-weight: 800; }
+        .hl-naranja { color: #c05621; font-weight: 800; }
+        .hl-morado  { color: #6b46c1; font-weight: 800; }
+        .hl-rosa    { color: #b83280; font-weight: 800; }
+        .hl-teal    { color: #0f766e; font-weight: 800; }
+        .hl-amarillo{ color: #b7791f; font-weight: 800; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto" alt="Cápsula">
+                <span class="codigo">#T08.01b.- </span>
+                <span class="texto">Redox: Número de oxidación</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- PROCEDIMIENTO: NÚMERO DE OXIDACIÓN -->
+    <div class="section procedimiento">
+        <h2>🔧 Número de oxidación</h2>
+
+        <!-- PASO 1: INFO MÍNIMA -->
+        <details class="step-desplegable">
+            <summary>
+                <span class="step-num">1</span>
+                <span class="titulo-paso">Información mínima: <span class="hl-morado">reglas del número de oxidación</span></span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>Para calcular el n.o. de un elemento dentro de un compuesto solo necesitas estas reglas, aplicadas <strong>en orden de prioridad</strong>:</p>
+                <table class="regla-tabla">
+                    <thead>
+                        <tr><th>Situación</th><th>Número de oxidación</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Elemento en estado libre (sin combinar)</td><td>\(0\) &nbsp;(ej.: \( \mathrm{O_2} \), \( \mathrm{Fe} \), \( \mathrm{Cl_2} \))</td></tr>
+                        <tr><td>Ion monoatómico</td><td>Igual a la carga del ion (ej.: \( \mathrm{Na^+} \rightarrow +1 \); \( \mathrm{Cl^-} \rightarrow -1 \))</td></tr>
+                        <tr><td>Oxígeno (en general)</td><td>\(-2\) (excepto peróxidos: \(-1\); con flúor: \(+2\))</td></tr>
+                        <tr><td>Hidrógeno (en general)</td><td>\(+1\) (excepto en hidruros metálicos: \(-1\))</td></tr>
+                        <tr><td>Metales alcalinos (Li, Na, K, Rb, Cs)</td><td>\(+1\)</td></tr>
+                        <tr><td>Metales alcalinotérreos (Be, Mg, Ca, Sr, Ba)</td><td>\(+2\)</td></tr>
+                        <tr><td>Flúor</td><td>\(-1\) (siempre)</td></tr>
+                        <tr><td>Suma de n.o. en un compuesto neutro</td><td>\(= 0\)</td></tr>
+                        <tr><td>Suma de n.o. en un ion poliatómico</td><td>\(=\) carga del ion</td></tr>
+                    </tbody>
+                </table>
+                <div class="note">
+                    <strong>💡 Estrategia:</strong> Empieza siempre por los elementos con regla fija (O, H, metales) y deja el elemento incógnita para el final, despejándolo de la suma total.
+                </div>
+            </div>
+        </details>
+
+        <!-- PASO 2: 20 EJEMPLOS -->
+        <details class="step-desplegable">
+            <summary>
+                <span class="step-num">2</span>
+                <span class="titulo-paso"><span class="hl-verde">20 ejemplos resueltos</span> paso a paso con <span class="hl-teal">comprobación de carga total = 0</span></span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>Cada ejemplo se resuelve en <strong>3 pasos</strong>: (1) identificar los n.o. fijos, (2) plantear y despejar la incógnita (o el elemento "difícil" a partir del "fácil"), y (3) <strong>comprobar que la suma total de cargas es CERO</strong>. Pulsa en cada compuesto para ver su resolución completa.</p>
+
+                <!-- GRUPO: COMPUESTOS BINARIOS -->
+                <details class="grupo-ejercicios">
+                    <summary>
+                        <i class="fas fa-cube" style="color:#2b6cb0;"></i>
+                        <span>🔵 Compuestos binarios (10 ejemplos)</span>
+                        <span class="badge-grupo">10</span>
+                        <i class="fas fa-chevron-down chevron-grupo"></i>
+                    </summary>
+                    <div class="contenido-grupo">
+
+                        <!-- EJEMPLO 1 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">1</span><span class="titulo-paso">NaCl (cloruro de sodio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> Na es metal alcalino → \( \mathrm{Na} = +1 \).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( (+1) + x = 0 \Rightarrow x = -1 \). Así, \( \mathrm{Cl} = -1 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del Na: \( 1 \times (+1) = +1 \)</div>
+                                    <div class="linea">Aportación del Cl: \( 1 \times (-1) = -1 \)</div>
+                                    <div class="linea">Suma total: \( (+1) + (-1) = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 2 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">2</span><span class="titulo-paso">MgO (óxido de magnesio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fáciles:</strong> Mg es alcalinotérreo → \( \mathrm{Mg} = +2 \). Sabemos que el O es \(-2\), pero vamos a calcularlo a partir del Mg para practicar el despeje.</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( (+2) + x = 0 \Rightarrow x = -2 \). Así, \( \mathrm{O} = -2 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del Mg: \( 1 \times (+2) = +2 \)</div>
+                                    <div class="linea">Aportación del O: \( 1 \times (-2) = -2 \)</div>
+                                    <div class="linea">Suma total: \( (+2) + (-2) = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 3 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">3</span><span class="titulo-paso">Fe₂O₃ (óxido de hierro(III))</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> O → \(-2\) (×3 = \(-6\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 2x + (-6) = 0 \Rightarrow 2x = +6 \Rightarrow x = +3 \). Así, \( \mathrm{Fe} = +3 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del Fe: \( 2 \times (+3) = +6 \)</div>
+                                    <div class="linea">Aportación del O: \( 3 \times (-2) = -6 \)</div>
+                                    <div class="linea">Suma total: \( (+6) + (-6) = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 4 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">4</span><span class="titulo-paso">CaCl₂ (cloruro de calcio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> Ca es alcalinotérreo → \(+2\).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( (+2) + 2x = 0 \Rightarrow 2x = -2 \Rightarrow x = -1 \). Así, \( \mathrm{Cl} = -1 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del Ca: \( 1 \times (+2) = +2 \)</div>
+                                    <div class="linea">Aportación del Cl: \( 2 \times (-1) = -2 \)</div>
+                                    <div class="linea">Suma total: \( (+2) + (-2) = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 5 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">5</span><span class="titulo-paso">H₂O (agua)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fáciles:</strong> H → \(+1\) (×2 = \(+2\)). Sabemos que el O es \(-2\), pero vamos a calcularlo a partir del H para practicar el despeje.</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 2(+1) + x = 0 \Rightarrow +2 + x = 0 \Rightarrow x = -2 \). Así, \( \mathrm{O} = -2 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del H: \( 2 \times (+1) = +2 \)</div>
+                                    <div class="linea">Aportación del O: \( 1 \times (-2) = -2 \)</div>
+                                    <div class="linea">Suma total: \( (+2) + (-2) = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 6 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">6</span><span class="titulo-paso">NH₃ (amoníaco)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> H → \(+1\) (×3 = \(+3\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( x + 3(+1) = 0 \Rightarrow x + 3 = 0 \Rightarrow x = -3 \). Así, \( \mathrm{N} = -3 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del N: \( 1 \times (-3) = -3 \)</div>
+                                    <div class="linea">Aportación del H: \( 3 \times (+1) = +3 \)</div>
+                                    <div class="linea">Suma total: \( (-3) + (+3) = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 7 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">7</span><span class="titulo-paso">Al₂O₃ (óxido de aluminio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> O → \(-2\) (×3 = \(-6\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 2x + (-6) = 0 \Rightarrow 2x = +6 \Rightarrow x = +3 \). Así, \( \mathrm{Al} = +3 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del Al: \( 2 \times (+3) = +6 \)</div>
+                                    <div class="linea">Aportación del O: \( 3 \times (-2) = -6 \)</div>
+                                    <div class="linea">Suma total: \( (+6) + (-6) = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 8 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">8</span><span class="titulo-paso">Cu₂O (óxido de cobre(I))</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> O → \(-2\).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 2x + (-2) = 0 \Rightarrow 2x = +2 \Rightarrow x = +1 \). Así, \( \mathrm{Cu} = +1 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del Cu: \( 2 \times (+1) = +2 \)</div>
+                                    <div class="linea">Aportación del O: \( 1 \times (-2) = -2 \)</div>
+                                    <div class="linea">Suma total: \( (+2) + (-2) = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 9 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">9</span><span class="titulo-paso">SO₂ (dióxido de azufre)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> O → \(-2\) (×2 = \(-4\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( x + (-4) = 0 \Rightarrow x = +4 \). Así, \( \mathrm{S} = +4 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del S: \( 1 \times (+4) = +4 \)</div>
+                                    <div class="linea">Aportación del O: \( 2 \times (-2) = -4 \)</div>
+                                    <div class="linea">Suma total: \( (+4) + (-4) = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 10 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">10</span><span class="titulo-paso">KBr (bromuro de potasio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> K es alcalino → \(+1\).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( (+1) + x = 0 \Rightarrow x = -1 \). Así, \( \mathrm{Br} = -1 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del K: \( 1 \times (+1) = +1 \)</div>
+                                    <div class="linea">Aportación del Br: \( 1 \times (-1) = -1 \)</div>
+                                    <div class="linea">Suma total: \( (+1) + (-1) = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                    </div>
+                </details>
+
+                <!-- GRUPO: COMPUESTOS TERNARIOS -->
+                <details class="grupo-ejercicios">
+                    <summary>
+                        <i class="fas fa-cubes" style="color:#276749;"></i>
+                        <span>🟢 Compuestos ternarios (10 ejemplos)</span>
+                        <span class="badge-grupo">10</span>
+                        <i class="fas fa-chevron-down chevron-grupo"></i>
+                    </summary>
+                    <div class="contenido-grupo">
+
+                        <!-- EJEMPLO 11 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">11</span><span class="titulo-paso">H₂SO₄ (ácido sulfúrico)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> H → \(+1\) (×2 = \(+2\)). O → \(-2\) (×4 = \(-8\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 2(+1) + x + 4(-2) = 0 \Rightarrow +2 + x - 8 = 0 \Rightarrow x = +6 \). Así, \( \mathrm{S} = +6 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del H: \( 2 \times (+1) = +2 \)</div>
+                                    <div class="linea">Aportación del S: \( 1 \times (+6) = +6 \)</div>
+                                    <div class="linea">Aportación del O: \( 4 \times (-2) = -8 \)</div>
+                                    <div class="linea">Suma total: \( (+2) + (+6) + (-8) = +8 - 8 = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 12 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">12</span><span class="titulo-paso">KMnO₄ (permanganato de potasio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> K → \(+1\). O → \(-2\) (×4 = \(-8\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 1 + x - 8 = 0 \Rightarrow x = +7 \). Así, \( \mathrm{Mn} = +7 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del K: \( 1 \times (+1) = +1 \)</div>
+                                    <div class="linea">Aportación del Mn: \( 1 \times (+7) = +7 \)</div>
+                                    <div class="linea">Aportación del O: \( 4 \times (-2) = -8 \)</div>
+                                    <div class="linea">Suma total: \( (+1) + (+7) + (-8) = +8 - 8 = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 13 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">13</span><span class="titulo-paso">HNO₃ (ácido nítrico)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> H → \(+1\). O → \(-2\) (×3 = \(-6\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 1 + x - 6 = 0 \Rightarrow x = +5 \). Así, \( \mathrm{N} = +5 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del H: \( 1 \times (+1) = +1 \)</div>
+                                    <div class="linea">Aportación del N: \( 1 \times (+5) = +5 \)</div>
+                                    <div class="linea">Aportación del O: \( 3 \times (-2) = -6 \)</div>
+                                    <div class="linea">Suma total: \( (+1) + (+5) + (-6) = +6 - 6 = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 14 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">14</span><span class="titulo-paso">H₂CO₃ (ácido carbónico)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> H → \(+1\) (×2 = \(+2\)). O → \(-2\) (×3 = \(-6\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 2 + x - 6 = 0 \Rightarrow x = +4 \). Así, \( \mathrm{C} = +4 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del H: \( 2 \times (+1) = +2 \)</div>
+                                    <div class="linea">Aportación del C: \( 1 \times (+4) = +4 \)</div>
+                                    <div class="linea">Aportación del O: \( 3 \times (-2) = -6 \)</div>
+                                    <div class="linea">Suma total: \( (+2) + (+4) + (-6) = +6 - 6 = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 15 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">15</span><span class="titulo-paso">K₂Cr₂O₇ (dicromato de potasio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> K → \(+1\) (×2 = \(+2\)). O → \(-2\) (×7 = \(-14\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 2 + 2x - 14 = 0 \Rightarrow 2x = +12 \Rightarrow x = +6 \). Así, \( \mathrm{Cr} = +6 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del K: \( 2 \times (+1) = +2 \)</div>
+                                    <div class="linea">Aportación del Cr: \( 2 \times (+6) = +12 \)</div>
+                                    <div class="linea">Aportación del O: \( 7 \times (-2) = -14 \)</div>
+                                    <div class="linea">Suma total: \( (+2) + (+12) + (-14) = +14 - 14 = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 16 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">16</span><span class="titulo-paso">NaOH (hidróxido de sodio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> Na → \(+1\). O → \(-2\).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 1 + (-2) + x = 0 \Rightarrow -1 + x = 0 \Rightarrow x = +1 \). Así, \( \mathrm{H} = +1 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del Na: \( 1 \times (+1) = +1 \)</div>
+                                    <div class="linea">Aportación del O: \( 1 \times (-2) = -2 \)</div>
+                                    <div class="linea">Aportación del H: \( 1 \times (+1) = +1 \)</div>
+                                    <div class="linea">Suma total: \( (+1) + (-2) + (+1) = +2 - 2 = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 17 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">17</span><span class="titulo-paso">CaCO₃ (carbonato de calcio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> Ca → \(+2\). O → \(-2\) (×3 = \(-6\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 2 + x - 6 = 0 \Rightarrow x = +4 \). Así, \( \mathrm{C} = +4 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del Ca: \( 1 \times (+2) = +2 \)</div>
+                                    <div class="linea">Aportación del C: \( 1 \times (+4) = +4 \)</div>
+                                    <div class="linea">Aportación del O: \( 3 \times (-2) = -6 \)</div>
+                                    <div class="linea">Suma total: \( (+2) + (+4) + (-6) = +6 - 6 = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 18 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">18</span><span class="titulo-paso">Na₂SO₄ (sulfato de sodio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> Na → \(+1\) (×2 = \(+2\)). O → \(-2\) (×4 = \(-8\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 2 + x - 8 = 0 \Rightarrow x = +6 \). Así, \( \mathrm{S} = +6 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del Na: \( 2 \times (+1) = +2 \)</div>
+                                    <div class="linea">Aportación del S: \( 1 \times (+6) = +6 \)</div>
+                                    <div class="linea">Aportación del O: \( 4 \times (-2) = -8 \)</div>
+                                    <div class="linea">Suma total: \( (+2) + (+6) + (-8) = +8 - 8 = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 19 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">19</span><span class="titulo-paso">Fe(NO₃)₃ (nitrato de hierro(III))</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> Fe → \(+3\) (es un ion \(\mathrm{Fe^{3+}}\)). O → \(-2\) (×9 = \(-18\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 3 + 3x - 18 = 0 \Rightarrow 3x = +15 \Rightarrow x = +5 \). Así, \( \mathrm{N} = +5 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del Fe: \( 1 \times (+3) = +3 \)</div>
+                                    <div class="linea">Aportación del N: \( 3 \times (+5) = +15 \)</div>
+                                    <div class="linea">Aportación del O: \( 9 \times (-2) = -18 \)</div>
+                                    <div class="linea">Suma total: \( (+3) + (+15) + (-18) = +18 - 18 = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- EJEMPLO 20 -->
+                        <details class="step-ejemplo">
+                            <summary><span class="step-num">20</span><span class="titulo-paso">K₃PO₄ (fosfato de potasio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                            <div class="contenido-paso">
+                                <p><span class="etiqueta-paso">Paso 1</span> <strong>N.o. fijos:</strong> K → \(+1\) (×3 = \(+3\)). O → \(-2\) (×4 = \(-8\)).</p>
+                                <p><span class="etiqueta-paso">Paso 2</span> <strong>Ecuación:</strong> \( 3 + x - 8 = 0 \Rightarrow x = +5 \). Así, \( \mathrm{P} = +5 \).</p>
+                                <div class="comprobacion">
+                                    <div class="titulo-check"><i class="fas fa-check-circle"></i> Comprobación de carga total</div>
+                                    <div class="linea">Aportación del K: \( 3 \times (+1) = +3 \)</div>
+                                    <div class="linea">Aportación del P: \( 1 \times (+5) = +5 \)</div>
+                                    <div class="linea">Aportación del O: \( 4 \times (-2) = -8 \)</div>
+                                    <div class="linea">Suma total: \( (+3) + (+5) + (-8) = +8 - 8 = 0 \)</div>
+                                    <div class="resultado-check">✔ Carga total = 0 → compuesto neutro correcto</div>
+                                </div>
+                            </div>
+                        </details>
+
+                    </div>
+                </details>
+
+                <div class="note">
+                    <strong>💡 También útil para iones:</strong> la suma de n.o. debe ser igual a la <em>carga del ion</em>. Ejemplos rápidos:
+                    <ul style="margin:6px 0 0 0;">
+                        <li>\( \mathrm{NO_3^-} \): \( x + 3(-2) = -1 \Rightarrow x = +5 \). Comprobación: \( (+5) + 3(-2) = +5 - 6 = -1 \) ✔ (coincide con la carga).</li>
+                        <li>\( \mathrm{SO_4^{2-}} \): \( x + 4(-2) = -2 \Rightarrow x = +6 \). Comprobación: \( (+6) + 4(-2) = +6 - 8 = -2 \) ✔.</li>
+                        <li>\( \mathrm{PO_4^{3-}} \): \( x + 4(-2) = -3 \Rightarrow x = +5 \). Comprobación: \( (+5) + 4(-2) = +5 - 8 = -3 \) ✔.</li>
+                        <li>\( \mathrm{NH_4^+} \): \( x + 4(+1) = +1 \Rightarrow x = -3 \). Comprobación: \( (-3) + 4(+1) = -3 + 4 = +1 \) ✔.</li>
+                    </ul>
+                </div>
+            </div>
+        </details>
+
+    </div>
+</div>
+</body>
+</html>

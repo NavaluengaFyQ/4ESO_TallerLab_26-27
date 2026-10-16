@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T08.01c. Redox: Identificación de reacciones redox</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .container { max-width: 900px; width: 100%; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; margin: 20px auto; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .header-left { display: flex; flex-direction: column; justify-content: center; }
+        .header-left h1 { font-size: 1.8em; margin: 0; }
+        .header-sub { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+        .header-sub img { max-height: 28px; width: auto; border-radius: 4px; background: white; padding: 2px; }
+        .header-sub .codigo { font-weight: 700; font-size: 1.1em; }
+        .header-sub .texto { font-size: 1.1em; }
+        .header-right img { max-height: 70px; max-width: 180px; object-fit: contain; display: block; }
+
+        .section { padding: 25px 30px; margin: 15px; border-radius: 12px; border-left: 5px solid; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .section h2 { font-size: 1.3em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .procedimiento h2 { color: #276749; }
+        .formula-box { background: #edf2f7; border: 2px solid #cbd5e0; border-radius: 10px; padding: 15px; margin: 15px 0; text-align: center; font-size: 1.1em; }
+        .note { background: #fffbeb; border: 1px solid #f6e05e; border-radius: 8px; padding: 12px; margin-top: 15px; font-size: 0.95em; color: #744210; }
+        p { line-height: 1.7; margin-bottom: 10px; }
+        ul, ol { padding-left: 25px; line-height: 1.7; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #cbd5e0; padding: 8px 12px; text-align: left; }
+        th { background: #edf2f7; }
+
+        /* Desplegable de paso */
+        details.step-desplegable { background: white; border-left: 4px solid #48bb78; border-radius: 0 8px 8px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.06); margin: 12px 0; transition: box-shadow 0.3s ease; padding: 0; }
+        details.step-desplegable[open] { box-shadow: 0 4px 14px rgba(72,187,120,0.18); }
+        details.step-desplegable > summary { list-style: none; cursor: pointer; padding: 14px 18px; display: flex; align-items: center; gap: 12px; font-weight: 600; color: #22543d; user-select: none; border-radius: 0 8px 8px 0; transition: background 0.2s ease; }
+        details.step-desplegable > summary:hover { background: #f0fff4; }
+        details.step-desplegable > summary::-webkit-details-marker { display: none; }
+        details.step-desplegable > summary .chevron { margin-left: auto; font-size: 0.95rem; color: #48bb78; transition: transform 0.3s ease; }
+        details.step-desplegable[open] > summary .chevron { transform: rotate(180deg); }
+        details.step-desplegable > summary .step-num { display: inline-flex; align-items: center; justify-content: center; background: #48bb78; color: white; width: 30px; height: 30px; min-width: 30px; border-radius: 50%; font-weight: bold; font-size: 0.95em; margin: 0; }
+        details.step-desplegable > summary .titulo-paso { flex: 1; font-size: 1em; color: #22543d; }
+        details.step-desplegable .contenido-paso { padding: 6px 22px 20px 22px; border-top: 1px solid #e6fffa; margin-top: 0; }
+
+        /* Desplegable de grupo */
+        details.grupo-ejercicios { margin: 20px 0; background: #f8fafc; border-radius: 16px; border: 2px solid #dbeafe; padding: 0.3rem 0.3rem 0.3rem 1rem; transition: all 0.3s ease; }
+        details.grupo-ejercicios[open] { background: #ffffff; border-color: #60a5fa; box-shadow: 0 4px 14px rgba(59,130,246,0.10); }
+        details.grupo-ejercicios > summary { list-style: none; cursor: pointer; font-size: 1.2rem; font-weight: 700; color: #1e3a8a; padding: 0.9rem 0.8rem 0.9rem 0; display: flex; align-items: center; gap: 12px; user-select: none; }
+        details.grupo-ejercicios > summary::-webkit-details-marker { display: none; }
+        details.grupo-ejercicios > summary .chevron-grupo { font-size: 1.15rem; color: #2563eb; transition: transform 0.3s ease; margin-left: auto; }
+        details.grupo-ejercicios[open] > summary .chevron-grupo { transform: rotate(180deg); }
+        details.grupo-ejercicios > summary .badge-grupo { background: #dbeafe; padding: 0.15rem 0.8rem; border-radius: 40px; font-size: 0.8rem; color: #1e40af; display: inline-flex; align-items: center; gap: 5px; font-weight: 600; }
+        details.grupo-ejercicios > .contenido-grupo { padding: 0.4rem 0.6rem 1rem 0.6rem; border-top: 1px solid #e2e8f0; margin-top: 0.3rem; }
+
+        /* Desplegable de tarjeta-ejercicio */
+        details.tarjeta-ejercicio { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 18px; padding: 0; margin-bottom: 1.1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.03); overflow: hidden; transition: box-shadow 0.3s ease; }
+        details.tarjeta-ejercicio[open] { box-shadow: 0 6px 18px rgba(37,99,235,0.10); border-color: #bfdbfe; }
+        details.tarjeta-ejercicio > summary.cabecera-ej { list-style: none; cursor: pointer; padding: 1rem 1.6rem; display: flex; align-items: center; gap: 12px; border-bottom: 2px dashed #bfdbfe; user-select: none; transition: background 0.2s ease; }
+        details.tarjeta-ejercicio > summary.cabecera-ej:hover { background: #f0f7ff; }
+        details.tarjeta-ejercicio > summary::-webkit-details-marker { display: none; }
+        details.tarjeta-ejercicio > summary .chevron-ej { margin-left: auto; font-size: 1rem; color: #2563eb; transition: transform 0.3s ease; }
+        details.tarjeta-ejercicio[open] > summary .chevron-ej { transform: rotate(180deg); }
+        details.tarjeta-ejercicio .cuerpo-ej { padding: 1rem 1.6rem 1.4rem 1.6rem; }
+        details.tarjeta-ejercicio > summary .num-ej { background: #2563eb; color: white; font-weight: 700; padding: 0.2rem 0.9rem; border-radius: 40px; font-size: 0.85rem; white-space: nowrap; }
+        details.tarjeta-ejercicio > summary .titulo-ej { font-weight: 600; font-size: 1.05rem; color: #0b1e33; }
+
+        .enunciado-ej { margin-bottom: 1rem; background: #f9fafb; padding: 0.8rem 1.2rem; border-radius: 12px; border-left: 4px solid #94a3b8; }
+        .resolucion-ej { background: #f1f5f9; padding: 1.2rem 1.5rem; border-radius: 16px; border: 1px solid #cbd5e1; font-size: 0.98rem; }
+        .resolucion-ej .paso { margin: 0.6rem 0; }
+        .resolucion-ej .paso strong { color: #1e40af; }
+        .pie-clave { margin-top: 1.8rem; padding: 1rem 1.8rem; background: #eef2ff; border-radius: 40px; border-left: 6px solid #3b82f6; font-weight: 500; color: #1e3a8a; display: flex; align-items: center; gap: 12px; }
+        .pie-clave i { font-size: 1.6rem; color: #2563eb; }
+
+        .truco { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px dashed #d97706; border-radius: 12px; padding: 14px 18px; margin: 16px 0; color: #78350f; }
+        .truco strong { color: #92400e; }
+
+        .tabla-resumen { font-size: 0.92em; margin-top: 14px; }
+        .tabla-resumen th { background: #1e3a8a; color: white; }
+        .tabla-resumen td { vertical-align: middle; }
+        .tag-ox { background: #fed7d7; color: #9b2c2c; padding: 2px 8px; border-radius: 20px; font-size: 0.85em; font-weight: 700; }
+        .tag-red { background: #bee3f8; color: #2a4365; padding: 2px 8px; border-radius: 20px; font-size: 0.85em; font-weight: 700; }
+        .tag-no { background: #e2e8f0; color: #4a5568; padding: 2px 8px; border-radius: 20px; font-size: 0.85em; font-weight: 700; }
+
+        /* Recuadro destacado de teoría mínima */
+        .recuadro-clave {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            color: white;
+            border-radius: 14px;
+            padding: 20px 26px;
+            margin: 18px 0;
+            box-shadow: 0 8px 20px rgba(37,99,235,0.25);
+        }
+        .recuadro-clave h3 { margin: 0 0 12px 0; font-size: 1.15em; display: flex; align-items: center; gap: 10px; color: #fef3c7; }
+        .recuadro-clave .regla-principal {
+            background: rgba(255,255,255,0.15);
+            border: 2px solid #fbbf24;
+            border-radius: 10px;
+            padding: 14px 18px;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-align: center;
+            margin: 12px 0;
+            color: #ffffff;
+        }
+        .recuadro-clave ul { margin: 8px 0; padding-left: 22px; line-height: 1.6; }
+        .recuadro-clave ul li { color: #e0e7ff; }
+        .recuadro-clave .formula-box { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.4); color: #ffffff; margin: 10px 0; }
+
+        .hl-rojo    { color: #c53030; font-weight: 800; }
+        .hl-azul    { color: #2b6cb0; font-weight: 800; }
+        .hl-verde   { color: #276749; font-weight: 800; }
+        .hl-naranja { color: #c05621; font-weight: 800; }
+        .hl-morado  { color: #6b46c1; font-weight: 800; }
+        .hl-rosa    { color: #b83280; font-weight: 800; }
+        .hl-teal    { color: #0f766e; font-weight: 800; }
+        .hl-amarillo{ color: #b7791f; font-weight: 800; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto" alt="Cápsula">
+                <span class="codigo">#T08.01c.- </span>
+                <span class="texto">Redox: Identificación de reacciones redox</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>🔧 Identificación de reacciones redox</h2>
+
+        <!-- TEORÍA MÍNIMA EN RECUADRO -->
+        <div class="recuadro-clave">
+            <h3>📌 Teoría mínima necesaria</h3>
+
+            <div class="regla-principal">
+                Una reacción es <span style="color:#fbbf24;">REDOX</span> ⟺ algún número de oxidación <span style="color:#fbbf24;">CAMBIA</span> entre reactivos y productos.
+            </div>
+
+            <p style="margin: 12px 0 6px 0; color:#e0e7ff;">Recuerda las dos definiciones clave:</p>
+            <ul>
+                <li><strong style="color:#fca5a5;">OXIDACIÓN:</strong> el n.o. <em>aumenta</em> → el elemento <strong>PIERDE</strong> electrones.</li>
+                <li><strong style="color:#93c5fd;">REDUCCIÓN:</strong> el n.o. <em>disminuye</em> → el elemento <strong>GANA</strong> electrones.</li>
+            </ul>
+
+            <p style="margin: 12px 0 6px 0; color:#e0e7ff;">Y las dos identidades (¡ojo, son "cruzadas"!):</p>
+            <ul>
+                <li>El que <strong>pierde</strong> e⁻ es el <strong style="color:#fca5a5;">REDUCTOR</strong> (se oxida).</li>
+                <li>El que <strong>gana</strong> e⁻ es el <strong style="color:#93c5fd;">OXIDANTE</strong> (se reduce).</li>
+            </ul>
+
+            <div class="formula-box">
+                \[ \text{Nº e}^-\text{ transferidos} = |\text{n.o. final} - \text{n.o. inicial}| \]
+            </div>
+
+            <p style="margin: 10px 0 0 0; color:#e0e7ff; font-size:0.95em;">
+                <strong>Método en 4 pasos:</strong> (1) calcula n.o. de cada elemento en reactivos y productos; (2) compara si sube o baja; (3) identifica oxidante/reductor; (4) comprueba que los e⁻ perdidos = e⁻ ganados.
+            </p>
+        </div>
+
+        <!-- 10 EJERCICIOS REDOX -->
+        <details class="grupo-ejercicios">
+            <summary>
+                <i class="fas fa-fire" style="color:#c53030;"></i>
+                <span>🔴 10 Ejercicios de REDOX resueltos</span>
+                <span class="badge-grupo">10</span>
+                <i class="fas fa-chevron-down chevron-grupo"></i>
+            </summary>
+            <div class="contenido-grupo">
+
+                <!-- EJERCICIO REDOX 1 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej">Redox 1</span>
+                        <span class="titulo-ej">Zn + CuSO₄ → ZnSO₄ + Cu</span>
+                        <i class="fas fa-chevron-down chevron-ej"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <p>Indica: n.o. inicial y final de cada elemento que cambia, si pierde o gana electrones, si es oxidante o reductor y en qué proceso participa.</p>
+                            <div class="formula-box">\[ \mathrm{Zn + CuSO_4 \longrightarrow ZnSO_4 + Cu} \]</div>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso"><strong>1)</strong> Reactivos: Zn = 0; CuSO₄ → Cu = +2, S = +6, O = −2.</div>
+                            <div class="paso">Productos: ZnSO₄ → Zn = +2, S = +6, O = −2; Cu = 0.</div>
+                            <div class="paso"><strong>2)</strong> Zn: 0 → +2 (sube, pierde 2 e⁻). Cu: +2 → 0 (baja, gana 2 e⁻). S y O no cambian.</div>
+                            <div class="paso"><strong>3)</strong> Zn pierde e⁻ → se oxida → <strong>reductor</strong>. Cu gana e⁻ → se reduce → <strong>oxidante</strong>.</div>
+                            <div class="paso"><strong>4)</strong> 2 e⁻ perdidos = 2 e⁻ ganados ✔</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Gana o pierde e⁻?</th><th>¿Oxidante o reductor?</th><th>Participa en...</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Zn</td><td>0</td><td>+2</td><td>Pierde 2 e⁻</td><td>Reductor</td><td><span class="tag-ox">Oxidación</span></td></tr>
+                                    <tr><td>Cu</td><td>+2</td><td>0</td><td>Gana 2 e⁻</td><td>Oxidante</td><td><span class="tag-red">Reducción</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO REDOX 2 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej">Redox 2</span>
+                        <span class="titulo-ej">2 Al + 3 Cl₂ → 2 AlCl₃</span>
+                        <i class="fas fa-chevron-down chevron-ej"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{2\,Al + 3\,Cl_2 \longrightarrow 2\,AlCl_3} \]</div>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">Reactivos: Al = 0; Cl₂ = 0. Productos: AlCl₃ → Al = +3, Cl = −1.</div>
+                            <div class="paso">Al: 0 → +3 (pierde 3 e⁻) → oxidación → <strong>reductor</strong>.</div>
+                            <div class="paso">Cl: 0 → −1 (gana 1 e⁻ por átomo) → reducción → <strong>oxidante</strong>.</div>
+                            <div class="paso">Comprobación: 2 Al × 3 e⁻ = 6 e⁻; 3 Cl₂ × 2 Cl × 1 e⁻ = 6 e⁻. ✔</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Gana o pierde e⁻?</th><th>¿Oxidante o reductor?</th><th>Participa en...</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Al</td><td>0</td><td>+3</td><td>Pierde 3 e⁻ (cada uno)</td><td>Reductor</td><td><span class="tag-ox">Oxidación</span></td></tr>
+                                    <tr><td>Cl</td><td>0</td><td>−1</td><td>Gana 1 e⁻ (cada uno)</td><td>Oxidante</td><td><span class="tag-red">Reducción</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO REDOX 3 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej">Redox 3</span>
+                        <span class="titulo-ej">Fe + 2 HCl → FeCl₂ + H₂</span>
+                        <i class="fas fa-chevron-down chevron-ej"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{Fe + 2\,HCl \longrightarrow FeCl_2 + H_2} \]</div>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">Reactivos: Fe = 0; HCl → H = +1, Cl = −1. Productos: FeCl₂ → Fe = +2, Cl = −1; H₂ = 0.</div>
+                            <div class="paso">Fe: 0 → +2 (pierde 2 e⁻) → oxidación → <strong>reductor</strong>.</div>
+                            <div class="paso">H: +1 → 0 (gana 1 e⁻ por átomo) → reducción → <strong>oxidante</strong>.</div>
+                            <div class="paso">Cl no cambia (sigue en −1).</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Gana o pierde e⁻?</th><th>¿Oxidante o reductor?</th><th>Participa en...</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Fe</td><td>0</td><td>+2</td><td>Pierde 2 e⁻</td><td>Reductor</td><td><span class="tag-ox">Oxidación</span></td></tr>
+                                    <tr><td>H</td><td>+1</td><td>0</td><td>Gana 1 e⁻ (cada uno)</td><td>Oxidante</td><td><span class="tag-red">Reducción</span></td></tr>
+                                    <tr><td>Cl</td><td>−1</td><td>−1</td><td>No cambia</td><td>—</td><td><span class="tag-no">No redox</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO REDOX 4 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej">Redox 4</span>
+                        <span class="titulo-ej">2 H₂ + O₂ → 2 H₂O</span>
+                        <i class="fas fa-chevron-down chevron-ej"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{2\,H_2 + O_2 \longrightarrow 2\,H_2O} \]</div>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">Reactivos: H₂ = 0; O₂ = 0. Productos: H₂O → H = +1, O = −2.</div>
+                            <div class="paso">H: 0 → +1 (pierde 1 e⁻ por átomo) → oxidación → <strong>reductor</strong>.</div>
+                            <div class="paso">O: 0 → −2 (gana 2 e⁻ por átomo) → reducción → <strong>oxidante</strong>.</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Gana o pierde e⁻?</th><th>¿Oxidante o reductor?</th><th>Participa en...</th></tr></thead>
+                                <tbody>
+                                    <tr><td>H</td><td>0</td><td>+1</td><td>Pierde 1 e⁻ (cada uno)</td><td>Reductor</td><td><span class="tag-ox">Oxidación</span></td></tr>
+                                    <tr><td>O</td><td>0</td><td>−2</td><td>Gana 2 e⁻ (cada uno)</td><td>Oxidante</td><td><span class="tag-red">Reducción</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO REDOX 5 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej">Redox 5</span>
+                        <span class="titulo-ej">Cu + 2 AgNO₃ → Cu(NO₃)₂ + 2 Ag</span>
+                        <i class="fas fa-chevron-down chevron-ej"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{Cu + 2\,AgNO_3 \longrightarrow Cu(NO_3)_2 + 2\,Ag} \]</div>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">Reactivos: Cu = 0; AgNO₃ → Ag = +1, N = +5, O = −2. Productos: Cu(NO₃)₂ → Cu = +2, N = +5, O = −2; Ag = 0.</div>
+                            <div class="paso">Cu: 0 → +2 (pierde 2 e⁻) → oxidación → <strong>reductor</strong>.</div>
+                            <div class="paso">Ag: +1 → 0 (gana 1 e⁻ por átomo) → reducción → <strong>oxidante</strong>.</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Gana o pierde e⁻?</th><th>¿Oxidante o reductor?</th><th>Participa en...</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Cu</td><td>0</td><td>+2</td><td>Pierde 2 e⁻</td><td>Reductor</td><td><span class="tag-ox">Oxidación</span></td></tr>
+                                    <tr><td>Ag</td><td>+1</td><td>0</td><td>Gana 1 e⁻ (cada uno)</td><td>Oxidante</td><td><span class="tag-red">Reducción</span></td></tr>
+                                    <tr><td>N</td><td>+5</td><td>+5</td><td>No cambia</td><td>—</td><td><span class="tag-no">No redox</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO REDOX 6 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej">Redox 6</span>
+                        <span class="titulo-ej">MnO₄⁻ + 5 Fe²⁺ + 8 H⁺ → Mn²⁺ + 5 Fe³⁺ + 4 H₂O</span>
+                        <i class="fas fa-chevron-down chevron-ej"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{MnO_4^- + 5\,Fe^{2+} + 8\,H^+ \longrightarrow Mn^{2+} + 5\,Fe^{3+} + 4\,H_2O} \]</div>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">Reactivos: MnO₄⁻ → Mn = +7, O = −2; Fe²⁺ = +2; H⁺ = +1. Productos: Mn²⁺ = +2; Fe³⁺ = +3; H₂O → H = +1, O = −2.</div>
+                            <div class="paso">Mn: +7 → +2 (gana 5 e⁻) → reducción → <strong>oxidante</strong>.</div>
+                            <div class="paso">Fe: +2 → +3 (pierde 1 e⁻) → oxidación → <strong>reductor</strong>.</div>
+                            <div class="paso">Comprobación: 1 Mn × 5 e⁻ = 5 e⁻; 5 Fe × 1 e⁻ = 5 e⁻. ✔</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Gana o pierde e⁻?</th><th>¿Oxidante o reductor?</th><th>Participa en...</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Mn</td><td>+7</td><td>+2</td><td>Gana 5 e⁻</td><td>Oxidante</td><td><span class="tag-red">Reducción</span></td></tr>
+                                    <tr><td>Fe</td><td>+2</td><td>+3</td><td>Pierde 1 e⁻ (cada uno)</td><td>Reductor</td><td><span class="tag-ox">Oxidación</span></td></tr>
+                                    <tr><td>O</td><td>−2</td><td>−2</td><td>No cambia</td><td>—</td><td><span class="tag-no">No redox</span></td></tr>
+                                    <tr><td>H</td><td>+1</td><td>+1</td><td>No cambia</td><td>—</td><td><span class="tag-no">No redox</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO REDOX 7 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej">Redox 7</span>
+                        <span class="titulo-ej">Cr₂O₇²⁻ + 6 Fe²⁺ + 14 H⁺ → 2 Cr³⁺ + 6 Fe³⁺ + 7 H₂O</span>
+                        <i class="fas fa-chevron-down chevron-ej"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{Cr_2O_7^{2-} + 6\,Fe^{2+} + 14\,H^+ \longrightarrow 2\,Cr^{3+} + 6\,Fe^{3+} + 7\,H_2O} \]</div>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">Reactivos: Cr₂O₇²⁻ → Cr = +6, O = −2; Fe²⁺ = +2; H⁺ = +1. Productos: Cr³⁺ = +3; Fe³⁺ = +3; H₂O → H = +1, O = −2.</div>
+                            <div class="paso">Cr: +6 → +3 (gana 3 e⁻ por átomo; 2 Cr → 6 e⁻) → reducción → <strong>oxidante</strong>.</div>
+                            <div class="paso">Fe: +2 → +3 (pierde 1 e⁻) → oxidación → <strong>reductor</strong>.</div>
+                            <div class="paso">Comprobación: 2 Cr × 3 e⁻ = 6 e⁻; 6 Fe × 1 e⁻ = 6 e⁻. ✔</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Gana o pierde e⁻?</th><th>¿Oxidante o reductor?</th><th>Participa en...</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Cr</td><td>+6</td><td>+3</td><td>Gana 3 e⁻ (cada uno)</td><td>Oxidante</td><td><span class="tag-red">Reducción</span></td></tr>
+                                    <tr><td>Fe</td><td>+2</td><td>+3</td><td>Pierde 1 e⁻ (cada uno)</td><td>Reductor</td><td><span class="tag-ox">Oxidación</span></td></tr>
+                                    <tr><td>O</td><td>−2</td><td>−2</td><td>No cambia</td><td>—</td><td><span class="tag-no">No redox</span></td></tr>
+                                    <tr><td>H</td><td>+1</td><td>+1</td><td>No cambia</td><td>—</td><td><span class="tag-no">No redox</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO REDOX 8 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej">Redox 8</span>
+                        <span class="titulo-ej">2 KClO₃ → 2 KCl + 3 O₂</span>
+                        <i class="fas fa-chevron-down chevron-ej"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{2\,KClO_3 \longrightarrow 2\,KCl + 3\,O_2} \]</div>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">Reactivos: KClO₃ → K = +1, Cl = +5, O = −2. Productos: KCl → K = +1, Cl = −1; O₂ = 0.</div>
+                            <div class="paso">Cl: +5 → −1 (gana 6 e⁻) → reducción → <strong>oxidante</strong>.</div>
+                            <div class="paso">O: −2 → 0 (pierde 2 e⁻ por átomo) → oxidación → <strong>reductor</strong>.</div>
+                            <div class="paso">Comprobación: 2 Cl × 6 e⁻ = 12 e⁻; 6 O × 2 e⁻ = 12 e⁻. ✔</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Gana o pierde e⁻?</th><th>¿Oxidante o reductor?</th><th>Participa en...</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Cl</td><td>+5</td><td>−1</td><td>Gana 6 e⁻ (cada uno)</td><td>Oxidante</td><td><span class="tag-red">Reducción</span></td></tr>
+                                    <tr><td>O</td><td>−2</td><td>0</td><td>Pierde 2 e⁻ (cada uno)</td><td>Reductor</td><td><span class="tag-ox">Oxidación</span></td></tr>
+                                    <tr><td>K</td><td>+1</td><td>+1</td><td>No cambia</td><td>—</td><td><span class="tag-no">No redox</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO REDOX 9 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej">Redox 9</span>
+                        <span class="titulo-ej">Cl₂ + 2 NaBr → 2 NaCl + Br₂</span>
+                        <i class="fas fa-chevron-down chevron-ej"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{Cl_2 + 2\,NaBr \longrightarrow 2\,NaCl + Br_2} \]</div>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">Reactivos: Cl₂ = 0; NaBr → Na = +1, Br = −1. Productos: NaCl → Na = +1, Cl = −1; Br₂ = 0.</div>
+                            <div class="paso">Cl: 0 → −1 (gana 1 e⁻ por átomo) → reducción → <strong>oxidante</strong>.</div>
+                            <div class="paso">Br: −1 → 0 (pierde 1 e⁻ por átomo) → oxidación → <strong>reductor</strong>.</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Gana o pierde e⁻?</th><th>¿Oxidante o reductor?</th><th>Participa en...</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Cl</td><td>0</td><td>−1</td><td>Gana 1 e⁻ (cada uno)</td><td>Oxidante</td><td><span class="tag-red">Reducción</span></td></tr>
+                                    <tr><td>Br</td><td>−1</td><td>0</td><td>Pierde 1 e⁻ (cada uno)</td><td>Reductor</td><td><span class="tag-ox">Oxidación</span></td></tr>
+                                    <tr><td>Na</td><td>+1</td><td>+1</td><td>No cambia</td><td>—</td><td><span class="tag-no">No redox</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO REDOX 10 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej">Redox 10</span>
+                        <span class="titulo-ej">2 Na + Cl₂ → 2 NaCl</span>
+                        <i class="fas fa-chevron-down chevron-ej"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{2\,Na + Cl_2 \longrightarrow 2\,NaCl} \]</div>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">Reactivos: Na = 0; Cl₂ = 0. Productos: NaCl → Na = +1, Cl = −1.</div>
+                            <div class="paso">Na: 0 → +1 (pierde 1 e⁻) → oxidación → <strong>reductor</strong>.</div>
+                            <div class="paso">Cl: 0 → −1 (gana 1 e⁻ por átomo) → reducción → <strong>oxidante</strong>.</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Gana o pierde e⁻?</th><th>¿Oxidante o reductor?</th><th>Participa en...</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Na</td><td>0</td><td>+1</td><td>Pierde 1 e⁻ (cada uno)</td><td>Reductor</td><td><span class="tag-ox">Oxidación</span></td></tr>
+                                    <tr><td>Cl</td><td>0</td><td>−1</td><td>Gana 1 e⁻ (cada uno)</td><td>Oxidante</td><td><span class="tag-red">Reducción</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </details>
+
+            </div>
+        </details>
+
+        <!-- 5 EJERCICIOS NO REDOX -->
+        <details class="grupo-ejercicios" style="border-color:#ddd6fe; background:#faf5ff;">
+            <summary>
+                <i class="fas fa-ban" style="color:#6b46c1;"></i>
+                <span style="color:#4c1d95;">🟣 5 Ejercicios de reacciones NO REDOX</span>
+                <span class="badge-grupo" style="background:#ede9fe; color:#4c1d95;">5</span>
+                <i class="fas fa-chevron-down chevron-grupo" style="color:#7c3aed;"></i>
+            </summary>
+            <div class="contenido-grupo">
+                <p style="margin-bottom: 16px; padding: 8px 4px;">En estas reacciones <strong>ningún</strong> número de oxidación cambia entre reactivos y productos. Por tanto, <strong>no hay transferencia de electrones</strong> y no son redox.</p>
+
+                <!-- EJERCICIO NO REDOX 1 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej" style="background:#6b46c1;">No Redox 1</span>
+                        <span class="titulo-ej">NaOH + HCl → NaCl + H₂O</span>
+                        <i class="fas fa-chevron-down chevron-ej" style="color:#6b46c1;"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{NaOH + HCl \longrightarrow NaCl + H_2O} \]</div>
+                            <p>Reacción ácido-base (neutralización).</p>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">NaOH → Na = +1, O = −2, H = +1. HCl → H = +1, Cl = −1.</div>
+                            <div class="paso">NaCl → Na = +1, Cl = −1. H₂O → H = +1, O = −2.</div>
+                            <div class="paso">Ningún elemento cambia su n.o. → <strong>NO es redox</strong>.</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Cambia?</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Na</td><td>+1</td><td>+1</td><td>No</td></tr>
+                                    <tr><td>O</td><td>−2</td><td>−2</td><td>No</td></tr>
+                                    <tr><td>H</td><td>+1</td><td>+1</td><td>No</td></tr>
+                                    <tr><td>Cl</td><td>−1</td><td>−1</td><td>No</td></tr>
+                                </tbody>
+                            </table>
+                            <p style="margin-top:10px;"><span class="tag-no">Conclusión: NO REDOX</span></p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO NO REDOX 2 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej" style="background:#6b46c1;">No Redox 2</span>
+                        <span class="titulo-ej">AgNO₃ + NaCl → AgCl↓ + NaNO₃</span>
+                        <i class="fas fa-chevron-down chevron-ej" style="color:#6b46c1;"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{AgNO_3 + NaCl \longrightarrow AgCl\downarrow + NaNO_3} \]</div>
+                            <p>Reacción de precipitación.</p>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">AgNO₃ → Ag = +1, N = +5, O = −2. NaCl → Na = +1, Cl = −1.</div>
+                            <div class="paso">AgCl → Ag = +1, Cl = −1. NaNO₃ → Na = +1, N = +5, O = −2.</div>
+                            <div class="paso">Todos los n.o. se mantienen → <strong>NO es redox</strong>.</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Cambia?</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Ag</td><td>+1</td><td>+1</td><td>No</td></tr>
+                                    <tr><td>N</td><td>+5</td><td>+5</td><td>No</td></tr>
+                                    <tr><td>O</td><td>−2</td><td>−2</td><td>No</td></tr>
+                                    <tr><td>Na</td><td>+1</td><td>+1</td><td>No</td></tr>
+                                    <tr><td>Cl</td><td>−1</td><td>−1</td><td>No</td></tr>
+                                </tbody>
+                            </table>
+                            <p style="margin-top:10px;"><span class="tag-no">Conclusión: NO REDOX</span></p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO NO REDOX 3 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej" style="background:#6b46c1;">No Redox 3</span>
+                        <span class="titulo-ej">CaCO₃ → CaO + CO₂</span>
+                        <i class="fas fa-chevron-down chevron-ej" style="color:#6b46c1;"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{CaCO_3 \longrightarrow CaO + CO_2} \]</div>
+                            <p>Descomposición térmica.</p>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">CaCO₃ → Ca = +2, C = +4, O = −2.</div>
+                            <div class="paso">CaO → Ca = +2, O = −2. CO₂ → C = +4, O = −2.</div>
+                            <div class="paso">Ningún n.o. cambia → <strong>NO es redox</strong>.</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Cambia?</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Ca</td><td>+2</td><td>+2</td><td>No</td></tr>
+                                    <tr><td>C</td><td>+4</td><td>+4</td><td>No</td></tr>
+                                    <tr><td>O</td><td>−2</td><td>−2</td><td>No</td></tr>
+                                </tbody>
+                            </table>
+                            <p style="margin-top:10px;"><span class="tag-no">Conclusión: NO REDOX</span></p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO NO REDOX 4 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej" style="background:#6b46c1;">No Redox 4</span>
+                        <span class="titulo-ej">HCl + KOH → KCl + H₂O</span>
+                        <i class="fas fa-chevron-down chevron-ej" style="color:#6b46c1;"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{HCl + KOH \longrightarrow KCl + H_2O} \]</div>
+                            <p>Neutralización ácido-base.</p>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">HCl → H = +1, Cl = −1. KOH → K = +1, O = −2, H = +1.</div>
+                            <div class="paso">KCl → K = +1, Cl = −1. H₂O → H = +1, O = −2.</div>
+                            <div class="paso">Todos los n.o. se conservan → <strong>NO es redox</strong>.</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Cambia?</th></tr></thead>
+                                <tbody>
+                                    <tr><td>H</td><td>+1</td><td>+1</td><td>No</td></tr>
+                                    <tr><td>Cl</td><td>−1</td><td>−1</td><td>No</td></tr>
+                                    <tr><td>K</td><td>+1</td><td>+1</td><td>No</td></tr>
+                                    <tr><td>O</td><td>−2</td><td>−2</td><td>No</td></tr>
+                                </tbody>
+                            </table>
+                            <p style="margin-top:10px;"><span class="tag-no">Conclusión: NO REDOX</span></p>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJERCICIO NO REDOX 5 -->
+                <details class="tarjeta-ejercicio">
+                    <summary class="cabecera-ej">
+                        <span class="num-ej" style="background:#6b46c1;">No Redox 5</span>
+                        <span class="titulo-ej">BaCl₂ + Na₂SO₄ → BaSO₄↓ + 2 NaCl</span>
+                        <i class="fas fa-chevron-down chevron-ej" style="color:#6b46c1;"></i>
+                    </summary>
+                    <div class="cuerpo-ej">
+                        <div class="enunciado-ej">
+                            <div class="formula-box">\[ \mathrm{BaCl_2 + Na_2SO_4 \longrightarrow BaSO_4\downarrow + 2\,NaCl} \]</div>
+                            <p>Reacción de precipitación.</p>
+                        </div>
+                        <div class="resolucion-ej">
+                            <div class="paso">BaCl₂ → Ba = +2, Cl = −1. Na₂SO₄ → Na = +1, S = +6, O = −2.</div>
+                            <div class="paso">BaSO₄ → Ba = +2, S = +6, O = −2. NaCl → Na = +1, Cl = −1.</div>
+                            <div class="paso">Ningún elemento cambia su n.o. → <strong>NO es redox</strong>.</div>
+                            <table class="tabla-resumen">
+                                <thead><tr><th>Elemento</th><th>n.o. inicial</th><th>n.o. final</th><th>¿Cambia?</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Ba</td><td>+2</td><td>+2</td><td>No</td></tr>
+                                    <tr><td>Cl</td><td>−1</td><td>−1</td><td>No</td></tr>
+                                    <tr><td>Na</td><td>+1</td><td>+1</td><td>No</td></tr>
+                                    <tr><td>S</td><td>+6</td><td>+6</td><td>No</td></tr>
+                                    <tr><td>O</td><td>−2</td><td>−2</td><td>No</td></tr>
+                                </tbody>
+                            </table>
+                            <p style="margin-top:10px;"><span class="tag-no">Conclusión: NO REDOX</span></p>
+                        </div>
+                    </div>
+                </details>
+
+            </div>
+        </details>
+
+        <!-- PIE DIDÁCTICO -->
+        <div class="pie-clave">
+            <i class="fas fa-lightbulb"></i>
+            <span><strong>Clave para el examen:</strong> una reacción es redox <em>si y solo si</em> algún número de oxidación cambia entre reactivos y productos. Si todos los n.o. se mantienen idénticos, NO es redox (aunque haya iones, precipitados o agua). Y recuerda: <strong>el oxidante se reduce</strong> y <strong>el reductor se oxida</strong>. ¡Grábatelo bien!</span>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

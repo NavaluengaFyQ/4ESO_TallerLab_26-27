@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T08.03. Reacciones de Precipitación</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        .container { max-width: 900px; width: 100%; background: white; border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; margin: 20px auto; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px 30px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+        .header-left { display: flex; flex-direction: column; justify-content: center; }
+        .header-left h1 { font-size: 1.8em; margin: 0; }
+        .header-sub { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+        .header-sub img { max-height: 28px; width: auto; border-radius: 4px; background: white; padding: 2px; }
+        .header-sub .codigo { font-weight: 700; font-size: 1.1em; }
+        .header-sub .texto { font-size: 1.1em; }
+        .header-right img { max-height: 70px; max-width: 180px; object-fit: contain; display: block; }
+
+        .section { padding: 25px 30px; margin: 15px; border-radius: 12px; border-left: 5px solid; }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 { font-size: 1.3em; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box { background: #edf2f7; border: 2px solid #cbd5e0; border-radius: 10px; padding: 15px; margin: 15px 0; text-align: center; font-size: 1.1em; }
+        .note { background: #fffbeb; border: 1px solid #f6e05e; border-radius: 8px; padding: 12px; margin-top: 15px; font-size: 0.95em; color: #744210; }
+        p { line-height: 1.7; margin-bottom: 10px; }
+        ul, ol { padding-left: 25px; line-height: 1.7; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        th, td { border: 1px solid #cbd5e0; padding: 8px 12px; text-align: left; }
+        th { background: #edf2f7; }
+
+        /* ============================================
+           DESPLEGABLE PRINCIPAL UNIFICADO
+           Todos los pasos usan el mismo estilo destacado
+           ============================================ */
+        details.step-desplegable-destacado {
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            border: 3px solid #48bb78;
+            border-left: 8px solid #2f855a;
+            border-radius: 14px;
+            box-shadow: 0 6px 20px rgba(72,187,120,0.20);
+            margin: 22px 0;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+        details.step-desplegable-destacado[open] {
+            box-shadow: 0 10px 28px rgba(72,187,120,0.35);
+            border-color: #38a169;
+            background: #ffffff;
+        }
+        details.step-desplegable-destacado > summary {
+            list-style: none;
+            cursor: pointer;
+            padding: 20px 22px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-weight: 700;
+            color: #22543d;
+            user-select: none;
+            border-radius: 11px;
+            transition: background 0.2s ease;
+        }
+        details.step-desplegable-destacado > summary:hover { background: #e6fffa; }
+        details.step-desplegable-destacado > summary::-webkit-details-marker { display: none; }
+        details.step-desplegable-destacado > summary .chevron { font-size: 1.15rem; color: #2f855a; transition: transform 0.3s ease; }
+        details.step-desplegable-destacado[open] > summary .chevron { transform: rotate(180deg); }
+        details.step-desplegable-destacado > summary .step-num {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #38a169, #2f855a); color: white;
+            width: 42px; height: 42px; min-width: 42px; border-radius: 50%;
+            font-weight: bold; font-size: 1.15em; margin: 0;
+            box-shadow: 0 3px 8px rgba(47,133,90,0.35);
+        }
+        details.step-desplegable-destacado > summary .titulo-paso { flex: 1; font-size: 1.12em; color: #22543d; }
+        details.step-desplegable-destacado > summary .badge-pulsa {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.82rem;
+            font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 2px solid #f59e0b;
+            white-space: nowrap;
+            animation: pulso-badge 1.6s ease-in-out infinite;
+        }
+        details.step-desplegable-destacado > summary .badge-pulsa i {
+            color: #d97706;
+            animation: pulso-mano 1.6s ease-in-out infinite;
+        }
+        @keyframes pulso-badge {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(245,158,11,0.55); }
+            50% { transform: scale(1.06); box-shadow: 0 0 0 8px rgba(245,158,11,0); }
+        }
+        @keyframes pulso-mano {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(4px); }
+        }
+        details.step-desplegable-destacado .contenido-paso { padding: 10px 24px 24px 24px; border-top: 2px dashed #a7f3d0; margin-top: 0; }
+
+        /* ============================================
+           DESPLEGABLE DE EJEMPLO
+           ============================================ */
+        details.step-ejemplo { background: white; border-left: 4px solid #4299e1; border-radius: 0 8px 8px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.05); margin: 10px 0; padding: 0; }
+        details.step-ejemplo[open] { box-shadow: 0 4px 14px rgba(66,153,225,0.18); }
+        details.step-ejemplo > summary { list-style: none; cursor: pointer; padding: 12px 16px; display: flex; align-items: center; gap: 12px; font-weight: 600; color: #1a365d; user-select: none; border-radius: 0 8px 8px 0; transition: background 0.2s ease; }
+        details.step-ejemplo > summary:hover { background: #ebf8ff; }
+        details.step-ejemplo > summary::-webkit-details-marker { display: none; }
+        details.step-ejemplo > summary .chevron { margin-left: auto; font-size: 0.9rem; color: #4299e1; transition: transform 0.3s ease; }
+        details.step-ejemplo[open] > summary .chevron { transform: rotate(180deg); }
+        details.step-ejemplo > summary .step-num { display: inline-flex; align-items: center; justify-content: center; background: #4299e1; color: white; width: 28px; height: 28px; min-width: 28px; border-radius: 50%; font-weight: bold; font-size: 0.85em; margin: 0; }
+        details.step-ejemplo > summary .titulo-paso { flex: 1; font-size: 0.98em; color: #1a365d; }
+        details.step-ejemplo .contenido-paso { padding: 6px 20px 18px 20px; border-top: 1px solid #ebf8ff; }
+
+        .regla-tabla td:first-child { font-weight: 600; color: #2d3748; width: 45%; }
+
+        .etiqueta-paso {
+            display: inline-block;
+            background: #fde68a;
+            color: #92400e;
+            font-weight: 800;
+            font-size: 0.7em;
+            padding: 2px 12px;
+            border-radius: 4px;
+            letter-spacing: 0.8px;
+            margin-right: 8px;
+            text-transform: uppercase;
+            border: 1px solid #f59e0b;
+            vertical-align: middle;
+        }
+
+        .tag-pp   { background: #fed7d7; color: #9b2c2c; padding: 2px 10px; border-radius: 20px; font-size: 0.85em; font-weight: 700; white-space: nowrap; }
+        .tag-sol  { background: #c6f6d5; color: #22543d; padding: 2px 10px; border-radius: 20px; font-size: 0.85em; font-weight: 700; white-space: nowrap; }
+        .tag-spec { background: #e2e8f0; color: #4a5568; padding: 2px 10px; border-radius: 20px; font-size: 0.85em; font-weight: 700; white-space: nowrap; }
+
+        .caja-modelo {
+            background: #f8fafc;
+            border: 2px solid #cbd5e0;
+            border-left: 6px solid #667eea;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin: 14px 0;
+        }
+        .caja-modelo h4 { margin: 0 0 8px 0; font-size: 1.02em; }
+        .caja-molecular  { border-left-color: #c05621; background: #fffaf0; }
+        .caja-molecular h4 { color: #c05621; }
+        .caja-ionica     { border-left-color: #3182ce; background: #f0f9ff; }
+        .caja-ionica h4 { color: #2b6cb0; }
+        .caja-neta       { border-left-color: #276749; background: #f0fff4; }
+        .caja-neta h4 { color: #276749; }
+        .caja-observacion{ border-left-color: #6b46c1; background: #faf5ff; }
+        .caja-observacion h4 { color: #6b46c1; }
+
+        .tabla-solubilidad th { background: #1e3a8a; color: white; font-size: 0.9em; }
+        .tabla-solubilidad td { font-size: 0.9em; padding: 6px 10px; }
+        .sol-si { background: #f0fff4; color: #22543d; font-weight: 600; }
+        .sol-no { background: #fff5f5; color: #9b2c2c; font-weight: 600; }
+        .sol-exc { background: #fffaf0; color: #92400e; font-weight: 600; }
+
+        .hl-rojo    { color: #c53030; font-weight: 800; }
+        .hl-azul    { color: #2b6cb0; font-weight: 800; }
+        .hl-verde   { color: #276749; font-weight: 800; }
+        .hl-naranja { color: #c05621; font-weight: 800; }
+        .hl-morado  { color: #6b46c1; font-weight: 800; }
+        .hl-rosa    { color: #b83280; font-weight: 800; }
+        .hl-teal    { color: #0f766e; font-weight: 800; }
+        .hl-amarillo{ color: #b7791f; font-weight: 800; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto" alt="Cápsula">
+                <span class="codigo">#T08.03.- </span>
+                <span class="texto">Reacciones de Precipitación</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 Enunciado</h2>
+        <p>Cuando mezclamos dos disoluciones de compuestos iónicos solubles, a veces aparece un <strong>sólido insoluble</strong> que "cae" al fondo del recipiente: es un <strong>precipitado</strong>. Estas reacciones se llaman <strong>reacciones de precipitación</strong> y son fundamentales en química analítica, en el tratamiento de aguas y en muchos procesos industriales.</p>
+        <p>En este documento estudiaremos:</p>
+        <ul>
+            <li>Qué es una <strong>reacción de precipitación</strong> y qué la provoca.</li>
+            <li>Las <strong>reglas de solubilidad</strong> que nos permiten predecir si se formará o no un precipitado.</li>
+            <li>Cómo escribir una <strong>ecuación iónica neta</strong> y qué son los <strong>iones espectadores</strong>.</li>
+            <li><strong>10 ejemplos resueltos</strong> paso a paso.</li>
+        </ul>
+        <div class="formula-box">
+            \[ \text{AB (aq)} + \text{CD (aq)} \longrightarrow \text{AD (s)}\downarrow + \text{CB (aq)} \]
+        </div>
+        <p style="text-align:center; font-size:0.95em; color:#4a5568;">El símbolo \(\downarrow\) indica que el compuesto AD es un <strong>precipitado</strong> (sólido insoluble).</p>
+    </div>
+
+    <!-- OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 Objetivo</h2>
+        <p>Comprender qué es una reacción de precipitación, aplicar las reglas de solubilidad para predecir la formación de precipitados, escribir correctamente las ecuaciones molecular, iónica e iónica neta, e identificar los iones espectadores.</p>
+    </div>
+
+    <!-- PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>🔧 Procedimiento</h2>
+
+        <!-- PASO 1 -->
+        <details class="step-desplegable-destacado">
+            <summary>
+                <span class="step-num">1</span>
+                <span class="titulo-paso">¿Qué es una <span class="hl-rojo">reacción de precipitación</span>?</span>
+                <span class="badge-pulsa"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>Una <strong>reacción de precipitación</strong> es una reacción química en la que, al mezclar dos disoluciones acuosas de compuestos iónicos solubles, se forma un <strong>compuesto iónico insoluble</strong> llamado <strong>precipitado</strong>, que se separa de la disolución como sólido.</p>
+
+                <h4 style="color:#276749; margin-top:14px;">¿Cómo ocurre?</h4>
+                <p>En disolución acuosa, los compuestos iónicos solubles están disociados en iones. Cuando mezclamos dos disoluciones, los cationes de una pueden encontrarse con los aniones de la otra. Si la combinación catión + anión da lugar a un compuesto <strong>insoluble</strong>, este precipita.</p>
+
+                <div class="formula-box">
+                    \[ \mathrm{AB\ (aq) + CD\ (aq) \longrightarrow AD\ (s)\downarrow + CB\ (aq)} \]
+                </div>
+
+                <h4 style="color:#276749; margin-top:14px;">Características clave</h4>
+                <ul>
+                    <li>Se parte de <strong>disoluciones</strong> (compuestos solubles).</li>
+                    <li>Se forma un <strong>sólido insoluble</strong> (el precipitado).</li>
+                    <li>Los <strong>iones espectadores</strong> (los que no forman el precipitado) permanecen disueltos y no cambian.</li>
+                    <li>Se puede escribir de tres formas: <strong>molecular</strong>, <strong>iónica</strong> e <strong>iónica neta</strong>.</li>
+                </ul>
+
+                <div class="note">
+                    <strong>💡 Idea clave:</strong> No toda mezcla de disoluciones da precipitado. Solo cuando el producto de las concentraciones de dos iones supera el producto de solubilidad (K<sub>ps</sub>) del compuesto insoluble. Si los iones son compatibles (forman un compuesto soluble), no hay precipitado.
+                </div>
+
+                <h4 style="color:#276749; margin-top:14px;">Aplicaciones</h4>
+                <ul>
+                    <li><strong>Análisis químico:</strong> identificar iones presentes en una muestra (por ejemplo, Cl⁻ con AgNO₃).</li>
+                    <li><strong>Tratamiento de aguas:</strong> eliminar metales pesados precipitándolos como hidróxidos o sulfuros.</li>
+                    <li><strong>Industria química:</strong> obtener productos sólidos a partir de disoluciones.</li>
+                    <li><strong>Biología y medicina:</strong> pruebas de diagnóstico que detectan sustancias por precipitación.</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- PASO 2 -->
+        <details class="step-desplegable-destacado">
+            <summary>
+                <span class="step-num">2</span>
+                <span class="titulo-paso">Reglas de <span class="hl-morado">solubilidad</span> y tabla de compuestos</span>
+                <span class="badge-pulsa"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>Las <strong>reglas de solubilidad</strong> nos permiten predecir qué compuestos son <strong>solubles</strong> (permanecen disueltos) y cuáles son <strong>insolubles</strong> (formarán precipitado). Se aplican en este orden de prioridad:</p>
+
+                <table class="tabla-solubilidad">
+                    <thead>
+                        <tr>
+                            <th style="width: 45%;">Compuesto / Ion</th>
+                            <th>Solubilidad</th>
+                            <th>Excepciones importantes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Sales de metales alcalinos</strong> (Li⁺, Na⁺, K⁺, Rb⁺, Cs⁺) y de <strong>amonio</strong> (NH₄⁺)</td>
+                            <td class="sol-si">Siempre solubles</td>
+                            <td>— (no hay excepciones)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nitratos</strong> (NO₃⁻) y <strong>acetatos</strong> (CH₃COO⁻)</td>
+                            <td class="sol-si">Siempre solubles</td>
+                            <td>— (no hay excepciones)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cloruros</strong> (Cl⁻), <strong>bromuros</strong> (Br⁻) e <strong>yoduros</strong> (I⁻)</td>
+                            <td class="sol-si">Solubles en general</td>
+                            <td>Insolubles con <strong>Ag⁺, Pb²⁺ y Hg₂²⁺</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sulfatos</strong> (SO₄²⁻)</td>
+                            <td class="sol-si">Solubles en general</td>
+                            <td>Insolubles con <strong>Ba²⁺, Sr²⁺, Pb²⁺ y Ca²⁺</strong> (Ca²⁺ ligeramente soluble)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hidróxidos</strong> (OH⁻)</td>
+                            <td class="sol-no">Insolubles en general</td>
+                            <td>Solubles con <strong>metales alcalinos, NH₄⁺, Ba²⁺ y Sr²⁺</strong> (Ca²⁺ ligeramente soluble)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Carbonatos</strong> (CO₃²⁻), <strong>fosfatos</strong> (PO₄³⁻), <strong>sulfuros</strong> (S²⁻)</td>
+                            <td class="sol-no">Insolubles en general</td>
+                            <td>Solubles con <strong>metales alcalinos y NH₄⁺</strong></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Óxidos e hidróxidos metálicos</strong> en general</td>
+                            <td class="sol-no">Insolubles</td>
+                            <td>Solubles los de metales alcalinos</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="note">
+                    <strong>💡 Cómo usarlas:</strong> Cuando tengas que predecir si hay precipitado, combina cada catión de un reactivo con cada anión del otro reactivo. Aplica las reglas y determina si el compuesto resultante es <strong>soluble</strong> (no precipita) o <strong>insoluble</strong> (precipita).
+                </div>
+
+                <h4 style="color:#276749; margin-top:16px;">Precipitados más comunes que debes recordar</h4>
+                <div class="formula-box" style="text-align:left; font-size:1em;">
+                    <ul style="margin: 0; padding-left: 20px;">
+                        <li><strong>AgCl</strong> — blanco</li>
+                        <li><strong>BaSO₄</strong> — blanco (el más insoluble de los sulfatos)</li>
+                        <li><strong>PbI₂</strong> — amarillo</li>
+                        <li><strong>CaCO₃</strong> — blanco</li>
+                        <li><strong>Fe(OH)₃</strong> — marrón rojizo</li>
+                        <li><strong>Cu(OH)₂</strong> — azul</li>
+                        <li><strong>Al(OH)₃</strong> — blanco gelatinoso</li>
+                        <li><strong>CuS</strong> — negro</li>
+                        <li><strong>PbS</strong> — negro</li>
+                    </ul>
+                </div>
+            </div>
+        </details>
+
+        <!-- PASO 3 -->
+        <details class="step-desplegable-destacado">
+            <summary>
+                <span class="step-num">3</span>
+                <span class="titulo-paso">Las <span class="hl-azul">tres ecuaciones</span>: molecular, iónica e iónica neta</span>
+                <span class="badge-pulsa"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>En una reacción de precipitación se escriben siempre <strong>tres ecuaciones</strong>:</p>
+
+                <div class="caja-modelo caja-molecular">
+                    <h4>🟠 1) Ecuación molecular</h4>
+                    <p>Se escriben los compuestos <strong>tal cual</strong>, con sus fórmulas completas. Es la forma más sencilla y la más útil para hacer cálculos estequiométricos.</p>
+                    <div class="formula-box" style="margin:8px 0;">
+                        \[ \mathrm{AgNO_3\ (aq) + NaCl\ (aq) \longrightarrow AgCl\downarrow + NaNO_3\ (aq)} \]
+                    </div>
+                    <p>Se indica el estado: (aq) para disuelto, (s) o ↓ para precipitado, (g) para gas, (l) para líquido.</p>
+                </div>
+
+                <div class="caja-modelo caja-ionica">
+                    <h4>🔵 2) Ecuación iónica</h4>
+                    <p>Se escriben <strong>disociados</strong> todos los compuestos que estén en disolución (los solubles), y <strong>sin disociar</strong> los precipitados, gases o líquidos.</p>
+                    <div class="formula-box" style="margin:8px 0;">
+                        \[ \mathrm{Ag^+\!+\!NO_3^-\!+\!Na^+\!+\!Cl^- \longrightarrow AgCl\downarrow + Na^+\!+\!NO_3^-} \]
+                    </div>
+                    <p>Los iones que están <strong>iguales a los dos lados</strong> son los <strong>iones espectadores</strong> (Na⁺ y NO₃⁻ en este ejemplo).</p>
+                </div>
+
+                <div class="caja-modelo caja-neta">
+                    <h4>🟢 3) Ecuación iónica neta</h4>
+                    <p>Es la ecuación iónica <strong>sin los iones espectadores</strong>. Muestra únicamente <strong>la reacción que realmente ocurre</strong>: la formación del precipitado.</p>
+                    <div class="formula-box" style="margin:8px 0;">
+                        \[ \mathrm{Ag^+ + Cl^- \longrightarrow AgCl\downarrow} \]
+                    </div>
+                    <p>Es la forma más informativa porque elimina todo lo accesorio.</p>
+                </div>
+
+                <div class="note">
+                    <strong>💡 Regla de oro:</strong> Los iones espectadores aparecen disueltos tanto en reactivos como en productos y <strong>no participan</strong> en la reacción real. Son "invitados de piedra" que permanecen en disolución. Se cancelan al pasar de la ecuación iónica a la neta.
+                </div>
+
+                <h4 style="color:#276749; margin-top:16px;">Pasos para escribir la ecuación iónica neta</h4>
+                <ol>
+                    <li>Escribe la ecuación molecular y ajústala.</li>
+                    <li>Disocia en iones todos los compuestos solubles (aq).</li>
+                    <li>No disocies: precipitados (s, ↓), gases (g), líquidos (l), ácidos débiles.</li>
+                    <li>Cancela los iones que aparecen iguales a los dos lados (iones espectadores).</li>
+                    <li>Lo que queda es la ecuación iónica neta.</li>
+                    <li>Comprueba que la carga y la masa están equilibradas.</li>
+                </ol>
+            </div>
+        </details>
+
+        <!-- PASO 4 -->
+        <details class="step-desplegable-destacado">
+            <summary>
+                <span class="step-num">4</span>
+                <span class="titulo-paso"><span class="hl-verde">10 ejemplos resueltos</span> paso a paso</span>
+                <span class="badge-pulsa"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </summary>
+            <div class="contenido-paso">
+                <p>En cada ejemplo escribimos las <strong>tres ecuaciones</strong> (molecular, iónica e iónica neta), identificamos el <strong>precipitado</strong>, los <strong>iones espectadores</strong> y justificamos el resultado aplicando las reglas de solubilidad.</p>
+
+                <!-- EJEMPLO 1 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">1</span><span class="titulo-paso">AgNO₃ + NaCl → AgCl↓ + NaNO₃ (cloruro de plata)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="caja-modelo caja-molecular">
+                            <h4>🟠 Ecuación molecular</h4>
+                            <div class="formula-box">\[ \mathrm{AgNO_3\ (aq) + NaCl\ (aq) \longrightarrow AgCl\downarrow + NaNO_3\ (aq)} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-ionica">
+                            <h4>🔵 Ecuación iónica</h4>
+                            <div class="formula-box">\[ \mathrm{Ag^+ + NO_3^- + Na^+ + Cl^- \longrightarrow AgCl\downarrow + Na^+ + NO_3^-} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-neta">
+                            <h4>🟢 Ecuación iónica neta</h4>
+                            <div class="formula-box">\[ \mathrm{Ag^+ + Cl^- \longrightarrow AgCl\downarrow} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-observacion">
+                            <h4>🟣 Justificación y observaciones</h4>
+                            <ul>
+                                <li><span class="tag-pp">PRECIPITADO = AgCl</span> Los cloruros son solubles <strong>excepto con Ag⁺, Pb²⁺ y Hg₂²⁺</strong>. Como tenemos Ag⁺ + Cl⁻, precipita.</li>
+                                <li><span class="tag-spec">ESPECTADORES = Na⁺ y NO₃⁻</span> Aparecen iguales a los dos lados de la ecuación iónica y no reaccionan.</li>
+                                <li>El precipitado es <strong>blanco</strong> (color característico del AgCl).</li>
+                                <li>Esta es la reacción clásica para <strong>identificar Cl⁻</strong> en análisis cualitativo.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 2 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">2</span><span class="titulo-paso">BaCl₂ + Na₂SO₄ → BaSO₄↓ + 2 NaCl (sulfato de bario)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="caja-modelo caja-molecular">
+                            <h4>🟠 Ecuación molecular</h4>
+                            <div class="formula-box">\[ \mathrm{BaCl_2\ (aq) + Na_2SO_4\ (aq) \longrightarrow BaSO_4\downarrow + 2\,NaCl\ (aq)} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-ionica">
+                            <h4>🔵 Ecuación iónica</h4>
+                            <div class="formula-box">\[ \mathrm{Ba^{2+} + 2\,Cl^- + 2\,Na^+ + SO_4^{2-} \longrightarrow BaSO_4\downarrow + 2\,Na^+ + 2\,Cl^-} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-neta">
+                            <h4>🟢 Ecuación iónica neta</h4>
+                            <div class="formula-box">\[ \mathrm{Ba^{2+} + SO_4^{2-} \longrightarrow BaSO_4\downarrow} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-observacion">
+                            <h4>🟣 Justificación y observaciones</h4>
+                            <ul>
+                                <li><span class="tag-pp">PRECIPITADO = BaSO₄</span> Los sulfatos son solubles <strong>excepto con Ba²⁺, Sr²⁺, Pb²⁺ y Ca²⁺</strong>. Con Ba²⁺ precipita como BaSO₄, que es <strong>el sulfato más insoluble</strong>.</li>
+                                <li><span class="tag-spec">ESPECTADORES = Na⁺ y Cl⁻</span> Permanecen disueltos formando NaCl.</li>
+                                <li>Precipitado <strong>blanco, muy denso y estable</strong>.</li>
+                                <li>Aplicación clásica: prueba de <strong>identificación de sulfatos</strong>. También se usa en radiología como contraste (papilla de bario).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 3 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">3</span><span class="titulo-paso">Pb(NO₃)₂ + 2 KI → PbI₂↓ + 2 KNO₃ (yoduro de plomo(II))</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="caja-modelo caja-molecular">
+                            <h4>🟠 Ecuación molecular</h4>
+                            <div class="formula-box">\[ \mathrm{Pb(NO_3)_2\ (aq) + 2\,KI\ (aq) \longrightarrow PbI_2\downarrow + 2\,KNO_3\ (aq)} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-ionica">
+                            <h4>🔵 Ecuación iónica</h4>
+                            <div class="formula-box">\[ \mathrm{Pb^{2+} + 2\,NO_3^- + 2\,K^+ + 2\,I^- \longrightarrow PbI_2\downarrow + 2\,K^+ + 2\,NO_3^-} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-neta">
+                            <h4>🟢 Ecuación iónica neta</h4>
+                            <div class="formula-box">\[ \mathrm{Pb^{2+} + 2\,I^- \longrightarrow PbI_2\downarrow} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-observacion">
+                            <h4>🟣 Justificación y observaciones</h4>
+                            <ul>
+                                <li><span class="tag-pp">PRECIPITADO = PbI₂</span> Los yoduros son solubles <strong>excepto con Ag⁺, Pb²⁺ y Hg₂²⁺</strong>. Con Pb²⁺ precipita.</li>
+                                <li><span class="tag-spec">ESPECTADORES = K⁺ y NO₃⁻</span> Aparecen a los dos lados y no participan.</li>
+                                <li>Precipitado <strong>amarillo intenso</strong>, muy característico.</li>
+                                <li>Esta reacción es la base de la famosa "lluvia de oro" (al calentar el PbI₂ se redisaulve y al enfriar vuelve a cristalizar en escamas doradas).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 4 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">4</span><span class="titulo-paso">CaCl₂ + Na₂CO₃ → CaCO₃↓ + 2 NaCl (carbonato de calcio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="caja-modelo caja-molecular">
+                            <h4>🟠 Ecuación molecular</h4>
+                            <div class="formula-box">\[ \mathrm{CaCl_2\ (aq) + Na_2CO_3\ (aq) \longrightarrow CaCO_3\downarrow + 2\,NaCl\ (aq)} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-ionica">
+                            <h4>🔵 Ecuación iónica</h4>
+                            <div class="formula-box">\[ \mathrm{Ca^{2+} + 2\,Cl^- + 2\,Na^+ + CO_3^{2-} \longrightarrow CaCO_3\downarrow + 2\,Na^+ + 2\,Cl^-} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-neta">
+                            <h4>🟢 Ecuación iónica neta</h4>
+                            <div class="formula-box">\[ \mathrm{Ca^{2+} + CO_3^{2-} \longrightarrow CaCO_3\downarrow} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-observacion">
+                            <h4>🟣 Justificación y observaciones</h4>
+                            <ul>
+                                <li><span class="tag-pp">PRECIPITADO = CaCO₃</span> Los carbonatos son insolubles <strong>excepto con metales alcalinos y NH₄⁺</strong>. Con Ca²⁺ precipita.</li>
+                                <li><span class="tag-spec">ESPECTADORES = Na⁺ y Cl⁻</span> Quedan en disolución como NaCl.</li>
+                                <li>Precipitado <strong>blanco</strong>. Es la base del mármol, la caliza y las conchas marinas.</li>
+                                <li>Aplicación: la <strong>dureza del agua</strong> se debe en parte a los iones Ca²⁺ y Mg²⁺ que precipitan con carbonatos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 5 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">5</span><span class="titulo-paso">FeCl₃ + 3 NaOH → Fe(OH)₃↓ + 3 NaCl (hidróxido de hierro(III))</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="caja-modelo caja-molecular">
+                            <h4>🟠 Ecuación molecular</h4>
+                            <div class="formula-box">\[ \mathrm{FeCl_3\ (aq) + 3\,NaOH\ (aq) \longrightarrow Fe(OH)_3\downarrow + 3\,NaCl\ (aq)} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-ionica">
+                            <h4>🔵 Ecuación iónica</h4>
+                            <div class="formula-box">\[ \mathrm{Fe^{3+} + 3\,Cl^- + 3\,Na^+ + 3\,OH^- \longrightarrow Fe(OH)_3\downarrow + 3\,Na^+ + 3\,Cl^-} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-neta">
+                            <h4>🟢 Ecuación iónica neta</h4>
+                            <div class="formula-box">\[ \mathrm{Fe^{3+} + 3\,OH^- \longrightarrow Fe(OH)_3\downarrow} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-observacion">
+                            <h4>🟣 Justificación y observaciones</h4>
+                            <ul>
+                                <li><span class="tag-pp">PRECIPITADO = Fe(OH)₃</span> Los hidróxidos son insolubles <strong>excepto con metales alcalinos, NH₄⁺, Ba²⁺ y Sr²⁺</strong>. Con Fe³⁺ precipita.</li>
+                                <li><span class="tag-spec">ESPECTADORES = Na⁺ y Cl⁻</span> Permanece disueltos.</li>
+                                <li>Precipitado <strong>marrón rojizo</strong> característico ("herrumbre").</li>
+                                <li>Esta reacción se usa en <strong>tratamiento de aguas residuales</strong> para eliminar metales pesados por coprecipitación con Fe(OH)₃.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 6 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">6</span><span class="titulo-paso">CuSO₄ + 2 NaOH → Cu(OH)₂↓ + Na₂SO₄ (hidróxido de cobre(II))</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="caja-modelo caja-molecular">
+                            <h4>🟠 Ecuación molecular</h4>
+                            <div class="formula-box">\[ \mathrm{CuSO_4\ (aq) + 2\,NaOH\ (aq) \longrightarrow Cu(OH)_2\downarrow + Na_2SO_4\ (aq)} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-ionica">
+                            <h4>🔵 Ecuación iónica</h4>
+                            <div class="formula-box">\[ \mathrm{Cu^{2+} + SO_4^{2-} + 2\,Na^+ + 2\,OH^- \longrightarrow Cu(OH)_2\downarrow + 2\,Na^+ + SO_4^{2-}} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-neta">
+                            <h4>🟢 Ecuación iónica neta</h4>
+                            <div class="formula-box">\[ \mathrm{Cu^{2+} + 2\,OH^- \longrightarrow Cu(OH)_2\downarrow} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-observacion">
+                            <h4>🟣 Justificación y observaciones</h4>
+                            <ul>
+                                <li><span class="tag-pp">PRECIPITADO = Cu(OH)₂</span> Los hidróxidos son insolubles en general. Con Cu²⁺ precipita.</li>
+                                <li><span class="tag-spec">ESPECTADORES = Na⁺ y SO₄²⁻</span> Permanecen disueltos como Na₂SO₄.</li>
+                                <li>Precipitado <strong>azul claro</strong>, muy llamativo. Al calentarlo se descompone a CuO (negro).</li>
+                                <li>Es la reacción clásica del <strong>reactivo de Fehling</strong> para detectar azúcares reductores (el Cu²⁺ azul pasa a Cu₂O rojo).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 7 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">7</span><span class="titulo-paso">2 AgNO₃ + K₂CrO₄ → Ag₂CrO₄↓ + 2 KNO₃ (cromato de plata)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="caja-modelo caja-molecular">
+                            <h4>🟠 Ecuación molecular</h4>
+                            <div class="formula-box">\[ \mathrm{2\,AgNO_3\ (aq) + K_2CrO_4\ (aq) \longrightarrow Ag_2CrO_4\downarrow + 2\,KNO_3\ (aq)} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-ionica">
+                            <h4>🔵 Ecuación iónica</h4>
+                            <div class="formula-box">\[ \mathrm{2\,Ag^+ + 2\,NO_3^- + 2\,K^+ + CrO_4^{2-} \longrightarrow Ag_2CrO_4\downarrow + 2\,K^+ + 2\,NO_3^-} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-neta">
+                            <h4>🟢 Ecuación iónica neta</h4>
+                            <div class="formula-box">\[ \mathrm{2\,Ag^+ + CrO_4^{2-} \longrightarrow Ag_2CrO_4\downarrow} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-observacion">
+                            <h4>🟣 Justificación y observaciones</h4>
+                            <ul>
+                                <li><span class="tag-pp">PRECIPITADO = Ag₂CrO₄</span> Los cromatos son insolubles en general, especialmente con Ag⁺, Pb²⁺ y Ba²⁺.</li>
+                                <li><span class="tag-spec">ESPECTADORES = K⁺ y NO₃⁻</span> Permanecen disueltos.</li>
+                                <li>Precipitado <strong>rojo ladrillo</strong> muy característico.</li>
+                                <li>Aplicación: método de <strong>Mohr</strong> para valorar cloruros (se usa K₂CrO₄ como indicador: aparece el precipitado rojo cuando ya no queda Cl⁻).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 8 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">8</span><span class="titulo-paso">CuSO₄ + H₂S → CuS↓ + H₂SO₄ (sulfuro de cobre(II))</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="caja-modelo caja-molecular">
+                            <h4>🟠 Ecuación molecular</h4>
+                            <div class="formula-box">\[ \mathrm{CuSO_4\ (aq) + H_2S\ (aq) \longrightarrow CuS\downarrow + H_2SO_4\ (aq)} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-ionica">
+                            <h4>🔵 Ecuación iónica</h4>
+                            <div class="formula-box">\[ \mathrm{Cu^{2+} + SO_4^{2-} + H_2S \longrightarrow CuS\downarrow + 2\,H^+ + SO_4^{2-}} \]</div>
+                            <p style="margin-top:6px; font-size:0.95em;">El H₂S es un ácido débil y no se disocia completamente, por lo que se escribe sin disociar.</p>
+                        </div>
+
+                        <div class="caja-modelo caja-neta">
+                            <h4>🟢 Ecuación iónica neta</h4>
+                            <div class="formula-box">\[ \mathrm{Cu^{2+} + H_2S \longrightarrow CuS\downarrow + 2\,H^+} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-observacion">
+                            <h4>🟣 Justificación y observaciones</h4>
+                            <ul>
+                                <li><span class="tag-pp">PRECIPITADO = CuS</span> Los sulfuros son insolubles en general. Con Cu²⁺ precipita como CuS, que es muy insoluble incluso en medio ácido.</li>
+                                <li><span class="tag-spec">ESPECTADOR = SO₄²⁻</span> Permanece en disolución.</li>
+                                <li>Precipitado <strong>negro</strong>.</li>
+                                <li>Aplicación: en <strong>marcha analítica</strong> se usa H₂S para separar cationes del grupo II (Cu²⁺, Pb²⁺, etc.).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 9 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">9</span><span class="titulo-paso">AlCl₃ + 3 NH₃ + 3 H₂O → Al(OH)₃↓ + 3 NH₄Cl (hidróxido de aluminio)</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="caja-modelo caja-molecular">
+                            <h4>🟠 Ecuación molecular</h4>
+                            <div class="formula-box">\[ \mathrm{AlCl_3\ (aq) + 3\,NH_3\ (aq) + 3\,H_2O \longrightarrow Al(OH)_3\downarrow + 3\,NH_4Cl\ (aq)} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-ionica">
+                            <h4>🔵 Ecuación iónica</h4>
+                            <div class="formula-box">\[ \mathrm{Al^{3+} + 3\,Cl^- + 3\,NH_3 + 3\,H_2O \longrightarrow Al(OH)_3\downarrow + 3\,NH_4^+ + 3\,Cl^-} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-neta">
+                            <h4>🟢 Ecuación iónica neta</h4>
+                            <div class="formula-box">\[ \mathrm{Al^{3+} + 3\,NH_3 + 3\,H_2O \longrightarrow Al(OH)_3\downarrow + 3\,NH_4^+} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-observacion">
+                            <h4>🟣 Justificación y observaciones</h4>
+                            <ul>
+                                <li><span class="tag-pp">PRECIPITADO = Al(OH)₃</span> Los hidróxidos son insolubles en general. Con Al³⁺ precipita. El NH₃ actúa como base débil en agua, generando OH⁻ que precipita al Al³⁺.</li>
+                                <li><span class="tag-spec">ESPECTADOR = Cl⁻</span> Permanece disuelto como NH₄Cl.</li>
+                                <li>Precipitado <strong>blanco gelatinoso</strong>.</li>
+                                <li>El Al(OH)₃ es <strong>anfótero</strong>: se redisaulve si se añade exceso de base fuerte (NaOH) formando Al(OH)₄⁻. Esto no ocurre con el NH₃ (base débil), lo que permite distinguirlo.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- EJEMPLO 10 -->
+                <details class="step-ejemplo">
+                    <summary><span class="step-num">10</span><span class="titulo-paso">Pb(NO₃)₂ + Na₂SO₄ → PbSO₄↓ + 2 NaNO₃ (sulfato de plomo(II))</span><i class="fas fa-chevron-down chevron"></i></summary>
+                    <div class="contenido-paso">
+                        <div class="caja-modelo caja-molecular">
+                            <h4>🟠 Ecuación molecular</h4>
+                            <div class="formula-box">\[ \mathrm{Pb(NO_3)_2\ (aq) + Na_2SO_4\ (aq) \longrightarrow PbSO_4\downarrow + 2\,NaNO_3\ (aq)} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-ionica">
+                            <h4>🔵 Ecuación iónica</h4>
+                            <div class="formula-box">\[ \mathrm{Pb^{2+} + 2\,NO_3^- + 2\,Na^+ + SO_4^{2-} \longrightarrow PbSO_4\downarrow + 2\,Na^+ + 2\,NO_3^-} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-neta">
+                            <h4>🟢 Ecuación iónica neta</h4>
+                            <div class="formula-box">\[ \mathrm{Pb^{2+} + SO_4^{2-} \longrightarrow PbSO_4\downarrow} \]</div>
+                        </div>
+
+                        <div class="caja-modelo caja-observacion">
+                            <h4>🟣 Justificación y observaciones</h4>
+                            <ul>
+                                <li><span class="tag-pp">PRECIPITADO = PbSO₄</span> Los sulfatos son solubles <strong>excepto con Ba²⁺, Sr²⁺, Pb²⁺ y Ca²⁺</strong>. Con Pb²⁺ precipita.</li>
+                                <li><span class="tag-spec">ESPECTADORES = Na⁺ y NO₃⁻</span> Permanecen disueltos.</li>
+                                <li>Precipitado <strong>blanco</strong>.</li>
+                                <li>Aplicación: en el <strong>análisis de baterías de plomo-ácido</strong>, este precipitado se forma sobre los electrodos durante la descarga; es reversible al cargar la batería.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- CUADRO RESUMEN FINAL -->
+                <div class="note" style="margin-top: 20px;">
+                    <strong>📊 Resumen final: todos los precipitados de los 10 ejemplos</strong>
+                    <table style="margin-top: 10px;">
+                        <thead>
+                            <tr>
+                                <th>Reacción</th>
+                                <th>Precipitado</th>
+                                <th>Color</th>
+                                <th>Iones espectadores</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>AgNO₃ + NaCl</td><td><strong>AgCl</strong></td><td>Blanco</td><td>Na⁺, NO₃⁻</td></tr>
+                            <tr><td>BaCl₂ + Na₂SO₄</td><td><strong>BaSO₄</strong></td><td>Blanco</td><td>Na⁺, Cl⁻</td></tr>
+                            <tr><td>Pb(NO₃)₂ + KI</td><td><strong>PbI₂</strong></td><td>Amarillo</td><td>K⁺, NO₃⁻</td></tr>
+                            <tr><td>CaCl₂ + Na₂CO₃</td><td><strong>CaCO₃</strong></td><td>Blanco</td><td>Na⁺, Cl⁻</td></tr>
+                            <tr><td>FeCl₃ + NaOH</td><td><strong>Fe(OH)₃</strong></td><td>Marrón rojizo</td><td>Na⁺, Cl⁻</td></tr>
+                            <tr><td>CuSO₄ + NaOH</td><td><strong>Cu(OH)₂</strong></td><td>Azul</td><td>Na⁺, SO₄²⁻</td></tr>
+                            <tr><td>AgNO₃ + K₂CrO₄</td><td><strong>Ag₂CrO₄</strong></td><td>Rojo ladrillo</td><td>K⁺, NO₃⁻</td></tr>
+                            <tr><td>CuSO₄ + H₂S</td><td><strong>CuS</strong></td><td>Negro</td><td>SO₄²⁻</td></tr>
+                            <tr><td>AlCl₃ + NH₃</td><td><strong>Al(OH)₃</strong></td><td>Blanco gelatinoso</td><td>Cl⁻</td></tr>
+                            <tr><td>Pb(NO₃)₂ + Na₂SO₄</td><td><strong>PbSO₄</strong></td><td>Blanco</td><td>Na⁺, NO₃⁻</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="note" style="margin-top: 16px; background: #e0f2fe; border-color: #7dd3fc; color: #0c4a6e;">
+                    <strong>💡 Regla para recordar:</strong> El <strong>precipitado</strong> siempre se forma por la combinación del <strong>catión de un reactivo</strong> con el <strong>anión del otro</strong>, y viceversa. Aplica las reglas de solubilidad a cada posible combinación y la que sea <strong>insoluble</strong> será el precipitado.
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="section resultado">
+        <h2>✅ Resultado</h2>
+        <p>Con este documento has aprendido a:</p>
+        <ul>
+            <li>Definir qué es una <strong>reacción de precipitación</strong> y reconocer sus aplicaciones.</li>
+            <li>Aplicar las <strong>reglas de solubilidad</strong> para predecir qué compuestos precipitan.</li>
+            <li>Escribir las <strong>tres ecuaciones</strong> (molecular, iónica e iónica neta) de una reacción de precipitación.</li>
+            <li>Identificar el <strong>precipitado</strong> y los <strong>iones espectadores</strong> en cada caso.</li>
+            <li>Resolver <strong>10 ejemplos</strong> paso a paso con los colores y aplicaciones de cada precipitado.</li>
+        </ul>
+        <div class="formula-box">
+            \[ \boxed{\text{Catión (aq) + Anión (aq) } \longrightarrow \text{ Compuesto insoluble (s)}\downarrow} \]
+        </div>
+        <div class="note">
+            <strong>💡 Clave para el examen:</strong> Cuando te pidan analizar una reacción de precipitación: (1) escribe la ecuación molecular ajustada; (2) disocia solo lo soluble; (3) cancela los iones espectadores; (4) comprueba que lo que queda es la formación del precipitado. Recuerda los precipitados más comunes: <strong>AgCl, BaSO₄, PbI₂, CaCO₃, Fe(OH)₃, Cu(OH)₂, Al(OH)₃, CuS, PbS</strong>.
+        </div>
+    </div>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="max-width: 100%; padding: 15px; margin: 10px auto; text-align: center; background: #f8fafc; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);">
+            <p style="font-size: clamp(0.95rem, 3vw, 1.2rem); color: #2d3748; margin-top: 0; margin-bottom: 12px; padding: 0 10px;">
+                <br>  Los precipitados están por todas partes: en el agua de tu casa, en las baterías y en los laboratorios forenses.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+            <div style="text-align:center;">
+                <a href="../index.html" target="_blank" style="display:inline-block; padding:12px 24px; background:#0078D4; color:white; text-decoration:none; border-radius:12px; font-weight:bold;">
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
