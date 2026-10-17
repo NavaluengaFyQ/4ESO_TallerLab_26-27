@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U02c08 - Disolución piraña: la mezcla que devora la materia orgánica</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .seccion-peligro { background: #fff5f5; border-color: #e53e3e; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .seccion-peligro h2 { color: #9b2c2c; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        .danger strong { color: #9b2c2c; }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+        .mini-card.morado { border-top-color: #805ad5; }
+
+        /* =========================================================
+           ESTILOS PARA LAS FIGURAS DIDÁCTICAS
+           ========================================================= */
+        .figure {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 18px 15px 12px 15px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        .figure svg {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 640px;
+            height: auto;
+        }
+        .figure-caption {
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-top: 12px;
+            line-height: 1.5;
+            font-style: italic;
+            padding: 0 10px;
+        }
+        .figure-caption strong {
+            color: #2d3748;
+            font-style: normal;
+        }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+
+        /* =========================================================
+           TABLA DE PELIGROS (pictogramas GHS)
+           ========================================================= */
+        .picto-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            margin: 20px 0;
+        }
+        .picto-card {
+            width: 150px;
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            padding: 12px 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border: 2px solid #fed7d7;
+        }
+        .picto-card .rombo {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 8px auto;
+            transform: rotate(45deg);
+            border: 3px solid #e53e3e;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+        .picto-card .rombo span {
+            transform: rotate(-45deg);
+            font-size: 1.6em;
+            font-weight: 900;
+            color: #e53e3e;
+        }
+        .picto-card .picto-label {
+            font-size: 0.82em;
+            font-weight: 600;
+            color: #742a2a;
+            line-height: 1.3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U02c08.- </span>
+                <span class="texto">Disolución piraña: la mezcla que devora la materia orgánica</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>Vamos a preparar y utilizar la <strong>disolución piraña</strong> (<em>piranha solution</em>), una de las mezclas más agresivas y peligrosas que se usan en un laboratorio de química. Se trata de una mezcla fuertemente oxidante de <strong>ácido sulfúrico concentrado</strong> y <strong>peróxido de hidrógeno al 30%</strong> (agua oxigenada), que se emplea para <strong>eliminar por completo los residuos orgánicos</strong> adheridos al material de vidrio.</p>
+        <p>Cuando sumergimos material de vidrio sucio en la disolución piraña, la materia orgánica no se disuelve: <strong>se destruye</strong>. Los compuestos orgánicos se oxidan hasta convertirse en <strong>CO₂ y H₂O</strong>, dejando el vidrio perfectamente limpio para análisis de trazas o experimentos de precisión.</p>
+        <ul>
+            <li>La mezcla es <strong>transparente e incolora</strong> cuando está recién preparada, pero se vuelve <strong>amarillenta o marrón</strong> a medida que oxida materia orgánica.</li>
+            <li>Se calienta mucho durante su preparación (reacción exotérmica) y desprende vapores muy corrosivos.</li>
+            <li>Es un ejemplo espectacular de <strong>oxidación química extrema</strong>, y también de los riesgos que conlleva manipular reactivos concentrados.</li>
+        </ul>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Cómo es posible que una mezcla de dos líquidos transparentes destruya la materia orgánica hasta dejar solo CO₂ y agua? ¿Y por qué se llama "piraña"?
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué es la <strong>disolución piraña</strong> y para qué se usa en el laboratorio.</li>
+            <li>La <strong>reacción química</strong> que tiene lugar: formación del ácido de Caro y oxidación de la materia orgánica.</li>
+            <li>Por qué es una mezcla <strong>extremadamente peligrosa</strong> y cómo manipularla con seguridad.</li>
+            <li>La diferencia entre <strong>disolver</strong> (proceso físico) y <strong>destruir/oxidar</strong> (proceso químico).</li>
+            <li>Cómo se <strong>neutraliza y elimina</strong> correctamente el residuo generado.</li>
+            <li>Las <strong>aplicaciones</strong> de la disolución piraña en nanotecnología, microelectrónica y análisis químico.</li>
+            <li>La importancia de la <strong>química verde</strong> y de buscar alternativas menos peligrosas.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN PELIGROS -->
+    <div class="section seccion-peligro">
+        <h2>☠️ ¿Por qué se llama "piraña"?</h2>
+        <p>El nombre no es casual: la disolución piraña <strong>ataca y devora</strong> la materia orgánica con la misma voracidad que una piraña devora a su presa. Es una de las mezclas más peligrosas que se preparan en un laboratorio, y por eso debe manipularse con un protocolo de seguridad estricto.</p>
+
+        <div class="picto-row">
+            <div class="picto-card">
+                <div class="rombo"><span>⚠</span></div>
+                <div class="picto-label">Corrosivo<br>para metales<br>y piel</div>
+            </div>
+            <div class="picto-card">
+                <div class="rombo"><span>🔥</span></div>
+                <div class="picto-label">Comburente<br>(favorece<br>la combustión)</div>
+            </div>
+            <div class="picto-card">
+                <div class="rombo"><span>☠</span></div>
+                <div class="picto-label">Tóxico por<br>inhalación<br>de vapores</div>
+            </div>
+            <div class="picto-card">
+                <div class="rombo"><span>💥</span></div>
+                <div class="picto-label">Riesgo de<br>explosión con<br>orgánicos</div>
+            </div>
+        </div>
+
+        <div class="danger">
+            <strong>⚠️ ¡ATENCIÓN! Riesgos específicos de la disolución piraña:</strong>
+            <ul>
+                <li><strong>Reacción violenta con materia orgánica:</strong> si entra en contacto con acetona, etanol, papel, trapos o cualquier compuesto orgánico, la reacción puede ser <strong>explosiva</strong>.</li>
+                <li><strong>Quemaduras químicas y térmicas:</strong> la mezcla alcanza temperaturas superiores a 100 °C durante su preparación. Puede quemar la piel por dos mecanismos a la vez.</li>
+                <li><strong>Vapores muy corrosivos:</strong> los humos de ácido sulfúrico y de ácido de Caro dañan gravemente las vías respiratorias y los ojos.</li>
+                <li><strong>Nunca debe almacenarse en recipientes cerrados:</strong> la descomposición del peróxido genera O₂ y puede provocar sobrepresión y estallido del recipiente.</li>
+                <li><strong>Nunca se debe mezclar con disolventes orgánicos</strong> ni con residuos de reacciones anteriores.</li>
+                <li><strong>Solo se prepara la cantidad que se va a usar en el momento</strong> y siempre bajo supervisión del profesor o técnico de laboratorio.</li>
+            </ul>
+        </div>
+
+        <div class="note">
+            <strong>Nota importante:</strong> esta práctica debe realizarse exclusivamente bajo la supervisión directa de un profesor o técnico de laboratorio, dentro de una <strong>campana extractora</strong> y con el <strong>equipo de protección individual completo</strong>. No se debe improvisar ni realizar sin la preparación previa adecuada.
+        </div>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>🔬 Fundamento teórico: la reacción química</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>¿Qué ocurre al mezclar ácido sulfúrico y peróxido de hidrógeno?</strong>
+            <p>Al mezclar ácido sulfúrico concentrado (H₂SO₄) con peróxido de hidrógeno (H₂O₂), se produce una reacción de <strong>desproporción</strong> en la que se forma <strong>ácido de Caro</strong> (ácido peroxomonosulfúrico, H₂SO₅):</p>
+            <div class="formula-box">
+                \[
+                \mathrm{H_2SO_4 + H_2O_2 \;\rightleftharpoons\; H_2SO_5 + H_2O}
+                \]
+                <p>El ácido de Caro es un <strong>oxidante extraordinariamente potente</strong>, mucho más fuerte que el propio peróxido de hidrógeno. Es el responsable de la acción "devoradora" de la disolución piraña.</p>
+            </div>
+            <p>La reacción es <strong>exotérmica</strong>: libera una gran cantidad de calor, por eso la mezcla se calienta hasta superar los 100 °C.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>¿Cómo destruye la materia orgánica?</strong>
+            <p>El ácido de Caro oxida los compuestos orgánicos (que contienen C, H y O) hasta sus formas más oxidadas: <strong>dióxido de carbono (CO₂)</strong> y <strong>agua (H₂O)</strong>. De forma simplificada, para un compuesto orgánico genérico:</p>
+            <div class="formula-box">
+                \[
+                \mathrm{C_xH_yO_z + H_2SO_5 \;\longrightarrow\; x\,CO_2 + \frac{y}{2}\,H_2O + H_2SO_4}
+                \]
+                <p>El azufre del ácido de Caro se reduce de nuevo a sulfato (S +6 → S +6 en el sulfato, mientras que el oxígeno peroxídico se reduce). El resultado neto: <strong>la materia orgánica desaparece</strong> convertida en gases y agua.</p>
+            </div>
+            <div class="note">
+                <strong>Observación experimental:</strong> cuando la disolución piraña oxida materia orgánica, aparecen <strong>burbujas</strong> (CO₂ y O₂) y la mezcla se tiñe de <strong>amarillo o marrón</strong>. Es una señal de que está trabajando. Cuando ya no burbujea y vuelve a ser transparente, ha agotado su poder oxidante.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>¿Por qué hay que añadir el peróxido SOBRE el ácido?</strong>
+            <p>El orden de mezcla es <strong>crítico</strong>. Se debe añadir siempre el <strong>peróxido de hidrógeno sobre el ácido sulfúrico</strong>, gota a gota y con agitación suave. Si se hace al revés (ácido sobre peróxido), la reacción puede descontrolarse y provocar una <strong>ebullición violenta con salpicaduras</strong>.</p>
+            <div class="formula-box" style="border-color:#e53e3e; background:#fff5f5;">
+                <strong style="color:#9b2c2c;">REGLA DE ORO:</strong><br>
+                <span style="color:#742a2a;">Añadir SIEMPRE el H₂O₂ al H₂SO₄.<br>NUNCA el H₂SO₄ al H₂O₂.</span>
+            </div>
+            <p>Esta regla es la misma que se aplica al diluir ácido sulfúrico en agua: el ácido concentrado se añade sobre el agua, no al revés. La razón es la misma: controlar la liberación de calor.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>¿Por qué no puede guardarse la disolución piraña?</strong>
+            <p>La disolución piraña <strong>no es estable</strong>. Con el tiempo, el ácido de Caro se descompone liberando oxígeno:</p>
+            <div class="formula-box">
+                \[
+                \mathrm{2\,H_2SO_5 \;\longrightarrow\; 2\,H_2SO_4 + O_2\uparrow}
+                \]
+            </div>
+            <p>Si se guarda en un recipiente cerrado, la acumulación de O₂ genera <strong>sobrepresión</strong> y el recipiente puede estallar. Por eso <strong>nunca se almacena</strong>: se prepara la cantidad justa y, tras su uso, se deja descomponer en un recipiente abierto dentro de la campana y se neutraliza.</p>
+        </div>
+
+        <!-- FIGURA DIDÁCTICA -->
+        <div class="figure">
+            <svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Esquema de la acción de la disolución piraña sobre la materia orgánica">
+                <defs>
+                    <marker id="arrowPiraña" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+                        <path d="M0,0 L7,3 L0,6 Z" fill="#2d3748"/>
+                    </marker>
+                    <linearGradient id="gradVaso" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#fff5f5"/>
+                        <stop offset="100%" stop-color="#fed7d7"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- Título -->
+                <text x="310" y="24" font-size="15" font-weight="bold" fill="#2d3748" text-anchor="middle">Acción de la disolución piraña sobre la materia orgánica</text>
+
+                <!-- Vaso de precipitados -->
+                <path d="M 70 70 L 70 250 Q 70 275 95 275 L 215 275 Q 240 275 240 250 L 240 70" fill="url(#gradVaso)" stroke="#4a5568" stroke-width="3"/>
+                <!-- Líquido -->
+                <path d="M 75 130 L 75 250 Q 75 270 95 270 L 215 270 Q 235 270 235 250 L 235 130 Z" fill="#feb2b2" opacity="0.65"/>
+                <!-- Burbujas -->
+                <circle cx="110" cy="200" r="6" fill="none" stroke="#e53e3e" stroke-width="2"/>
+                <circle cx="150" cy="180" r="4" fill="none" stroke="#e53e3e" stroke-width="2"/>
+                <circle cx="180" cy="220" r="5" fill="none" stroke="#e53e3e" stroke-width="2"/>
+                <circle cx="130" cy="240" r="3" fill="none" stroke="#e53e3e" stroke-width="2"/>
+                <circle cx="200" cy="195" r="4" fill="none" stroke="#e53e3e" stroke-width="2"/>
+                <!-- Residuo orgánico inicial (mancha) -->
+                <ellipse cx="155" cy="150" rx="30" ry="12" fill="#a0aec0" opacity="0.7"/>
+                <!-- Etiqueta -->
+                <text x="155" y="300" font-size="12" fill="#4a5568" font-weight="bold" text-anchor="middle">Disolución piraña</text>
+                <text x="155" y="316" font-size="11" fill="#742a2a" text-anchor="middle">H₂SO₄ + H₂O₂ → H₂SO₅</text>
+
+                <!-- Flecha -->
+                <line x1="265" y1="170" x2="345" y2="170" stroke="#2d3748" stroke-width="3" marker-end="url(#arrowPiraña)"/>
+                <text x="305" y="158" font-size="11" fill="#2d3748" font-weight="bold" text-anchor="middle">oxidación</text>
+
+                <!-- Productos -->
+                <rect x="365" y="70" width="220" height="205" rx="14" fill="#f0fff4" stroke="#38a169" stroke-width="2.5"/>
+                <text x="475" y="100" font-size="13" font-weight="bold" fill="#276749" text-anchor="middle">Productos de la oxidación</text>
+                <text x="475" y="135" font-size="14" fill="#2d3748" text-anchor="middle">CO₂ ↑</text>
+                <text x="475" y="165" font-size="14" fill="#2d3748" text-anchor="middle">H₂O</text>
+                <text x="475" y="195" font-size="14" fill="#2d3748" text-anchor="middle">SO₄²⁻ (sulfato)</text>
+                <text x="475" y="235" font-size="11" fill="#4a5568" text-anchor="middle" font-style="italic">La materia orgánica desaparece</text>
+                <text x="475" y="253" font-size="11" fill="#4a5568" text-anchor="middle" font-style="italic">El vidrio queda limpio</text>
+
+                <!-- Leyenda -->
+                <g transform="translate(365, 290)">
+                    <circle cx="8" cy="0" r="5" fill="#a0aec0" opacity="0.7"/>
+                    <text x="20" y="4" font-size="11" fill="#4a5568">Residuo orgánico</text>
+                    <circle cx="140" cy="0" r="4" fill="none" stroke="#e53e3e" stroke-width="2"/>
+                    <text x="152" y="4" font-size="11" fill="#4a5568">Burbujas (CO₂, O₂)</text>
+                </g>
+            </svg>
+            <div class="figure-caption"><strong>Figura 1.</strong> La disolución piraña oxida la materia orgánica hasta CO₂ y H₂O. La aparición de burbujas y el cambio de color (amarillento o marrón) indican que la mezcla está actuando. El material de vidrio queda completamente limpio, sin residuos orgánicos.</div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN MATERIALES Y PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y procedimiento experimental</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Materiales y reactivos</strong>
+            <ul>
+                <li><strong>Ácido sulfúrico concentrado 96%</strong> (H₂SO₄) — en el inventario aparece como "Ácido sulfúrico 96%".</li>
+                <li><strong>Peróxido de hidrógeno al 30%</strong> (H₂O₂) — agua oxigenada concentrada. <strong>No sirve la del supermercado (3% o 10%)</strong>: la concentración debe ser la indicada.</li>
+                <li><strong>Vaso de precipitados de vidrio borosilicato (Pyrex)</strong> de 250 mL o 400 mL. <strong>Nunca de plástico.</strong></li>
+                <li><strong>Varilla de vidrio</strong> para agitar.</li>
+                <li><strong>Pinzas de acero inoxidable o Teflón</strong> para manipular el material a limpiar.</li>
+                <li><strong>Baño de hielo</strong> (un recipiente con hielo y agua) para enfriar el peróxido.</li>
+                <li><strong>Campana extractora de gases</strong> en funcionamiento.</li>
+                <li><strong>EPP completo:</strong> gafas de seguridad + pantalla facial, guantes de butilo o neopreno (o doble par de nitrilo), bata de algodón, delantal resistente a ácidos, calzado cerrado.</li>
+                <li><strong>Kit anti-derrames:</strong> bicarbonato de sodio o carbonato de sodio, abundante agua.</li>
+                <li><strong>Frasco de vidrio etiquetado</strong> para residuos (con tapa, pero abierto durante la descomposición).</li>
+                <li><strong>Material de vidrio a limpiar</strong>: debe estar <strong>previamente enjuagado y SECO</strong>. Nunca introducir material con residuos orgánicos abundantes.</li>
+            </ul>
+            <div class="danger">
+                <strong>⚠️ Seguridad:</strong> los reactivos concentrados son extremadamente corrosivos. Manipula siempre dentro de la campana, con EPP completo. No respires los vapores. No dejes la disolución piraña desatendida. No la mezcles con disolventes orgánicos (acetona, etanol, etc.). Ten cerca agua abundante y bicarbonato para neutralizar derrames.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Preparación de la disolución piraña (3:1)</strong>
+            <p>La proporción clásica y más segura para laboratorios docentes es <strong>3 volúmenes de ácido sulfúrico por 1 volumen de peróxido de hidrógeno al 30%</strong>.</p>
+            <ol>
+                <li><strong>Enfría el peróxido de hidrógeno</strong> al 30% en un baño de hielo. Esto ayuda a moderar la reacción exotérmica.</li>
+                <li><strong>Vierte el ácido sulfúrico primero:</strong> mide y vierte, dentro de la campana, <strong>3 partes de ácido sulfúrico concentrado</strong> en el vaso de precipitados de Pyrex (por ejemplo, 30 mL).</li>
+                <li><strong>Añade el peróxido MUY LENTAMENTE:</strong> añade <strong>1 parte de peróxido de hidrógeno al 30%</strong> (por ejemplo, 10 mL) <strong>gota a gota</strong>, con agitación suave y constante, sin dejar de mirar la mezcla.</li>
+                <li><strong>Observa la reacción:</strong> la mezcla se calienta y comienza a burbujear. Esto es normal. Si la reacción es demasiado violenta, detén la adición y espera a que se calme.</li>
+            </ol>
+            <div class="highlight-box">
+                <strong>Regla mnemotécnica:</strong> "El peróxido se echa al ácido, nunca al revés". Es la misma regla que al diluir ácido sulfúrico: <strong>el ácido sobre el agua, no el agua sobre el ácido</strong>. En este caso: <strong>el H₂O₂ sobre el H₂SO₄</strong>.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Uso: limpieza del material de vidrio</strong>
+            <ol>
+                <li>Asegúrate de que el material de vidrio a limpiar está <strong>previamente enjuagado con agua y SECO</strong>. <strong>Nunca introduzcas material con residuos orgánicos abundantes</strong>: la reacción sería violenta.</li>
+                <li>Sumerge el material de vidrio <strong>lentamente</strong> en la disolución piraña usando las pinzas.</li>
+                <li>Deja actuar durante <strong>10 a 20 minutos</strong>, dentro de la campana.</li>
+                <li>Extrae el material con las pinzas y <strong>enjuágalo abundantemente con agua destilada</strong>. <strong>Nunca viertas agua directamente sobre la disolución piraña caliente</strong>: puede salpicar violentamente.</li>
+                <li>Desecha el agua de enjuague por el desagüe con abundante agua corriente.</li>
+            </ol>
+            <div class="note">
+                <strong>Observación:</strong> si el material estaba muy sucio, verás que la disolución se vuelve amarilla o marrón y burbujea. Es la materia orgánica oxidándose. Cuando deja de burbujear y vuelve a ser transparente, la disolución ya no es útil.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Eliminación del residuo (paso crítico)</strong>
+            <p><strong>Nunca viertas la disolución piraña por el desagüe.</strong> Sigue este protocolo:</p>
+            <ol>
+                <li><strong>Deja reaccionar:</strong> una vez usada, deja la disolución en el vaso de precipitados <strong>destapado</strong> dentro de la campana extractora durante al menos <strong>24 horas</strong>, hasta que pierda su reactividad y se enfríe por completo.</li>
+                <li><strong>Dilución:</strong> con la disolución fría, viértela <strong>lentamente sobre abundante agua</strong> (nunca al revés) hasta reducir su concentración por debajo del 10%.</li>
+                <li><strong>Neutralización:</strong> añade <strong>lentamente y con agitación</strong> una disolución concentrada de <strong>hidróxido de sodio (NaOH)</strong> o <strong>carbonato de sodio (Na₂CO₃)</strong>. La neutralización con carbonatos produce efervescencia (CO₂): añade el neutralizante poco a poco.</li>
+                <li><strong>Comprobación del pH:</strong> mide con papel indicador hasta que esté entre <strong>4 y 10</strong>. Entonces podrá ser desechado según las normas del centro.</li>
+                <li><strong>Recolección como residuo:</strong> si el volumen es grande, vierte la disolución fría y reaccionada en un <strong>frasco de vidrio etiquetado</strong> como "Residuo de disolución piraña (ácido)" para su gestión por un gestor autorizado.</li>
+            </ol>
+            <div class="danger">
+                <strong>⚠️ Nunca:</strong> cerrar el recipiente con la disolución piraña aún reactiva (riesgo de sobrepresión), mezclarla con otros residuos orgánicos, verterla por el desagüe sin neutralizar, ni dejarla en recipientes de plástico.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN APLICACIONES -->
+    <div class="section resultado">
+        <h2>🌍 Aplicaciones de la disolución piraña</h2>
+        <p>A pesar de su peligrosidad, la disolución piraña tiene aplicaciones muy importantes en ciencia y tecnología, especialmente donde se necesita <strong>vidrio o superficies perfectamente limpias y libres de materia orgánica</strong>:</p>
+
+        <div class="mini-card azul">
+            <h4>🔬 Análisis de trazas</h4>
+            <p>En química analítica, la presencia de residuos orgánicos en el material de vidrio puede contaminar las muestras y falsear los resultados. La disolución piraña garantiza una limpieza a nivel de trazas, imprescindible en técnicas como <strong>HPLC, espectrometría de masas o análisis de ultratrazas</strong>.</p>
+        </div>
+
+        <div class="mini-card verde">
+            <h4>💻 Microelectrónica y nanotecnología</h4>
+            <p>En la fabricación de <strong>obleas de silicio</strong>, la superficie debe estar perfectamente limpia a escala atómica. La disolución piraña elimina los residuos orgánicos y deja la superficie <strong>hidrofílica</strong> (mojable por el agua), lista para los siguientes procesos litográficos.</p>
+        </div>
+
+        <div class="mini-card naranja">
+            <h4>🧪 Limpieza de material de laboratorio</h4>
+            <p>Se usa para limpiar matraces, tubos de ensayo, portamuestras y material de vidrio que ha estado en contacto con compuestos orgánicos y que debe reutilizarse en experimentos sensibles. También para eliminar residuos de <strong>aceites, grasas y polímeros</strong> adheridos al vidrio.</p>
+        </div>
+
+        <div class="mini-card morado">
+            <h4>⚗️ Activación de superficies</h4>
+            <p>La disolución piraña no solo limpia: también <strong>activa</strong> la superficie del vidrio o del silicio, generando grupos <strong>silanol (–SiOH)</strong> que permiten anclar moléculas orgánicas, anticuerpos o nanopartículas. Es un paso clave en la fabricación de <strong>biosensores</strong> y chips de laboratorio.</p>
+        </div>
+
+        <div class="mini-card rojo">
+            <h4>🔬 Investigación en materiales</h4>
+            <p>En investigación de materiales (grafeno, nanotubos de carbono, óxidos metálicos), la disolución piraña se usa para eliminar residuos de polímeros (PMMA) o contaminantes orgánicos de las superficies antes de su caracterización.</p>
+        </div>
+
+        <div class="mini-card azul">
+            <h4>🧫 Preparación de sustratos biológicos</h4>
+            <p>En biología celular y en estudios de adhesión celular, se usa para preparar cubreobjetos y superficies de cultivo perfectamente limpias, libres de residuos orgánicos que puedan interferir en los experimentos.</p>
+        </div>
+
+        <p style="margin-top: 15px;"><strong>Y por otro lado, la disolución piraña también es un ejemplo de los problemas de la química clásica:</strong></p>
+        <ul>
+            <li>Es <strong>extremadamente peligrosa</strong> y ha causado numerosos accidentes graves en laboratorios.</li>
+            <li>Genera <strong>residuos ácidos</strong> que deben gestionarse como residuos peligrosos.</li>
+            <li>Por ello, la <strong>química verde</strong> busca alternativas más seguras: tratamientos con plasma, disoluciones de hidróxido de sodio y etanol, o limpiadores enzimáticos.</li>
+            <li>Sin embargo, en muchos casos sigue siendo insustituible por su <strong>eficacia y versatilidad</strong>.</li>
+        </ul>
+
+        <div class="highlight-box">
+            <strong>Reflexión final:</strong> la disolución piraña es un ejemplo perfecto de cómo la química puede ser a la vez <strong>extraordinariamente útil y extraordinariamente peligrosa</strong>. Su manejo responsable exige formación, supervisión y respeto absoluto por los protocolos de seguridad. La mejor práctica de laboratorio no es la que se hace más rápido, sino la que se hace <strong>sin accidentes</strong>.
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has demostrado?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>La disolución piraña destruye la materia orgánica por oxidación química extrema.</strong></p>
+            <p>El ácido sulfúrico concentrado y el peróxido de hidrógeno al 30% forman <strong>ácido de Caro (H₂SO₅)</strong>, un oxidante extraordinariamente potente que convierte los compuestos orgánicos en <strong>CO₂ y H₂O</strong>. El material de vidrio queda perfectamente limpio, listo para análisis de trazas o experimentos de precisión.</p>
+        </div>
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>La reacción de formación del ácido de Caro es <strong>exotérmica</strong>: la mezcla se calienta mucho.</li>
+            <li>El <strong>orden de mezcla</strong> es crítico: siempre el peróxido sobre el ácido, nunca al revés.</li>
+            <li>La disolución piraña <strong>no es estable</strong> y no puede almacenarse: se descompone liberando O₂.</li>
+            <li>La aparición de <strong>burbujas y color amarillento</strong> indica que está oxidando materia orgánica.</li>
+            <li>Es <strong>extremadamente peligrosa</strong>: requiere campana extractora, EPP completo y supervisión.</li>
+            <li>Sus residuos deben <strong>neutralizarse y gestionarse</strong> como residuos peligrosos: nunca por el desagüe.</li>
+            <li>Tiene aplicaciones importantes en <strong>microelectrónica, nanotecnología, análisis químico y biología</strong>.</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que la disolución piraña "disuelve" la materia orgánica. No la disuelve: la <strong>destruye químicamente</strong>, la oxida hasta CO₂ y H₂O. Es una diferencia fundamental entre un proceso físico (disolver) y un proceso químico (oxidar/destruir). Otra confusión frecuente: creer que se puede guardar para reutilizarla. <strong>Nunca se almacena</strong>: se prepara la cantidad justa y se neutraliza tras su uso.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO la disolución piraña</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>La reacción de formación del ácido de Caro</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Escribe y ajusta la reacción de formación del ácido de Caro a partir de ácido sulfúrico y peróxido de hidrógeno. Indica qué tipo de reacción es y por qué se libera calor.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Reacción:</strong></div>
+                    <div class="formula-box">\[ \mathrm{H_2SO_4 + H_2O_2 \;\rightleftharpoons\; H_2SO_5 + H_2O} \]</div>
+                    <div class="paso"><strong>Paso 2 — Tipo de reacción:</strong> es una reacción de <strong>desproporción</strong> (o dismutación) en la que el oxígeno peroxídico (–1) se reparte entre el ácido de Caro y el agua. También puede considerarse una reacción ácido-base seguida de una sustitución nucleófila.</div>
+                    <div class="paso"><strong>Paso 3 — ¿Por qué se libera calor?</strong> La formación de nuevos enlaces (S–O–O–H y O–H) libera más energía que la que se necesita para romper los enlaces iniciales (S–OH y O–O). La diferencia se libera como calor. Es una reacción <strong>exotérmica</strong>.</div>
+                    <div class="paso"><strong>Resultado:</strong> la mezcla se calienta hasta superar los 100 °C. Por eso es imprescindible añadir el peróxido poco a poco y con baño de hielo.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Oxidación de la materia orgánica</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Escribe la reacción de oxidación completa del etanol (C₂H₅OH) por el ácido de Caro, sabiendo que los productos son CO₂, H₂O y H₂SO₄.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Reacción sin ajustar:</strong></div>
+                    <div class="formula-box">\[ \mathrm{C_2H_5OH + H_2SO_5 \;\longrightarrow\; CO_2 + H_2O + H_2SO_4} \]</div>
+                    <div class="paso"><strong>Paso 2 — Ajuste:</strong> el etanol tiene 2 C y 6 H. Necesitamos 2 CO₂ y 3 H₂O. Por tanto:</div>
+                    <div class="formula-box">\[ \mathrm{C_2H_5OH + 6\,H_2SO_5 \;\longrightarrow\; 2\,CO_2 + 3\,H_2O + 6\,H_2SO_4} \]</div>
+                    <div class="paso"><strong>Paso 3 — Comprobación:</strong> C: 2 → 2 ✓; H: 6 + 6 = 12 → 6 + 6 = 12 ✓; S: 6 → 6 ✓; O: 1 + 30 = 31 → 4 + 3 + 24 = 31 ✓.</div>
+                    <div class="paso"><strong>Resultado:</strong> cada molécula de etanol necesita 6 moléculas de ácido de Caro para oxidarse completamente hasta CO₂ y H₂O. La materia orgánica desaparece.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>¿Por qué nunca se guarda la disolución piraña?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica, con la reacción química correspondiente, por qué la disolución piraña no debe almacenarse en un recipiente cerrado.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Descomposición del ácido de Caro:</strong></div>
+                    <div class="formula-box">\[ \mathrm{2\,H_2SO_5 \;\longrightarrow\; 2\,H_2SO_4 + O_2\uparrow} \]</div>
+                    <div class="paso"><strong>Paso 2 — Consecuencia:</strong> el O₂ generado se acumula en el espacio de cabeza del recipiente. Si el recipiente está cerrado, la presión aumenta.</div>
+                    <div class="paso"><strong>Paso 3 — Riesgo:</strong> el aumento de presión puede provocar el <strong>estallido del recipiente</strong>, con proyección de ácido corrosivo. Además, el O₂ puro en contacto con materia orgánica en un recipiente cerrado puede generar atmósferas inflamables o explosivas.</div>
+                    <div class="paso"><strong>Conclusión:</strong> nunca se almacena la disolución piraña. Se prepara la cantidad justa, se usa y se deja descomponer en recipiente abierto dentro de la campana antes de neutralizar.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>Cálculo de la proporción 3:1</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Necesitas preparar 80 mL de disolución piraña en proporción 3:1 (H₂SO₄:H₂O₂). ¿Qué volumen de cada reactivo debes medir? Si el peróxido está al 30% en masa (densidad ≈ 1,11 g/mL) y el ácido al 96% (densidad ≈ 1,84 g/mL), ¿qué masa de cada uno interviene?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Volúmenes:</strong> proporción 3:1 significa 3 partes de ácido por 1 de peróxido. Total = 4 partes.</div>
+                    <div class="formula-box">\[ V_{\mathrm{H_2SO_4}} = \frac{3}{4} \cdot 80 = 60\ \mathrm{mL} \qquad V_{\mathrm{H_2O_2}} = \frac{1}{4} \cdot 80 = 20\ \mathrm{mL} \]</div>
+                    <div class="paso"><strong>Paso 2 — Masas:</strong></div>
+                    <div class="formula-box">\[ m_{\mathrm{H_2SO_4}} = 60 \cdot 1{,}84 = 110{,}4\ \mathrm{g} \qquad m_{\mathrm{H_2O_2}} = 20 \cdot 1{,}11 = 22{,}2\ \mathrm{g} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> se miden 60 mL de ácido sulfúrico y 20 mL de peróxido. La masa de ácido es de unos 110 g y la de peróxido unos 22 g. Recuerda: <strong>siempre el peróxido sobre el ácido</strong>, gota a gota.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>¿Por qué no se usa agua oxigenada del supermercado?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La disolución piraña requiere peróxido de hidrógeno al 30%, no el del supermercado (3% o 10%). Explica por qué. ¿Qué ocurriría si se usara el del supermercado?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Función del peróxido:</strong> el H₂O₂ es el precursor del ácido de Caro (H₂SO₅). Cuanto mayor sea su concentración, más ácido de Caro se forma y más potente es la disolución piraña.</div>
+                    <div class="paso"><strong>Paso 2 — Consecuencia de usar H₂O₂ diluido:</strong> con H₂O₂ al 3%, la cantidad de agua presente es enorme (97%). El ácido sulfúrico se diluye, la formación de ácido de Caro es mínima y la mezcla <strong>apenas oxida</strong>. No sirve para limpiar material de trazas.</div>
+                    <div class="paso"><strong>Paso 3 — ¿Por qué no basta con echar más H₂O₂ diluido?</strong> Porque el agua extra diluye el ácido sulfúrico, reduciendo su concentración y su capacidad oxidante. La proporción 3:1 está pensada para reactivos concentrados.</div>
+                    <div class="paso"><strong>Resultado:</strong> la disolución piraña solo funciona con H₂O₂ concentrado (30%) y H₂SO₄ concentrado (96%). Con reactivos diluidos no se alcanza la potencia oxidante necesaria.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>La reacción con acetona: ¿por qué es peligrosa?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La disolución piraña reacciona violentamente con la acetona (C₃H₆O). Explica por qué esta mezcla es especialmente peligrosa y qué producto intermedio puede formarse.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — La acetona es un compuesto orgánico:</strong> contiene C, H y O, por lo que es susceptible de ser oxidada por el ácido de Caro.</div>
+                    <div class="paso"><strong>Paso 2 — Producto intermedio:</strong> la oxidación parcial de la acetona puede generar <strong>peróxidos orgánicos</strong> (como el peróxido de acetona o el triperóxido de triacetona, TATP), que son <strong>explosivos extremadamente sensibles al choque y a la fricción</strong>.</div>
+                    <div class="paso"><strong>Paso 3 — Riesgo:</strong> la reacción es muy exotérmica y puede descontrolarse. La formación de peróxidos orgánicos explosivos convierte una simple limpieza en un riesgo de detonación.</div>
+                    <div class="paso"><strong>Conclusión:</strong> nunca se debe mezclar disolución piraña con acetona, etanol, alcoholes, ni con ningún disolvente orgánico. El material a limpiar debe estar previamente enjuagado y seco, sin residuos orgánicos abundantes.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Neutralización del residuo</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Tras usar 100 mL de disolución piraña, se deja descomponer y se diluye. Para neutralizarla se añade carbonato de sodio (Na₂CO₃). Escribe la reacción de neutralización del ácido sulfúrico con carbonato de sodio y explica por qué se produce efervescencia.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Reacción:</strong></div>
+                    <div class="formula-box">\[ \mathrm{H_2SO_4 + Na_2CO_3 \;\longrightarrow\; Na_2SO_4 + CO_2\uparrow + H_2O} \]</div>
+                    <div class="paso"><strong>Paso 2 — ¿Por qué hay efervescencia?</strong> Se desprende <strong>CO₂</strong> gaseoso, que forma burbujas. Por eso el neutralizante debe añadirse <strong>poco a poco</strong> y con agitación, para evitar que la espuma arrastre ácido y provoque salpicaduras.</div>
+                    <div class="paso"><strong>Paso 3 — Comprobación del pH:</strong> se mide con papel indicador hasta que esté entre 4 y 10. Si el pH es muy ácido, se añade más carbonato; si es muy básico, se añade más ácido diluido.</div>
+                    <div class="paso"><strong>Resultado:</strong> la neutralización convierte el residuo ácido en una disolución de sulfato de sodio, que puede gestionarse como residuo acuoso según las normas del centro.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 8 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 8</span>
+                    <span>Aplicación: limpieza de obleas de silicio</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En la fabricación de chips, las obleas de silicio se limpian con disolución piraña antes de la litografía. Explica por qué es necesario este paso y qué propiedad de la superficie se consigue.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — ¿Por qué limpiar?</strong> La superficie de la oblea debe estar libre de <strong>residuos orgánicos</strong> (aceites, polímeros, partículas) para que las capas posteriores (fotorresina, óxidos, metales) se adhieran correctamente y los circuitos funcionen.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Qué hace la disolución piraña?</strong> Oxida toda la materia orgánica hasta CO₂ y H₂O, dejando la superficie de silicio <strong>perfectamente limpia</strong>.</div>
+                    <div class="paso"><strong>Paso 3 — Activación de la superficie:</strong> además, la oxidación genera grupos <strong>silanol (–SiOH)</strong> en la superficie, que la hacen <strong>hidrofílica</strong> (mojable por el agua). Esto mejora la adhesión de las capas posteriores y es esencial en la fabricación de chips.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la disolución piraña no solo limpia: <strong>activa</strong> la superficie. Es un paso clave en la microelectrónica, aunque hoy se buscan alternativas más seguras por su peligrosidad.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> La disolución piraña es un ejemplo extremo de <strong>oxidación química</strong>. Las tres ideas clave son: (1) el ácido sulfúrico y el peróxido de hidrógeno forman <strong>ácido de Caro (H₂SO₅)</strong>, un oxidante muy potente; (2) ese oxidante destruye la materia orgánica convirtiéndola en <strong>CO₂ y H₂O</strong>; (3) la mezcla es <strong>extremadamente peligrosa</strong> y debe manipularse con protocolo estricto. Es importante distinguir entre <strong>disolver</strong> (proceso físico) y <strong>oxidar/destruir</strong> (proceso químico). También es una lección de <strong>seguridad química</strong>: el orden de mezcla, la campana extractora, el EPP y la neutralización del residuo no son opcionales. La química es poderosa; manipularla con respeto es la mejor práctica de laboratorio.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Dos líquidos transparentes, una mezcla que devora la materia orgánica. La mejor manera de <em>ver</em> la oxidación química extrema en acción.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>

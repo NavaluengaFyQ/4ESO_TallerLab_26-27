@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U02c09 - Reloj de yodo: la reacción que cambia de color de golpe</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .seccion-peligro { background: #fff5f5; border-color: #e53e3e; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .seccion-peligro h2 { color: #9b2c2c; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        .danger strong { color: #9b2c2c; }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+        .mini-card.morado { border-top-color: #805ad5; }
+
+        /* =========================================================
+           ESTILOS PARA LAS FIGURAS DIDÁCTICAS
+           ========================================================= */
+        .figure {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 18px 15px 12px 15px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        .figure svg {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 640px;
+            height: auto;
+        }
+        .figure-caption {
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-top: 12px;
+            line-height: 1.5;
+            font-style: italic;
+            padding: 0 10px;
+        }
+        .figure-caption strong {
+            color: #2d3748;
+            font-style: normal;
+        }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+
+        /* =========================================================
+           TABLA DE PELIGROS (pictogramas GHS)
+           ========================================================= */
+        .picto-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            margin: 20px 0;
+        }
+        .picto-card {
+            width: 150px;
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            padding: 12px 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border: 2px solid #fed7d7;
+        }
+        .picto-card .rombo {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 8px auto;
+            transform: rotate(45deg);
+            border: 3px solid #e53e3e;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+        .picto-card .rombo span {
+            transform: rotate(-45deg);
+            font-size: 1.6em;
+            font-weight: 900;
+            color: #e53e3e;
+        }
+        .picto-card .picto-label {
+            font-size: 0.82em;
+            font-weight: 600;
+            color: #742a2a;
+            line-height: 1.3;
+        }
+
+        /* =========================================================
+           SECCIÓN DESTACADA: ¿DE DÓNDE VIENE EL CAMBIO DE COLOR?
+           ========================================================= */
+        .color-reveal-outer {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 45%, #667eea 100%);
+            padding: 4px;
+            border-radius: 22px;
+            margin: 25px 15px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.35);
+        }
+        .color-reveal-inner {
+            background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+            border-radius: 19px;
+            padding: 25px 28px;
+        }
+        .color-reveal-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+        .color-reveal-title h2 {
+            margin: 0;
+            color: #2d3748;
+            font-size: 1.4em;
+        }
+        .color-reveal-title .big-icon {
+            font-size: 1.8em;
+        }
+        .color-reveal-lead {
+            font-size: 1em;
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 18px;
+        }
+        .stages-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .stage-card {
+            flex: 1 1 210px;
+            min-width: 210px;
+            max-width: 270px;
+            background: white;
+            border-radius: 14px;
+            padding: 16px 16px 18px 16px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-top: 5px solid;
+            text-align: center;
+        }
+        .stage-card.stage-1 { border-top-color: #ecc94b; }
+        .stage-card.stage-2 { border-top-color: #ed8936; }
+        .stage-card.stage-3 { border-top-color: #3182ce; }
+        .stage-card .stage-label {
+            display: inline-block;
+            font-size: 0.72em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            background: #edf2f7;
+            color: #4a5568;
+        }
+        .stage-card.stage-1 .stage-label { background: #fefcbf; color: #744210; }
+        .stage-card.stage-2 .stage-label { background: #feebc8; color: #7b341e; }
+        .stage-card.stage-3 .stage-label { background: #bee3f8; color: #2a4365; }
+        .stage-card .stage-emoji {
+            font-size: 2.2em;
+            display: block;
+            margin: 6px 0 8px 0;
+        }
+        .stage-card h4 {
+            margin: 0 0 8px 0;
+            font-size: 0.98em;
+            color: #2d3748;
+        }
+        .stage-card p {
+            font-size: 0.87em;
+            color: #4a5568;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .stage-arrow {
+            display: flex;
+            align-items: center;
+            font-size: 1.6em;
+            color: #a0aec0;
+            font-weight: bold;
+        }
+        .color-net-box {
+            background: #edf2f7;
+            border-left: 5px solid #3182ce;
+            border-radius: 10px;
+            padding: 14px 20px;
+            margin-top: 18px;
+        }
+        .color-net-box strong {
+            color: #2a4365;
+        }
+        .color-net-box p {
+            margin: 6px 0;
+            font-size: 0.95em;
+            color: #2d3748;
+        }
+        .color-net-box .formula-box {
+            margin: 8px 0 0 0;
+            background: #ffffff;
+            border-color: #bee3f8;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U02c09.- </span>
+                <span class="texto">Reloj de yodo: la reacción que cambia de color de golpe</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>Vamos a preparar un <strong>reloj de yodo</strong> (<em>iodine clock</em>), una de las demostraciones más elegantes de cinética química que existen. En esta práctica vamos a mezclar dos disoluciones completamente <strong>transparentes</strong> y, al cabo de un tiempo que nosotros controlamos, la mezcla se vuelve <strong>azul oscuro, casi negro, de forma brusca</strong>.</p>
+        <p>Lo interesante no es el color, sino <strong>cuándo aparece</strong>. Prepararemos <strong>tres vasos</strong> en los que la cantidad de yodato de potasio (KIO₃) es <strong>exactamente la misma</strong>, pero la cantidad de bisulfito de sodio (NaHSO₃) va disminuyendo. El resultado: tres tiempos de espera distintos, perfectamente ordenados.</p>
+        <ul>
+            <li>Los tres vasos se quedan <strong>incoloros</strong> un rato, como si no estuviera pasando nada.</li>
+            <li>De repente, en un instante, el contenido se vuelve <strong>azul oscuro</strong>. No hay degradado: hay un salto.</li>
+            <li>Cuanto <strong>más bisulfito</strong> hay, <strong>más tarda</strong> en aparecer el azul.</li>
+            <li>El "reloj" que medimos es el <strong>tiempo de inducción</strong>: el tiempo que el bisulfito tarda en agotarse.</li>
+        </ul>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Por qué una reacción puede estar ocurriendo sin que se note nada… y luego terminar en un instante? ¿Y cómo podemos "programar" el momento en que cambia de color?
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué es la <strong>velocidad de una reacción química</strong> y por qué unas son rápidas y otras lentas.</li>
+            <li>Qué es una <strong>reacción reloj</strong> y por qué tiene un <strong>tiempo de inducción</strong> antes del cambio brusco.</li>
+            <li>La diferencia entre <strong>reacción global</strong> y <strong>etapas elementales</strong> (una etapa rápida "esconde" a la otra).</li>
+            <li>La <strong>estequiometría</strong> del sistema yodato–bisulfito y el papel del <strong>almidón</strong> como indicador.</li>
+            <li>Cómo <strong>controlar la velocidad</strong> cambiando la concentración de un reactivo.</li>
+            <li>A <strong>preparar disoluciones</strong> y a calcular masas y concentraciones finales tras una mezcla.</li>
+            <li>La importancia de <strong>medir con precisión</strong> el tiempo y la temperatura en un experimento cinético.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>⏱️ Reacciones rápidas, reacciones lentas y reacciones reloj</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>No todas las reacciones van a la misma velocidad</strong>
+            <p>Cuando hablamos de <strong>velocidad de reacción</strong> nos referimos a la rapidez con la que los reactivos se transforman en productos. Es decir: cuánta cantidad de reactivo desaparece (o de producto aparece) por unidad de tiempo.</p>
+            <p>Hay reacciones <strong>rapidísimas</strong>, que ocurren en fracciones de segundo: la combustión del metano, la neutralización de un ácido con una base, la precipitación del cloruro de plata, la explosión de la nitroglicerina. Y hay reacciones <strong>muy lentas</strong>, que tardan días, años o siglos: el hierro que se oxida, la maduración de una fruta, la formación de una cueva por disolución de la caliza, la descomposición de un plástico.</p>
+            <div class="highlight-box">
+                <strong>Idea clave:</strong> la velocidad de reacción <em>no</em> nos dice si una reacción es favorable o no. Una reacción puede liberar muchísima energía (ser muy favorable termodinámicamente) y, aun así, ser <strong>extraordinariamente lenta</strong>. El diamante no se convierte en grafito a temperatura ambiente… aunque "debería". La velocidad es otra cosa: es cuestión de <strong>cinética</strong>, no de energía.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>¿De qué depende la velocidad?</strong>
+            <p>Para que dos moléculas reaccionen tienen que <strong>encontrarse</strong> y <strong>chocar con energía suficiente</strong>. Todo lo que aumente el número de choques eficaces aumenta la velocidad:</p>
+            <ul>
+                <li><strong>Concentración de los reactivos:</strong> más moléculas por unidad de volumen → más choques. En esta práctica es justo lo que vamos a variar.</li>
+                <li><strong>Temperatura:</strong> a mayor temperatura, las moléculas se mueven más rápido y una fracción mayor supera la energía de activación. Regla práctica: unos 10 °C más pueden duplicar la velocidad.</li>
+                <li><strong>Superficie de contacto:</strong> un reactivo en polvo reacciona mucho más rápido que en un bloque.</li>
+                <li><strong>Catalizadores:</strong> sustancias que abren un camino de reacción con menor energía de activación.</li>
+                <li><strong>Naturaleza de los reactivos:</strong> los enlaces fuertes tardan más en romperse.</li>
+            </ul>
+            <div class="note">
+                <strong>En nuestro reloj de yodo</strong> mantenemos constantes la temperatura, el volumen total (200 mL en cada vaso), la cantidad de yodato y la cantidad de almidón. La <strong>única variable</strong> que cambia es la <strong>concentración de bisulfito de sodio</strong>. Es un experimento con una sola variable: por eso se pueden comparar los tiempos.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>¿Qué es una reacción reloj?</strong>
+            <p>Una <strong>reacción reloj</strong> (<em>clock reaction</em>) es un sistema de varias reacciones acopladas en el que se produce un <strong>cambio brusco y visible</strong> (normalmente de color) al cabo de un tiempo característico, el llamado <strong>tiempo de inducción</strong>.</p>
+            <p>La clave está en que durante ese tiempo <strong>sí está ocurriendo química</strong>, pero no la vemos. Sucede algo parecido a esto:</p>
+            <ol>
+                <li>El sistema genera una sustancia que podría dar color (en nuestro caso, <strong>yodo, I₂</strong>).</li>
+                <li>Pero hay un reactivo "amortiguador" (el <strong>bisulfito, HSO₃⁻</strong>) que la consume <strong>inmediatamente</strong> y la hace desaparecer. Esa segunda reacción es <strong>mucho más rápida</strong> que la primera.</li>
+                <li>Mientras quede amortiguador, la sustancia coloreada <strong>nunca se acumula</strong>: la disolución sigue transparente.</li>
+                <li>En el instante en que el amortiguador <strong>se agota</strong>, ya nada consume el yodo. El yodo se acumula <strong>de golpe</strong> y la disolución cambia de color en una fracción de segundo.</li>
+            </ol>
+            <div class="formula-box" style="border-color:#38a169; background:#f0fff4;">
+                <strong style="color:#276749;">El "truco" del reloj:</strong><br>
+                <span style="color:#22543d;">Mientras hay HSO₃⁻, el I₂ no puede acumularse.<br>Cuando el HSO₃⁻ se acaba, el I₂ aparece de golpe.</span>
+            </div>
+            <p>Por eso una reacción reloj <strong>parece no hacer nada durante mucho tiempo y luego reacciona de forma instantánea</strong>. No es magia: es una <strong>competición entre dos reacciones</strong> con velocidades muy distintas.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Las tres reacciones de nuestro reloj de yodo</strong>
+            <p>En la práctica usamos el sistema clásico <strong>yodato–bisulfito</strong> (también llamado reloj de yodo de Landolt). Ocurren tres procesos:</p>
+            <p><strong>a) Reducción del yodato por el bisulfito</strong> (rápida; mientras quede bisulfito):</p>
+            <div class="formula-box">
+                \[
+                \mathrm{IO_3^- + 3\,HSO_3^- \;\longrightarrow\; I^- + 3\,SO_4^{2-} + 3\,H^+}
+                \]
+            </div>
+            <p><strong>b) Formación de yodo</strong> a partir del yodato y del yoduro ya formado (también rápida en medio ácido):</p>
+            <div class="formula-box">
+                \[
+                \mathrm{IO_3^- + 5\,I^- + 6\,H^+ \;\longrightarrow\; 3\,I_2 + 3\,H_2O}
+                \]
+            </div>
+            <p><strong>c) Consumo inmediato del yodo</strong> por el bisulfito que aún queda:</p>
+            <div class="formula-box">
+                \[
+                \mathrm{I_2 + HSO_3^- + H_2O \;\longrightarrow\; 2\,I^- + SO_4^{2-} + 3\,H^+}
+                \]
+            </div>
+            <p>Sumando (a) y (c) se ve que, mientras haya bisulfito, el yodo <strong>no se acumula</strong>: se forma y se destruye al mismo ritmo. El yoduro (I⁻) actúa como intermediario que se recicla.</p>
+            <div class="note">
+                <strong>Y el almidón, ¿qué hace?</strong> El almidón forma con el yodo un <strong>complejo de inclusión</strong> de color <strong>azul intenso</strong> (azul-violeta, y en concentraciones altas casi negro). Es un indicador <strong>extremadamente sensible</strong>: basta una cantidad mínima de I₂ libre para que aparezca el color. Por eso el cambio es tan brusco.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>¿Por qué más bisulfito significa más tiempo de espera?</strong>
+            <p>El bisulfito es el <strong>amortiguador</strong> que se va consumiendo poco a poco. La cantidad total de yodato es la misma en los tres vasos, así que el "combustible" del reloj es idéntico; lo que cambia es <strong>cuánto amortiguador hay que gastar antes de que el yodo pueda acumularse</strong>.</p>
+            <ul>
+                <li><strong>Mucho bisulfito</strong> → hay que consumir mucho antes de que se agote → el azul tarda <strong>más</strong>.</li>
+                <li><strong>Poco bisulfito</strong> → se agota enseguida → el azul aparece <strong>antes</strong>.</li>
+            </ul>
+            <p>Como la velocidad de consumo del bisulfito es aproximadamente constante (el yodato está en exceso), el <strong>tiempo de aparición del azul es prácticamente proporcional a la cantidad inicial de bisulfito</strong>. Esa es la relación que vamos a comprobar experimentalmente.</p>
+            <div class="highlight-box">
+                <strong>Resumen mental:</strong> el bisulfito es como una <strong>esponja</strong> que va absorbiendo todo el yodo que se produce. Mientras la esponja tenga capacidad, no vemos nada. Cuando se satura, el yodo empieza a sobrar… y el color aparece de golpe. <strong>El reloj mide cuánto tarda la esponja en llenarse.</strong>
+            </div>
+        </div>
+
+        <!-- FIGURA DIDÁCTICA -->
+        <div class="figure">
+            <svg viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tres vasos con la misma cantidad de yodato y distinta cantidad de bisulfito, que cambian de color a tiempos crecientes">
+                <defs>
+                    <marker id="arrowReloj" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+                        <path d="M0,0 L7,3 L0,6 Z" fill="#4a5568"/>
+                    </marker>
+                    <linearGradient id="gradLiquido" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#f7fbff"/>
+                        <stop offset="100%" stop-color="#d6ecff"/>
+                    </linearGradient>
+                </defs>
+
+                <!-- Título -->
+                <text x="320" y="22" font-size="15" font-weight="bold" fill="#2d3748" text-anchor="middle">Mismo yodato, distinto bisulfito: tres tiempos de espera</text>
+
+                <!-- ================= VASO 1 ================= -->
+                <path d="M 60 55 L 60 150 Q 60 165 75 165 L 145 165 Q 160 165 160 150 L 160 55" fill="#ffffff" stroke="#4a5568" stroke-width="2.5"/>
+                <path d="M 64 90 L 64 150 Q 64 161 76 161 L 144 161 Q 156 161 156 150 L 156 90 Z" fill="url(#gradLiquido)" opacity="0.9"/>
+                <text x="110" y="185" font-size="11.5" fill="#4a5568" font-weight="bold" text-anchor="middle">Vaso 1</text>
+                <text x="110" y="200" font-size="10.5" fill="#4a5568" text-anchor="middle">100 mL A + 100 mL B 100 %</text>
+                <line x1="110" y1="208" x2="110" y2="226" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowReloj)"/>
+                <circle cx="110" cy="258" r="30" fill="#f0f4ff" stroke="#667eea" stroke-width="2.5"/>
+                <text x="110" y="265" font-size="17" font-weight="bold" fill="#2d3748" text-anchor="middle">t₁</text>
+                <text x="110" y="312" font-size="12" font-weight="bold" fill="#2b6cb0" text-anchor="middle">MÁS LENTO</text>
+                <text x="110" y="328" font-size="10.5" fill="#4a5568" text-anchor="middle">0,0150 M de HSO₃⁻</text>
+
+                <!-- ================= VASO 2 ================= -->
+                <path d="M 270 55 L 270 150 Q 270 165 285 165 L 355 165 Q 370 165 370 150 L 370 55" fill="#ffffff" stroke="#4a5568" stroke-width="2.5"/>
+                <path d="M 274 90 L 274 150 Q 274 161 286 161 L 354 161 Q 366 161 366 150 L 366 90 Z" fill="url(#gradLiquido)" opacity="0.9"/>
+                <text x="320" y="185" font-size="11.5" fill="#4a5568" font-weight="bold" text-anchor="middle">Vaso 2</text>
+                <text x="320" y="200" font-size="10.5" fill="#4a5568" text-anchor="middle">100 mL A + 100 mL B 66 %</text>
+                <line x1="320" y1="208" x2="320" y2="226" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowReloj)"/>
+                <circle cx="320" cy="258" r="30" fill="#f0f4ff" stroke="#667eea" stroke-width="2.5"/>
+                <text x="320" y="265" font-size="17" font-weight="bold" fill="#2d3748" text-anchor="middle">t₂</text>
+                <text x="320" y="312" font-size="12" font-weight="bold" fill="#2f855a" text-anchor="middle">INTERMEDIO</text>
+                <text x="320" y="328" font-size="10.5" fill="#4a5568" text-anchor="middle">0,0099 M de HSO₃⁻</text>
+
+                <!-- ================= VASO 3 ================= -->
+                <path d="M 480 55 L 480 150 Q 480 165 495 165 L 565 165 Q 580 165 580 150 L 580 55" fill="#ffffff" stroke="#4a5568" stroke-width="2.5"/>
+                <path d="M 484 90 L 484 150 Q 484 161 496 161 L 564 161 Q 576 161 576 150 L 576 90 Z" fill="url(#gradLiquido)" opacity="0.9"/>
+                <text x="530" y="185" font-size="11.5" fill="#4a5568" font-weight="bold" text-anchor="middle">Vaso 3</text>
+                <text x="530" y="200" font-size="10.5" fill="#4a5568" text-anchor="middle">100 mL A + 100 mL B 33 %</text>
+                <line x1="530" y1="208" x2="530" y2="226" stroke="#4a5568" stroke-width="2" marker-end="url(#arrowReloj)"/>
+                <circle cx="530" cy="258" r="30" fill="#f0f4ff" stroke="#667eea" stroke-width="2.5"/>
+                <text x="530" y="265" font-size="17" font-weight="bold" fill="#2d3748" text-anchor="middle">t₃</text>
+                <text x="530" y="312" font-size="12" font-weight="bold" fill="#c53030" text-anchor="middle">MÁS RÁPIDO</text>
+                <text x="530" y="328" font-size="10.5" fill="#4a5568" text-anchor="middle">0,00495 M de HSO₃⁻</text>
+
+                <!-- Relación de tiempos -->
+                <text x="320" y="362" font-size="12" fill="#2d3748" text-anchor="middle" font-weight="bold">t₁ &gt; t₂ &gt; t₃</text>
+            </svg>
+            <div class="figure-caption"><strong>Figura 1.</strong> Los tres vasos contienen la misma cantidad de yodato de potasio y de almidón. Solo cambia la concentración de bisulfito de sodio. Cuanto menos bisulfito hay, menos tiempo tarda en agotarse la "esponja" y antes aparece el azul oscuro del complejo yodo-almidón.</div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         SECCIÓN DESTACADA: ¿DE DÓNDE VIENE EL CAMBIO DE COLOR?
+         ============================================================ -->
+    <div class="color-reveal-outer">
+        <div class="color-reveal-inner">
+            <div class="color-reveal-title">
+                <span class="big-icon">🎨</span>
+                <h2>¿De dónde viene exactamente el cambio de color?</h2>
+            </div>
+            <p class="color-reveal-lead">El cambio de color <strong>no viene del yodato ni del bisulfito</strong>, sino del <strong>yodo molecular (I₂)</strong> que se acumula cuando ya no queda bisulfito que lo consuma, y que se "atrapa" en el almidón formando un complejo de color azul intenso. Veámoslo en tres fases:</p>
+
+            <div class="stages-row">
+                <!-- FASE 1 -->
+                <div class="stage-card stage-1">
+                    <div class="stage-label">FASE 1 · INCOLORO</div>
+                    <span class="stage-emoji">💧</span>
+                    <h4>Todo transparente (pero trabajando)</h4>
+                    <p>El yodato y el yoduro generan I₂, pero el bisulfito que aún queda lo consume <strong>inmediatamente</strong>. La concentración de I₂ libre es prácticamente <strong>cero</strong>: no hay color.</p>
+                </div>
+                <div class="stage-arrow">→</div>
+                <!-- FASE 2 -->
+                <div class="stage-card stage-2">
+                    <div class="stage-label">FASE 2 · PUNTO CRÍTICO</div>
+                    <span class="stage-emoji">⚡</span>
+                    <h4>El bisulfito se agota</h4>
+                    <p>Se consume la <strong>última molécula</strong> de HSO₃⁻. A partir de este instante ya no hay quien destruya el yodo: el sistema está al borde del cambio.</p>
+                </div>
+                <div class="stage-arrow">→</div>
+                <!-- FASE 3 -->
+                <div class="stage-card stage-3">
+                    <div class="stage-label">FASE 3 · AZUL</div>
+                    <span class="stage-emoji">🟦</span>
+                    <h4>El yodo se acumula de golpe</h4>
+                    <p>El I₂ ya no tiene consumidor y se acumula muy rápido. El <strong>almidón lo atrapa</strong> en su hélice formando un complejo <strong>azul oscuro</strong>. El cambio es prácticamente instantáneo.</p>
+                </div>
+            </div>
+
+            <div class="color-net-box">
+                <strong>La química del color, en tres reacciones:</strong>
+                <p><strong>1)</strong> Se forma yodo (pero aún no se ve):</p>
+                <div class="formula-box">
+                    \[ \mathrm{IO_3^- + 5\,I^- + 6\,H^+ \;\longrightarrow\; 3\,I_2 + 3\,H_2O} \]
+                </div>
+                <p><strong>2)</strong> Mientras queda bisulfito, el yodo se destruye al instante:</p>
+                <div class="formula-box">
+                    \[ \mathrm{I_2 + HSO_3^- + H_2O \;\longrightarrow\; 2\,I^- + SO_4^{2-} + 3\,H^+} \]
+                </div>
+                <p><strong>3)</strong> Cuando el bisulfito se agota, el yodo libre se une al almidón y aparece el azul:</p>
+                <div class="formula-box" style="border-color:#3182ce; background:#ebf8ff;">
+                    \[ \mathrm{I_2 + \text{alimidón} \;\longrightarrow\; \text{complejo azul (I}_2\text{–almidón)}} \]
+                </div>
+            </div>
+
+            <div class="note" style="margin-top:18px;">
+                <strong>La "esponja" del reloj:</strong> el bisulfito es la esponja que absorbe el yodo. Mientras la esponja tenga capacidad, no vemos nada. Cuando se satura (se agota el HSO₃⁻), el yodo "rebosa" y aparece el azul. <strong>El tiempo de espera es el tiempo que tarda la esponja en llenarse.</strong> Por eso, más bisulfito = más tiempo; menos bisulfito = menos tiempo.
+            </div>
+
+            <p style="margin-top:16px; font-size:0.95em; color:#4a5568;">
+                <em>Y no lo olvides:</em> si no añadiéramos <strong>almidón</strong>, el yodo acumulado daría un color <strong>amarillo-pardo</strong> y el cambio pasaría casi desapercibido. El almidón es lo que convierte una simple acumulación en un <strong>cambio de color espectacular</strong>.
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         BLOQUE PLEGABLE: MATERIALES Y PROCEDIMIENTO EXPERIMENTAL
+         ============================================================ -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>⚙️ Materiales y procedimiento experimental</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <div class="step">
+                <span class="step-num">1</span>
+                <strong>Materiales y reactivos</strong>
+                <ul>
+                    <li><strong>Yodato de potasio</strong> (KIO₃), sólido, <em>M</em> = 214,00 g/mol.</li>
+                    <li><strong>Bisulfito de sodio</strong> (NaHSO₃), sólido, <em>M</em> = 104,06 g/mol.</li>
+                    <li><strong>Almidón soluble</strong> (indicador).</li>
+                    <li><strong>Agua destilada</strong> (unos 600 mL en total).</li>
+                    <li><strong>Tres vasos de precipitados de 250 mL</strong> (para los vasos 1, 2 y 3).</li>
+                    <li><strong>Dos vasos o matraces aforados de 250 mL</strong> para preparar las disoluciones A y B.</li>
+                    <li><strong>Probeta de 100 mL</strong> y <strong>pipetas</strong> para medir volúmenes con precisión.</li>
+                    <li><strong>Balanza de precisión</strong> (± 0,001 g).</li>
+                    <li><strong>Varilla de vidrio</strong> para agitar.</li>
+                    <li><strong>Cronómetro</strong> (o el móvil, pero siempre el mismo para los tres vasos).</li>
+                    <li><strong>Termómetro</strong> para comprobar que los tres vasos están a la misma temperatura.</li>
+                    <li><strong>Etiquetas y rotulador</strong> para marcar los vasos.</li>
+                    <li><strong>EPP básico:</strong> bata, guantes de nitrilo y gafas de seguridad.</li>
+                </ul>
+                <div class="danger">
+                    <strong>⚠️ Seguridad:</strong> el yodato de potasio es un oxidante y el bisulfito de sodio puede irritar la piel y las vías respiratorias. El yodo que se forma <strong>mancha mucho</strong> la piel y la ropa (la mancha desaparece lentamente, o con un poco de disolución de tiosulfato). Trabaja con guantes, no te lleves las manos a la cara y no viertas los residuos por el desagüe: recógelos en un frasco etiquetado para su gestión.
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-num">2</span>
+                <strong>Disolución A común: KIO₃ 0,03 M</strong>
+                <p>Necesitamos <strong>100 mL de A para cada uno de los tres vasos</strong>, es decir, <strong>300 mL en total</strong>.</p>
+                <div class="formula-box">
+                    \[ m_{\mathrm{KIO_3}} = 0{,}03\ \frac{\mathrm{mol}}{\mathrm{L}} \times 0{,}300\ \mathrm{L} \times 214{,}00\ \frac{\mathrm{g}}{\mathrm{mol}} = \mathbf{1{,}93\ g} \]
+                </div>
+                <ul>
+                    <li><strong>KIO₃:</strong> 1,93 g (para 300 mL) — o bien <strong>0,642 g</strong> si prefieres preparar 100 mL por vaso.</li>
+                    <li><strong>Agua destilada:</strong> hasta completar 300 mL (o 100 mL por vaso).</li>
+                </ul>
+                <p>Disuelve el sólido en un poco de agua, agita hasta disolución completa y enrasa hasta el volumen final.</p>
+            </div>
+
+            <div class="step">
+                <span class="step-num">3</span>
+                <strong>Disoluciones B: una para cada vaso</strong>
+                <p>La disolución B original es <strong>NaHSO₃ 0,03 M + almidón</strong>. Para 100 mL de B, el almidón de la receta original equivale a <strong>0,06 g</strong> (0,15 g / 250 mL = 0,06 g por 100 mL). Prepara <strong>100 mL de B para cada vaso</strong>:</p>
+                <table>
+                    <tr>
+                        <th>Vaso</th>
+                        <th>Tipo de B</th>
+                        <th>[NaHSO₃]</th>
+                        <th>NaHSO₃ para 100 mL</th>
+                        <th>Almidón</th>
+                        <th>Agua</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>B 100 %</td>
+                        <td>0,0300 M</td>
+                        <td><strong>0,312 g</strong></td>
+                        <td><strong>0,060 g</strong></td>
+                        <td>hasta 100 mL</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>B 66 %</td>
+                        <td>0,0198 M</td>
+                        <td><strong>0,206 g</strong></td>
+                        <td><strong>0,060 g</strong></td>
+                        <td>hasta 100 mL</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>B 33 %</td>
+                        <td>0,0099 M</td>
+                        <td><strong>0,103 g</strong></td>
+                        <td><strong>0,060 g</strong></td>
+                        <td>hasta 100 mL</td>
+                    </tr>
+                </table>
+                <p><strong>Preparación de cada B:</strong> disuelve el almidón en un poco de agua caliente, deja templar, añade el NaHSO₃, agita y enrasa hasta <strong>100 mL</strong> con agua destilada. Prepara las B <strong>justo antes de usarlas</strong> si es posible.</p>
+                <div class="note">
+                    <strong>Alternativa rápida por dilución:</strong> prepara una <strong>B madre 0,03 M con almidón</strong> y diluye:
+                    <ul>
+                        <li>Vaso 1: <strong>100 mL de B madre</strong> → B 100 %.</li>
+                        <li>Vaso 2: <strong>66 mL de B madre + agua hasta 100 mL</strong> → B 66 %.</li>
+                        <li>Vaso 3: <strong>33 mL de B madre + agua hasta 100 mL</strong> → B 33 %.</li>
+                    </ul>
+                    En ese caso el almidón también se diluye en los vasos 2 y 3. Si quieres mantener el almidón constante, añade <strong>0,06 g de almidón</strong> a cada B final y enrasa a 100 mL.
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-num">4</span>
+                <strong>Mezcla final en cada vaso (200 mL)</strong>
+                <table>
+                    <tr>
+                        <th>Vaso</th>
+                        <th>Disolución A</th>
+                        <th>Disolución B</th>
+                        <th>Volumen final</th>
+                        <th>[NaHSO₃] final</th>
+                        <th>Velocidad esperada</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>100 mL A 0,03 M</td>
+                        <td>100 mL B 100 %</td>
+                        <td><strong>200 mL</strong></td>
+                        <td>0,0150 M</td>
+                        <td><strong>Lenta</strong></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>100 mL A 0,03 M</td>
+                        <td>100 mL B 66 %</td>
+                        <td><strong>200 mL</strong></td>
+                        <td>0,0099 M</td>
+                        <td><strong>Media</strong></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>100 mL A 0,03 M</td>
+                        <td>100 mL B 33 %</td>
+                        <td><strong>200 mL</strong></td>
+                        <td>0,00495 M</td>
+                        <td><strong>Más rápida</strong></td>
+                    </tr>
+                </table>
+                <div class="note">
+                    <strong>¿Por qué se divide por dos la concentración?</strong> Porque al mezclar 100 mL de A con 100 mL de B el volumen se duplica, y la cantidad de NaHSO₃ se reparte en un volumen doble. Es una <strong>dilución 1:2</strong>.
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-num">5</span>
+                <strong>Procedimiento</strong>
+                <ol>
+                    <li>Etiqueta los vasos: <strong>1 lento</strong>, <strong>2 medio</strong>, <strong>3 rápido</strong>.</li>
+                    <li>Prepara la disolución A y las tres disoluciones B.</li>
+                    <li>En el vaso 1 pon <strong>100 mL de A</strong>; en el 2, <strong>100 mL de A</strong>; en el 3, <strong>100 mL de A</strong>.</li>
+                    <li>Añade rápidamente al vaso 1 <strong>100 mL de B 100 %</strong>, al vaso 2 <strong>100 mL de B 66 %</strong> y al vaso 3 <strong>100 mL de B 33 %</strong>.</li>
+                    <li>Inicia el cronómetro al mezclar y agita suavemente.</li>
+                    <li>Anota el tiempo hasta la aparición del <strong>azul oscuro/negro</strong> del complejo yodo-almidón.</li>
+                    <li>Mantén los tres vasos a la misma temperatura; si cambia la temperatura, los tiempos cambian.</li>
+                </ol>
+                <div class="highlight-box">
+                    <strong>Consejo experimental:</strong> si preparas los tres vasos a la vez, no podrás cronometrarlos bien. Es mejor <strong>mezclar un vaso, cronometrarlo, y solo después preparar el siguiente</strong> (o contar con dos compañeros que cronometren a la vez). Y anota el tiempo en el momento exacto en que veas el primer tono azul, no cuando ya esté negro.
+                </div>
+                <div class="danger">
+                    <strong>⚠️ Errores que arruinan el experimento:</strong>
+                    <ul>
+                        <li><strong>Temperaturas distintas</strong> entre vasos: un par de grados cambia el tiempo de forma apreciable.</li>
+                        <li><strong>Impurezas orgánicas</strong> o restos de jabón en el material: consumen yodo y adelantan o retrasan el cambio.</li>
+                        <li><strong>No agitar</strong> tras la mezcla: se forman zonas de distinta concentración y el color aparece irregular.</li>
+                        <li><strong>Preparar las B con mucha antelación</strong>: el bisulfito se oxida lentamente con el oxígeno del aire.</li>
+                        <li><strong>Medir mal los volúmenes</strong>: la proporción A:B debe ser exactamente 1:1 para que el volumen final sea 200 mL.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </details>
+
+    <!-- ============================================================
+         BLOQUE PLEGABLE: APLICACIONES
+         ============================================================ -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🌍 ¿Para qué sirve estudiar reacciones reloj?</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <p>Las reacciones reloj no son solo un espectáculo de laboratorio. Son un <strong>modelo experimental muy potente</strong> para estudiar cinética química y sistemas complejos:</p>
+
+            <div class="mini-card azul">
+                <h4>📐 Medir velocidades de reacción</h4>
+                <p>Como el cambio de color es <strong>brusco y fácil de detectar</strong>, el tiempo de inducción se mide con mucha precisión. Variando concentraciones se puede determinar el <strong>orden de reacción</strong> y la <strong>constante de velocidad</strong> del sistema.</p>
+            </div>
+
+            <div class="mini-card verde">
+                <h4>🌡️ Estudiar el efecto de la temperatura</h4>
+                <p>Repitiendo el experimento a distintas temperaturas se obtiene la <strong>energía de activación</strong> mediante la ecuación de Arrhenius. Es una práctica clásica de laboratorio de cinética.</p>
+            </div>
+
+            <div class="mini-card naranja">
+                <h4>🧪 Análisis cuantitativo (yodometría)</h4>
+                <p>El sistema yodo–almidón es la base de la <strong>yodometría</strong>: valoraciones redox para determinar la concentración de oxidantes o reductores. El almidón actúa como indicador del punto final.</p>
+            </div>
+
+            <div class="mini-card morado">
+                <h4>🌀 Osciladores químicos y sistemas complejos</h4>
+                <p>Las reacciones reloj son la puerta de entrada a los <strong>sistemas oscilantes</strong> (como la reacción de Belousov–Zhabotinsky), donde el color oscila periódicamente sin intervención externa. Son un ejemplo de <strong>dinámica no lineal</strong> en química.</p>
+            </div>
+
+            <div class="mini-card rojo">
+                <h4>🎓 Didáctica de la química</h4>
+                <p>Es una de las demostraciones más usadas en el aula porque hace <strong>visible lo invisible</strong>: muestra que una reacción puede estar ocurriendo sin que se aprecie nada, y que el cambio de color depende de la concentración.</p>
+            </div>
+
+            <div class="mini-card azul">
+                <h4>⏱️ Modelos de "temporizador" químico</h4>
+                <p>Los sistemas reloj inspiran el diseño de <strong>materiales y sensores que responden a un tiempo programado</strong>, desde indicadores de caducidad hasta sistemas de liberación controlada.</p>
+            </div>
+
+            <div class="highlight-box" style="margin-top:18px;">
+                <strong>Reflexión final:</strong> el reloj de yodo enseña una lección profunda: <strong>que algo no se vea no significa que no esté ocurriendo</strong>. Durante los segundos de aparente calma, el sistema está trabajando a toda velocidad; simplemente, una segunda reacción mucho más rápida "borra" el resultado. Cuando esa segunda reacción se queda sin reactivo, la primera se hace visible de golpe. Entender eso es entender la <strong>competición cinética</strong>, uno de los conceptos más importantes de la química.
+            </div>
+
+        </div>
+    </details>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has demostrado?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>El tiempo de aparición del azul depende de la cantidad de bisulfito presente.</strong></p>
+            <p>Con la misma cantidad de yodato y de almidón, a <strong>mayor concentración de NaHSO₃</strong> el azul tarda <strong>más</strong> en aparecer, y a <strong>menor concentración</strong> aparece <strong>antes</strong>. El bisulfito actúa como amortiguador que consume el yodo mientras exista.</p>
+        </div>
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>La mezcla permanece <strong>incolora</strong> durante un tiempo, aunque la reacción ya está ocurriendo.</li>
+            <li>El cambio de color es <strong>brusco</strong>, no gradual: es la firma de una reacción reloj.</li>
+            <li>El <strong>almidón</strong> es un indicador muy sensible del yodo libre.</li>
+            <li>La <strong>concentración</strong> es un factor determinante de la velocidad de reacción.</li>
+            <li>La relación entre tiempo de inducción y cantidad de bisulfito es aproximadamente <strong>proporcional</strong>.</li>
+            <li>Es imprescindible controlar la <strong>temperatura</strong> y medir bien los <strong>volúmenes</strong> para comparar los tres vasos.</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que la reacción "no ha empezado" porque no hay color. En un reloj de yodo la química ocurre <strong>desde el primer segundo</strong>: lo que no ocurre es la <strong>acumulación</strong> de yodo. Otro error frecuente es creer que el azul aparece "poco a poco": no, aparece <strong>de forma repentina</strong> cuando se agota el bisulfito.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE: EJERCICIOS -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO el reloj de yodo</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Masa de yodato de potasio necesaria</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Necesitas 300 mL de disolución de KIO₃ 0,03 M. Calcula la masa de KIO₃ necesaria (<em>M</em> = 214,00 g/mol). ¿Cuánta masa necesitarías si prepararas solo 100 mL?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Moles necesarios:</strong></div>
+                    <div class="formula-box">\[ n = c \cdot V = 0{,}03\ \mathrm{mol/L} \times 0{,}300\ \mathrm{L} = 9{,}00 \times 10^{-3}\ \mathrm{mol} \]</div>
+                    <div class="paso"><strong>Paso 2 — Masa:</strong></div>
+                    <div class="formula-box">\[ m = n \cdot M = 9{,}00 \times 10^{-3} \times 214{,}00 = 1{,}93\ \mathrm{g} \]</div>
+                    <div class="paso"><strong>Paso 3 — Para 100 mL:</strong> es la tercera parte: \(1{,}93/3 = 0{,}642\ \mathrm{g}\).</div>
+                    <div class="paso"><strong>Resultado:</strong> 1,93 g de KIO₃ para 300 mL, o 0,642 g para 100 mL. Se pesan en balanza de precisión y se enrasa con agua destilada.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Masa de bisulfito en cada vaso</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La disolución B madre es NaHSO₃ 0,03 M (<em>M</em> = 104,06 g/mol). Para cada vaso se preparan 100 mL de B con el 100 %, el 66 % y el 33 % de esa concentración. Calcula la masa de NaHSO₃ en cada caso.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Concentraciones de cada B:</strong> 0,0300 M; 0,0300 × 0,66 = 0,0198 M; 0,0300 × 0,33 = 0,0099 M.</div>
+                    <div class="paso"><strong>Paso 2 — Moles y masa en 100 mL:</strong></div>
+                    <div class="formula-box">
+                        \[ m_1 = 0{,}0300 \times 0{,}100 \times 104{,}06 = 0{,}312\ \mathrm{g} \]
+                        \[ m_2 = 0{,}0198 \times 0{,}100 \times 104{,}06 = 0{,}206\ \mathrm{g} \]
+                        \[ m_3 = 0{,}0099 \times 0{,}100 \times 104{,}06 = 0{,}103\ \mathrm{g} \]
+                    </div>
+                    <div class="paso"><strong>Resultado:</strong> 0,312 g en el vaso 1; 0,206 g en el vaso 2; 0,103 g en el vaso 3. Observa que las masas están en la misma proporción que las concentraciones (100 : 66 : 33).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>Concentración final tras la mezcla</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En cada vaso se mezclan 100 mL de A con 100 mL de B. Calcula la concentración final de NaHSO₃ en los tres vasos.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Dilución:</strong> al pasar de 100 mL a 200 mL, la concentración se divide por 2.</div>
+                    <div class="formula-box">
+                        \[ c_1 = \frac{0{,}0300}{2} = 0{,}0150\ \mathrm{M} \]
+                        \[ c_2 = \frac{0{,}0198}{2} = 0{,}0099\ \mathrm{M} \]
+                        \[ c_3 = \frac{0{,}0099}{2} = 0{,}00495\ \mathrm{M} \]
+                    </div>
+                    <div class="paso"><strong>Paso 2 — Comprobación con la fórmula de dilución:</strong> \(c_1 V_1 = c_2 V_2 \Rightarrow 0{,}0300 \times 100 = c_f \times 200 \Rightarrow c_f = 0{,}0150\ \mathrm{M}\). ✓</div>
+                    <div class="paso"><strong>Resultado:</strong> 0,0150 M; 0,0099 M y 0,00495 M. Es decir, las concentraciones finales están en proporción 100 : 66 : 33.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>¿Por qué más bisulfito implica más tiempo?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica, usando las reacciones del sistema, por qué el vaso con más NaHSO₃ tarda más en volverse azul.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — El yodo se forma desde el principio:</strong> el yodato oxida al yoduro generando I₂: \(\mathrm{IO_3^- + 5I^- + 6H^+ \rightarrow 3I_2 + 3H_2O}\).</div>
+                    <div class="paso"><strong>Paso 2 — El bisulfito consume el yodo:</strong> \(\mathrm{I_2 + HSO_3^- + H_2O \rightarrow 2I^- + SO_4^{2-} + 3H^+}\). Esta reacción es muy rápida, así que el I₂ no se acumula.</div>
+                    <div class="paso"><strong>Paso 3 — El tiempo de inducción:</strong> el azul aparece cuando el HSO₃⁻ se agota. Como el ritmo de consumo es aproximadamente constante, el tiempo necesario es proporcional a la cantidad inicial de HSO₃⁻.</div>
+                    <div class="paso"><strong>Resultado:</strong> el vaso 1 (0,0150 M) tarda aproximadamente el doble que el vaso 2 (0,0099 M) y unas tres veces más que el vaso 3 (0,00495 M). El bisulfito es el "temporizador" del reloj.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>Ajuste de la reacción global yodato–bisulfito</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Ajusta en medio ácido la reacción global entre el ion yodato y el ion bisulfito, sabiendo que se obtienen ion yoduro, ion sulfato e iones hidrógeno.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Semirreacción de reducción:</strong></div>
+                    <div class="formula-box">\[ \mathrm{IO_3^- + 6H^+ + 6e^- \longrightarrow I^- + 3H_2O} \]</div>
+                    <div class="paso"><strong>Paso 2 — Semirreacción de oxidación:</strong></div>
+                    <div class="formula-box">\[ \mathrm{HSO_3^- + H_2O \longrightarrow SO_4^{2-} + 3H^+ + 2e^-} \]</div>
+                    <div class="paso"><strong>Paso 3 — Igualar electrones</strong> (multiplicamos la oxidación por 3) y sumar:</div>
+                    <div class="formula-box">\[ \mathrm{IO_3^- + 3\,HSO_3^- \longrightarrow I^- + 3\,SO_4^{2-} + 3H^+} \]</div>
+                    <div class="paso"><strong>Paso 4 — Comprobación:</strong> I: 1 = 1 ✓; S: 3 = 3 ✓; O: 3 + 9 = 12 → 12 ✓; H: 3 → 3 ✓; carga: −1 − 3 = −4 → −1 − 6 + 3 = −4 ✓.</div>
+                    <div class="paso"><strong>Resultado:</strong> \(\mathrm{IO_3^- + 3HSO_3^- \rightarrow I^- + 3SO_4^{2-} + 3H^+}\). Es la reacción que consume el bisulfito y que "programa" el tiempo del reloj.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>Preparar las disoluciones B por dilución</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En lugar de pesar tres veces NaHSO₃, quieres preparar una única disolución B madre 0,03 M con almidón y diluirla. ¿Qué volumen de B madre y de agua necesitas para cada vaso si quieres 100 mL de B final?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Aplicar \(c_1V_1 = c_2V_2\):</strong> el volumen de B madre necesario es \(V_1 = V_2 \times (c_2/c_1)\).</div>
+                    <div class="formula-box">
+                        \[ V_1 = 100\ \mathrm{mL} \times 1{,}00 = 100\ \mathrm{mL} \]
+                        \[ V_2 = 100\ \mathrm{mL} \times 0{,}66 = 66\ \mathrm{mL} \]
+                        \[ V_3 = 100\ \mathrm{mL} \times 0{,}33 = 33\ \mathrm{mL} \]
+                    </div>
+                    <div class="paso"><strong>Paso 2 — Completar con agua:</strong> vaso 1: 100 mL de B madre (nada de agua); vaso 2: 66 mL de B madre + agua hasta 100 mL; vaso 3: 33 mL de B madre + agua hasta 100 mL.</div>
+                    <div class="paso"><strong>Ojo:</strong> así el almidón también se diluye en los vasos 2 y 3. Si quieres que la concentración de almidón sea la misma en los tres, añade <strong>0,06 g de almidón</strong> a cada B final y enrasa a 100 mL.</div>
+                    <div class="paso"><strong>Resultado:</strong> 100 mL, 66 mL y 33 mL de B madre respectivamente, completando siempre hasta 100 mL.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Variante con NaHSO₃ 0,05 M</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Si en lugar de NaHSO₃ 0,03 M usaras NaHSO₃ 0,05 M, ¿cómo cambiarían las masas de la tabla de las disoluciones B?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Factor de escala:</strong> \(0{,}05/0{,}03 = 1{,}667\). Todas las masas de NaHSO₃ se multiplican por ese factor.</div>
+                    <div class="formula-box">
+                        \[ m_1 = 0{,}312 \times 1{,}667 = 0{,}520\ \mathrm{g} \]
+                        \[ m_2 = 0{,}206 \times 1{,}667 = 0{,}343\ \mathrm{g} \]
+                        \[ m_3 = 0{,}103 \times 1{,}667 = 0{,}172\ \mathrm{g} \]
+                    </div>
+                    <div class="paso"><strong>Paso 2 — Lo que NO cambia:</strong> el almidón (0,060 g por cada 100 mL), los volúmenes (100 mL de A + 100 mL de B) y el esquema general (100 %, 66 %, 33 %).</div>
+                    <div class="paso"><strong>Resultado:</strong> 0,520 g; 0,343 g y 0,172 g. Los tiempos de espera se alargarán en la misma proporción (aproximadamente ×1,667), porque hay más bisulfito que consumir.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 8 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 8</span>
+                    <span>El papel del almidón y el cambio brusco de color</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> ¿Por qué la disolución se vuelve azul <em>de golpe</em> y no poco a poco? ¿Qué pasaría si no añadiéramos almidón?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Antes del punto crítico:</strong> todo el I₂ que se forma es consumido inmediatamente por el HSO₃⁻ que aún queda. La concentración de I₂ libre es prácticamente <strong>cero</strong>.</div>
+                    <div class="paso"><strong>Paso 2 — En el punto crítico:</strong> el HSO₃⁻ se agota. A partir de ese instante, el I₂ ya no tiene quien lo consuma y <strong>se acumula muy rápidamente</strong>.</div>
+                    <div class="paso"><strong>Paso 3 — Papel del almidón:</strong> el almidón atrapa las moléculas de I₂ en su hélice formando un complejo de color azul intenso. Es tan sensible que basta una cantidad mínima de I₂ para que aparezca el color: por eso el cambio parece instantáneo.</div>
+                    <div class="paso"><strong>Paso 4 — Sin almidón:</strong> el I₂ se acumularía igual, y la disolución se iría volviendo <strong>amarilla-parda</strong> (color del I₂ disuelto). El cambio sería mucho menos visible y el "reloj" perdería su efecto dramático.</div>
+                    <div class="paso"><strong>Resultado:</strong> el carácter brusco se debe a la combinación de (a) una reacción amortiguadora que mantiene el I₂ a cero y (b) un indicador extremadamente sensible. Sin almidón no habría reloj visible, solo un lento amarillear.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> El reloj de yodo es la mejor demostración de que <strong>velocidad de reacción y espontaneidad son cosas distintas</strong>, y de que <strong>no ver nada no significa que no ocurra nada</strong>. Las tres ideas clave son: (1) hay reacciones rápidas y lentas, y su velocidad depende de la concentración; (2) en un sistema con dos reacciones acopladas, la más rápida "esconde" a la más lenta hasta que se agota un reactivo; (3) en ese momento el producto coloreado aparece de forma <strong>repentina</strong>. La variable que controla el tiempo es la <strong>cantidad de bisulfito</strong>, y el indicador que hace visible el final es el <strong>almidón</strong>. Y no olvides la parte experimental: una sola variable, temperatura constante y volúmenes exactos. Sin control, no hay medida.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Dos líquidos transparentes, un silencio de unos segundos… y un azul que aparece de golpe. La mejor manera de <em>ver</em> la cinética química en acción.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>
