@@ -238,6 +238,44 @@
         }
 
         /* =========================================================
+           MINI-GALERÍA DENTRO DE PASOS
+           ========================================================= */
+        .material-mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .material-mini-card {
+            background: #f9fcff;
+            border-radius: 10px;
+            padding: 10px 6px 8px 6px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.15s;
+        }
+        .material-mini-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .material-mini-card img {
+            width: 100%;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 5px;
+            background: white;
+            border-radius: 4px;
+        }
+        .material-mini-card span {
+            font-size: 0.78em;
+            font-weight: 600;
+            color: #2d3748;
+            display: block;
+            line-height: 1.3;
+        }
+
+        /* =========================================================
            DESPLEGABLES
            ========================================================= */
         details {
@@ -608,6 +646,44 @@
                 <li><strong>Material aforado (exacto):</strong> matraz aforado, pipeta aforada, bureta. Tienen una o dos marcas y se calibran a una temperatura concreta. Se usan para <strong>preparar disoluciones y valorar</strong>.</li>
                 <li><strong>Material graduado (aproximado):</strong> probeta, vaso de precipitados, pipeta graduada, matraz Erlenmeyer. Tienen una escala más o menos fina, pero su precisión es menor. Se usan para <strong>medir de forma rápida y no crítica</strong>.</li>
             </ul>
+
+            <!-- MINI-GALERÍA: MATERIAL VOLUMÉTRICO -->
+            <p style="margin-top:18px; font-weight:600; color:#2a4365;">Material aforado (exacto)</p>
+            <div class="material-mini-grid">
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Matraz aforado.jpg" alt="Matraz aforado">
+                    <span>Matraz aforado</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Pipeta aforada.jpg" alt="Pipeta aforada">
+                    <span>Pipeta aforada</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Bureta.jpg" alt="Bureta">
+                    <span>Bureta</span>
+                </div>
+            </div>
+
+            <p style="margin-top:14px; font-weight:600; color:#2a4365;">Material graduado (aproximado)</p>
+            <div class="material-mini-grid">
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Probeta.jpg" alt="Probeta">
+                    <span>Probeta</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Beajer o Vaso de precipitado.jpg" alt="Vaso de precipitados">
+                    <span>Vaso de precipitados</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Pipeta graduada.jpg" alt="Pipeta graduada">
+                    <span>Pipeta graduada</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Matraz erlenmeyer.jpg" alt="Matraz Erlenmeyer">
+                    <span>Matraz Erlenmeyer</span>
+                </div>
+            </div>
+
             <table>
                 <tr>
                     <th>Instrumento</th>
@@ -659,6 +735,73 @@
                 <li><strong>Calefacción:</strong> mechero Bunsen o de alcohol, trípode, rejilla metálica, crisol, cápsula de porcelana, vaso de precipitados de borosilicato, tubo de ensayo (con pinza de madera).</li>
                 <li><strong>Separación:</strong> embudo en V y papel filtro (filtración por gravedad), embudo Büchner y kitasato (filtración a vacío), embudo de decantación (líquidos inmiscibles), cristalizador (cristalización), desecador (secado).</li>
             </ul>
+
+            <!-- MINI-GALERÍA: CALEFACCIÓN -->
+            <p style="margin-top:18px; font-weight:600; color:#7b341e;">Material de calefacción</p>
+            <div class="material-mini-grid">
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Mechero de bunsen.jpg" alt="Mechero Bunsen">
+                    <span>Mechero Bunsen</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Mechero de alcohol.jpg" alt="Mechero de alcohol">
+                    <span>Mechero de alcohol</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Trípode.jpg" alt="Trípode">
+                    <span>Trípode</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Malla metálica.jpg" alt="Malla metálica">
+                    <span>Malla metálica</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Crisol.jpg" alt="Crisol">
+                    <span>Crisol</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Cápsula.jpg" alt="Cápsula de porcelana">
+                    <span>Cápsula de porcelana</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Tubo de ensayo.jpg" alt="Tubo de ensayo">
+                    <span>Tubo de ensayo</span>
+                </div>
+            </div>
+
+            <!-- MINI-GALERÍA: SEPARACIÓN -->
+            <p style="margin-top:14px; font-weight:600; color:#2a4365;">Material de separación</p>
+            <div class="material-mini-grid">
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Embudo en V.jpg" alt="Embudo en V">
+                    <span>Embudo en V</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Papel de filtro.jpg" alt="Papel filtro">
+                    <span>Papel filtro</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Empudo buchner.jpg" alt="Embudo Büchner">
+                    <span>Embudo Büchner</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Kitasato.jpg" alt="Kitasato">
+                    <span>Kitasato</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Embudo de separación o decantación.jpg" alt="Embudo de decantación">
+                    <span>Embudo de decantación</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Cristalizador.jpg" alt="Cristalizador">
+                    <span>Cristalizador</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Desecador.jpg" alt="Desecador">
+                    <span>Desecador</span>
+                </div>
+            </div>
+
             <div class="note">
                 <strong>Regla de oro:</strong> el material de vidrio normal <strong>no se calienta directamente a la llama</strong>. Para calentar se usa vidrio de borosilicato, porcelana o metal, y siempre con rejilla o baño maría cuando corresponda.
             </div>
@@ -674,6 +817,38 @@
                 <li><strong>Pinzas de crisol:</strong> para manipular crisoles y cápsulas a alta temperatura.</li>
                 <li><strong>Aro metálico con rejilla:</strong> para apoyar vasos y matraces sobre el mechero.</li>
             </ul>
+
+            <!-- MINI-GALERÍA: SUJECIÓN Y SOPORTE -->
+            <div class="material-mini-grid">
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Soporte universal.jpg" alt="Soporte universal">
+                    <span>Soporte universal</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Nuez doble.jpg" alt="Nuez doble">
+                    <span>Nuez doble</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Pinzas 1.jpg" alt="Pinzas">
+                    <span>Pinzas</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Aro metálico.jpg" alt="Aro metálico">
+                    <span>Aro metálico</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Trípode.jpg" alt="Trípode">
+                    <span>Trípode</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Pinza para tubo de ensaño.jpg" alt="Pinza de madera">
+                    <span>Pinza de madera</span>
+                </div>
+                <div class="material-mini-card">
+                    <img src="../imagenes/Material_Laboratorio/Pinzas de crisol.jpg" alt="Pinzas de crisol">
+                    <span>Pinzas de crisol</span>
+                </div>
+            </div>
         </div>
 
         <!-- FIGURA DIDÁCTICA: CLASIFICACIÓN -->
