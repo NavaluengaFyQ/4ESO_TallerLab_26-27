@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U02c09 - Camaleón químico: el permanganato que cambia de color</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+            overflow-x: auto;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+        .mini-card.morado { border-top-color: #805ad5; }
+
+        /* ============================================
+           IMÁGENES Y TIRAS DE COLOR
+           ============================================ */
+        figure.figura {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.figura img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+            background: #fff;
+            padding: 4px;
+        }
+        figure.figura figcaption {
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: #4a5568;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        .color-strip {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .color-chip {
+            flex: 1 1 170px;
+            border-radius: 14px;
+            padding: 16px 12px;
+            color: #ffffff;
+            text-align: center;
+            font-weight: 600;
+            line-height: 1.4;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+        }
+        .color-chip span {
+            display: block;
+            font-weight: 300;
+            font-size: 0.9em;
+            margin-top: 4px;
+        }
+        .chip-morado   { background: #6b21a8; }
+        .chip-verde    { background: #15803d; }
+        .chip-amarillo { background: #b45309; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+            flex-wrap: wrap;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U02c09.- </span>
+                <span class="texto">Camaleón químico: el permanganato que cambia de color</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>Vamos a preparar la conocida como <strong>"reacción camaleón"</strong>: una disolución que cambia de color <strong>morado → verde → amarillo-ocre</strong> ante nuestros ojos, sin que tengamos que añadir nada nuevo. El truco está en tres ingredientes: <strong>permanganato de potasio</strong> (KMnO₄), <strong>hidróxido de sodio</strong> (NaOH) y <strong>sacarosa</strong> (el azúcar de mesa).</p>
+        <p>El manganeso del permanganato está en su estado de oxidación máximo, <strong>+7</strong>, y tiene "hambre de electrones". La sacarosa, en medio básico, se los va cediendo poco a poco. Cada vez que el manganeso gana electrones <strong>baja de estado de oxidación</strong> y, como consecuencia, <strong>cambia de color</strong>. Primero pasa a <strong>+6</strong> (verde) y después a <strong>+4</strong> (amarillo-ocre). Como un camaleón, la disolución se transforma sin parar.</p>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Por qué una misma disolución cambia de color varias veces si no le añadimos nada nuevo?
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué son las <strong>reacciones redox</strong> y cómo se identifica quién se oxida y quién se reduce.</li>
+            <li>A calcular <strong>estados de oxidación</strong> y a relacionarlos con el color de una especie química.</li>
+            <li>Por qué el <strong>medio básico</strong> (el NaOH) es imprescindible para que aparezcan el verde y el amarillo.</li>
+            <li>Por qué la <strong>sacarosa</strong> hace que el cambio sea <strong>lento y observable</strong>, mientras que otros azúcares lo aceleran demasiado.</li>
+            <li>La importancia de la <strong>estequiometría</strong>: identificar el reactivo limitante y entender por qué basta con dos granos de KMnO₄.</li>
+            <li>A manejar material de laboratorio con seguridad: vaso de precipitado, matraz Erlenmeyer, agitador magnético y reactivos corrosivos.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>🔬 Fundamento teórico</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>El permanganato de potasio: el protagonista morado</strong>
+            <p>El <strong>KMnO₄</strong> es una sal de color morado muy intenso. Al disolverse en agua se separa en iones potasio (K⁺) y en el ion <strong>permanganato</strong> (MnO₄⁻), que es el responsable del color.</p>
+            <p>En el ion permanganato, el manganeso tiene estado de oxidación <strong>+7</strong>, el más alto que puede alcanzar. Eso significa que ya ha "cedido" todos los electrones que puede ceder: solo le queda <strong>ganar</strong> electrones. Por eso el KMnO₄ es un <strong>oxidante muy fuerte</strong>.</p>
+            <figure class="figura">
+                <img src="../imagenes/Camaleón-Mn_más7.jpg" alt="Disolución de permanganato de potasio, de color morado, en un vaso de precipitado" width="300">
+                <figcaption>Disolución de KMnO₄: el ion permanganato, MnO₄⁻, con el manganeso en estado de oxidación <strong>+7</strong>, es el causante del color morado-violeta.</figcaption>
+            </figure>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>La sacarosa: el donante de electrones</strong>
+            <p>La <strong>sacarosa</strong> (C₁₂H₂₂O₁₁) es el azúcar de mesa. Si la miras en un libro de texto, verás que se dice que es un azúcar <strong>no reductor</strong>: sus dos carbonos anoméricos están unidos entre sí y no tiene ningún grupo aldehído o cetona libre capaz de ceder electrones con facilidad.</p>
+            <p>Sin embargo, en una disolución concentrada de NaOH ocurre algo importante: la sacarosa se <strong>hidroliza</strong> (se rompe) lentamente en <strong>glucosa + fructosa</strong>. Y estos dos azúcares <strong>sí</strong> son reductores, porque tienen grupos carbonilo libres. En ese momento empiezan a ceder electrones al manganeso.</p>
+            <div class="note">
+                <strong>¿Por qué nos interesa la sacarosa y no la glucosa?</strong> Porque la hidrólisis es lenta y hace de "cuello de botella". La glucosa o el zumo de fruta reaccionan casi instantáneamente y apenas da tiempo a ver el verde. Con la sacarosa, los tres colores aparecen espaciados en el tiempo: es el azúcar ideal para una demostración didáctica.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>El hidróxido de sodio: el director de orquesta</strong>
+            <p>El NaOH no es un simple "ayudante": <strong>decide el producto final</strong> de la reducción del permanganato. El pH del medio determina hasta dónde puede bajar el manganeso:</p>
+            <table>
+                <tr>
+                    <th>Medio</th>
+                    <th>Producto de la reducción</th>
+                    <th>Estado de oxidación del Mn</th>
+                    <th>Color</th>
+                </tr>
+                <tr>
+                    <td>Muy ácido</td>
+                    <td>Mn²⁺</td>
+                    <td>+2</td>
+                    <td>Casi incoloro (rosa pálido)</td>
+                </tr>
+                <tr>
+                    <td>Neutro / poco básico</td>
+                    <td>MnO₂</td>
+                    <td>+4</td>
+                    <td>Marrón oscuro / ocre</td>
+                </tr>
+                <tr>
+                    <td><strong>Muy básico (nuestro caso)</strong></td>
+                    <td>MnO₄²⁻ (intermedio) → MnO₂</td>
+                    <td>+6 → +4</td>
+                    <td><strong>Verde → amarillo-ocre</strong></td>
+                </tr>
+            </table>
+            <p>Con 5 g de NaOH en 150 mL de agua partimos de una concentración aproximada de <strong>0,83 mol/L</strong> (pH ≈ 13,7). Ese exceso enorme de base es lo que hace posible que el <strong>manganato (MnO₄²⁻, verde)</strong> sea lo bastante estable como para que lo veamos antes de que se transforme en dióxido de manganeso.</p>
+            <div class="note">
+                <strong>Ojo:</strong> si se te olvida el NaOH, el permanganato pasaría directamente a MnO₂ marrón sin mostrar el verde. El medio básico es la condición <em>necesaria</em> para que exista el camaleón.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>La secuencia de colores</strong>
+            <p>Al verter el permanganato sobre la disolución básica de azúcar, el manganeso va ganando electrones en dos etapas bien diferenciadas:</p>
+            <div class="color-strip">
+                <div class="color-chip chip-morado">MnO₄⁻ &nbsp;(Mn +7)<span>Morado / violeta</span></div>
+                <div class="color-chip chip-verde">MnO₄²⁻ &nbsp;(Mn +6)<span>Verde</span></div>
+                <div class="color-chip chip-amarillo">MnO₂ &nbsp;(Mn +4)<span>Amarillo-ocre / marrón</span></div>
+            </div>
+            <figure class="figura">
+                <img src="../imagenes/Camaleón-Los tres iones.jpg" alt="Diagrama de los tres iones: permanganato morado, manganato verde y dióxido de manganeso amarillo" width="800">
+                <figcaption>Los tres iones implicados: <strong>permanganato</strong> (Mn +7, morado), <strong>manganato</strong> (Mn +6, verde) y <strong>dióxido de manganeso</strong> (Mn +4, amarillo-ocre).</figcaption>
+            </figure>
+            <p>El proceso es reversible en apariencia (los colores "vuelven" si agitas o si añades más permanganato), pero en realidad es una <strong>reducción progresiva</strong>: el manganeso solo puede bajar, nunca subir solo.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Las semirreacciones y la ecuación global</strong>
+            <p>En una reacción redox conviene separar lo que le pasa al oxidante y lo que le pasa al reductor. El manganeso se reduce en dos pasos:</p>
+            <div class="formula-box">
+                <strong>Reducción 1 (rápida):</strong><br>
+                \[ \mathrm{MnO_4^- + e^- \rightarrow MnO_4^{2-}} \]
+                <em>Morado (+7) → Verde (+6)</em>
+            </div>
+            <div class="formula-box">
+                <strong>Reducción 2 (más lenta):</strong><br>
+                \[ \mathrm{MnO_4^{2-} + 2H_2O + 2e^- \rightarrow MnO_2 + 4OH^-} \]
+                <em>Verde (+6) → Amarillo-ocre (+4)</em>
+            </div>
+            <p>La sacarosa, por su parte, se oxida. En medio básico fuerte acaba convertida en <strong>carbonato</strong> (CO₃²⁻), cediendo <strong>48 electrones</strong> por molécula:</p>
+            <div class="formula-box">
+                \[ \mathrm{C_{12}H_{22}O_{11} + 72\,OH^- \rightarrow 12\,CO_3^{2-} + 47\,H_2O + 48\,e^-} \]
+            </div>
+            <p>Combinando ambas semirreacciones se obtiene la <strong>ecuación iónica global ajustada</strong>:</p>
+            <div class="formula-box" style="border-color:#38b2ac; border-width:3px; background:#e6fffa;">
+                \[ \mathrm{C_{12}H_{22}O_{11} + 16\,MnO_4^- + 8\,OH^- \rightarrow 12\,CO_3^{2-} + 16\,MnO_2 + 15\,H_2O} \]
+            </div>
+            <p>Fíjate en el dato clave: <strong>hacen falta 16 iones permanganato por cada molécula de sacarosa</strong>. Eso explica por qué el KMnO₄ es el reactivo limitante y por qué dos granos son suficientes para toda la disolución.</p>
+            <div class="note">
+                <strong>Para ampliar:</strong> en la práctica real no toda la sacarosa llega hasta CO₃²⁻; también se forman ácidos orgánicos parcialmente oxidados (glucónico, oxálico, sacarínico...). La ecuación anterior es la simplificación estequiométrica correcta en cuanto a <strong>electrones intercambiados</strong>.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>¿Por qué se llama "camaleón"?</strong>
+            <p>Porque, igual que el animal cambia de color para adaptarse al entorno, esta disolución cambia de color <strong>sin que añadamos nada nuevo</strong>. Todo lo que ocurre es un intercambio interno de electrones entre la sacarosa (que se oxida) y el manganeso (que se reduce).</p>
+            <div class="highlight-box">
+                <strong>Idea clave:</strong> el manganeso <strong>no desaparece</strong> ni se transforma en otra sustancia misteriosa: sigue ahí, en el mismo recipiente, con el mismo número de átomos. Lo único que cambia es <strong>cuántos electrones tiene</strong>, y eso cambia su color. Esa es toda la magia (y toda la química) del camaleón.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN MATERIALES -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y reactivos</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Material de laboratorio</strong>
+            <ul>
+                <li><strong>Vaso de precipitado</strong> de 200 mL (para la disolución de KMnO₄).</li>
+                <li><strong>Matraz Erlenmeyer</strong> de 250 mL (para la disolución básica de azúcar).</li>
+                <li><strong>Agitador magnético</strong> con imán (barra magnética).</li>
+                <li><strong>Vidrio de reloj</strong> o papel para pesar los sólidos.</li>
+                <li><strong>Balanza granataria</strong> (precisión 0,1 g; si es analítica, mejor).</li>
+                <li><strong>Probeta</strong> de 100 mL o vaso graduado para medir el agua.</li>
+                <li><strong>Espátula, varilla de vidrio y guantes de nitrilo</strong>.</li>
+                <li><strong>Gafas de seguridad y bata</strong>.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Reactivos: cantidades y criticidad</strong>
+            <table>
+                <tr>
+                    <th>Reactivo</th>
+                    <th>Masa / volumen</th>
+                    <th>Moles aproximados</th>
+                    <th>¿Es crítico?</th>
+                </tr>
+                <tr>
+                    <td><strong>KMnO₄</strong></td>
+                    <td>1–2 granos<br>(≈ 0,010–0,020 g)</td>
+                    <td>≈ 0,06–0,13 mmol</td>
+                    <td><strong>Sí (moderadamente)</strong>. Es el reactivo limitante: conviene que sea <em>poco</em>. Si te pasas, el morado tapa el verde y se forma tanto MnO₂ que la disolución queda opaca.</td>
+                </tr>
+                <tr>
+                    <td><strong>NaOH</strong></td>
+                    <td>5 g</td>
+                    <td>125 mmol</td>
+                    <td><strong>No crítico.</strong> Exceso enorme (≈ 2.500×) sobre lo que consume la reacción. Solo debe haber <em>suficiente</em> para mantener pH &gt; 13 y que el verde aparezca.</td>
+                </tr>
+                <tr>
+                    <td><strong>Sacarosa</strong></td>
+                    <td>2 g</td>
+                    <td>5,8 mmol</td>
+                    <td><strong>No crítico.</strong> Exceso de ≈ 1.000×. Solo reaccionan realmente unos <strong>2 mg</strong>. Más cantidad acelera el proceso pero no altera el resultado.</td>
+                </tr>
+                <tr>
+                    <td><strong>Agua</strong></td>
+                    <td>150 mL (Erlenmeyer)<br>+ ≈ 50 mL (vaso)</td>
+                    <td>—</td>
+                    <td>No crítico. Determina la concentración y, por tanto, la intensidad de los colores.</td>
+                </tr>
+            </table>
+            <div class="formula-box">
+                <strong>Justificación de las masas (estequiometría):</strong><br>
+                Con 0,015 g de KMnO₄ (≈ 0,095 mmol) se necesitarían<br>
+                \( 0{,}095/16 = 0{,}0059 \text{ mmol de sacarosa} = \mathbf{2{,}0\ mg} \).<br>
+                Como tenemos 2 000 mg, la sacarosa está en exceso de ≈ 1 000 veces.<br>
+                Para oxidar los 2 g completos harían falta <strong>14,8 g de KMnO₄</strong>: por eso basta con dos granos.
+            </div>
+            <div class="danger">
+                <strong>⚠️ Seguridad:</strong> el NaOH es <strong>corrosivo</strong> (produce quemaduras graves en piel y ojos). Manipúlalo con guantes y gafas, y recuerda que al disolverse <strong>libera mucho calor</strong>: el vaso se calienta. El KMnO₄ es <strong>comburente y mancha</strong> la piel y la ropa con un tono marrón muy persistente. El MnO₂ generado es un residuo con metales pesados: <strong>no se tira por el desagüe</strong>; recógelo en un recipiente de residuos. Neutraliza siempre con ácido diluido antes de desechar las disoluciones básicas.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Procedimiento experimental</strong>
+            <ol>
+                <li>Prepara la <strong>disolución de permanganato</strong>: pon 1–2 granos de KMnO₄ en el vaso de precipitado con ≈ 50 mL de agua y agita con la barra magnética hasta disolverlos por completo. Obtendrás una disolución <strong>morada intensa</strong>.</li>
+                <li>Pon <strong>150 mL de agua</strong> en el matraz Erlenmeyer.</li>
+                <li>Añade al Erlenmeyer los <strong>5 g de NaOH</strong> y los <strong>2 g de sacarosa</strong>. Agita hasta que todo se disuelva. La disolución será <strong>incolora</strong> (¡ojo, el vaso se calienta!).</li>
+                <li>Vierte <strong>un poco</strong> (unos pocos mL) de la disolución morada de KMnO₄ en el Erlenmeyer. Vuelve a colocar el matraz sobre el agitador.</li>
+                <li>Observa y cronometra: el color <strong>morado</strong> desaparece casi de inmediato y aparece un <strong>verde intenso</strong>.</li>
+                <li>Deja el agitador en marcha y sigue observando: en unos minutos el verde vira a <strong>amarillo-ocre</strong> (MnO₂ en suspensión).</li>
+            </ol>
+            <figure class="figura">
+                <img src="../imagenes/Camaleón-Disolución kmno4 en agua.jpg" alt="Disolución del permanganato de potasio en agua" width="800">
+                <figcaption>Paso 1: al disolver el KMnO₄ en agua se liberan los iones permanganato, que dan a la disolución su color morado característico.</figcaption>
+            </figure>
+            <figure class="figura">
+                <img src="../imagenes/Camaleón-Matraz150mlagua.jpg" alt="Matraz Erlenmeyer con 150 mL de agua" width="300">
+                <figcaption>Paso 2: 150 mL de agua en el matraz Erlenmeyer, listos para recibir el hidróxido de sodio y la sacarosa.</figcaption>
+            </figure>
+            <figure class="figura">
+                <img src="../imagenes/Camaleón-Matraz150mlaguaConHidroxySacar.jpg" alt="Matraz Erlenmeyer con la disolución de hidróxido de sodio y sacarosa" width="300">
+                <figcaption>Paso 3: disolución básica de sacarosa. Es incolora, pero ya está lista para ceder electrones al permanganato.</figcaption>
+            </figure>
+            <div class="note">
+                <strong>Truco:</strong> si quieres ver el verde durante más tiempo, <strong>enfría</strong> el matraz en un baño de hielo antes de verter el permanganato. Si quieres acelerar el cambio a amarillo, <strong>calienta</strong> ligeramente. La temperatura es el mejor "mando" para controlar el camaleón.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>La etapa verde: el manganato (Mn +6)</strong>
+            <p>Pocos segundos después de verter el permanganato, la disolución se vuelve <strong>verde esmeralda</strong>. La sacarosa (ya parcialmente hidrolizada) ha cedido <strong>un electrón</strong> a cada ion permanganato, que pasa de <strong>Mn +7 a Mn +6</strong> y se convierte en <strong>ion manganato</strong>, MnO₄²⁻.</p>
+            <figure class="figura">
+                <img src="../imagenes/Camaleón-erlenmeyer-Verde.jpg" alt="Matraz Erlenmeyer con la disolución de color verde tras añadir el permanganato" width="800">
+                <figcaption>Etapa intermedia: el permanganato (Mn +7, morado) ha ganado <strong>1 electrón</strong> y se ha transformado en manganato (Mn +6, verde).</figcaption>
+            </figure>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>La etapa amarilla: el dióxido de manganeso (Mn +4)</strong>
+            <p>Si sigues agitando, el verde va apagándose y la disolución toma un tono <strong>amarillo-ocre</strong> (a veces descrito como marrón claro o mostaza). El manganato ha ganado <strong>dos electrones más</strong> y ha pasado a <strong>Mn +4</strong>, formando <strong>dióxido de manganeso</strong>, MnO₂, que queda en suspensión coloidal y por eso se ve amarillento en lugar de negro.</p>
+            <figure class="figura">
+                <img src="../imagenes/Camaleón-erlenmeyer-amarillo.jpg" alt="Matraz Erlenmeyer con la disolución amarilla de dióxido de manganeso" width="800">
+                <figcaption>Etapa final: el manganato (Mn +6, verde) ha ganado <strong>2 electrones</strong> más y se ha convertido en dióxido de manganeso (Mn +4, amarillo-ocre).</figcaption>
+            </figure>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>Variantes para investigar</strong>
+            <ul>
+                <li><strong>Cambiar el azúcar:</strong> repite con glucosa, fructosa o zumo de fruta. ¿Cuánto tarda en aparecer el verde? ¿Y el amarillo?</li>
+                <li><strong>Cambiar la temperatura:</strong> prueba a 5 °C (baño de hielo) y a 40 °C (baño María). Cronometra cada etapa.</li>
+                <li><strong>Quitar el NaOH:</strong> haz la prueba sin hidróxido de sodio. ¿Aparece el verde? ¿Por qué no?</li>
+                <li><strong>Cambiar la concentración de KMnO₄:</strong> con un solo grano el verde dura más; con cinco, el morado tarda en desaparecer.</li>
+                <li><strong>Añadir más permanganato cuando ya está amarillo:</strong> ¿vuelve a aparecer el morado? ¿Se puede "reiniciar" el camaleón?</li>
+                <li><strong>Medir el pH:</strong> con papel indicador o pH-metro, comprueba que el medio se mantiene básico durante toda la experiencia.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has demostrado?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>El "camaleón químico" es una reacción redox en la que el manganeso va ganando electrones de la sacarosa y baja progresivamente de estado de oxidación, cambiando de color en cada etapa.</strong></p>
+            <p>Morado (Mn +7) → Verde (Mn +6) → Amarillo-ocre (Mn +4).</p>
+        </div>
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>El <strong>color de una especie química depende de su estado de oxidación</strong>: el mismo elemento (Mn) da tres colores completamente distintos según cuántos electrones tenga.</li>
+            <li>El <strong>medio básico</strong> es imprescindible: es lo que permite que el manganato (verde) sea observable y lo que hidroliza la sacarosa para que pueda ceder electrones.</li>
+            <li>La <strong>sacarosa</strong> es un reductor "lento" porque primero tiene que hidrolizarse: por eso los cambios de color se pueden seguir a simple vista.</li>
+            <li>El <strong>KMnO₄ es el reactivo limitante</strong>: dos granos bastan para toda la disolución porque la estequiometría exige 16 iones permanganato por cada molécula de sacarosa.</li>
+            <li>La <strong>agitación constante</strong> es clave para que el cambio de color sea homogéneo y no aparezcan "nubes" verdes o motas marrones.</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que el permanganato "se ha destruido" o "ha desaparecido". Los átomos de manganeso siguen exactamente ahí, en el mismo matraz: solo han cambiado de estado de oxidación. Si quisieras, podrías recuperarlos en parte como MnO₂ filtrando la disolución final.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO el camaleón químico</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Los tres estados de oxidación del manganeso</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Calcula el estado de oxidación del manganeso en KMnO₄, K₂MnO₄ y MnO₂. Indica cuántos electrones gana el manganeso en cada salto y relaciona cada estado con el color observado.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — KMnO₄:</strong> \( +1 + x + 4(-2) = 0 \Rightarrow x = +7 \). Color <strong>morado</strong>.</div>
+                    <div class="paso"><strong>Paso 2 — K₂MnO₄:</strong> \( 2(+1) + x + 4(-2) = 0 \Rightarrow x = +6 \). Color <strong>verde</strong>.</div>
+                    <div class="paso"><strong>Paso 3 — MnO₂:</strong> \( x + 2(-2) = 0 \Rightarrow x = +4 \). Color <strong>amarillo-ocre / marrón</strong>.</div>
+                    <div class="paso"><strong>Paso 4 — Electrones ganados:</strong> +7 → +6 gana <strong>1 e⁻</strong>; +6 → +4 gana <strong>2 e⁻</strong>. En total, el manganeso gana <strong>3 electrones</strong> por átomo.</div>
+                    <div class="paso"><strong>Resultado:</strong> a medida que el manganeso se reduce, el color pasa de morado a verde y de verde a amarillo. El color es, literalmente, un indicador del estado de oxidación.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>¿Por qué el NaOH es imprescindible?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un compañero propone hacer la práctica sin hidróxido de sodio, "para ver si sale igual". ¿Qué ocurriría? Explica el papel del medio básico.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — El pH decide el producto:</strong> en medio ácido, el permanganato se reduce directamente a Mn²⁺ (casi incoloro). En medio neutro o poco básico pasa a MnO₂ (marrón) sin detenerse en el verde.</div>
+                    <div class="paso"><strong>Paso 2 — Estabilidad del manganato:</strong> el ion MnO₄²⁻ (verde) solo es estable en disoluciones muy básicas. Sin un exceso de OH⁻, se desproporciona rápidamente y no llegamos a verlo.</div>
+                    <div class="paso"><strong>Paso 3 — Hidrólisis de la sacarosa:</strong> la sacarosa necesita un medio básico fuerte para romperse en glucosa y fructosa, que son los verdaderos reductores.</div>
+                    <div class="paso"><strong>Conclusión:</strong> sin NaOH no habría ni verde ni amarillo: el efecto camaleón <strong>desaparece</strong>. El hidróxido de sodio no es un ingrediente decorativo, es el que marca el camino de la reacción.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>¿Por qué con sacarosa va lento?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La sacarosa es un azúcar no reductor. Sin embargo, en esta práctica actúa como reductora. Explícalo y razona por qué se elige sacarosa en lugar de glucosa para hacer la demostración.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Sacarosa pura:</strong> sus dos carbonos anoméricos están unidos en el enlace glucosídico, así que no tiene grupo aldehído ni cetona libre. Por eso no reduce al permanganato directamente.</div>
+                    <div class="paso"><strong>Paso 2 — En medio básico:</strong> el NaOH cataliza la <strong>hidrolisis</strong> de la sacarosa en glucosa + fructosa. Ambos son azúcares reductores y sí ceden electrones con facilidad.</div>
+                    <div class="paso"><strong>Paso 3 — El factor tiempo:</strong> como la hidrólisis es lenta, la cesión de electrones también lo es. Eso permite ver el paso intermedio verde, que con glucosa desaparece casi instantáneamente.</div>
+                    <div class="paso"><strong>Conclusión:</strong> con sacarosa los tres colores aparecen espaciados en el tiempo. Es el azúcar ideal para una demostración didáctica.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>¿Cuál es el reactivo limitante?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Partimos de 0,015 g de KMnO₄, 5 g de NaOH y 2 g de sacarosa. Sabiendo que la ecuación global es<br>
+                    C₁₂H₂₂O₁₁ + 16 MnO₄⁻ + 8 OH⁻ → 12 CO₃²⁻ + 16 MnO₂ + 15 H₂O,<br>
+                    determina el reactivo limitante y la masa de sacarosa que realmente reacciona.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Moles de KMnO₄:</strong> \( n = 0{,}015 / 158{,}03 = 9{,}5\times10^{-5} \) mol ≈ <strong>0,095 mmol</strong>.</div>
+                    <div class="paso"><strong>Paso 2 — Moles de sacarosa:</strong> \( n = 2 / 342{,}30 = 5{,}84\times10^{-3} \) mol ≈ <strong>5,84 mmol</strong>.</div>
+                    <div class="paso"><strong>Paso 3 — Moles de NaOH:</strong> \( n = 5 / 40 = 0{,}125 \) mol = <strong>125 mmol</strong>.</div>
+                    <div class="paso"><strong>Paso 4 — Comparación estequiométrica:</strong> 5,84 mmol de sacarosa necesitarían \( 16 \times 5{,}84 = 93{,}4 \) mmol de MnO₄⁻, es decir, <strong>14,8 g de KMnO₄</strong>. Solo tenemos 0,095 mmol.</div>
+                    <div class="paso"><strong>Paso 5 — Sacarosa consumida:</strong> \( 0{,}095/16 = 0{,}0059 \) mmol → \( 0{,}0059 \times 342{,}30 \approx \) <strong>2,0 mg</strong>.</div>
+                    <div class="paso"><strong>Resultado:</strong> el <strong>KMnO₄ es el reactivo limitante</strong> (por un factor de ≈ 1 000). El NaOH y la sacarosa están en exceso enorme, y solo reaccionan ≈ 2 mg de los 2 g de azúcar. Por eso sus masas exactas no son críticas, pero la del permanganato sí.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>¿Por qué hay que agitar?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La práctica se hace siempre con agitador magnético. ¿Qué pasaría si vertiéramos el permanganato y dejáramos el matraz en reposo?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Gradientes de concentración:</strong> al caer, el permanganato se acumula en la zona de vertido. Allí habría una reducción muy rápida (verde e incluso marrón local) mientras el resto del matraz seguiría incoloro.</div>
+                    <div class="paso"><strong>Paso 2 — Efecto sobre la observación:</strong> veríamos "nubes" verdes y motas de MnO₂, y no un cambio de color uniforme y limpio.</div>
+                    <div class="paso"><strong>Paso 3 — Suspensión del MnO₂:</strong> el dióxido de manganeso es un sólido. Sin agitación se deposita en el fondo y el color amarillo se pierde.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la agitación <strong>homogeneiza</strong> la disolución, <strong>acelera</strong> el proceso (favorece los choques entre iones) y <strong>mantiene en suspensión</strong> el MnO₂. Sin ella, el camaleón se ve mal.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>¿Qué pasa si echas demasiado KMnO₄?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Si en lugar de dos granos echamos una cucharadita de KMnO₄, la experiencia no funciona bien. Explica por qué, apoyándote en la estequiometría y en la óptica.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Mucho permanganato:</strong> el morado es un color muy intenso. Con concentraciones altas, el color morado <strong>tapa</strong> el verde y el amarillo, porque absorbe la mayor parte de la luz visible.</div>
+                    <div class="paso"><strong>Paso 2 — Mucho MnO₂:</strong> al reducirse, todo ese exceso de permanganato genera una cantidad enorme de MnO₂ sólido, que vuelve la disolución <strong>opaca y marrón oscura</strong>. La suspensión deja de ser translúcida.</div>
+                    <div class="paso"><strong>Paso 3 — Estequiometría:</strong> con más KMnO₄, la sacarosa disponible no basta para reducirlo todo. Queda permanganato sin reaccionar y la disolución se queda morada.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el KMnO₄ es el limitante y por eso <strong>hay que echar muy poco</strong>: "uno o dos granos". Es el único reactivo cuya masa afecta de verdad al resultado visible.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Del aula al laboratorio real</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El cambio de color del permanganato no es solo un truco vistoso. Nombra al menos tres aplicaciones reales del comportamiento redox del KMnO₄ y explica en qué se basa cada una.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>1. Permanganometría (valoraciones redox):</strong> el KMnO₄ se usa como valorante porque, como es intensamente morado y se decolora al reducirse, <strong>actúa como su propio indicador</strong>. Se emplea para determinar la concentración de disoluciones reductoras (Fe²⁺, agua oxigenada, nitritos...).</div>
+                    <div class="paso"><strong>2. Detección de azúcares reductores:</strong> aunque hoy se usa más el reactivo de Fehling, la idea es la misma: un oxidante de color fuerte que se decolora al ser reducido por azúcares con grupo carbonilo libre.</div>
+                    <div class="paso"><strong>3. Tratamiento de aguas:</strong> el KMnO₄ se utiliza como oxidante para eliminar materia orgánica, hierro y manganeso del agua potable y para el control de olores.</div>
+                    <div class="paso"><strong>4. Sensores y biosensores:</strong> muchos sensores de glucosa se basan en la oxidación del azúcar por un oxidante fuerte y en la medida electroquímica o colorimétrica del cambio.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el camaleón químico no es una curiosidad de laboratorio: es la versión didáctica y a gran escala de procesos que se usan a diario en análisis clínicos, control de calidad y tratamiento de aguas.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> El camaleón químico es una lección de química redox en tres actos. Las ideas clave son: (1) el <strong>color de un ion depende de su estado de oxidación</strong>: Mn +7 morado, Mn +6 verde, Mn +4 amarillo-ocre; (2) el <strong>medio básico</strong> es lo que hace posible ver el verde, porque estabiliza el manganato; (3) la <strong>sacarosa</strong> es un reductor lento porque primero se hidroliza, y eso es justo lo que convierte la reacción en un espectáculo observable. Entender esto te permite controlar el camaleón (con la temperatura, la cantidad de permanganato o el tipo de azúcar) en lugar de limitarte a mirarlo.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Dos granos de permanganato, azúcar y sosa: tres colores y una sola reacción redox.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>
