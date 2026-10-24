@@ -499,6 +499,45 @@
             background: #ffffff;
             border-color: #bee3f8;
         }
+
+        /* =========================================================
+           FOTOGRAFÍAS DE LABORATORIO
+           ========================================================= */
+        .photo-figure {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 15px 15px 10px 15px;
+            margin: 20px auto;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            max-width: 640px;
+        }
+        .photo-figure img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+        }
+        .photo-pair {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .photo-pair > .photo-figure {
+            flex: 1 1 240px;
+            max-width: 320px;
+            margin: 0;
+        }
+        .photo-pair > .photo-figure img {
+            max-height: 380px;
+            object-fit: contain;
+        }
     </style>
 </head>
 <body>
@@ -748,6 +787,12 @@
                 </div>
             </div>
 
+            <!-- FOTOGRAFÍA: ANTES Y DESPUÉS -->
+            <div class="photo-figure">
+                <img src="../imagenes/Reloj de Yodo-Antes y después.jpg" alt="Comparación antes y después: a la izquierda vasos con disolución transparente, a la derecha vasos con disolución negra">
+                <div class="figure-caption"><strong>Antes y después.</strong> A la izquierda, la mezcla recién preparada: dos disoluciones incoloras que, juntas, siguen siendo transparentes. A la derecha, la misma mezcla tras el tiempo de inducción: el complejo yodo-almidón ha aparecido <em>de golpe</em> y el líquido se ha vuelto azul oscuro, casi negro.</div>
+            </div>
+
             <div class="note" style="margin-top:18px;">
                 <strong>La "esponja" del reloj:</strong> el bisulfito es la esponja que absorbe el yodo. Mientras la esponja tenga capacidad, no vemos nada. Cuando se satura (se agota el HSO₃⁻), el yodo "rebosa" y aparece el azul. <strong>El tiempo de espera es el tiempo que tarda la esponja en llenarse.</strong> Por eso, más bisulfito = más tiempo; menos bisulfito = menos tiempo.
             </div>
@@ -900,6 +945,18 @@
                 </div>
             </div>
 
+            <!-- FOTOGRAFÍAS: DISOLUCIONES A Y B ANTES DE MEZCLAR -->
+            <div class="photo-pair">
+                <div class="photo-figure">
+                    <img src="../imagenes/Reloj de Yodo-Erlenmeyer A.jpg" alt="Erlenmeyer con la disolución A incolora y transparente (almidón y tiosulfato de sodio)">
+                    <div class="figure-caption"><strong>Disolución A.</strong> Incolora y transparente. Contiene el almidón (indicador) y el tiosulfato de sodio (amortiguador que consume el yodo).</div>
+                </div>
+                <div class="photo-figure">
+                    <img src="../imagenes/Reloj de Yodo-Erlenmeyer B.jpg" alt="Erlenmeyer con la disolución B incolora y transparente (yodato de potasio)">
+                    <div class="figure-caption"><strong>Disolución B.</strong> Incolora y transparente. Contiene el yodato de potasio (KIO₃), el reactivo que genera el yodo.</div>
+                </div>
+            </div>
+
             <div class="step">
                 <span class="step-num">5</span>
                 <strong>Procedimiento</strong>
@@ -912,6 +969,13 @@
                     <li>Anota el tiempo hasta la aparición del <strong>azul oscuro/negro</strong> del complejo yodo-almidón.</li>
                     <li>Mantén los tres vasos a la misma temperatura; si cambia la temperatura, los tiempos cambian.</li>
                 </ol>
+
+                <!-- FOTOGRAFÍA: VERTIDO DE UNA DISOLUCIÓN SOBRE OTRA -->
+                <div class="photo-figure">
+                    <img src="../imagenes/Reloj de Yodo-Vertiendo transparente transparente.jpg" alt="Vertiendo una disolución incolora sobre otra en un vaso de precipitado">
+                    <div class="figure-caption"><strong>El momento de la mezcla.</strong> Se vierte una disolución incolora sobre la otra y, durante unos segundos, todo sigue transparente. La reacción <em>ya ha comenzado</em>, pero el bisulfito aún consume todo el yodo: el color todavía no se ve.</div>
+                </div>
+
                 <div class="highlight-box">
                     <strong>Consejo experimental:</strong> si preparas los tres vasos a la vez, no podrás cronometrarlos bien. Es mejor <strong>mezclar un vaso, cronometrarlo, y solo después preparar el siguiente</strong> (o contar con dos compañeros que cronometren a la vez). Y anota el tiempo en el momento exacto en que veas el primer tono azul, no cuando ya esté negro.
                 </div>
@@ -987,6 +1051,13 @@
             <p><strong>El tiempo de aparición del azul depende de la cantidad de bisulfito presente.</strong></p>
             <p>Con la misma cantidad de yodato y de almidón, a <strong>mayor concentración de NaHSO₃</strong> el azul tarda <strong>más</strong> en aparecer, y a <strong>menor concentración</strong> aparece <strong>antes</strong>. El bisulfito actúa como amortiguador que consume el yodo mientras exista.</p>
         </div>
+
+        <!-- FOTOGRAFÍA: VASO CON LA MEZCLA NEGRA -->
+        <div class="photo-figure">
+            <img src="../imagenes/Reloj de Yodo-Vaso precipitado pequeño negro.jpg" alt="Vaso de precipitado con la mezcla ya de color negro tras el cambio brusco">
+            <div class="figure-caption"><strong>El "reloj" ha sonado.</strong> La mezcla, que era transparente hace unos segundos, se ha vuelto azul oscuro casi negro. El complejo yodo-almidón ha aparecido de golpe en cuanto el bisulfito se ha agotado.</div>
+        </div>
+
         <p>Además, has comprobado que:</p>
         <ul>
             <li>La mezcla permanece <strong>incolora</strong> durante un tiempo, aunque la reacción ya está ocurriendo.</li>
