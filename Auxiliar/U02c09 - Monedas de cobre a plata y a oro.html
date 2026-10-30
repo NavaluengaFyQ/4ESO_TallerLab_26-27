@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U02c10 - Monedas de cobre a plata y oro: zincado y formación de latón</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left { display: flex; flex-direction: column; justify-content: center; }
+        .header-left h1 { font-size: 1.8em; margin: 0; }
+        .header-left p { margin: 6px 0 0 0; font-size: 1em; }
+        .header-sub { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+        .header-sub img {
+            max-height: 30px; width: auto; object-fit: contain;
+            border-radius: 4px; background: rgba(255,255,255,0.2); padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600; font-size: 1.1em; letter-spacing: 0.5px; color: #ffecb0;
+        }
+        .header-sub .texto { font-size: 1em; font-weight: 300; }
+        .header-right img {
+            max-height: 70px; max-width: 180px; object-fit: contain;
+            display: block; background: rgba(255,255,255,0.15);
+            border-radius: 8px; padding: 4px;
+        }
+        .section {
+            padding: 25px 30px; margin: 15px;
+            border-radius: 12px; border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .seccion-peligro { background: #fff5f5; border-color: #e53e3e; }
+        .section h2 {
+            font-size: 1.3em; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .seccion-peligro h2 { color: #9b2c2c; }
+        .formula-box {
+            background: #edf2f7; border: 2px solid #cbd5e0;
+            border-radius: 10px; padding: 15px; margin: 15px 0;
+            text-align: center; font-size: 1.1em;
+        }
+        .step {
+            background: white; border-left: 4px solid #a0aec0;
+            padding: 15px; margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block; background: #667eea; color: white;
+            width: 28px; height: 28px; border-radius: 50%;
+            text-align: center; line-height: 28px;
+            font-weight: bold; margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb; border: 1px solid #f6e05e;
+            border-radius: 8px; padding: 12px; margin-top: 15px;
+            font-size: 0.95em; color: #744210;
+        }
+        .danger {
+            background: #fff5f5; border: 1px solid #fc8181;
+            border-radius: 8px; padding: 12px; margin-top: 15px;
+            font-size: 0.95em; color: #742a2a;
+        }
+        .danger strong { color: #9b2c2c; }
+        p { line-height: 1.7; margin-bottom: 10px; }
+        ul, ol { padding-left: 1.8em; line-height: 1.7; }
+        li { margin-bottom: 6px; }
+        table {
+            width: 100%; border-collapse: collapse; margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0; padding: 8px 12px; text-align: center;
+        }
+        th { background: #edf2f7; color: #2d3748; }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px; padding: 18px 22px; margin: 18px 0;
+            color: #1a202c; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong { color: #2d3748; }
+        .mini-card {
+            display: inline-block; vertical-align: top; width: 45%;
+            min-width: 260px; background: white; border-radius: 12px;
+            padding: 15px 18px; margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 { margin: 0 0 8px 0; color: #4a5568; }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+        .mini-card.morado { border-top-color: #805ad5; }
+
+        /* FIGURAS DIDÁCTICAS */
+        .figure {
+            background: white; border: 1px solid #e2e8f0;
+            border-radius: 14px; padding: 18px 15px 12px 15px;
+            margin: 20px 0; text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        .figure svg { display: block; margin: 0 auto; width: 100%; max-width: 640px; height: auto; }
+        .figure-caption {
+            font-size: 0.9em; color: #4a5568; margin-top: 12px;
+            line-height: 1.5; font-style: italic; padding: 0 10px;
+        }
+        .figure-caption strong { color: #2d3748; font-style: normal; }
+
+        /* FOTOGRAFÍAS DE LABORATORIO (adaptadas al tamaño real) */
+        .photo-figure {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 15px 15px 10px 15px;
+            margin: 20px auto;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            max-width: 520px;
+        }
+        .photo-figure img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            max-height: 440px;
+            width: auto;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+        }
+        .photo-pair {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .photo-pair > .photo-figure {
+            flex: 1 1 240px;
+            max-width: 320px;
+            margin: 0;
+        }
+        .photo-pair > .photo-figure img {
+            max-height: 380px;
+            object-fit: contain;
+        }
+
+        /* BLOQUES DESPLEGABLES */
+        details {
+            margin: 30px 15px 20px 15px; background: #ffffff;
+            border: 2px solid #667eea; border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none; display: flex; align-items: center;
+            gap: 0.8rem; padding: 1rem 1.5rem; cursor: pointer;
+            font-size: 1.2rem; font-weight: 600; color: #2d3748;
+            background: #f0f4ff; border-radius: 18px;
+            user-select: none; transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker { display: none; }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem; color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down { transform: rotate(180deg); }
+        details summary .icon-pulsame {
+            background: #667eea; color: white;
+            padding: 0.1rem 0.8rem; border-radius: 40px;
+            font-size: 0.85rem; font-weight: 400; letter-spacing: 0.5px;
+        }
+        details .details-content { padding: 0.5rem 1.8rem 2rem 1.8rem; }
+        .exercise-card {
+            background: #f9fcff; border: 1px solid #dce7f2;
+            border-radius: 18px; padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0; box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex; align-items: baseline; gap: 0.5rem;
+            font-weight: 600; font-size: 1.1rem; color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea; color: white; border-radius: 40px;
+            padding: 0.05rem 0.9rem; font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd; padding: 0.8rem 1.2rem;
+            border-radius: 12px; margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9; padding: 0.8rem 1.5rem;
+            border-radius: 14px; border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso { margin: 0.5rem 0; }
+        .exercise-card .solucion .paso strong { color: #2b3a67; }
+        .clave-didactica {
+            background: #e6f0fa; padding: 1rem 1.8rem;
+            border-radius: 40px; margin-top: 1.8rem;
+            font-weight: 500; color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+
+        /* SECCIÓN DESTACADA: ETAPAS */
+        .color-reveal-outer {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 45%, #667eea 100%);
+            padding: 4px; border-radius: 22px; margin: 25px 15px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.35);
+        }
+        .color-reveal-inner {
+            background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+            border-radius: 19px; padding: 25px 28px;
+        }
+        .color-reveal-title {
+            display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+        }
+        .color-reveal-title h2 { margin: 0; color: #2d3748; font-size: 1.4em; }
+        .color-reveal-title .big-icon { font-size: 1.8em; }
+        .color-reveal-lead {
+            font-size: 1em; color: #4a5568; line-height: 1.7; margin-bottom: 18px;
+        }
+        .stages-row {
+            display: flex; flex-wrap: wrap; justify-content: center;
+            align-items: stretch; gap: 10px; margin: 20px 0;
+        }
+        .stage-card {
+            flex: 1 1 210px; min-width: 210px; max-width: 270px;
+            background: white; border-radius: 14px;
+            padding: 16px 16px 18px 16px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-top: 5px solid; text-align: center;
+        }
+        .stage-card.stage-1 { border-top-color: #b87333; }
+        .stage-card.stage-2 { border-top-color: #a0aec0; }
+        .stage-card.stage-3 { border-top-color: #ecc94b; }
+        .stage-card .stage-label {
+            display: inline-block; font-size: 0.72em; font-weight: 700;
+            letter-spacing: 1px; padding: 3px 10px;
+            border-radius: 20px; margin-bottom: 10px;
+            background: #edf2f7; color: #4a5568;
+        }
+        .stage-card.stage-1 .stage-label { background: #fdebd0; color: #7b341e; }
+        .stage-card.stage-2 .stage-label { background: #e2e8f0; color: #2d3748; }
+        .stage-card.stage-3 .stage-label { background: #fefcbf; color: #744210; }
+        .stage-card .stage-emoji {
+            font-size: 2.2em; display: block; margin: 6px 0 8px 0;
+        }
+        .stage-card h4 { margin: 0 0 8px 0; font-size: 0.98em; color: #2d3748; }
+        .stage-card p { font-size: 0.87em; color: #4a5568; line-height: 1.5; margin: 0; }
+        .stage-arrow {
+            display: flex; align-items: center; font-size: 1.6em;
+            color: #a0aec0; font-weight: bold;
+        }
+        .color-net-box {
+            background: #edf2f7; border-left: 5px solid #3182ce;
+            border-radius: 10px; padding: 14px 20px; margin-top: 18px;
+        }
+        .color-net-box strong { color: #2a4365; }
+        .color-net-box p { margin: 6px 0; font-size: 0.95em; color: #2d3748; }
+        .color-net-box .formula-box { margin: 8px 0 0 0; background: #ffffff; border-color: #bee3f8; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- ============================== CABECERA ============================== -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U02c10.- </span>
+                <span class="texto">Monedas de cobre a plata y oro: zincado y formación de latón</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- ============================== ENUNCIADO ============================== -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>Vamos a convertir una <strong>moneda de cobre</strong> en una moneda que parece de <strong>plata</strong> y, después, en una que parece de <strong>oro</strong>. No es magia ni una reacción nuclear: son dos procesos químicos muy bien conocidos que se encadenan:</p>
+        <ul>
+            <li><strong>Fase 1 — Plateado (zincado):</strong> sumergimos la moneda de cobre en una disolución caliente de <strong>hidróxido de sodio (NaOH)</strong> con <strong>zinc en polvo</strong>. El zinc se deposita sobre la superficie del cobre y la moneda adquiere un aspecto <strong>blanco-plateado</strong>.</li>
+            <li><strong>Fase 2 — Dorado (formación de latón):</strong> calentamos la moneda plateada en la llama. El zinc se <strong>difunde</strong> en el cobre y forma una <strong>aleación superficial de latón (Cu–Zn)</strong> de color <strong>amarillo-dorado</strong>, muy parecido al oro.</li>
+        </ul>
+        <p>La moneda <strong>no se convierte en oro real</strong>. Solo <em>lo parece</em>. Y entender por qué es el verdadero objetivo de la práctica.</p>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Cómo un metal puede recubrirse de otro sin corriente eléctrica? ¿Y cómo un simple calentamiento transforma el color del recubrimiento?
+        </div>
+
+        <!-- FOTO: MONEDAS DE COBRE DE PARTIDA -->
+        <div class="photo-figure">
+            <img src="../imagenes/CobrePlataOro-Monedas de 5ct cobre.jpg" alt="Monedas de 5 céntimos de euro de cobre, material de partida de la práctica">
+            <div class="figure-caption"><strong>El punto de partida.</strong> Monedas de <strong>5 céntimos de euro</strong>, de cobre (o aleación de cobre), tal como se sacan del monedero. Sobre esta superficie habrá que depositar el zinc primero, y el latón después.</div>
+        </div>
+    </div>
+
+    <!-- ============================== OBJETIVO ============================== -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué es una <strong>reacción redox de desplazamiento</strong> y cómo se produce un depósito metálico <strong>sin corriente externa</strong> (zincado por contacto).</li>
+            <li>El papel del <strong>hidróxido de sodio</strong> como medio que disuelve el zinc y permite la formación de <strong>zincato</strong>.</li>
+            <li>Qué es una <strong>aleación</strong> y cómo se forma por <strong>difusión térmica en estado sólido</strong>.</li>
+            <li>La diferencia entre <strong>recubrimiento</strong> (plateado) y <strong>aleación</strong> (dorado).</li>
+            <li>A <strong>preparar disoluciones</strong> con precisión y a calcular concentraciones.</li>
+            <li>La importancia del <strong>control de la temperatura y del tiempo</strong> en un proceso químico.</li>
+            <li><strong>Seguridad de laboratorio</strong>: manejo de bases fuertes, gases inflamables y objetos calientes.</li>
+        </ul>
+    </div>
+
+    <!-- ============================== FUNDAMENTO ============================== -->
+    <div class="section procedimiento">
+        <h2>🧪 El fundamento químico, paso a paso</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>¿Por qué hace falta una base tan fuerte?</strong>
+            <p>El zinc metálico es <strong>anfótero</strong>: reacciona tanto con ácidos como con bases fuertes. En una disolución concentrada de <strong>NaOH</strong> se disuelve formando el ion <strong>zincato</strong> y liberando <strong>hidrógeno</strong>:</p>
+            <div class="formula-box">
+                \[
+                \mathrm{Zn + 2\,NaOH + 2\,H_2O \;\longrightarrow\; Na_2[Zn(OH)_4] + H_2\uparrow}
+                \]
+            </div>
+            <p>Este proceso es el que pone al zinc en disolución y, a la vez, genera el gas que verás burbujear.</p>
+            <div class="danger">
+                <strong>⚠️ Seguridad:</strong> el <strong>H₂ es inflamable</strong> y se desprende durante toda la reacción. Trabaja en un sitio bien ventilado y mantén el mechero <strong>apagado o alejado</strong> mientras se forma el depósito. Solo enciéndelo después, para la fase de dorado, y nunca mientras el vaso esté burbujeando activamente.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>¿Cómo se deposita el zinc sobre el cobre?</strong>
+            <p>El cobre es un metal <strong>noble</strong> (menos activo que el zinc), pero el zinc en disolución puede reducirse sobre su superficie si hay un aporte de electrones. Ese aporte lo proporciona el propio zinc metálico que está en el fondo del vaso, en <strong>contacto físico</strong> con la moneda. Se forma una <strong>pila galvánica local</strong>:</p>
+            <ul>
+                <li><strong>Ánodo (zinc del fondo):</strong> se oxida y cede electrones.
+                    \[
+                    \mathrm{Zn + 4\,OH^- \longrightarrow [Zn(OH)_4]^{2-} + 2\,e^-}
+                    \]</li>
+                <li><strong>Cátodo (superficie del cobre):</strong> los electrones llegan a la moneda y reducen el zincato.
+                    \[
+                    \mathrm{[Zn(OH)_4]^{2-} + 2\,e^- \longrightarrow Zn + 4\,OH^-}
+                    \]</li>
+            </ul>
+            <p>El resultado neto es que el zinc <strong>"viaja" del fondo del vaso a la superficie de la moneda</strong>. La moneda se recubre de una capa fina, brillante y <strong>blanco-plateada</strong>.</p>
+            <div class="note">
+                <strong>Contacto indispensable:</strong> si la moneda <em>no toca</em> el zinc sólido, el circuito se interrumpe y no hay depósito. Puedes ayudarte de una varilla de vidrio para empujarla suavemente contra los gránulos del fondo.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>¿Por qué hay que calentar?</strong>
+            <p>A temperatura ambiente, el zinc se disuelve muy despacio y el depósito tarda muchísimo en formarse. Al calentar a <strong>70–80 °C</strong>:</p>
+            <ul>
+                <li>Aumenta la <strong>velocidad de disolución</strong> del zinc (más choques eficaces).</li>
+                <li>Aumenta la <strong>movilidad iónica</strong> y, con ella, la conductividad de la disolución.</li>
+                <li>La capa de zinc se deposita de forma <strong>más uniforme y brillante</strong>.</li>
+            </ul>
+            <p>En un vaso de 100 mL con 50 mL de disolución, pasar de temperatura ambiente a ~80 °C lleva <strong>aproximadamente 5 minutos</strong> con un mechero suave. Es un dato práctico importante para no impacientarse.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>El dorado: difusión en estado sólido</strong>
+            <p>La moneda plateada no tiene oro: tiene una capa de zinc. Al calentarla en la llama, los átomos de zinc <strong>se difunden</strong> hacia el interior del cobre y forman una <strong>aleación de latón</strong> en la superficie:</p>
+            <div class="formula-box">
+                \[
+                \mathrm{Cu \;+\; Zn \;\xrightarrow{\;\Delta\;}\; \text{latón (Cu–Zn)}}
+                \]
+            </div>
+            <p>El latón tiene un color <strong>amarillo-dorado</strong> muy característico. Como la capa es muy fina, el color aparece en cuestión de <strong>segundos</strong> de calentamiento.</p>
+            <div class="highlight-box">
+                <strong>Idea clave:</strong> en el plateado se <em>añade</em> una capa encima del cobre; en el dorado, el zinc <em>entra dentro</em> del cobre y forma una aleación. Son dos procesos físicamente distintos aunque el resultado final parezca continuo.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Las tres variables que controlan el resultado</strong>
+            <ul>
+                <li><strong>Limpieza de la moneda:</strong> grasa o óxido impiden la adherencia del zinc.</li>
+                <li><strong>Temperatura:</strong> demasiado fría → no hay depósito; demasiado caliente → el líquido salpica y el zinc se oxida.</li>
+                <li><strong>Tiempo y calor en la llama:</strong> segundos de más en el mechero y el dorado se pierde (el zinc se quema o el latón se empaña).</li>
+            </ul>
+        </div>
+
+        <!-- FIGURA DIDÁCTICA DEL PROCESO COMPLETO -->
+        <div class="figure">
+            <svg viewBox="0 0 640 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Etapas del proceso: moneda de cobre, moneda plateada y moneda dorada">
+                <defs>
+                    <marker id="arrowProceso" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+                        <path d="M0,0 L8,3 L0,6 Z" fill="#4a5568"/>
+                    </marker>
+                    <linearGradient id="gradOro" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#ffe066"/>
+                        <stop offset="100%" stop-color="#d4a017"/>
+                    </linearGradient>
+                </defs>
+
+                <text x="320" y="22" font-size="15" font-weight="bold" fill="#2d3748" text-anchor="middle">De cobre a "plata" y a "oro": las dos transformaciones</text>
+
+                <!-- Moneda de cobre -->
+                <circle cx="100" cy="120" r="55" fill="#b87333" stroke="#7b341e" stroke-width="3"/>
+                <circle cx="100" cy="120" r="42" fill="none" stroke="#7b341e" stroke-width="1" opacity="0.6"/>
+                <text x="100" y="127" text-anchor="middle" font-size="20" fill="#fff8e7" font-weight="bold">Cu</text>
+                <text x="100" y="205" text-anchor="middle" font-size="12" fill="#2d3748" font-weight="bold">Moneda de cobre</text>
+                <text x="100" y="222" text-anchor="middle" font-size="10.5" fill="#4a5568">(2 ó 5 céntimos)</text>
+
+                <!-- Flecha 1 -->
+                <line x1="170" y1="120" x2="252" y2="120" stroke="#4a5568" stroke-width="2.5" marker-end="url(#arrowProceso)"/>
+                <text x="211" y="100" text-anchor="middle" font-size="10.5" fill="#4a5568" font-weight="bold">NaOH + Zn</text>
+                <text x="211" y="86" text-anchor="middle" font-size="10" fill="#4a5568">70–80 °C</text>
+                <text x="211" y="148" text-anchor="middle" font-size="10" fill="#4a5568">2–3 min</text>
+
+                <!-- Moneda plateada -->
+                <circle cx="320" cy="120" r="55" fill="#cfd8dc" stroke="#78909c" stroke-width="3"/>
+                <circle cx="320" cy="120" r="42" fill="none" stroke="#78909c" stroke-width="1" opacity="0.6"/>
+                <text x="320" y="127" text-anchor="middle" font-size="20" fill="#37474f" font-weight="bold">Zn</text>
+                <text x="320" y="205" text-anchor="middle" font-size="12" fill="#2d3748" font-weight="bold">Moneda "plateada"</text>
+                <text x="320" y="222" text-anchor="middle" font-size="10.5" fill="#4a5568">capa de zinc</text>
+
+                <!-- Flecha 2 -->
+                <line x1="390" y1="120" x2="472" y2="120" stroke="#4a5568" stroke-width="2.5" marker-end="url(#arrowProceso)"/>
+                <text x="431" y="100" text-anchor="middle" font-size="10.5" fill="#4a5568" font-weight="bold">Llama</text>
+                <text x="431" y="86" text-anchor="middle" font-size="10" fill="#4a5568">3–5 s</text>
+                <text x="431" y="148" text-anchor="middle" font-size="10" fill="#4a5568">difusión</text>
+
+                <!-- Moneda dorada -->
+                <circle cx="540" cy="120" r="55" fill="url(#gradOro)" stroke="#b8860b" stroke-width="3"/>
+                <circle cx="540" cy="120" r="42" fill="none" stroke="#b8860b" stroke-width="1" opacity="0.6"/>
+                <text x="540" y="127" text-anchor="middle" font-size="17" fill="#5c4000" font-weight="bold">Cu–Zn</text>
+                <text x="540" y="205" text-anchor="middle" font-size="12" fill="#2d3748" font-weight="bold">Moneda "dorada"</text>
+                <text x="540" y="222" text-anchor="middle" font-size="10.5" fill="#4a5568">latón superficial</text>
+
+                <!-- Etiqueta inferior -->
+                <text x="320" y="278" text-anchor="middle" font-size="11.5" fill="#2d3748" font-style="italic">Recubrimiento (plateado) + aleación por difusión (dorado)</text>
+            </svg>
+            <div class="figure-caption"><strong>Figura 1.</strong> La moneda de cobre se recubre primero de una fina capa de zinc (aspecto plateado). Al calentarla, el zinc se difunde en el cobre y forma latón (aspecto dorado). La moneda no cambia de metal: cambia su superficie.</div>
+        </div>
+    </div>
+
+    <!-- ============================== ETAPAS (COLOR REVEAL) ============================== -->
+    <div class="color-reveal-outer">
+        <div class="color-reveal-inner">
+            <div class="color-reveal-title">
+                <span class="big-icon">🪙</span>
+                <h2>Las tres "vidas" de la moneda</h2>
+            </div>
+            <p class="color-reveal-lead">La misma moneda pasa por <strong>tres estados visualmente distintos</strong> en menos de diez minutos. Cada uno se corresponde con una situación química diferente:</p>
+
+            <div class="stages-row">
+                <div class="stage-card stage-1">
+                    <div class="stage-label">ESTADO 1 · COBRE</div>
+                    <span class="stage-emoji">🟤</span>
+                    <h4>Moneda original</h4>
+                    <p>Superficie de <strong>cobre</strong> (o de una aleación de cobre). Hay que limpiarla bien para que el zinc se adhiera.</p>
+                </div>
+                <div class="stage-arrow">→</div>
+                <div class="stage-card stage-2">
+                    <div class="stage-label">ESTADO 2 · PLATEADO</div>
+                    <span class="stage-emoji">⚪</span>
+                    <h4>Capa de zinc</h4>
+                    <p>El zinc se ha depositado sobre el cobre. La moneda es <strong>blanco-plateada y brillante</strong>. Es solo un recubrimiento.</p>
+                </div>
+                <div class="stage-arrow">→</div>
+                <div class="stage-card stage-3">
+                    <div class="stage-label">ESTADO 3 · DORADO</div>
+                    <span class="stage-emoji">🟡</span>
+                    <h4>Latón (Cu–Zn)</h4>
+                    <p>El zinc se ha difundido en el cobre por el calor. La superficie es ahora una <strong>aleación dorada</strong>.</p>
+                </div>
+            </div>
+
+            <div class="color-net-box">
+                <strong>Lo que hay en la superficie de la moneda en cada etapa:</strong>
+                <p><strong>1)</strong> Cobre limpio: \(\mathrm{Cu}\)</p>
+                <p><strong>2)</strong> Cobre recubierto: \(\mathrm{Cu} + \mathrm{Zn\; (depositado)}\)</p>
+                <p><strong>3)</strong> Cobre con zinc difundido: \(\mathrm{Cu\!-\!Zn\;(latón)}\)</p>
+            </div>
+
+            <div class="note" style="margin-top:18px;">
+                <strong>La "trampa" del experimento:</strong> el dorado no es una capa de oro. Es una <strong>aleación de cobre y zinc</strong> cuyo color imita al del oro. La moneda sigue siendo de cobre por dentro: solo su superficie ha cambiado.
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================== MATERIALES Y PROCEDIMIENTO ============================== -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>⚙️ Materiales y procedimiento experimental</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <div class="step">
+                <span class="step-num">1</span>
+                <strong>Materiales y reactivos (para un vaso de 100 mL)</strong>
+                <ul>
+                    <li><strong>Monedas de cobre</strong> (de 2 ó 5 céntimos; mejor varias para repetir).</li>
+                    <li><strong>Hidróxido de sodio (NaOH)</strong>: <strong>6 g</strong>.</li>
+                    <li><strong>Zinc en polvo o granalla</strong>: <strong>2,5 g</strong>.</li>
+                    <li><strong>Agua destilada</strong>: <strong>50 mL</strong>.</li>
+                    <li><strong>Vaso de precipitados de 100 mL</strong>.</li>
+                    <li><strong>Pinzas metálicas o fórceps</strong>.</li>
+                    <li><strong>Mechero Bunsen</strong> (o placa calefactora / soplete de laboratorio).</li>
+                    <li><strong>Varilla de vidrio</strong> para agitar.</li>
+                    <li><strong>Papel de filtro o paño suave</strong>.</li>
+                    <li><strong>Cronómetro</strong> y <strong>termómetro</strong>.</li>
+                    <li><strong>EPP:</strong> gafas de seguridad, guantes de nitrilo y bata.</li>
+                    <li>(Opcional) <strong>lana de acero</strong>, <strong>vinagre y sal</strong> o <strong>HCl diluido</strong> para limpiar la moneda.</li>
+                </ul>
+                <div class="danger">
+                    <strong>⚠️ Seguridad:</strong> el <strong>NaOH es extremadamente corrosivo</strong> y puede causar quemaduras graves. El <strong>zinc en polvo es inflamable</strong>. Durante la reacción se desprende <strong>H₂</strong>, que es inflamable. Usa siempre gafas, guantes y bata, y trabaja en un sitio bien ventilado.
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-num">2</span>
+                <strong>Preparación de la disolución (vaso de 100 mL)</strong>
+                <ul>
+                    <li>Pesa <strong>6 g de NaOH</strong> en un vaso pequeño o sobre un vidrio de reloj.</li>
+                    <li>Mide <strong>50 mL de agua destilada</strong> con una probeta y viértelos en el vaso de precipitados de 100 mL.</li>
+                    <li>Añade el NaOH <strong>poco a poco</strong>, removiendo con la varilla de vidrio. La disolución se calienta sola (reacción exotérmica).</li>
+                    <li>Deja templar hasta que puedas manipular el vaso con seguridad.</li>
+                </ul>
+                <div class="formula-box">
+                    \[
+                    c_{\mathrm{NaOH}} = \frac{n}{V} = \frac{6\ \mathrm{g} / 40\ \mathrm{g/mol}}{0{,}050\ \mathrm{L}} = \mathbf{3{,}0\ M}
+                    \]
+                </div>
+
+                <!-- FOTO: VASO CON NaOH Y AGUA -->
+                <div class="photo-figure">
+                    <img src="../imagenes/CobrePlataOro-Vaso de precipitado.jpg" alt="Vaso de precipitados con disolución de hidróxido de sodio en agua destilada">
+                    <div class="figure-caption"><strong>Disolución de NaOH.</strong> Vaso de precipitados de 100 mL con los <strong>6 g de NaOH disueltos en 50 mL de agua destilada</strong>. La disolución es incolora, pero extremadamente corrosiva: manipúlala siempre con guantes y gafas.</div>
+                </div>
+
+                <div class="note">
+                    La disolución concentrada de NaOH es <strong>viscosa y resbaladiza</strong>. Manipúlala siempre con guantes y no la dejes cerca del borde de la mesa.
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-num">3</span>
+                <strong>Añadir el zinc</strong>
+                <p>Con cuidado, añade los <strong>2,5 g de zinc en polvo o granalla</strong> a la disolución de NaOH. Verás que la mezcla <strong>burbujea</strong> y se calienta ligeramente, formándose <strong>zincato de sodio</strong> y liberándose <strong>H₂</strong>:</p>
+                <div class="formula-box">
+                    \[
+                    \mathrm{Zn + 2\,NaOH + 2\,H_2O \;\longrightarrow\; Na_2[Zn(OH)_4] + H_2\uparrow}
+                    \]
+                </div>
+
+                <!-- FOTO: VASO CON NaOH + Zn -->
+                <div class="photo-figure">
+                    <img src="../imagenes/CobrePlataOro-Vaso de precipitado Zn.jpg" alt="Vaso de precipitados con NaOH, agua destilada y zinc en el fondo">
+                    <div class="figure-caption"><strong>La disolución de zincato.</strong> Vaso de precipitados con <strong>NaOH, agua destilada y zinc</strong> en el fondo. El zinc se está disolviendo como zincato de sodio y se desprende hidrógeno (por eso burbujea). Es la "pila" que después depositará el zinc sobre la moneda.</div>
+                </div>
+
+                <div class="danger">
+                    <strong>⚠️ Muy importante:</strong> realiza este paso <strong>lejos de cualquier llama</strong>. El hidrógeno que se desprende es inflamable. No enciendas el mechero hasta que termine la fase de plateado.
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-num">4</span>
+                <strong>Calentar la disolución a 70–80 °C</strong>
+                <p>Coloca el vaso sobre una rejilla y calienta <strong>suavemente</strong> con el mechero. La disolución debe alcanzar <strong>70–80 °C</strong> (ebullición ligera, sin llegar a hervir fuerte).</p>
+                <div class="highlight-box">
+                    <strong>Dato práctico:</strong> con un vaso de 100 mL y 50 mL de disolución, pasar de temperatura ambiente a ~80 °C lleva <strong>aproximadamente 5 minutos</strong>. Ten paciencia y no subas demasiado la llama: si hierve en exceso, salpica NaOH y se pierde disolución.
+                </div>
+                <p>Mantén esta temperatura <strong>durante todo el plateado</strong>: una disolución fría recubre mal la moneda.</p>
+            </div>
+
+            <div class="step">
+                <span class="step-num">5</span>
+                <strong>Limpieza previa de la moneda (¡clave!)</strong>
+                <p>Mientras se calienta la disolución, limpia la moneda:</p>
+                <ul>
+                    <li>Frota con <strong>lana de acero</strong> hasta que recupere el brillo metálico.</li>
+                    <li>Alternativa química: sumérgela unos minutos en <strong>vinagre con sal</strong> o en <strong>HCl diluido</strong>, y aclara bien.</li>
+                    <li>Una vez limpia, <strong>no la toques con los dedos</strong>: los aceites de la piel impiden que el zinc se adhiera.</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <span class="step-num">6</span>
+                <strong>Plateado (inmersión)</strong>
+                <ol>
+                    <li>Con las pinzas, introduce la moneda limpia en la disolución caliente.</li>
+                    <li>Asegúrate de que <strong>toca físicamente el zinc del fondo</strong>. Ayúdate de la varilla de vidrio si hace falta.</li>
+                    <li>Déjala sumergida <strong>2–3 minutos</strong> (nunca más de 5–10 minutos; más tiempo no mejora el resultado).</li>
+                    <li>Observa cómo la moneda va adquiriendo un <strong>color blanco-plateado</strong>.</li>
+                </ol>
+
+                <!-- FOTO: MONEDA PLATEADA EN EL VASO -->
+                <div class="photo-figure">
+                    <img src="../imagenes/CobrePlataOro-Moneda plateada en vaso.jpg" alt="Moneda de cobre ya recubierta de zinc dentro del vaso con disolución de NaOH y zinc">
+                    <div class="figure-caption"><strong>El plateado en marcha.</strong> La moneda, ya <strong>"plateada"</strong>, dentro del vaso con la disolución de NaOH y zinc. El cambio de color se ve a simple vista: el cobre ha quedado recubierto de una capa fina de zinc.</div>
+                </div>
+
+                <div class="note">
+                    <strong>¿Por qué hay que tocarlo?</strong> Porque el depósito se produce gracias a una <strong>pila galvánica local</strong> entre el zinc del fondo y el cobre de la moneda. Sin contacto, el circuito se corta y no hay plateado.
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-num">7</span>
+                <strong>Enjuague y secado</strong>
+                <ul>
+                    <li>Retira la moneda con las pinzas y <strong>enjuágala abundantemente con agua corriente</strong>.</li>
+                    <li>Seca con suavidad con <strong>papel de filtro</strong>, <strong>sin frotar</strong>, para no dañar la fina capa de zinc.</li>
+                </ul>
+
+                <!-- FOTO: TRES MONEDAS PLATEADAS -->
+                <div class="photo-figure">
+                    <img src="../imagenes/CobrePlataOro-3Moneda plateada.jpg" alt="Tres monedas de cobre ya recubiertas de zinc, fuera del vaso">
+                    <div class="figure-caption"><strong>Tres monedas "plateadas".</strong> Ya fuera del vaso, enjuagadas y secas. Su superficie es ahora de <strong>zinc</strong>, no de cobre. Están listas para la segunda fase: el dorado por calentamiento.</div>
+                </div>
+
+                <div class="danger">
+                    <strong>⚠️ Enjuaga bien:</strong> si quedan restos de NaOH en la superficie, al calentar reaccionarán y <strong>arruinarán el dorado</strong> (tonos irregulares, manchas). El enjuague es tan importante como el propio depósito.
+                </div>
+            </div>
+
+            <div class="step">
+                <span class="step-num">8</span>
+                <strong>Dorado (calentamiento en la llama)</strong>
+                <ol>
+                    <li>Sujeta la moneda plateada con las pinzas.</li>
+                    <li>Acércala a la <strong>parte superior de la llama</strong> del mechero (o al soplete).</li>
+                    <li>Muévela constantemente para que <strong>ambas caras se calienten por igual</strong>.</li>
+                    <li>En <strong>3–5 segundos</strong> aparecerá el color <strong>dorado</strong>.</li>
+                    <li><strong>Retírala del fuego en cuanto veas el cambio</strong>: un exceso de calor estropea el efecto.</li>
+                    <li>Déjala enfriar sobre una superficie resistente al calor antes de tocarla.</li>
+                </ol>
+
+                <!-- FOTO: CALENTANDO LA MONEDA -->
+                <div class="photo-figure">
+                    <img src="../imagenes/CobrePlataOro-Calentando moneda.jpg" alt="Moneda plateada siendo calentada en la llama para convertirla en dorada">
+                    <div class="figure-caption"><strong>El dorado.</strong> Calentando la moneda plateada en la llama. En pocos segundos el zinc se difunde en el cobre y la superficie adquiere el <strong>color dorado del latón</strong>. Hay que retirarla en cuanto aparezca el cambio: un exceso de calor quema el zinc o empaña el latón.</div>
+                </div>
+
+                <div class="note">
+                    <strong>Truco:</strong> si usas una <strong>placa caliente</strong> en lugar de la llama, el calentamiento es más gradual y controlable, aunque tardará algo más en aparecer el dorado.
+                </div>
+            </div>
+
+        </div>
+    </details>
+
+    <!-- ============================== SEGURIDAD Y ERRORES ============================== -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>⚠️ Seguridad, errores frecuentes y gestión de residuos</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <div class="mini-card rojo">
+                <h4>🧴 NaOH: corrosivo</h4>
+                <p>Produce <strong>quemaduras graves</strong> en piel y ojos. Si salpica, lava con <strong>abundante agua</strong> durante al menos 15 minutos y avisa al profesor.</p>
+            </div>
+            <div class="mini-card naranja">
+                <h4>🔥 Zinc en polvo: inflamable</h4>
+                <p>Manténlo <strong>lejos de llamas</strong> y no lo viertas por el desagüe: es tóxico para el medio ambiente. Recógelo como residuo.</p>
+            </div>
+            <div class="mini-card azul">
+                <h4>💨 H₂: gas inflamable</h4>
+                <p>Se desprende durante la disolución del zinc. Trabaja en un sitio <strong>ventilado</strong> y no enciendas el mechero hasta que termine el burbujeo.</p>
+            </div>
+            <div class="mini-card morado">
+                <h4>🔥 Moneda caliente</h4>
+                <p>Tras el dorado, la moneda alcanza <strong>temperaturas muy altas</strong>. Manipúlala siempre con pinzas y déjala enfriar sobre una superficie resistente.</p>
+            </div>
+
+            <div class="danger" style="margin-top:20px;">
+                <strong>⚠️ Errores que arruinan el resultado:</strong>
+                <ul>
+                    <li><strong>No limpiar bien la moneda:</strong> el zinc no se adhiere o lo hace de forma irregular.</li>
+                    <li><strong>No tocar el zinc del fondo:</strong> no se forma la pila galvánica y la moneda no se platea.</li>
+                    <li><strong>Dejar la moneda demasiado tiempo (más de 5–10 min):</strong> aparecen grumos, capa gris mate y el dorado posterior será desigual.</li>
+                    <li><strong>No enjuagar bien:</strong> los restos de NaOH estropean el dorado.</li>
+                    <li><strong>Calentar demasiado en la llama:</strong> el zinc se quema o el latón se empaña y pierde el color.</li>
+                    <li><strong>Usar monedas modernas con núcleo de zinc</strong> (posteriores a 1982, como los centavos de EE. UU.): pueden deformarse si se sobrecalientan.</li>
+                </ul>
+            </div>
+
+            <div class="step" style="margin-top:20px;">
+                <strong>Gestión de residuos</strong>
+                <ul>
+                    <li>Deja que la disolución se <strong>enfríe</strong>.</li>
+                    <li>El <strong>zinc sólido sobrante</strong> del fondo debe desecharse como <strong>residuo peligroso</strong> (contenedor etiquetado).</li>
+                    <li>La disolución líquida, una vez fría, puede verterse por el desagüe con <strong>abundante agua</strong>.</li>
+                    <li>Las monedas ya transformadas pueden conservarse como recuerdo de la práctica.</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <!-- ============================== EJERCICIOS ============================== -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO la moneda de plata y oro</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Concentración de la disolución de NaOH</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Se disuelven 6 g de NaOH (<em>M</em> = 40,00 g/mol) en 50 mL de agua destilada. Calcula la concentración molar de la disolución resultante.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Moles de NaOH:</strong></div>
+                    <div class="formula-box">\[ n = \frac{m}{M} = \frac{6{,}00}{40{,}00} = 0{,}150\ \mathrm{mol} \]</div>
+                    <div class="paso"><strong>Paso 2 — Concentración:</strong></div>
+                    <div class="formula-box">\[ c = \frac{n}{V} = \frac{0{,}150}{0{,}050} = \mathbf{3{,}0\ M} \]</div>
+                    <div class="paso"><strong>Resultado:</strong> la disolución es 3,0 M en NaOH. Es una concentración alta, por eso hay que manipularla con mucha precaución.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Moles de zinc y cantidad de H₂</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Se añaden 2,5 g de zinc (<em>M</em> = 65,38 g/mol) a la disolución anterior. Suponiendo que reaccionara todo, ¿cuántos moles de H₂ se desprenderían? ¿Qué volumen ocuparían a 1 atm y 25 °C?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Moles de Zn:</strong></div>
+                    <div class="formula-box">\[ n_{\mathrm{Zn}} = \frac{2{,}50}{65{,}38} = 0{,}0382\ \mathrm{mol} \]</div>
+                    <div class="paso"><strong>Paso 2 — Estequiometría:</strong> según \(\mathrm{Zn + 2NaOH + 2H_2O \rightarrow Na_2[Zn(OH)_4] + H_2}\), 1 mol de Zn produce 1 mol de H₂. Por tanto:</div>
+                    <div class="formula-box">\[ n_{\mathrm{H_2}} = 0{,}0382\ \mathrm{mol} \]</div>
+                    <div class="paso"><strong>Paso 3 — Volumen (gas ideal):</strong> \(V = nRT/P = 0{,}0382 \times 0{,}082 \times 298 / 1 \approx 0{,}933\ \mathrm{L}\).</div>
+                    <div class="paso"><strong>Resultado:</strong> se desprenderían unos <strong>0,038 mol de H₂</strong> (~0,93 L a 1 atm y 25 °C) si reaccionara todo el zinc. En la práctica reacciona solo una pequeña parte; el resto sirve para mantener la disolución saturada y permitir el contacto.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>¿Por qué hay que calentar la disolución?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica, usando la teoría cinética, por qué el plateado no funciona bien en frío y sí a 70–80 °C.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Teoría cinética:</strong> la velocidad de una reacción depende de la frecuencia de choques eficaces entre las especies que reaccionan. Al calentar, las moléculas se mueven más rápido y hay más choques con energía suficiente.</div>
+                    <div class="paso"><strong>Paso 2 — Efecto concreto:</strong> a 80 °C el zinc se disuelve más rápido (más Zn²⁺ disponible), los iones se mueven más (mayor conductividad) y la reducción sobre el cobre es más rápida.</div>
+                    <div class="paso"><strong>Paso 3 — Resultado:</strong> a temperatura ambiente el depósito tarda muchísimo y es irregular; a 70–80 °C la capa se forma en 2–3 minutos y es uniforme y brillante. Regla práctica: unos 10 °C de más pueden duplicar la velocidad.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>¿Qué pasa si caliento mucho la moneda?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Describe qué ocurre si se sobrecalienta la moneda en la llama y por qué.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — El zinc se quema/evapora:</strong> el zinc funde a ~420 °C y, con llama directa prolongada, puede arder o evaporarse. La capa dorada desaparece.</div>
+                    <div class="paso"><strong>Paso 2 — El latón se empaña:</strong> el sobrecalentamiento oxida la superficie y la vuelve opaca, perdiendo el brillo dorado.</div>
+                    <div class="paso"><strong>Paso 3 — Riesgo de deformación:</strong> si la moneda tiene núcleo de zinc (como muchos céntimos modernos), el núcleo puede fundirse y deformar la pieza.</div>
+                    <div class="paso"><strong>Resultado:</strong> el dorado hay que hacerlo en <strong>3–5 segundos</strong> y retirar en cuanto aparezca el color. Mejor quedarse corto y repetir que pasarse y arruinar la moneda.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>¿Por qué la moneda debe tocar el zinc?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica el mecanismo electroquímico del plateado y por qué es imprescindible el contacto físico entre la moneda y el zinc del fondo.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Pila galvánica local:</strong> el zinc del fondo se oxida y cede electrones: \(\mathrm{Zn + 4OH^- \rightarrow [Zn(OH)_4]^{2-} + 2e^-}\).</div>
+                    <div class="paso"><strong>Paso 2 — Cátodo en la moneda:</strong> los electrones llegan a la superficie del cobre y reducen el zincato: \(\mathrm{[Zn(OH)_4]^{2-} + 2e^- \rightarrow Zn + 4OH^-}\).</div>
+                    <div class="paso"><strong>Paso 3 — Contacto indispensable:</strong> si la moneda no toca el zinc, no hay camino para los electrones y el circuito se corta. Sin pila, no hay depósito.</div>
+                    <div class="paso"><strong>Resultado:</strong> el plateado es una <strong>electrodeposición sin corriente externa</strong>: la corriente la genera la propia pila Zn/Cu. Por eso hay que tocar el zinc con la moneda.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>¿Por qué hay que enjuagar bien la moneda?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> ¿Qué consecuencia tiene no enjuagar bien la moneda antes de calentarla?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Restos de NaOH:</strong> al sacar la moneda de la disolución, su superficie queda mojada con NaOH concentrado y zincato.</div>
+                    <div class="paso"><strong>Paso 2 — Al calentar:</strong> esos restos reaccionan con el zinc y con el cobre, produciendo manchas, tonos irregulares y un dorado desigual.</div>
+                    <div class="paso"><strong>Paso 3 — Resultado:</strong> el enjuague con agua corriente es <strong>crítico</strong>. Sin él, el dorado puede quedar feo o no aparecer de forma uniforme.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>¿Qué pasa si dejo la moneda mucho tiempo en la disolución?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> ¿Qué ocurre si se deja la moneda sumergida más de 10 minutos?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Grumos:</strong> en lugar de una capa fina y uniforme, se adhieren grumos irregulares de zinc.</div>
+                    <div class="paso"><strong>Paso 2 — Aspecto gris mate:</strong> la superficie pierde brillo y adquiere un tono grisáceo y poroso, difícil de limpiar.</div>
+                    <div class="paso"><strong>Paso 3 — Consecuencias para el dorado:</strong> la capa gruesa e irregular se difunde de forma desigual y aparecen manchas doradas, marrones o negras. Además, puede agrietarse y desconcharse.</div>
+                    <div class="paso"><strong>Resultado:</strong> el tiempo óptimo es <strong>2–3 minutos</strong>. Más tiempo no mejora el resultado, lo empeora.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 8 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 8</span>
+                    <span>¿La moneda se convierte en oro real?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica por qué el resultado final se parece al oro pero no lo es, y qué tipo de transformación ha ocurrido.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — No hay transmutación:</strong> el oro es un elemento químico distinto del cobre y del zinc. No se puede obtener oro a partir de cobre en una reacción química ordinaria.</div>
+                    <div class="paso"><strong>Paso 2 — Lo que sí ha ocurrido:</strong> se ha formado una <strong>aleación superficial de latón</strong> (Cu–Zn). Su color amarillo-dorado imita al oro.</div>
+                    <div class="paso"><strong>Paso 3 — Prueba de que no es oro:</strong> el oro es muy denso (~19,3 g/cm³) y muy inerte. La moneda sigue siendo ligera y reacciona con ácidos, a diferencia del oro.</div>
+                    <div class="paso"><strong>Resultado:</strong> es una transformación <strong>física y química</strong> de la superficie (recubrimiento + aleación), no una transmutación nuclear. La moneda parece de oro, pero no lo es.</div>
+                </div>
+            </div>
+
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> la práctica encadena dos procesos distintos: (1) una <strong>electrodeposición sin corriente externa</strong> (zincado por pila galvánica local) y (2) una <strong>difusión térmica en estado sólido</strong> (formación de latón). Lo importante no es que la moneda "cambie de metal", sino comprender que <strong>podemos modificar la superficie de un material</strong> aprovechando reacciones redox y tratamientos térmicos. Y que, como en casi toda la química experimental, el <strong>control de la temperatura, el tiempo y la limpieza</strong> marca la diferencia entre un resultado brillante y un churro.
+            </div>
+        </div>
+    </details>
+
+    <!-- ============================== RESULTADOS ============================== -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has demostrado?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>La superficie de la moneda puede transformarse en dos etapas sucesivas:</strong></p>
+            <p>primero se recubre de <strong>zinc</strong> (aspecto plateado) mediante una pila galvánica local, y después, por calentamiento, el zinc se difunde en el cobre formando <strong>latón</strong> (aspecto dorado).</p>
+        </div>
+
+        <!-- FOTO: RESULTADO FINAL (COBRE, PLATA, ORO) -->
+        <div class="photo-figure">
+            <img src="../imagenes/CobrePlataOro-Resultado final.jpg" alt="Las tres monedas del experimento: cobre original, plateada tras el zincado y dorada tras el calentamiento">
+            <div class="figure-caption"><strong>El resultado final.</strong> Las tres etapas de la misma moneda: a la izquierda, el <strong>cobre</strong> original; en el centro, la moneda <strong>plateada</strong> tras el zincado; a la derecha, la moneda <strong>dorada</strong> tras el calentamiento. Tres aspectos distintos para un mismo metal de base.</div>
+        </div>
+
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>La <strong>limpieza previa</strong> de la moneda es decisiva para que el zinc se adhiera.</li>
+            <li>El <strong>contacto físico</strong> entre la moneda y el zinc del fondo es imprescindible: sin él no hay depósito.</li>
+            <li>La <strong>temperatura</strong> controla la velocidad de disolución del zinc y la calidad del recubrimiento.</li>
+            <li>El <strong>tiempo de inmersión</strong> tiene un óptimo (2–3 min). Pasarse arruina la capa.</li>
+            <li>El <strong>enjuague</strong> es tan importante como el propio depósito.</li>
+            <li>El <strong>dorado</strong> solo necesita unos segundos de llama: pasarse quema el zinc o empaña el latón.</li>
+            <li>La moneda <strong>no se convierte en oro real</strong>: solo imita su color.</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que la moneda "se ha vuelto de otro metal". En realidad la moneda sigue siendo de cobre; lo que cambia es la <strong>composición de su superficie</strong> (primero Zn, luego latón). El interior no se toca.
+        </div>
+    </div>
+
+    <!-- ============================== ES HORA DE ============================== -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br> Una moneda de cobre, una disolución caliente y una llama. En menos de diez minutos habrás hecho un recubrimiento metálico y una aleación superficial. Dos procesos químicos clásicos en una sola práctica.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div> <!-- fin container -->
+</body>
+</html>
