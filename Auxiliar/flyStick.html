@@ -1,0 +1,1137 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U02c10 - Electrostática con el Flystick: 18 experimentos sorprendentes</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO BASE (heredado del camaleón químico)
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left { display: flex; flex-direction: column; justify-content: center; }
+        .header-left h1 { font-size: 1.8em; margin: 0; }
+        .header-left p { margin: 6px 0 0 0; font-size: 1em; }
+        .header-sub { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+        .header-sub img {
+            max-height: 30px; width: auto; object-fit: contain;
+            border-radius: 4px; background: rgba(255,255,255,0.2); padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600; font-size: 1.1em; letter-spacing: 0.5px; color: #ffecb0;
+        }
+        .header-sub .texto { font-size: 1em; font-weight: 300; }
+        .header-right img {
+            max-height: 70px; max-width: 180px; object-fit: contain; display: block;
+            background: rgba(255,255,255,0.15); border-radius: 8px; padding: 4px;
+        }
+        .section {
+            padding: 25px 30px; margin: 15px; border-radius: 12px; border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em; margin-bottom: 15px;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7; border: 2px solid #cbd5e0; border-radius: 10px;
+            padding: 15px; margin: 15px 0; text-align: center;
+            font-size: 1.1em; overflow-x: auto;
+        }
+        .step {
+            background: white; border-left: 4px solid #a0aec0; padding: 15px;
+            margin: 12px 0; border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block; background: #667eea; color: white;
+            width: 28px; height: 28px; border-radius: 50%;
+            text-align: center; line-height: 28px; font-weight: bold; margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb; border: 1px solid #f6e05e; border-radius: 8px;
+            padding: 12px; margin-top: 15px; font-size: 0.95em; color: #744210;
+        }
+        .danger {
+            background: #fff5f5; border: 1px solid #fc8181; border-radius: 8px;
+            padding: 12px; margin-top: 15px; font-size: 0.95em; color: #742a2a;
+        }
+        p { line-height: 1.7; margin-bottom: 10px; }
+        ul, ol { padding-left: 1.8em; line-height: 1.7; }
+        li { margin-bottom: 6px; }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.98em; }
+        th, td { border: 1px solid #cbd5e0; padding: 8px 12px; text-align: center; }
+        th { background: #edf2f7; color: #2d3748; }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px; padding: 18px 22px; margin: 18px 0;
+            color: #1a202c; box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong { color: #2d3748; }
+
+        /* ============================================
+           CATEGORÍAS Y EXPERIMENTOS
+           ============================================ */
+        .categoria {
+            margin: 30px 15px 10px 15px;
+            padding: 14px 22px;
+            border-radius: 14px;
+            color: white;
+            font-size: 1.15em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .cat-levitacion  { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .cat-atraccion   { background: linear-gradient(135deg, #ed8936, #dd6b20); }
+        .cat-circuitos   { background: linear-gradient(135deg, #38a169, #2f855a); }
+        .cat-viento      { background: linear-gradient(135deg, #3182ce, #2c5282); }
+        .cat-avanzados   { background: linear-gradient(135deg, #805ad5, #6b46c1); }
+        .categoria .cat-count {
+            background: rgba(255,255,255,0.25);
+            border-radius: 40px;
+            padding: 2px 12px;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin-left: auto;
+        }
+
+        /* ============================================
+           DIAGRAMAS SVG
+           ============================================ */
+        .svg-figura {
+            margin: 18px 0; text-align: center;
+            background: #ffffff; border-radius: 14px; padding: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.06);
+        }
+        .svg-figura svg { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+        .svg-figura .svg-caption {
+            margin-top: 8px; font-size: 0.9em; color: #4a5568;
+            font-style: italic; line-height: 1.5;
+        }
+
+        /* =========================================================
+           BLOQUES DESPLEGABLES
+           ========================================================= */
+        details {
+            margin: 18px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 18px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.15);
+            transition: all 0.2s;
+        }
+        details[open] {
+            box-shadow: 0 8px 22px rgba(102, 126, 234, 0.28);
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.9rem 1.4rem;
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 16px;
+            user-select: none;
+            transition: background 0.2s;
+            flex-wrap: wrap;
+        }
+        details summary::-webkit-details-marker { display: none; }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.5rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down { transform: rotate(180deg); }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.15rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            margin-left: auto;
+        }
+        details .details-content {
+            padding: 0.5rem 1.6rem 1.5rem 1.6rem;
+        }
+        details summary .exp-emoji { font-size: 1.3rem; }
+        details summary .exp-titulo { flex: 1; }
+
+        /* Tarjetas de experimento */
+        .exp-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 16px;
+            padding: 1rem 1.4rem 1.2rem 1.4rem;
+            margin: 1.2rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exp-card .ex-title {
+            display: flex; align-items: baseline; gap: 0.5rem;
+            font-weight: 600; font-size: 1.05rem; color: #2d3748;
+            margin-bottom: 0.4rem; flex-wrap: wrap;
+        }
+        .exp-card .ex-title .badge {
+            background: #667eea; color: white; border-radius: 40px;
+            padding: 0.05rem 0.9rem; font-size: 0.82rem;
+        }
+        .exp-card .enunciado {
+            background: #f1f6fd; padding: 0.7rem 1.1rem; border-radius: 10px;
+            margin: 0.6rem 0 0.9rem 0; border-left: 4px solid #667eea;
+        }
+        .exp-card .solucion {
+            background: #eef3f9; padding: 0.7rem 1.3rem; border-radius: 12px;
+            border: 1px solid #d3e0ee; margin-top: 0.8rem;
+        }
+        .exp-card .solucion .paso { margin: 0.4rem 0; }
+        .exp-card .solucion .paso strong { color: #2b3a67; }
+        .clave-didactica {
+            background: #e6f0fa; padding: 1rem 1.8rem; border-radius: 30px;
+            margin-top: 1.8rem; font-weight: 500; color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+        .material-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px 20px;
+            margin: 8px 0 4px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        .material-list li {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.95em;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- ==================== CABECERA ==================== -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto" alt="Cápsula">
+                <span class="codigo">#U02c10.- </span>
+                <span class="texto">Electrostática con el Flystick: 18 experimentos sorprendentes</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- ==================== ENUNCIADO ==================== -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>El <strong>Flystick</strong> (o <em>Fun Fly Stick</em>) es un generador de Van de Graaff portátil que acumula carga electrostática positiva en su punta. En esta práctica lo vamos a convertir en el centro de un pequeño laboratorio de electrostática: con él podremos hacer levitar objetos, mover cosas sin tocarlas, encender lámparas, construir campanas, condensadores y hasta generar viento iónico.</p>
+        <p>Dividiremos el trabajo en <strong>cinco grandes categorías</strong>, según el fenómeno físico que se pone de manifiesto: repulsión, atracción/inducción, generación y transferencia de carga, viento eléctrico y montajes avanzados. Al final tendrás un auténtico <strong>kit de experimentos</strong> para comprender cómo se comportan las cargas eléctricas en reposo.</p>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Cómo puede un simple tubo cargado producir levitación, atracción, chispas y sonido sin ningún cable ni pila?
+        </div>
+    </div>
+
+    <!-- ==================== OBJETIVO ==================== -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué son la <strong>carga eléctrica</strong>, la <strong>polarización</strong> y la <strong>inducción electrostática</strong>.</li>
+            <li>Por qué <strong>cargas iguales se repelen</strong> y <strong>cargas opuestas se atraen</strong>.</li>
+            <li>Cómo funciona un <strong>generador de Van de Graaff</strong> en miniatura y por qué la carga se acumula en la punta.</li>
+            <li>Cómo se <strong>transfiere carga</strong> entre objetos y cómo se construyen dispositivos clásicos (campana de Franklin, electroscopio, botella de Leyden).</li>
+            <li>Qué es el <strong>viento iónico</strong> y cómo puede desviar una llama o encender una lámpara de neón.</li>
+            <li>A manejar el Flystick con <strong>seguridad</strong>: descargas, materiales, distancia adecuada y limpieza.</li>
+        </ul>
+    </div>
+
+    <!-- ==================== FUNDAMENTO TEÓRICO ==================== -->
+    <div class="section procedimiento">
+        <h2>🔬 Fundamento teórico: ¿qué hay dentro del Flystick?</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>El generador de Van de Graaff en miniatura</strong>
+            <p>El Flystick contiene en su interior una <strong>correa de goma</strong> que se mueve entre dos poleas (una accionada por un motor y otra conectada a una manivela o al propio motor). Al girar la correa, esta se <strong>carga por fricción</strong> y transporta carga hasta la parte superior, donde un peine metálico la transfiere a la <strong>cúpula o punta colectora</strong>. El resultado: la punta acumula una carga positiva muy alta (típicamente 10–20 kV).</p>
+
+            <div class="svg-figura">
+                <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="0" y="0" width="420" height="260" fill="#f7fafc" rx="12"/>
+                    <!-- Carcasa -->
+                    <rect x="60" y="120" width="60" height="110" rx="8" fill="#4a5568"/>
+                    <rect x="60" y="120" width="60" height="110" rx="8" fill="none" stroke="#2d3748" stroke-width="2"/>
+                    <!-- Polea inferior -->
+                    <circle cx="90" cy="200" r="16" fill="#a0aec0" stroke="#4a5568" stroke-width="2"/>
+                    <!-- Polea superior -->
+                    <circle cx="90" cy="140" r="12" fill="#a0aec0" stroke="#4a5568" stroke-width="2"/>
+                    <!-- Correa -->
+                    <line x1="78" y1="140" x2="78" y2="200" stroke="#2d3748" stroke-width="3"/>
+                    <line x1="102" y1="140" x2="102" y2="200" stroke="#2d3748" stroke-width="3"/>
+                    <!-- Motor -->
+                    <rect x="60" y="215" width="60" height="20" rx="3" fill="#718096"/>
+                    <text x="90" y="229" text-anchor="middle" fill="white" font-size="9">motor</text>
+                    <!-- Mango / punta -->
+                    <rect x="85" y="60" width="10" height="65" fill="#667eea"/>
+                    <circle cx="90" cy="52" r="12" fill="#667eea" stroke="#4a5568" stroke-width="2"/>
+                    <text x="90" y="57" text-anchor="middle" fill="white" font-size="14" font-weight="bold">+</text>
+                    <!-- Peine superior -->
+                    <path d="M90 68 L75 68 M90 68 L105 68 M90 68 L90 78" stroke="#2d3748" stroke-width="2"/>
+                    <!-- Carga viajera -->
+                    <circle cx="78" cy="160" r="3" fill="#e53e3e"/>
+                    <circle cx="78" cy="175" r="3" fill="#e53e3e"/>
+                    <circle cx="102" cy="150" r="3" fill="#e53e3e"/>
+                    <text x="130" y="150" fill="#4a5568" font-size="11">correa</text>
+                    <text x="130" y="165" fill="#4a5568" font-size="11">transporta</text>
+                    <text x="130" y="180" fill="#4a5568" font-size="11">carga</text>
+                    <text x="60" y="45" fill="#4a5568" font-size="11">punta colectora</text>
+                    <!-- Mano -->
+                    <text x="320" y="60" fill="#4a5568" font-size="12">Mango /</text>
+                    <text x="320" y="76" fill="#4a5568" font-size="12">empuñadura</text>
+                    <text x="320" y="100" fill="#4a5568" font-size="12">→ no tocar</text>
+                    <text x="320" y="116" fill="#4a5568" font-size="12">la punta</text>
+                </svg>
+                <div class="svg-caption">Esquema del generador interno del Flystick: la correa se carga por fricción y transporta la carga hasta la punta.</div>
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Los tres principios que explican TODOS los experimentos</strong>
+            <table>
+                <tr>
+                    <th>Principio</th>
+                    <th>Qué dice</th>
+                    <th>Experimentos que lo demuestran</th>
+                </tr>
+                <tr>
+                    <td><strong>Repulsión</strong></td>
+                    <td>Cargas del mismo signo se repelen.</td>
+                    <td>Levitación de Mylar, papel, pompas, láminas de aluminio, Rice Krispies.</td>
+                </tr>
+                <tr>
+                    <td><strong>Atracción por inducción</strong></td>
+                    <td>Un cuerpo cargado atrae a un cuerpo neutro porque lo polariza.</td>
+                    <td>Chorro de agua, lata rodante, mano, papel en la pared.</td>
+                </tr>
+                <tr>
+                    <td><strong>Transferencia de carga</strong></td>
+                    <td>La carga puede pasar de un objeto a otro por contacto o por descarga.</td>
+                    <td>Campana de Franklin, electroscopio, botella de Leyden, lámpara de neón.</td>
+                </tr>
+            </table>
+            <div class="note">
+                <strong>Idea clave:</strong> el Flystick no "crea" electrones ni protones: solo los <strong>separadas</strong> y los <strong>acumula</strong> en su punta. Todos los fenómenos que veremos son consecuencia directa de cómo las cargas se redistribuyen en los materiales.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Materiales conductores y aislantes</strong>
+            <p>El Flystick funciona muy bien con <strong>materiales dieléctricos ligeros</strong> (Mylar, papel, plástico) porque se cargan fácilmente por contacto y se repelen. Con <strong>conductores</strong> (latas, bolas metálicas, agua con sales) la carga se redistribuye y hay que tener cuidado con las descargas. Con <strong>aislantes</strong> (goma, vidrio, madera seca) la carga queda "atrapada" y el experimento puede fallar si el objeto está húmedo o sucio.</p>
+        </div>
+    </div>
+
+    <!-- ==================== MATERIALES ==================== -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y reactivos</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Material imprescindible</strong>
+            <ul class="material-list">
+                <li>✔️ Flystick (Fun Fly Stick) cargado</li>
+                <li>✔️ Figuras de Mylar (incluidas o recortadas)</li>
+                <li>✔️ Papel de seda o papel fino</li>
+                <li>✔️ Láminas finas de aluminio</li>
+                <li>✔️ Bolas de ping-pong o de porexpán</li>
+                <li>✔️ Latas de refresco vacías</li>
+                <li>✔️ Vasos de plástico y de vidrio</li>
+                <li>✔️ Globo y paño de lana (alternativa)</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Material opcional para los montajes avanzados</strong>
+            <ul class="material-list">
+                <li>🔧 Hilo de cobre fino</li>
+                <li>🔧 Papel de aluminio</li>
+                <li>🔧 Bote de carrete de fotos</li>
+                <li>🔧 Alfileres y agujas</li>
+                <li>🔧 Lámpara de neón pequeña (sin resistencia)</li>
+                <li>🔧 Pompas de jabón y pajita</li>
+                <li>🔧 Vela y mechero</li>
+                <li>🔧 Agua del grifo</li>
+                <li>🔧 Cinta adhesiva</li>
+            </ul>
+            <div class="danger">
+                <strong>⚠️ Seguridad:</strong> el Flystick genera tensiones de varios miles de voltios. Aunque la corriente es minúscula, <strong>evita tocar la punta con la piel</strong> (produce un calambre desagradable), no lo acerques a marcapasos ni a dispositivos electrónicos sensibles, y no lo uses cerca de personas con implantes. Las chispas pueden inflamar vapores inflamables: manténlo lejos de alcohol, disolventes y gases.
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== PROCEDIMIENTO: EXPERIMENTOS ==================== -->
+    <div class="section procedimiento">
+        <h2>🧪 Los 18 experimentos, agrupados por categorías</h2>
+        <p>Pulsa sobre cada experimento para desplegar sus instrucciones, la explicación física y, cuando proceda, un diagrama. Empieza por la categoría A e id avanzando: cada bloque supone una dificultad ligeramente mayor.</p>
+
+        <!-- ============ CATEGORÍA A ============ -->
+        <div class="categoria cat-levitacion">
+            <i class="fas fa-magic"></i>
+            <span>A. Levitación y repulsión (cargas del mismo signo)</span>
+            <span class="cat-count">5 experimentos</span>
+        </div>
+
+        <!-- A1 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🎈</span>
+                <span class="exp-titulo">A1. Levitación de figuras de Mylar</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">A1</span><span>El experimento estrella del Flystick</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick cargado, una figura de Mylar (la que viene con el juguete o una recortada de una bolsa de globos metálicos).</p>
+                        <p><strong>Cómo se hace:</strong> Toca la figura con la punta del Flystick durante un segundo. Sepárala y suéltala: la figura queda flotando en el aire. Puedes guiarla por la habitación con la varita.</p>
+                    </div>
+                    <div class="svg-figura">
+                        <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="0" width="400" height="240" fill="#f7fafc" rx="10"/>
+                            <!-- Flystick -->
+                            <rect x="170" y="160" width="18" height="70" rx="4" fill="#4a5568"/>
+                            <circle cx="179" cy="155" r="13" fill="#667eea" stroke="#4a5568" stroke-width="2"/>
+                            <text x="179" y="160" text-anchor="middle" fill="white" font-size="14" font-weight="bold">+</text>
+                            <!-- Mylar -->
+                            <ellipse cx="179" cy="85" rx="28" ry="38" fill="#ed8936" stroke="#c05621" stroke-width="2"/>
+                            <text x="179" y="92" text-anchor="middle" fill="white" font-size="16" font-weight="bold">+</text>
+                            <!-- Flechas repulsión -->
+                            <defs>
+                                <marker id="arrA1" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                    <path d="M0,0 L10,5 L0,10 Z" fill="#e53e3e"/>
+                                </marker>
+                            </defs>
+                            <line x1="179" y1="128" x2="179" y2="142" stroke="#e53e3e" stroke-width="2" marker-end="url(#arrA1)"/>
+                            <line x1="179" y1="142" x2="179" y2="128" stroke="#e53e3e" stroke-width="2" marker-end="url(#arrA1)"/>
+                            <text x="215" y="135" fill="#e53e3e" font-size="12" font-weight="bold">repulsión</text>
+                            <text x="35" y="225" fill="#4a5568" font-size="12">Flystick cargado +</text>
+                            <text x="245" y="90" fill="#4a5568" font-size="12">Figura de Mylar +</text>
+                        </svg>
+                        <div class="svg-caption">La figura adquiere la misma carga que la punta y se repele: queda levitando.</div>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> al tocar la figura, esta adquiere carga positiva (la misma que la punta). Como cargas iguales se repelen, la figura se aleja de la varita. La levitación se mantiene porque la figura es muy ligera y el campo eléctrico de la punta la sostiene.</div>
+                        <div class="paso"><strong>Truco:</strong> si la figura cae, vuelve a tocarla. Si se queda "pegada" a la pared o a tu mano, es porque se ha descargado y ahora es atraída por inducción.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- A2 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">📄</span>
+                <span class="exp-titulo">A2. Levitación de formas de papel</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">A2</span><span>Cuando el papel también levita</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, trozos pequeños de papel de seda o papel de fumar (cuanto más finos, mejor), tijeras.</p>
+                        <p><strong>Cómo se hace:</strong> Recorta formas pequeñas (estrellas, mariposas, círculos). Tócalas con la punta del Flystick y sepáralas. Verás que algunas quedan suspendidas y otras caen rápidamente.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> el papel es un aislante, pero en su superficie puede adquirir carga por contacto. Como es más pesado que el Mylar, la repulsión electrostática no siempre vence a la gravedad; por eso conviene usar trozos muy pequeños y finos.</div>
+                        <div class="paso"><strong>Variante:</strong> prueba con papel de aluminio muy fino. Al ser conductor, la carga se redistribuye y el comportamiento es distinto: las láminas se repelen entre sí y saltan.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- A3 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🫧</span>
+                <span class="exp-titulo">A3. Repulsión de pompas de jabón</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">A3</span><span>Pompas que huyen de la varita</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, pompas de jabón (con pajita o pompero), agua y jabón.</p>
+                        <p><strong>Cómo se hace:</strong> Genera varias pompas y acércalas a la punta cargada del Flystick. Observa cómo se alejan, se deforman e incluso estallan.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> la pompa de jabón es una finísima película de agua con iones. Al acercar la punta cargada, la pompa se polariza y adquiere carga del mismo signo (o se produce una descarga a través de la película), por lo que se repele. El campo eléctrico puede deformar la película y romperla.</div>
+                        <div class="paso"><strong>Observación:</strong> si la pompa se acerca mucho, puede estallar por la descarga eléctrica. Es un efecto muy visual.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- A4 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🥇</span>
+                <span class="exp-titulo">A4. Levitación de láminas de aluminio</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">A4</span><span>Conductores que se repelen entre sí</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, papel de aluminio, tijeras, un vaso de plástico o una superficie aislante.</p>
+                        <p><strong>Cómo se hace:</strong> Corta varias láminas muy finas de aluminio (de unos 2 × 2 cm). Colócalas sobre la mesa. Acerques el Flystick cargado: las láminas saltan, se adhieren a la varita y luego se repelen entre sí.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> el aluminio es conductor: al tocar la varita, las láminas adquieren carga positiva y se repelen entre sí (y con la varita). Como son muy ligeras, la repulsión vence a la gravedad y saltan.</div>
+                        <div class="paso"><strong>Variante:</strong> si las láminas están sobre una superficie aislante, quedan cargadas y "danzan" durante más tiempo.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- A5 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🥣</span>
+                <span class="exp-titulo">A5. El "bailarín" de Rice Krispies</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">A5</span><span>Cereales que saltan y flotan</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, cereales de arroz inflado (Rice Krispies o similares), un plato o una superficie seca.</p>
+                        <p><strong>Cómo se hace:</strong> Esparce los cereales sobre el plato. Acerca el Flystick cargado a unos centímetros: los cereales saltan hacia la varita, se quedan pegados un momento y luego salen disparados o flotan.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> los cereales son ligeros y su superficie es irregular. Al acercar la varita, se polarizan y son atraídos; al tocarla, adquieren la misma carga y se repelen. El resultado es un "baile" continuo de atracción-repulsión.</div>
+                        <div class="paso"><strong>Control:</strong> si los cereales están húmedos, el experimento falla: el agua conduce la carga y la disipa. Usa cereales muy secos.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- ============ CATEGORÍA B ============ -->
+        <div class="categoria cat-atraccion">
+            <i class="fas fa-magnet"></i>
+            <span>B. Atracción e inducción (cargas opuestas y polarización)</span>
+            <span class="cat-count">4 experimentos</span>
+        </div>
+
+        <!-- B1 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">💧</span>
+                <span class="exp-titulo">B1. Atracción de un chorro de agua</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">B1</span><span>El chorro que se dobla</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick cargado, un grifo con un chorro fino de agua, un vaso.</p>
+                        <p><strong>Cómo se hace:</strong> Abre el grifo muy poco, para que caiga un chorro fino y continuo. Acerca el Flystick cargado lateralmente al chorro, sin tocarlo. El agua se desviará hacia la varita.</p>
+                    </div>
+                    <div class="svg-figura">
+                        <svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="0" width="400" height="230" fill="#f7fafc" rx="10"/>
+                            <!-- Grifo -->
+                            <rect x="120" y="20" width="30" height="18" fill="#a0aec0"/>
+                            <rect x="130" y="38" width="10" height="40" fill="#718096"/>
+                            <text x="120" y="18" fill="#4a5568" font-size="11">grifo</text>
+                            <!-- Chorro normal (punteado) -->
+                            <path d="M135 78 Q135 150 135 210" stroke="#bee3f8" stroke-width="3" fill="none" stroke-dasharray="4 4"/>
+                            <!-- Chorro desviado -->
+                            <path d="M135 78 Q180 140 230 190" stroke="#3182ce" stroke-width="3" fill="none"/>
+                            <text x="250" y="180" fill="#2b6cb0" font-size="11">chorro desviado</text>
+                            <!-- Flystick -->
+                            <rect x="260" y="120" width="16" height="80" rx="3" fill="#4a5568"/>
+                            <circle cx="268" cy="115" r="11" fill="#667eea" stroke="#4a5568" stroke-width="2"/>
+                            <text x="268" y="120" text-anchor="middle" fill="white" font-size="12" font-weight="bold">+</text>
+                            <!-- Flecha atracción -->
+                            <defs>
+                                <marker id="arrB1" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                    <path d="M0,0 L10,5 L0,10 Z" fill="#ed8936"/>
+                                </marker>
+                            </defs>
+                            <line x1="220" y1="170" x2="255" y2="145" stroke="#ed8936" stroke-width="2" marker-end="url(#arrB1)"/>
+                            <text x="200" y="155" fill="#c05621" font-size="11" font-weight="bold">atracción</text>
+                            <text x="20" y="210" fill="#4a5568" font-size="11">Las moléculas de agua se polarizan</text>
+                        </svg>
+                        <div class="svg-caption">El campo eléctrico de la punta polariza las moléculas de agua, que son atraídas hacia la varita.</div>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> el agua es una molécula <strong>polar</strong> (tiene un lado positivo y otro negativo). Al acercar la varita cargada positivamente, las moléculas giran y orientan su lado negativo hacia la punta. La atracción neta desvía el chorro.</div>
+                        <div class="paso"><strong>Idea clave:</strong> el agua es neutra, pero se <strong>polariza</strong>. Esto demuestra que la atracción electrostática no requiere que el objeto esté cargado, solo que sea polarizable.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B2 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🥫</span>
+                <span class="exp-titulo">B2. Mover una lata de refresco vacía</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">B2</span><span>Rodar sin tocar</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick cargado, una lata de refresco vacía y seca, una superficie lisa.</p>
+                        <p><strong>Cómo se hace:</strong> Coloca la lata tumbada sobre la mesa, de modo que pueda rodar. Acerca el Flystick cargado a uno de los extremos laterales, sin tocarla: la lata empezará a rodar hacia la varita.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> el aluminio de la lata es conductor. Al acercar la varita cargada positivamente, los electrones del metal son atraídos hacia el lado más cercano (inducción), dejando el lado opuesto con carga positiva. La atracción neta hace que la lata ruede hacia la varita.</div>
+                        <div class="paso"><strong>Variante:</strong> si la lata está mojada o muy sucia, la carga se disipa y el efecto se debilita. Séquela bien antes del experimento.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B3 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">✋</span>
+                <span class="exp-titulo">B3. Atraer la mano y objetos neutros</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">B3</span><span>La figura de Mylar se pega a todo</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, figura de Mylar levitando, tu mano, una pared, un vaso.</p>
+                        <p><strong>Cómo se hace:</strong> Haz levitar la figura de Mylar. Acerca la mano (sin tocar la figura): la figura se sentirá atraída. Acércala a una pared o a un vaso: también se pegará.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> la figura de Mylar está cargada positivamente. Cuando se acerca a un objeto neutro (tu mano, la pared), las cargas negativas del objeto se desplazan hacia la figura (polarización), generando atracción. La figura "salta" hacia el objeto neutro.</div>
+                        <div class="paso"><strong>Diferencia con la levitación:</strong> en la levitación, la figura se repele de la varita (misma carga). Aquí, en cambio, es atraída por objetos neutros (polarización). Son dos caras del mismo fenómeno.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- B4 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">📌</span>
+                <span class="exp-titulo">B4. Adherir papel a la pared</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">B4</span><span>Un "post-it" electrostático</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, un trozo de papel fino, una pared lisa y seca.</p>
+                        <p><strong>Cómo se hace:</strong> Toca el papel con la punta del Flystick durante un par de segundos. Luego colócalo contra la pared y suéltalo: el papel se queda pegado.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> el papel adquiere carga por contacto. La pared, neutra, se polariza y atrae al papel. La fuerza electrostática es suficiente para vencer la gravedad durante un rato, hasta que la carga se disipa.</div>
+                        <div class="paso"><strong>Duración:</strong> en ambientes húmedos, el papel cae casi de inmediato (la humedad disipa la carga). En ambientes secos puede durar minutos.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- ============ CATEGORÍA C ============ -->
+        <div class="categoria cat-circuitos">
+            <i class="fas fa-bolt"></i>
+            <span>C. Generación de carga y circuitos electrostáticos</span>
+            <span class="cat-count">4 experimentos</span>
+        </div>
+
+        <!-- C1 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🔔</span>
+                <span class="exp-titulo">C1. Campana de Franklin</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">C1</span><span>Una campana que suena sola</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, dos latas metálicas, una bolita conductora (bola de ping-pong recubierta de grafito o de papel de aluminio), hilo de coser, un soporte.</p>
+                        <p><strong>Cómo se hace:</strong> Cuelga la bolita entre las dos latas, separadas unos centímetros. Carga una de las latas con el Flystick. La bolita empezará a oscilar entre las dos latas, golpeándolas y produciendo un repiqueteo.</p>
+                    </div>
+                    <div class="svg-figura">
+                        <svg viewBox="0 0 420 230" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="0" y="0" width="420" height="230" fill="#f7fafc" rx="10"/>
+                            <!-- Soporte -->
+                            <line x1="210" y1="20" x2="210" y2="50" stroke="#4a5568" stroke-width="3"/>
+                            <line x1="130" y1="20" x2="290" y2="20" stroke="#4a5568" stroke-width="3"/>
+                            <!-- Hilo -->
+                            <line x1="210" y1="50" x2="210" y2="105" stroke="#718096" stroke-width="1.5" stroke-dasharray="3 2"/>
+                            <!-- Bolita -->
+                            <circle cx="210" cy="110" r="10" fill="#ecc94b" stroke="#b7791f" stroke-width="2"/>
+                            <!-- Lata izquierda -->
+                            <rect x="110" y="130" width="45" height="70" rx="5" fill="#a0aec0" stroke="#4a5568" stroke-width="2"/>
+                            <text x="132" y="170" text-anchor="middle" fill="white" font-size="11" font-weight="bold">+</text>
+                            <!-- Lata derecha -->
+                            <rect x="265" y="130" width="45" height="70" rx="5" fill="#cbd5e0" stroke="#4a5568" stroke-width="2"/>
+                            <!-- Trayectoria -->
+                            <path d="M170 140 Q210 120 255 140" stroke="#e53e3e" stroke-width="2" fill="none" stroke-dasharray="4 3"/>
+                            <defs>
+                                <marker id="arrC1" markerWidth="9" markerHeight="9" refX="4" refY="4" orient="auto">
+                                    <path d="M0,0 L8,4 L0,8 Z" fill="#e53e3e"/>
+                                </marker>
+                            </defs>
+                            <path d="M240 135 L255 140" stroke="#e53e3e" stroke-width="2" marker-end="url(#arrC1)"/>
+                            <text x="180" y="205" fill="#4a5568" font-size="11">La bolita rebota entre las dos latas</text>
+                            <text x="110" y="220" fill="#4a5568" font-size="11">Lata cargada +</text>
+                            <text x="260" y="220" fill="#4a5568" font-size="11">Lata neutra</text>
+                        </svg>
+                        <div class="svg-caption">La bolita, al tocar la lata cargada, adquiere su carga y es repelida hacia la otra lata; el ciclo se repite.</div>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> la bolita toca la lata cargada positivamente y adquiere carga positiva. Se repele y vuela hacia la otra lata, que está neutra (atracción por inducción). Al tocarla, le transfiere parte de su carga y vuelve a ser repelida. El ciclo se repite hasta que las cargas se igualan.</div>
+                        <div class="paso"><strong>Nombre:</strong> este dispositivo fue inventado por Benjamin Franklin y se conoce como "campana de Franklin" o "molino eléctrico".</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- C2 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🧪</span>
+                <span class="exp-titulo">C2. Cargar un electroscopio de lata</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">C2</span><span>Detectando la carga</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, una lata de conservas vacía y limpia, papel de aluminio, un alambre fino, un trozo de corcho o porexpán.</p>
+                        <p><strong>Cómo se hace:</strong> Construye un electroscopio casero: pega una tira de papel de aluminio al extremo de un alambre y colócalo dentro de la lata, de modo que la tira quede colgando. Toca la lata con el Flystick cargado: la tira de aluminio se abre.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> la lata se carga y transfiere parte de su carga al alambre y a la tira de aluminio. Como las dos mitades de la tira (o la tira y el alambre) adquieren la misma carga, se repelen y se separan. Cuanto más abierta esté la tira, más carga hay.</div>
+                        <div class="paso"><strong>Uso:</strong> este electroscopio rudimentario permite comparar la cantidad de carga de distintos objetos y demostrar la transferencia de carga.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- C3 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🫙</span>
+                <span class="exp-titulo">C3. Fabricar un condensador (botella de Leyden)</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">C3</span><span>Almacenar carga eléctrica</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, un bote de carrete de fotos (o un vaso de plástico), papel de aluminio, un clavo o alambre grueso, cinta adhesiva.</p>
+                        <p><strong>Cómo se hace:</strong> Forra el interior y el exterior del bote con papel de aluminio (sin que se toquen). Introduce el clavo en el centro, conectado al aluminio interior. Carga el clavo con el Flystick varias veces. Luego acerca el clavo a otro objeto metálico: salta una chispa.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> el aluminio interior y el exterior forman las dos placas de un condensador. El plástico del bote actúa como dieléctrico. Al cargar el clavo, se acumula carga en el aluminio interior, y el exterior se polariza. La energía queda almacenada hasta que se produce la descarga.</div>
+                        <div class="paso"><strong>Conexión histórica:</strong> este montaje es una versión mini de la botella de Leyden, el primer condensador de la historia (siglo XVIII).</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- C4 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">💡</span>
+                <span class="exp-titulo">C4. Encender una lámpara de neón</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">C4</span><span>Luz sin cables</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, una pequeña lámpara de neón (sin resistencia interna, de las que se usan en pilotos indicadores), un destornillador aislado.</p>
+                        <p><strong>Cómo se hace:</strong> Sujeta la lámpara de neón con el destornillador (para no tocarla directamente). Acerca uno de sus terminales a la punta del Flystick cargado: la lámpara se enciende brevemente.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> la lámpara de neón contiene un gas que se ioniza y emite luz cuando pasa una corriente a través de él. El campo eléctrico del Flystick es tan intenso que ioniza el gas y produce una pequeña descarga, suficiente para encender la lámpara.</div>
+                        <div class="paso"><strong>Seguridad:</strong> la lámpara de neón debe ser de las que no llevan resistencia interna, y hay que sujetarla con un aislante. No toques los terminales con la piel.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- ============ CATEGORÍA D ============ -->
+        <div class="categoria cat-viento">
+            <i class="fas fa-wind"></i>
+            <span>D. Viento eléctrico y descarga</span>
+            <span class="cat-count">3 experimentos</span>
+        </div>
+
+        <!-- D1 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🌬️</span>
+                <span class="exp-titulo">D1. Viento eléctrico e iónico</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">D1</span><span>Un viento invisible</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, un alfiler o una aguja metálica.</p>
+                        <p><strong>Cómo se hace:</strong> Clava el alfiler en la punta del Flystick (o sujétalo con cinta). Carga el Flystick y acerca la palma de la mano a unos centímetros del alfiler. Notarás una suave brisa.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> la punta del alfiler concentra el campo eléctrico. Las moléculas de aire se ionizan cerca de la punta y son aceleradas por el campo, arrastrando a otras moléculas neutras. Se genera una corriente de aire llamada <strong>viento iónico</strong> o <strong>viento eléctrico</strong>.</div>
+                        <div class="paso"><strong>Aplicación real:</strong> este efecto se usa en los "ventiladores iónicos" sin aspas y en algunos sistemas de propulsión experimental.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- D2 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🕯️</span>
+                <span class="exp-titulo">D2. Desviar una llama</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">D2</span><span>El viento iónico apaga (casi) una vela</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, una vela encendida, un alfiler.</p>
+                        <p><strong>Cómo se hace:</strong> Coloca el alfiler en la punta del Flystick. Carga la varita y acerca el alfiler a la llama de la vela, sin tocarla. La llama se desvía hacia un lado.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> el viento iónico generado por la punta del alfiler empuja la llama. Además, la llama contiene iones y partículas cargadas que también responden al campo eléctrico.</div>
+                        <div class="paso"><strong>Seguridad:</strong> mantén el Flystick a una distancia segura de la llama. No lo acerques demasiado: el calor puede dañar el plástico.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- D3 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🥫</span>
+                <span class="exp-titulo">D3. El "Can de Graaff"</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">D3</span><span>Aumentar la capacidad del Flystick</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, una lata de refresco vacía, cinta aislante.</p>
+                        <p><strong>Cómo se hace:</strong> Fija la lata al extremo del Flystick con cinta aislante, de modo que la lata quede en contacto con la punta. Enciende el Flystick: la lata se carga también. Ahora puedes usarla como una punta "grande" para atraer objetos, producir chispas más largas o cargar otros dispositivos.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> la lata actúa como una extensión conductora de la punta. Al aumentar la superficie conductora, aumenta la capacidad de almacenar carga y el campo eléctrico en los bordes. Las chispas y los efectos son más intensos.</div>
+                        <div class="paso"><strong>Precaución:</strong> con la lata acoplada, las descargas son más energéticas. Evita tocar la lata con la piel.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- ============ CATEGORÍA E ============ -->
+        <div class="categoria cat-avanzados">
+            <i class="fas fa-flask"></i>
+            <span>E. Montajes avanzados y variantes didácticas</span>
+            <span class="cat-count">2 experimentos</span>
+        </div>
+
+        <!-- E1 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🌀</span>
+                <span class="exp-titulo">E1. Péndulo electrostático</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">E1</span><span>Oscilaciones cargadas</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, una bolita de porexpán o de papel de aluminio, hilo de coser, un soporte.</p>
+                        <p><strong>Cómo se hace:</strong> Cuelga la bolita del soporte con el hilo. Carga el Flystick y acércalo a la bolita: esta se moverá hacia la varita, la tocará y saldrá repelida. El péndulo oscila.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> la bolita es atraída por inducción, toca la varita, adquiere su misma carga y es repelida. Al volver por gravedad, se descarga parcialmente al tocar el aire o el soporte y el ciclo se repite.</div>
+                        <div class="paso"><strong>Estudio cuantitativo:</strong> se puede medir el período de oscilación y relacionarlo con la carga y la masa de la bolita.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- E2 -->
+        <details>
+            <summary>
+                <i class="fas fa-chevron-circle-down"></i>
+                <span class="exp-emoji">🐍</span>
+                <span class="exp-titulo">E2. Serpiente eléctrica de papel</span>
+                <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Abrir</span>
+            </summary>
+            <div class="details-content">
+                <div class="exp-card">
+                    <div class="ex-title"><span class="badge">E2</span><span>Una espiral que gira sola</span></div>
+                    <div class="enunciado">
+                        <p><strong>Qué necesitas:</strong> Flystick, papel de seda, tijeras, hilo, un soporte.</p>
+                        <p><strong>Cómo se hace:</strong> Recorta una espiral de papel de seda y cuélgala del soporte. Carga el Flystick y acércalo a la espiral: esta empezará a girar y a retorcerse.</p>
+                    </div>
+                    <div class="solucion">
+                        <div class="paso"><strong>Explicación:</strong> la espiral se carga por contacto y se repele de la varita. Como es muy ligera, las fuerzas electrostáticas la hacen girar. Es una variante del "molino eléctrico" de Franklin.</div>
+                        <div class="paso"><strong>Variante:</strong> si se coloca sobre un eje vertical, la espiral puede girar de forma continua mientras se mantenga la carga.</div>
+                    </div>
+                </div>
+            </div>
+        </details>
+
+        <!-- Clave didáctica -->
+        <div class="clave-didactica">
+            <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+            <strong>Clave didáctica:</strong> el Flystick es un generador de Van de Graaff en miniatura. Todos los experimentos se reducen a tres ideas: (1) cargas iguales se repelen (levitación, pompas, cereales); (2) un cuerpo cargado atrae a los neutros porque los polariza (agua, lata, papel); (3) la carga se puede transferir y almacenar (campana, electroscopio, botella de Leyden). Si dominas estas tres ideas, puedes inventar tus propios experimentos.
+        </div>
+    </div>
+
+    <!-- ==================== RESULTADO ==================== -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has demostrado?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>El Flystick no es un juguete: es un generador electrostático portátil que permite reproducir en el aula los experimentos clásicos de la electrostática.</strong></p>
+            <p>Levitación, atracción, transferencia de carga, viento iónico y descargas son manifestaciones del mismo fenómeno: la acumulación y redistribución de carga eléctrica.</p>
+        </div>
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>La <strong>carga eléctrica</strong> puede acumularse en una punta y transferirse por contacto a otros objetos.</li>
+            <li>Los <strong>materiales conductores</strong> (aluminio, agua con sales) redistribuyen la carga, mientras que los <strong>aislantes</strong> (Mylar, papel) la retienen en la superficie.</li>
+            <li>La <strong>polarización</strong> explica por qué un objeto neutro puede ser atraído por uno cargado.</li>
+            <li>La <strong>geometría</strong> importa: las puntas concentran el campo eléctrico y favorecen el viento iónico y las descargas.</li>
+            <li>El <strong>medio ambiente</strong> influye: la humedad disipa la carga y arruina muchos experimentos.</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que el Flystick "crea" electricidad. En realidad, solo separa cargas que ya estaban ahí. La energía que le das al girar la manivela (o al motor) se invierte en separar cargas y crear una diferencia de potencial.
+        </div>
+    </div>
+
+    <!-- ==================== DESPLEGABLE "DESMITIFICANDO" ==================== -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧠 DESMITIFICANDO el Flystick</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Púlsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- Ejercicio 1 -->
+            <div class="exp-card">
+                <div class="ex-title"><span class="badge">Ejercicio 1</span><span>¿Por qué la figura de Mylar levita y luego se cae?</span></div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica por qué la figura de Mylar se mantiene levitando un rato y luego cae al suelo.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Carga inicial:</strong> al tocar la varita, la figura adquiere carga positiva y se repele.</div>
+                    <div class="paso"><strong>Paso 2 — Pérdida de carga:</strong> la figura está rodeada de aire húmedo y de partículas que van neutralizando su carga poco a poco.</div>
+                    <div class="paso"><strong>Paso 3 — Gravedad:</strong> cuando la carga es demasiado pequeña, la fuerza electrostática no puede vencer al peso y la figura cae.</div>
+                    <div class="paso"><strong>Resultado:</strong> la levitación no es permanente: es un equilibrio dinámico entre la fuerza eléctrica y la gravedad, que se rompe cuando la carga se disipa.</div>
+                </div>
+            </div>
+
+            <!-- Ejercicio 2 -->
+            <div class="exp-card">
+                <div class="ex-title"><span class="badge">Ejercicio 2</span><span>¿Por qué el agua se desvía pero el aceite no?</span></div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Si acercas el Flystick a un chorro de agua, se desvía. Si lo acercas a un chorro de aceite, apenas se mueve. ¿Por qué?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Polaridad molecular:</strong> la molécula de agua es muy polar (tiene un momento dipolar grande). El aceite es apolar.</div>
+                    <div class="paso"><strong>Paso 2 — Polarización inducida:</strong> el agua se polariza fácilmente con el campo eléctrico. El aceite apenas se polariza.</div>
+                    <div class="paso"><strong>Resultado:</strong> la fuerza de atracción sobre el agua es mucho mayor. El aceite no se desvía de forma apreciable.</div>
+                </div>
+            </div>
+
+            <!-- Ejercicio 3 -->
+            <div class="exp-card">
+                <div class="ex-title"><span class="badge">Ejercicio 3</span><span>¿Por qué la campana de Franklin se detiene?</span></div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La bolita de la campana de Franklin rebota entre las dos latas durante un rato y luego se detiene. Explica por qué.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Transferencia de carga:</strong> cada vez que la bolita toca una lata, le transfiere parte de su carga.</div>
+                    <div class="paso"><strong>Paso 2 — Igualación:</strong> las dos latas van acumulando carga hasta que su potencial se iguala con el de la bolita.</div>
+                    <div class="paso"><strong>Paso 3 — Fin del movimiento:</strong> cuando ya no hay diferencia de potencial, no hay fuerza que impulse la bolita y el péndulo se detiene.</div>
+                    <div class="paso"><strong>Resultado:</strong> el movimiento cesa cuando se alcanza el equilibrio electrostático.</div>
+                </div>
+            </div>
+
+            <!-- Ejercicio 4 -->
+            <div class="exp-card">
+                <div class="ex-title"><span class="badge">Ejercicio 4</span><span>¿Por qué el Flystick funciona mejor en invierno?</span></div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En invierno, en una habitación con calefacción, los experimentos con el Flystick funcionan mucho mejor que en verano. ¿A qué se debe?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Humedad absoluta:</strong> el aire frío de la calefacción contiene menos vapor de agua que el aire cálido y húmedo del verano.</div>
+                    <div class="paso"><strong>Paso 2 — Conductividad del aire:</strong> el vapor de agua facilita la conducción de la carga eléctrica a través del aire.</div>
+                    <div class="paso"><strong>Paso 3 — Disipación:</strong> con mucha humedad, la carga se escapa rápidamente de los objetos y los experimentos fallan.</div>
+                    <div class="paso"><strong>Resultado:</strong> el Flystick rinde mejor en ambientes secos. Por eso conviene guardarlo en una bolsa con desecante.</div>
+                </div>
+            </div>
+
+            <!-- Ejercicio 5 -->
+            <div class="exp-card">
+                <div class="ex-title"><span class="badge">Ejercicio 5</span><span>¿Se puede encender una bombilla LED?</span></div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> ¿Se puede encender una bombilla LED normal con el Flystick? Razona la respuesta.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Voltaje:</strong> el Flystick genera varios miles de voltios, suficiente para ionizar gases (neón) pero con muy poca corriente.</div>
+                    <div class="paso"><strong>Paso 2 — LED:</strong> un LED necesita una corriente continua de algunos miliamperios para emitir luz. El Flystick proporciona descargas de muy baja corriente (microamperios).</div>
+                    <div class="paso"><strong>Paso 3 — Resultado:</strong> en general, no se puede encender un LED de forma continua; a lo sumo se ven destellos muy débiles en el momento de la descarga.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el Flystick no es una fuente de alimentación: es un generador de alta tensión y baja corriente.</div>
+                </div>
+            </div>
+
+            <!-- Ejercicio 6 -->
+            <div class="exp-card">
+                <div class="ex-title"><span class="badge">Ejercicio 6</span><span>¿Por qué las chispas son más largas con la lata acoplada?</span></div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Al acoplar una lata al Flystick (experimento D3), las chispas son más largas y energéticas. Explica por qué.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Capacidad:</strong> la lata aumenta la superficie conductora y, con ella, la capacidad eléctrica del conjunto.</div>
+                    <div class="paso"><strong>Paso 2 — Carga almacenada:</strong> a igual voltaje, más capacidad implica más carga almacenada: \( Q = C \cdot V \).</div>
+                    <div class="paso"><strong>Paso 3 — Energía:</strong> la energía almacenada es \( E = \frac{1}{2} C V^2 \). Al aumentar \( C \), aumenta la energía disponible para la chispa.</div>
+                    <div class="paso"><strong>Resultado:</strong> las chispas son más largas y luminosas. Por eso en los generadores Van de Graaff reales la cúpula es grande: cuanto mayor es, más carga almacena.</div>
+                </div>
+            </div>
+
+            <!-- Ejercicio 7 -->
+            <div class="exp-card">
+                <div class="ex-title"><span class="badge">Ejercicio 7</span><span>Del aula a la industria</span></div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Nombra al menos tres aplicaciones reales de la electrostática que se basan en los mismos principios que el Flystick.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>1. Precipitadores electrostáticos:</strong> usan campos eléctricos intensos para cargar las partículas de humo y polvo y atraerlas hacia placas colectoras. Se usan en centrales térmicas y cementeras.</div>
+                    <div class="paso"><strong>2. Pintura electrostática:</strong> las gotas de pintura se cargan y se dirigen hacia la pieza (conectada a tierra), lo que reduce el desperdicio y mejora la adherencia.</div>
+                    <div class="paso"><strong>3. Fotocopiadoras e impresoras láser:</strong> el tóner se adhiere selectivamente a zonas cargadas de un tambor fotoconductor.</div>
+                    <div class="paso"><strong>4. Filtros de aire domésticos:</strong> los ionizadores cargan las partículas y las atraen hacia placas colectoras.</div>
+                    <div class="paso"><strong>Conclusión:</strong> los mismos principios que hacen levitar una figura de Mylar están detrás de tecnologías industriales y domésticas de gran escala.</div>
+                </div>
+            </div>
+
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> la electrostática no es un tema "de libro": está en el Flystick, en la pintura de coches, en las fotocopiadoras y en los filtros de aire. Los 18 experimentos de esta práctica son una invitación a mirar el mundo con otros ojos: entenderás por qué te "salta la chispa" al tocar el coche, por qué el pelo se eriza con un globo y por qué se pega la ropa recién sacada de la secadora.
+            </div>
+        </div>
+    </details>
+
+    <!-- ==================== PIE "ES HORA DE" ==================== -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Un tubo, una punta cargada y dieciocho formas de asombrarse con la electricidad quieta.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- =================== FIN DE "ES HORA DE" ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>
+```
