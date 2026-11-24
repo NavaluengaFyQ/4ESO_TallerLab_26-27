@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>#U01c11 - Motor homopolar: el motor eléctrico más simple del mundo</title>
+    <title>#U01c11 - Motor homopolar y motores DC con bobinas: el motor eléctrico más simple del mundo</title>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -200,6 +200,101 @@
         .mini-card.azul { border-top-color: #3182ce; }
         .mini-card.verde { border-top-color: #38a169; }
         .mini-card.naranja { border-top-color: #ed8936; }
+        .mini-card.morado { border-top-color: #805ad5; }
+
+        /* =========================================================
+           ESTILOS PARA IMÁGENES Y VÍDEOS DIDÁCTICOS
+           ========================================================= */
+        .photo-figure {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 15px 15px 10px 15px;
+            margin: 20px auto;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            max-width: 520px;
+        }
+        .photo-figure img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            max-height: 440px;
+            width: auto;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+        }
+        .photo-pair {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .photo-pair > .photo-figure {
+            flex: 1 1 240px;
+            max-width: 320px;
+            margin: 0;
+        }
+        .photo-pair > .photo-figure img {
+            max-height: 380px;
+            object-fit: contain;
+        }
+        .figure-caption {
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-top: 12px;
+            line-height: 1.5;
+            font-style: italic;
+            padding: 0 10px;
+        }
+        .figure-caption strong {
+            color: #2d3748;
+            font-style: normal;
+        }
+        .video-figure {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 15px;
+            margin: 20px auto;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            max-width: 600px;
+        }
+        .video-figure video {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 560px;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            background: #000;
+        }
+        .video-figure iframe {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 560px;
+            aspect-ratio: 16 / 9;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            border: none;
+        }
+        .video-figure .video-caption {
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-top: 12px;
+            line-height: 1.5;
+            font-style: italic;
+            padding: 0 10px;
+        }
+        .video-figure .video-caption strong {
+            color: #2d3748;
+            font-style: normal;
+        }
 
         /* =========================================================
            ESTILOS PARA EL BLOQUE DESPLEGABLE
@@ -315,7 +410,7 @@
             <div class="header-sub">
                 <img src="../img_comunes/Cápsula.png" width="40" height="auto">
                 <span class="codigo">#U01c11.- </span>
-                <span class="texto">Motor homopolar: el motor eléctrico más simple del mundo</span>
+                <span class="texto">Motor homopolar y motores DC con bobinas: el motor eléctrico más simple del mundo</span>
             </div>
         </div>
         <div class="header-right">
@@ -328,11 +423,12 @@
         <h2>📋 ¿En qué consiste la práctica?</h2>
         <p>Vamos a construir el <strong>motor eléctrico más sencillo que existe</strong>: el <strong>motor homopolar</strong>. Solo necesitas <strong>tres cosas</strong>: una <strong>pila de 1,5 V</strong>, un <strong>tornillo</strong> (o un trozo de alambre grueso) y un <strong>imán de neodimio</strong> pegado en el extremo inferior del tornillo.</p>
         <p>Al colocar el imán en el polo negativo de la pila y apoyar el tornillo en el polo positivo, el tornillo <strong>se pone a girar</strong> a gran velocidad, ¡como por arte de magia!</p>
+        <p>Pero el motor homopolar es solo el punto de partida. En esta práctica también vamos a construir y entender <strong>motores de corriente continua con una y con dos bobinas</strong>, que añaden un elemento fundamental: la <strong>conmutación</strong>. Veremos cómo un rotor con un lado totalmente conductor y el otro lado parcialmente aislado (la mitad axial) permite que el motor siga girando sin detenerse.</p>
         <div class="formula-box">
             <strong>Pregunta que intentamos responder:</strong><br>
-            ¿Por qué gira un tornillo cuando lo colocamos sobre una pila con un imán debajo?
+            ¿Por qué gira un tornillo cuando lo colocamos sobre una pila con un imán debajo? ¿Y cómo se consigue que un motor con bobinas siga girando de forma continua?
         </div>
-        <p>La respuesta está en la <strong>fuerza de Lorentz</strong>: cuando una corriente eléctrica circula por un conductor inmerso en un campo magnético, aparece una fuerza perpendicular a ambos. Esa fuerza es la que hace girar al tornillo.</p>
+        <p>La respuesta está en la <strong>fuerza de Lorentz</strong>: cuando una corriente eléctrica circula por un conductor inmerso en un campo magnético, aparece una fuerza perpendicular a ambos. Esa fuerza es la que hace girar al tornillo y la que mueve las bobinas de los motores DC.</p>
     </div>
 
     <!-- SECCIÓN OBJETIVO -->
@@ -343,8 +439,12 @@
             <li>Qué es un <strong>motor homopolar</strong> y por qué se llama así.</li>
             <li>Cómo se produce el <strong>movimiento de rotación</strong> a partir de una corriente y un campo magnético.</li>
             <li>La regla de la mano derecha (o regla de Fleming) para determinar el sentido del giro.</li>
+            <li>Cómo construir un <strong>motor DC con una bobina</strong> y un imán permanente.</li>
+            <li>Cómo construir un <strong>motor DC con dos bobinas</strong> y un imán permanente.</li>
+            <li>El papel del <strong>rotor con conmutación</strong>: un lado totalmente conductor y el otro con aislante parcial (la mitad axial).</li>
+            <li>Por qué la conmutación es imprescindible en los motores con bobinas y por qué no hace falta en el homopolar.</li>
             <li>Cómo varía el sentido de giro si cambiamos la polaridad o el imán.</li>
-            <li>La relación entre el motor homopolar y los motores eléctricos reales (bobinas, conmutadores, etc.).</li>
+            <li>La relación entre estos motores y los motores eléctricos reales (bobinas, conmutadores, etc.).</li>
             <li>Los usos reales de los motores homopolares y de los motores eléctricos en general.</li>
         </ul>
     </div>
@@ -363,6 +463,13 @@
                 \]
             </div>
             <p>El producto vectorial implica que la fuerza es <strong>perpendicular</strong> tanto a la velocidad como al campo magnético. Por eso un campo magnético no acelera las cargas en la dirección de su movimiento, sino que las desvía lateralmente.</p>
+
+            <!-- FIGURA: DIAGRAMA DE LA FUERZA DE LORENTZ -->
+            <div class="photo-figure">
+                <img src="../imagenes/Motor Diagrama Fuerza Lorenz.gif" alt="Diagrama de la fuerza de Lorentz con la regla de la mano derecha y los vectores F, v y B">
+                <div class="figure-caption"><strong>Figura 1.</strong> Diagrama de la fuerza de Lorentz. La fuerza \( \vec{F} \) es perpendicular a la velocidad \( \vec{v} \) y al campo magnético \( \vec{B} \). La regla de la mano derecha permite determinar su dirección: pulgar = fuerza, índice = velocidad (o corriente), corazón = campo magnético.</div>
+            </div>
+
             <p>Si en lugar de una carga individual consideramos un <strong>conductor por el que circula una corriente</strong> \( I \) de longitud \( L \) inmerso en un campo magnético \( \vec{B} \), la fuerza sobre el conductor es:</p>
             <div class="formula-box">
                 \[
@@ -374,7 +481,7 @@
 
         <div class="step">
             <span class="step-num">2</span>
-            <strong>¿Por qué gira el tornillo?</strong>
+            <strong>¿Por qué gira el tornillo? (motor homopolar)</strong>
             <p>En nuestro motor homopolar ocurre lo siguiente:</p>
             <ol>
                 <li>La pila de 1,5 V empuja una corriente eléctrica desde su polo positivo (arriba) hacia el polo negativo (abajo).</li>
@@ -383,8 +490,27 @@
                 <li>Las cargas que circulan por el tornillo se mueven, por tanto, dentro de un campo magnético. Experimentan la fuerza de Laplace y, como el tornillo es un cuerpo rígido, esa fuerza se traduce en un <strong>par de giro</strong>.</li>
                 <li>El tornillo empieza a girar. Cuanto más intenso es el campo magnético (imán más potente) y mayor la corriente (pila más nueva), más rápido gira.</li>
             </ol>
+
+            <!-- FIGURAS: DIAGRAMAS DEL MOTOR HOMOPOLAR -->
+            <div class="photo-pair">
+                <div class="photo-figure">
+                    <img src="../imagenes/Motor homopolar.webp" alt="Diagrama de un motor homopolar con pila, tornillo e imán">
+                    <div class="figure-caption"><strong>Figura 2a.</strong> Diagrama de un motor homopolar: pila, tornillo e imán de neodimio. La corriente atraviesa el tornillo y el campo magnético del imán produce el giro.</div>
+                </div>
+                <div class="photo-figure">
+                    <img src="../imagenes/Motor homopolar-Diagrama.jpg" alt="Diagrama detallado de un motor homopolar con campos de fuerza y movimiento de electrones">
+                    <div class="figure-caption"><strong>Figura 2b.</strong> Diagrama detallado del motor homopolar: se muestran las líneas de campo magnético del imán, el sentido de la corriente (movimiento de electrones) y la fuerza resultante que hace girar el tornillo.</div>
+                </div>
+            </div>
+
             <div class="highlight-box">
                 <strong>Idea clave:</strong> la corriente va del polo + al −, el campo magnético del imán la atraviesa, y la combinación de ambos produce una fuerza perpendicular que, al estar aplicada en la periferia del tornillo, lo hace girar.
+            </div>
+
+            <!-- VÍDEO: MOTORES HOMOPOLARES EN FUNCIONAMIENTO -->
+            <div class="video-figure">
+                <iframe src="https://www.youtube.com/embed/OHF-mGDrA0M?start=119" title="Motores homopolares en funcionamiento" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="video-caption"><strong>Vídeo 1.</strong> Varios motores homopolares en funcionamiento. Observa cómo el tornillo gira alrededor de la pila y cómo cambia el sentido de giro al invertir la polaridad o el imán. <a href="https://www.youtube.com/watch?v=OHF-mGDrA0M&t=119s" target="_blank" rel="noopener">Ver en YouTube</a>.</div>
             </div>
         </div>
 
@@ -469,6 +595,87 @@
                 <p>El mismo principio funciona al revés: si haces girar un conductor en un campo magnético, se genera corriente. Así funcionan los alternadores y las dinamos.</p>
             </div>
         </div>
+
+        <!-- ============================================================
+             NUEVO: MOTORES DC CON BOBINAS
+             ============================================================ -->
+        <div class="step">
+            <span class="step-num">8</span>
+            <strong>Motor de corriente continua con una bobina e imán</strong>
+            <p>El motor homopolar es fascinante, pero tiene un inconveniente: no puede mover cargas grandes. Para eso están los <strong>motores de corriente continua (DC) con bobinas</strong>. En su versión más simple, un motor DC consta de:</p>
+            <ul>
+                <li>Un <strong>imán permanente</strong> que proporciona el campo magnético (el estator).</li>
+                <li>Una <strong>bobina</strong> de alambre de cobre por la que circula la corriente (el rotor).</li>
+                <li>Un <strong>sistema de conmutación</strong> que invierte el sentido de la corriente en la bobina cada media vuelta.</li>
+                <li>Unas <strong>escobillas</strong> (o contactos deslizantes) que conectan la bobina con la fuente de alimentación.</li>
+            </ul>
+            <p>El principio es el mismo que en el motor homopolar: la corriente en la bobina, dentro del campo magnético del imán, experimenta la fuerza de Laplace y genera un par de giro. Pero hay una diferencia crucial: si la corriente siempre circulara en el mismo sentido, la bobina giraría media vuelta y se quedaría atascada. Para que siga girando, hay que <strong>invertir la corriente</strong> cada vez que la bobina pasa por la posición vertical.</p>
+
+            <!-- VÍDEO: MOTOR CON UNA BOBINA -->
+            <div class="video-figure">
+                <video controls preload="metadata">
+                    <source src="../videos/Motor 1 bobina.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de vídeo. Puedes descargar el archivo <a href="../videos/Motor 1 bobina.mp4">aquí</a>.
+                </video>
+                <div class="video-caption"><strong>Vídeo 2.</strong> Motor DC con una bobina e imán permanente. Observa cómo la bobina gira de forma continua gracias al sistema de conmutación del rotor. El rotor tiene un lado totalmente conductor y el otro lado con aislante parcial (la mitad axial), que actúa como conmutador.</div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>El rotor con conmutación:</strong> en este motor, el rotor tiene <strong>dos extremos de contacto</strong>. Uno de ellos es <strong>totalmente conductor</strong>: la escobilla correspondiente está siempre en contacto. El otro extremo tiene un <strong>aislante parcial</strong> que cubre la mitad de su superficie (la mitad axial), de modo que la escobilla solo hace contacto durante <strong>media vuelta</strong>. Esa interrupción periódica de la corriente es lo que permite que la bobina siga girando: cuando la bobina está en la posición adecuada, la corriente se invierte (o se corta) y el par de giro se mantiene siempre en el mismo sentido.
+            </div>
+
+            <div class="note">
+                <strong>¿Por qué funciona?</strong> Cuando la bobina está horizontal, la corriente circula y el par la hace girar. Al llegar a la vertical, el aislante del rotor corta la corriente (o la invierte), y la bobina sigue girando por inercia. Al pasar la vertical, la corriente vuelve a circular en el sentido adecuado para que el par siga empujando en la misma dirección. El resultado es un giro continuo.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">9</span>
+            <strong>Motor de corriente continua con dos bobinas e imán</strong>
+            <p>Si con una bobina el motor ya gira, con <strong>dos bobinas</strong> el movimiento es mucho más suave y regular. Las dos bobinas se colocan perpendiculares entre sí (formando una cruz) y se conectan al mismo sistema de conmutación. De este modo, siempre hay al menos una bobina en una posición en la que la fuerza de Laplace produce un par útil.</p>
+            <p>Las ventajas de añadir una segunda bobina son:</p>
+            <ul>
+                <li>El <strong>par de giro es más constante</strong>: no hay posiciones en las que el motor se quede sin fuerza.</li>
+                <li>El motor <strong>arranca con más facilidad</strong> desde cualquier posición.</li>
+                <li>El giro es <strong>más suave y silencioso</strong>.</li>
+                <li>Se reduce el <strong>rizado</strong> (las variaciones de velocidad y par).</li>
+            </ul>
+            <p>El rotor sigue teniendo el mismo diseño: un lado totalmente conductor y el otro lado con aislante parcial (la mitad axial), que actúa como conmutador para las dos bobinas.</p>
+
+            <!-- VÍDEO: MOTOR CON DOS BOBINAS -->
+            <div class="video-figure">
+                <video controls preload="metadata">
+                    <source src="../videos/Motor 2 bobinas.mp4" type="video/mp4">
+                    Tu navegador no soporta el elemento de vídeo. Puedes descargar el archivo <a href="../videos/Motor 2 bobinas.mp4">aquí</a>.
+                </video>
+                <div class="video-caption"><strong>Vídeo 3.</strong> Motor DC con dos bobinas e imán permanente. Las dos bobinas, colocadas perpendicularmente, hacen que el par de giro sea más constante y que el motor arranque con más facilidad desde cualquier posición. El rotor mantiene el mismo sistema de conmutación: un lado totalmente conductor y el otro con aislante parcial (la mitad axial).</div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Comparación con el motor de una bobina:</strong> el motor de dos bobinas es una evolución directa del de una bobina. Añadir una segunda bobina no cambia el principio físico (fuerza de Lorentz + conmutación), pero mejora prestaciones: más par, giro más suave y arranque más fiable. Es el mismo camino que siguieron los motores reales: de una bobina simple se pasó a múltiples bobinas y a diseños cada vez más optimizados.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">10</span>
+            <strong>El rotor con conmutación: un lado conductor y otro parcialmente aislado</strong>
+            <p>Tanto el motor de una bobina como el de dos bobinas utilizan un rotor con un diseño muy ingenioso y sencillo. El rotor tiene <strong>dos extremos de contacto</strong> (los puntos donde las escobillas tocan el rotor para hacer pasar la corriente):</p>
+            <ul>
+                <li><strong>Un lado (extremo) totalmente conductor:</strong> la escobilla correspondiente está siempre en contacto eléctrico. La corriente puede entrar o salir sin interrupción por este lado.</li>
+                <li><strong>El otro lado (extremo) con aislante parcial:</strong> solo la mitad de su superficie es conductora. La otra mitad está cubierta por un aislante (la mitad axial). Como el rotor gira, la escobilla de este lado toca alternativamente la parte conductora y la parte aislada.</li>
+            </ul>
+            <p>Este diseño produce una <strong>conmutación mecánica simple</strong>: la corriente se conecta y se desconecta (o se invierte) automáticamente a medida que el rotor gira. Es el equivalente a un <strong>conmutador de dos delgas</strong> (o de una delga) en los motores tradicionales, pero fabricado de forma muy sencilla con un aislante parcial en el eje.</p>
+            <div class="formula-box">
+                <strong>Funcionamiento de la conmutación:</strong><br>
+                <span style="display:block; margin-top:8px;">Cuando la escobilla toca la parte conductora → la corriente circula → la bobina produce par.</span>
+                <span style="display:block; margin-top:4px;">Cuando la escobilla toca la parte aislada → la corriente se corta → la bobina sigue por inercia.</span>
+                <span style="display:block; margin-top:4px;">Al volver a tocar la parte conductora, el ciclo se repite.</span>
+            </div>
+            <div class="note">
+                <strong>¿Por qué no se queda atascado el motor?</strong> Porque la inercia del rotor hace que este siga girando durante el breve intervalo en que la corriente está cortada. Si el rotor se parase justo en el punto muerto, el motor no arrancaría; pero en la práctica, la inercia y la posición de las bobinas hacen que siempre haya una posición en la que el par es distinto de cero.
+            </div>
+            <p>Esta solución es mucho más sencilla que un conmutador de varias delgas, y es perfecta para motores didácticos. En los motores industriales se usan conmutadores más elaborados (con muchas delgas) para conseguir un par más uniforme y un funcionamiento más suave.</p>
+        </div>
     </div>
 
     <!-- SECCIÓN MATERIALES Y PROCEDIMIENTO -->
@@ -477,7 +684,7 @@
 
         <div class="step">
             <span class="step-num">1</span>
-            <strong>Materiales</strong>
+            <strong>Materiales para el motor homopolar</strong>
             <ul>
                 <li>Una <strong>pila de 1,5 V</strong> (mejor si es nueva y de buena calidad; las alcalinas funcionan mejor).</li>
                 <li>Un <strong>tornillo</strong> de acero con cabeza (los de cabeza plana o redonda grande funcionan muy bien). También vale un trozo de alambre grueso de cobre o de acero.</li>
@@ -492,7 +699,25 @@
 
         <div class="step">
             <span class="step-num">2</span>
-            <strong>Montaje</strong>
+            <strong>Materiales para los motores DC con bobinas</strong>
+            <ul>
+                <li><strong>Alambre de cobre esmaltado</strong> (para las bobinas) de 0,5–1 mm de diámetro.</li>
+                <li>Un <strong>imán permanente</strong> (de neodimio o de ferrita) suficientemente potente.</li>
+                <li>Un <strong>soporte</strong> para el rotor (puede ser un tapón de corcho, una base de madera o un soporte impreso en 3D).</li>
+                <li><strong>Dos escobillas</strong> o contactos deslizantes (pueden ser dos clips metálicos o dos trozos de alambre grueso).</li>
+                <li>Un <strong>eje</strong> para el rotor (un palillo, un alambre grueso o un tornillo pequeño).</li>
+                <li><strong>Cinta aislante</strong> o tubo termorretráctil para el aislante parcial del rotor.</li>
+                <li>Una <strong>pila</strong> de 1,5 V o una fuente de alimentación de 1,5–3 V.</li>
+                <li><strong>Cables de conexión</strong> y pinzas de cocodrilo.</li>
+            </ul>
+            <div class="note">
+                <strong>El rotor con conmutación:</strong> para construir el rotor con un lado totalmente conductor y el otro con aislante parcial, puedes usar un eje de metal (totalmente conductor en un extremo) y en el otro extremo cubrir la mitad de la superficie con cinta aislante o tubo termorretráctil. Así de sencillo.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Montaje del motor homopolar</strong>
             <ol>
                 <li>Pega el <strong>imán de neodimio</strong> en la <strong>cabeza del tornillo</strong>, o al extremo inferior si es un alambre. La cara del imán debe quedar bien alineada con el eje del tornillo.</li>
                 <li>Coloca la <strong>pila</strong> vertical sobre la mesa, con el <strong>polo negativo hacia abajo</strong>.</li>
@@ -510,7 +735,39 @@
         </div>
 
         <div class="step">
-            <span class="step-num">3</span>
+            <span class="step-num">4</span>
+            <strong>Montaje del motor DC con una bobina</strong>
+            <ol>
+                <li>Construye la <strong>bobina</strong> enrollando alambre de cobre esmaltado alrededor de un cilindro (por ejemplo, un rotulador) unas 20–30 vueltas. Deja dos extremos libres de unos 5 cm para las conexiones.</li>
+                <li>Fija la bobina a un <strong>eje</strong> (palillo o alambre) y coloca el conjunto sobre el <strong>soporte</strong>, de modo que pueda girar libremente.</li>
+                <li>Prepara el <strong>rotor con conmutación</strong>: en un extremo del eje, deja el metal totalmente descubierto (contacto permanente). En el otro extremo, cubre la mitad de la superficie con cinta aislante o tubo termorretráctil (aislante parcial, la mitad axial).</li>
+                <li>Coloca las <strong>escobillas</strong> (clips o alambres) de modo que una toque siempre el extremo conductor y la otra toque el extremo con aislante parcial.</li>
+                <li>Coloca el <strong>imán permanente</strong> debajo o alrededor de la bobina, de forma que el campo magnético atraviese la bobina.</li>
+                <li>Conecta la pila a las escobillas y da un pequeño impulso a la bobina. Si todo está bien, la bobina debe seguir girando.</li>
+            </ol>
+            <div class="note">
+                <strong>Ajuste fino:</strong> si el motor no gira, prueba a girar el imán, a cambiar la polaridad de la pila o a ajustar la posición de las escobillas. A veces hace falta un pequeño empujón inicial para que la bobina salga del punto muerto.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Montaje del motor DC con dos bobinas</strong>
+            <ol>
+                <li>Construye <strong>dos bobinas</strong> iguales a la anterior (mismo número de vueltas y mismo diámetro).</li>
+                <li>Colócalas <strong>perpendiculares entre sí</strong> (formando una cruz) sobre el mismo eje.</li>
+                <li>Conecta los extremos de las dos bobinas al mismo sistema de conmutación (el rotor con un lado conductor y otro con aislante parcial).</li>
+                <li>Asegúrate de que las conexiones estén bien hechas y de que las dos bobinas estén bien sujetas al eje.</li>
+                <li>Coloca el imán y las escobillas igual que en el motor de una bobina.</li>
+                <li>Conecta la pila y da un pequeño impulso. El motor debe girar de forma más suave y regular que el de una bobina.</li>
+            </ol>
+            <div class="highlight-box">
+                <strong>Consejo:</strong> si el motor de dos bobinas no gira, comprueba que las dos bobinas estén bien conectadas (que no haya un cortocircuito entre ellas) y que el imán esté bien orientado. A veces basta con girar el imán 90° para que el motor funcione.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
             <strong>Variantes para investigar</strong>
             <ul>
                 <li><strong>Cambiar el sentido de la pila:</strong> gira la pila 180° (polo + hacia abajo, − hacia arriba). ¿En qué sentido gira el tornillo ahora?</li>
@@ -519,12 +776,14 @@
                 <li><strong>Probar con diferentes pilas:</strong> alcalina nueva vs. gastada. ¿Gira más despacio?</li>
                 <li><strong>Probar con alambre:</strong> en lugar de un tornillo, un trozo de alambre grueso de cobre doblado en forma de "U" o de "L". ¿Gira igual?</li>
                 <li><strong>Colocar el imán en otro sitio:</strong> pruébalo con el imán pegado al polo positivo y el tornillo apoyado en el negativo. ¿Funciona igual?</li>
+                <li><strong>Cambiar el número de vueltas de las bobinas:</strong> ¿qué pasa si pones más o menos vueltas? ¿Gira más rápido o más despacio?</li>
+                <li><strong>Cambiar el aislante parcial del rotor:</strong> ¿qué pasa si cubres más o menos de la mitad axial? ¿Qué efecto tiene sobre el giro?</li>
             </ul>
         </div>
 
         <div class="step">
-            <span class="step-num">4</span>
-            <strong>Explicación detallada del giro</strong>
+            <span class="step-num">7</span>
+            <strong>Explicación detallada del giro del motor homopolar</strong>
             <p>¿Por qué gira <em>el tornillo</em> y no simplemente se queda quieto? La razón es que la fuerza de Laplace no es una fuerza única aplicada al centro, sino una <strong>distribución de fuerzas a lo largo del tornillo</strong>:</p>
             <ol>
                 <li>La corriente entra por la cabeza del tornillo (arriba) y sale por la punta (abajo, en contacto con el imán).</li>
@@ -537,14 +796,34 @@
         </div>
 
         <div class="step">
-            <span class="step-num">5</span>
+            <span class="step-num">8</span>
+            <strong>Explicación detallada del giro de los motores con bobinas</strong>
+            <p>En los motores con bobinas, el giro se produce por el mismo principio, pero con un matiz importante: la <strong>conmutación</strong>.</p>
+            <ol>
+                <li>La corriente circula por la bobina y experimenta la fuerza de Laplace en el campo del imán.</li>
+                <li>Las fuerzas sobre los lados de la bobina producen un par que la hace girar.</li>
+                <li>Cuando la bobina llega a la posición vertical, el par se anularía y la bobina se quedaría atascada.</li>
+                <li>Pero el <strong>rotor con conmutación</strong> (un lado totalmente conductor y el otro con aislante parcial) corta o invierte la corriente en ese momento.</li>
+                <li>La bobina sigue girando por inercia y, al pasar la vertical, la corriente vuelve a circular en el sentido adecuado para que el par siga empujando en la misma dirección.</li>
+                <li>El resultado es un <strong>giro continuo</strong>.</li>
+            </ol>
+            <div class="highlight-box">
+                <strong>Diferencia clave con el homopolar:</strong> el motor homopolar no necesita conmutación porque su geometría es simétrica y el par siempre tiene el mismo sentido. Los motores con bobinas, en cambio, necesitan conmutación porque la bobina gira y el par cambiaría de sentido cada media vuelta si no se invirtiera la corriente.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">9</span>
             <strong>Observaciones clave</strong>
             <ul>
-                <li>El tornillo gira <strong>alrededor de la pila</strong>, no sobre su propio eje. La pila hace de "pista" circular imaginaria.</li>
+                <li>El tornillo del motor homopolar gira <strong>alrededor de la pila</strong>, no sobre su propio eje. La pila hace de "pista" circular imaginaria.</li>
                 <li>Si la pila está muy gastada, el tornillo no gira. La corriente es imprescindible.</li>
                 <li>Si el imán es muy débil, el tornillo no gira o gira muy despacio.</li>
                 <li>Si el tornillo es demasiado grueso o pesado, tampoco gira bien.</li>
                 <li>El contacto eléctrico debe ser bueno: tanto entre la cabeza del tornillo y el polo + como entre el imán y el polo −.</li>
+                <li>En los motores con bobinas, la <strong>conmutación</strong> es imprescindible: sin ella, la bobina gira media vuelta y se queda atascada.</li>
+                <li>El <strong>aislante parcial del rotor</strong> (la mitad axial) es lo que permite la conmutación de forma sencilla.</li>
+                <li>El motor de dos bobinas gira más suave y arranca con más facilidad que el de una bobina.</li>
             </ul>
         </div>
     </div>
@@ -555,16 +834,20 @@
         <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
             <p><strong>Una corriente eléctrica que circula por un conductor inmerso en un campo magnético experimenta una fuerza perpendicular a ambos (fuerza de Lorentz/Laplace).</strong></p>
             <p>En el motor homopolar, esa fuerza se distribuye alrededor del tornillo y produce un par de giro. El tornillo gira alrededor de la pila sin necesidad de conmutador ni de inversión de corriente.</p>
+            <p>En los motores DC con bobinas, la misma fuerza produce el giro, pero es necesario un <strong>sistema de conmutación</strong> (el rotor con un lado conductor y otro con aislante parcial) para invertir la corriente cada media vuelta y mantener el par en el mismo sentido.</p>
         </div>
         <p>Además, has comprobado que:</p>
         <ul>
             <li>El giro depende de la <strong>intensidad de corriente</strong> y de la <strong>intensidad del campo magnético</strong>.</li>
             <li>Cambiando la polaridad de la pila o el sentido del imán, se invierte el sentido de giro.</li>
             <li>El motor homopolar es la <strong>versión más simple posible</strong> de un motor eléctrico, y fue el primero de la historia (Faraday, 1821).</li>
+            <li>Los motores DC con bobinas añaden <strong>conmutación</strong>, lo que les permite girar de forma continua y con más par.</li>
+            <li>El <strong>rotor con un lado conductor y otro con aislante parcial</strong> es un sistema de conmutación sencillo y eficaz.</li>
+            <li>El motor de dos bobinas es una mejora del de una bobina: más par, giro más suave y arranque más fiable.</li>
             <li>El mismo principio rige el funcionamiento de todos los motores eléctricos y generadores actuales.</li>
         </ul>
         <div class="note">
-            <strong>Error típico:</strong> pensar que el imán "empuja" el tornillo por atracción magnética. No es así: el imán solo proporciona el campo; es la <strong>corriente</strong> la que, al atravesar el campo, genera la fuerza. Si quitas la pila y dejas solo el imán, el tornillo no gira.
+            <strong>Error típico:</strong> pensar que el imán "empuja" el tornillo por atracción magnética. No es así: el imán solo proporciona el campo; es la <strong>corriente</strong> la que, al atravesar el campo, genera la fuerza. Si quitas la pila y dejas solo el imán, el tornillo no gira. Lo mismo ocurre en los motores con bobinas: sin corriente, no hay giro.
         </div>
     </div>
 
@@ -572,7 +855,7 @@
     <details>
         <summary>
             <i class="fas fa-chevron-circle-down"></i>
-            <span>🧪 DESMITIFICANDO el motor homopolar</span>
+            <span>🧪 DESMITIFICANDO el motor homopolar y los motores con bobinas</span>
             <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
         </summary>
         <div class="details-content">
@@ -724,10 +1007,43 @@
                 </div>
             </div>
 
+            <!-- EJERCICIO 9 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 9</span>
+                    <span>¿Por qué el motor de dos bobinas gira más suave?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica por qué un motor DC con dos bobinas perpendiculares gira de forma más suave y regular que uno con una sola bobina.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — El problema de una bobina:</strong> con una sola bobina, hay posiciones (cuando la bobina está vertical) en las que el par de giro se anula. El motor depende de la inercia para pasar por ese punto muerto.</div>
+                    <div class="paso"><strong>Paso 2 — La solución de dos bobinas:</strong> con dos bobinas perpendiculares, cuando una está en el punto muerto, la otra está en la posición de máximo par. Siempre hay al menos una bobina produciendo par útil.</div>
+                    <div class="paso"><strong>Paso 3 — Conclusión:</strong> el par total es más constante, el motor arranca con más facilidad desde cualquier posición y el giro es más suave. Es el mismo principio que usan los motores reales con múltiples bobinas.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 10 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 10</span>
+                    <span>El rotor con aislante parcial: ¿cómo funciona la conmutación?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Describe cómo el rotor con un lado totalmente conductor y el otro con aislante parcial (la mitad axial) consigue invertir o cortar la corriente en el momento adecuado para que el motor siga girando.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Contacto permanente:</strong> el extremo totalmente conductor del rotor está siempre en contacto con una escobilla. La corriente puede entrar o salir sin interrupción por ese lado.</div>
+                    <div class="paso"><strong>Paso 2 — Contacto intermitente:</strong> el otro extremo tiene un aislante que cubre la mitad de su superficie (la mitad axial). A medida que el rotor gira, la escobilla de ese lado toca alternativamente la parte conductora y la parte aislada.</div>
+                    <div class="paso"><strong>Paso 3 — Conmutación:</strong> cuando la escobilla toca la parte conductora, la corriente circula por la bobina y se produce par. Cuando toca la parte aislada, la corriente se corta (o se invierte, según el diseño) y la bobina sigue girando por inercia.</div>
+                    <div class="paso"><strong>Paso 4 — Ciclo continuo:</strong> al volver a tocar la parte conductora, el ciclo se repite. Así se mantiene el par en el mismo sentido y el motor gira de forma continua.</div>
+                </div>
+            </div>
+
             <!-- Pie didáctico -->
             <div class="clave-didactica">
                 <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
-                <strong>Clave didáctica:</strong> El motor homopolar es la mejor manera de <em>ver</em> la fuerza de Lorentz en acción. Las tres ideas que hay que llevarse son: (1) una corriente dentro de un campo magnético experimenta una fuerza perpendicular a ambos; (2) esa fuerza puede convertirse en giro si el conductor es simétrico alrededor del eje; (3) no hace falta conmutador porque el par siempre tiene el mismo sentido. Es el motor eléctrico más simple posible y, a la vez, la base conceptual de todos los motores y generadores actuales.
+                <strong>Clave didáctica:</strong> El motor homopolar es la mejor manera de <em>ver</em> la fuerza de Lorentz en acción. Las tres ideas que hay que llevarse son: (1) una corriente dentro de un campo magnético experimenta una fuerza perpendicular a ambos; (2) esa fuerza puede convertirse en giro si el conductor es simétrico alrededor del eje; (3) no hace falta conmutador porque el par siempre tiene el mismo sentido. Los motores DC con bobinas añaden la <strong>conmutación</strong>, que es imprescindible cuando el conductor no es simétrico alrededor del eje. El rotor con un lado conductor y otro con aislante parcial (la mitad axial) es un sistema de conmutación sencillo y eficaz que permite que los motores con una o dos bobinas giren de forma continua. Es el motor eléctrico más simple posible y, a la vez, la base conceptual de todos los motores y generadores actuales.
             </div>
         </div>
     </details>
@@ -750,7 +1066,7 @@
                 margin-bottom: 12px;
                 padding: 0 10px;
             ">
-                <br>  Una pila, un tornillo y un imán: el motor eléctrico más simple del mundo y el principio de la fuerza de Lorentz en acción.<br>
+                <br>  Una pila, un tornillo y un imán: el motor eléctrico más simple del mundo y el principio de la fuerza de Lorentz en acción. Y con dos bobinas y un rotor con conmutación, el mismo principio se convierte en un motor DC completo.<br>
                 <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
             </p>
 
