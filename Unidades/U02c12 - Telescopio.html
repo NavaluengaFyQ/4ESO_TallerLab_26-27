@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U01c12 - El telescopio del instituto: Konusuper 120</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+        .mini-card.morado { border-top-color: #805ad5; }
+
+        /* =========================================================
+           ESTILOS PARA IMÁGENES DIDÁCTICAS
+           ========================================================= */
+        .photo-figure {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 15px 15px 10px 15px;
+            margin: 20px auto;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            max-width: 520px;
+        }
+        .photo-figure img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            max-height: 440px;
+            width: auto;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+        }
+        .photo-pair {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .photo-pair > .photo-figure {
+            flex: 1 1 240px;
+            max-width: 340px;
+            margin: 0;
+        }
+        .photo-pair > .photo-figure img {
+            max-height: 380px;
+            object-fit: contain;
+        }
+        .figure-caption {
+            font-size: 0.9em;
+            color: #4a5568;
+            margin-top: 12px;
+            line-height: 1.5;
+            font-style: italic;
+            padding: 0 10px;
+        }
+        .figure-caption strong {
+            color: #2d3748;
+            font-style: normal;
+        }
+
+        /* =========================================================
+           ESTILOS PARA LAS VISTAS POR EL OCULAR (CÍRCULOS)
+           ========================================================= */
+        .eyepiece-section {
+            margin: 25px 0;
+            padding: 20px 22px;
+            background: radial-gradient(ellipse at top, #0d1226 0%, #05070f 100%);
+            border-radius: 16px;
+            border: 1px solid #2d3748;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.5), 0 4px 14px rgba(0,0,0,0.15);
+        }
+        .eyepiece-heading {
+            margin: 0 0 8px 0;
+            color: #f7fafc;
+            font-size: 1.05em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .eyepiece-intro {
+            color: #cbd5e0;
+            font-size: 0.92em;
+            margin: 0 0 16px 0;
+            line-height: 1.6;
+        }
+        .eyepiece-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+            margin: 12px 0 8px 0;
+        }
+        .eyepiece-card {
+            flex: 0 0 auto;
+            width: 168px;
+            text-align: center;
+        }
+        .eyepiece-card svg {
+            display: block;
+            margin: 0 auto;
+            width: 148px;
+            height: 148px;
+            border-radius: 50%;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.6), 0 0 0 2px #4a5568, 0 0 0 4px #1a202c;
+        }
+        .eyepiece-label {
+            margin-top: 10px;
+            font-size: 0.78em;
+            color: #a0aec0;
+            line-height: 1.4;
+        }
+        .eyepiece-label strong {
+            display: block;
+            color: #f7fafc;
+            font-size: 1.08em;
+            margin-bottom: 3px;
+        }
+        .eyepiece-field-info {
+            display: inline-block;
+            font-size: 0.9em;
+            background: #2d3748;
+            color: #ffecb0;
+            padding: 1px 8px;
+            border-radius: 10px;
+            margin-top: 5px;
+            font-family: monospace;
+        }
+        .eyepiece-legend {
+            margin-top: 12px;
+            font-size: 0.8em;
+            color: #a0aec0;
+            font-style: italic;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U01c12.- </span>
+                <span class="texto">El telescopio del instituto: Konusuper 120</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>En el instituto tenemos un telescopio <strong>refractor Konusuper 120</strong> (modelo 1778), de <strong>120 mm de diámetro</strong> y <strong>1000 mm de distancia focal</strong> (relación focal <strong>f/8,3</strong>). Es un instrumento perfecto para iniciarse en la observación astronómica y para aprender cómo funciona un telescopio real.</p>
+        <p>En esta práctica vamos a conocer el telescopio por dentro y por fuera: sus <strong>partes</strong>, los <strong>tipos de montura</strong> (altoacimutal, dobsoniana, ecuatorial y computerizada), las <strong>coordenadas ecuatoriales</strong> (Ascensión Recta y Declinación), el funcionamiento de los <strong>círculos graduados</strong> con nonius, el <strong>ajuste polar</strong> por el método de deriva y el potencial de unos simples <strong>prismáticos 10×50</strong>.</p>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Cómo funciona un telescopio? ¿Para qué sirve cada una de sus partes? ¿Cómo podemos localizar un astro en el cielo con una montura ecuatorial? ¿Y qué podemos ver con unos prismáticos o con nuestro Konusuper 120?
+        </div>
+        <p>La respuesta combina óptica, mecánica y astronomía de posición: el telescopio recoge luz con su objetivo, la concentra en el ocular y nos permite ver detalles que a simple vista serían invisibles. La montura, por su parte, nos ayuda a <strong>apuntar</strong> y a <strong>seguir</strong> el movimiento aparente de los astros.</p>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Las <strong>características técnicas</strong> del Konusuper 120: diámetro, distancia focal, relación focal y aumentos.</li>
+            <li>Las <strong>partes del telescopio</strong>: objetivo, tubo, buscador, ocular, diagonal, portaocular y enfocador.</li>
+            <li>Los <strong>tipos de montura</strong>: altoacimutal, dobsoniana, ecuatorial y computerizada (GOTO).</li>
+            <li>Qué son las <strong>coordenadas ecuatoriales</strong>: Ascensión Recta (AR) y Declinación (DEC).</li>
+            <li>Las <strong>ventajas de las coordenadas ecuatoriales</strong> frente a las altacimutales.</li>
+            <li>Cómo funcionan los <strong>círculos graduados</strong> de la montura ecuatorial y el <strong>nonius</strong> para leer minutos de arco.</li>
+            <li>Cómo hacer un <strong>ajuste polar</strong> por el método de deriva.</li>
+            <li>El potencial de unos <strong>prismáticos 10×50</strong>: qué objetos se pueden ver.</li>
+            <li>Cómo <strong>comparar el tamaño</strong> de los objetos de cielo profundo con la Luna.</li>
+            <li>Qué <strong>características</strong> debe tener un telescopio según lo que se quiera observar (planetas, cielo profundo, Sol).</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>🔬 Fundamento teórico</h2>
+
+        <!-- 1. EL TELESCOPIO DEL INSTITUTO -->
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>El telescopio del instituto: Konusuper 120</strong>
+            <p>El telescopio que tenemos en el laboratorio es un <strong>refractor</strong> (usa lentes, no espejos) de la marca Konus, modelo <strong>1778</strong>, comercializado como <strong>Konusuper 120</strong>. Sus características principales son:</p>
+            <table>
+                <tr><th>Característica</th><th>Valor</th><th>Qué significa</th></tr>
+                <tr><td><strong>Tipo</strong></td><td>Refractor</td><td>Usa una lente objetivo (no un espejo) para recoger la luz.</td></tr>
+                <tr><td><strong>Diámetro (D)</strong></td><td>120 mm</td><td>Abertura del objetivo. Determina la cantidad de luz recogida y el poder de resolución.</td></tr>
+                <tr><td><strong>Distancia focal (f)</strong></td><td>1000 mm</td><td>Distancia entre el objetivo y el plano focal. Determina el aumento con cada ocular.</td></tr>
+                <tr><td><strong>Relación focal</strong></td><td>f/8,3</td><td>Cociente f/D = 1000/120 = 8,33. Un telescopio "luminoso" para cielo profundo sería f/5; uno "planetario" sería f/10 o más. El f/8,3 es un buen equilibrio.</td></tr>
+                <tr><td><strong>Montura</strong></td><td>Ecuatorial</td><td>Permite seguir el movimiento aparente de los astros girando un solo eje.</td></tr>
+                <tr><td><strong>Buscador</strong></td><td>6×30 o similar</td><td>Pequeño telescopio auxiliar de gran campo para apuntar.</td></tr>
+            </table>
+            <div class="formula-box">
+                \[
+                \text{Relación focal} = \frac{f}{D} = \frac{1000\ \mathrm{mm}}{120\ \mathrm{mm}} \approx 8{,}3
+                \]
+            </div>
+
+            <!-- IMAGEN: EL TELESCOPIO DEL INSTITUTO -->
+            <div class="photo-figure">
+                <img src="../imagenes/Telescopio - Konussuper 120.jpg" alt="Fotografía del telescopio Konusuper 120 del instituto, con su montura ecuatorial y trípode">
+                <div class="figure-caption"><strong>Figura 1.</strong> El telescopio Konusuper 120 del instituto: refractor de 120 mm de diámetro y 1000 mm de distancia focal (f/8,3), montado sobre una montura ecuatorial con trípode de aluminio.</div>
+            </div>
+
+            <div class="note">
+                <strong>¿Por qué es importante el diámetro?</strong> El diámetro del objetivo es la característica más importante de un telescopio. Determina dos cosas: (1) cuánta luz recoge (a mayor diámetro, más estrellas débiles se ven) y (2) el poder de resolución (a mayor diámetro, más detalles se distinguen). La distancia focal, en cambio, solo determina el aumento que se consigue con cada ocular.
+            </div>
+        </div>
+
+        <!-- 2. PARTES DEL TELESCOPIO -->
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Partes del telescopio</strong>
+            <p>Un telescopio refractor como el nuestro consta de las siguientes partes principales:</p>
+            <ul>
+                <li><strong>Objetivo:</strong> lente de 120 mm de diámetro situada en la parte delantera del tubo. Recoge la luz y forma la imagen en el plano focal.</li>
+                <li><strong>Tubo óptico:</strong> estructura que mantiene alineados el objetivo y el enfocador. En nuestro caso, mide 1000 mm de longitud aproximadamente.</li>
+                <li><strong>Buscador:</strong> pequeño telescopio auxiliar (normalmente 6×30) montado sobre el tubo principal. Tiene un campo de visión muy amplio y sirve para apuntar el telescopio hacia la zona del cielo donde está el objeto que queremos observar.</li>
+                <li><strong>Portaocular y enfocador:</strong> mecanismo que sujeta el ocular y permite enfocar la imagen moviéndolo hacia delante o hacia atrás.</li>
+                <li><strong>Diagonal:</strong> espejo o prisma que desvía la imagen 90° para que podamos observar cómodamente con el telescopio apuntando hacia arriba.</li>
+                <li><strong>Ocular:</strong> lente (o conjunto de lentes) que amplía la imagen formada por el objetivo. Con distintos oculares se consiguen distintos aumentos.</li>
+                <li><strong>Montura ecuatorial:</strong> estructura mecánica que soporta el tubo y permite moverlo en Ascensión Recta y Declinación.</li>
+                <li><strong>Trípode:</strong> base de tres patas que sostiene la montura y el telescopio.</li>
+                <li><strong>Contrapeso:</strong> masa que equilibra el tubo y evita que la montura se venza.</li>
+            </ul>
+
+            <!-- IMAGEN: PARTES DEL TELESCOPIO -->
+            <div class="photo-figure">
+                <img src="../imagenes/Telescopio - Partes.jpg" alt="Diagrama de un telescopio con las partes señaladas: buscador, eje de AR, espejo diagonal, eje de ajuste de latitud, eje de declinación y trípode">
+                <div class="figure-caption"><strong>Figura 2.</strong> Partes de un telescopio con montura ecuatorial (en este caso, automatizada): buscador, eje de Ascensión Recta, espejo diagonal, eje de ajuste de latitud, eje de declinación y trípode. El Konusuper 120 del instituto tiene una configuración similar, aunque su montura no es GOTO.</div>
+            </div>
+        </div>
+
+        <!-- 3. TIPOS DE MONTURA -->
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Tipos de montura</strong>
+            <p>La montura es la estructura que soporta el telescopio y permite apuntarlo. Hay cuatro tipos principales:</p>
+
+            <div class="mini-card azul">
+                <h4>🧭 Altacimutal</h4>
+                <p>Mueve el telescopio en <strong>altura</strong> (arriba-abajo) y <strong>acimut</strong> (izquierda-derecha). Es la más sencilla e intuitiva, pero no permite seguir los astros con un solo motor.</p>
+            </div>
+            <div class="mini-card verde">
+                <h4>🪑 Dobsoniana</h4>
+                <p>Es una altacimutal de gran porte, con una base en forma de roquedal. Muy usada en telescopios grandes de aficionado por su sencillez y estabilidad.</p>
+            </div>
+            <div class="mini-card naranja">
+                <h4>🌐 Ecuatorial</h4>
+                <p>Tiene un eje <strong>paralelo al eje de rotación de la Tierra</strong>. Permite seguir los astros girando un solo eje (el de Ascensión Recta). Es la que usa nuestro Konusuper 120.</p>
+            </div>
+            <div class="mini-card morado">
+                <h4>🤖 Computerizada (GOTO)</h4>
+                <p>Puede ser altacimutal o ecuatorial, pero incorpora <strong>motores y una base de datos</strong> de objetos. Apunta automáticamente al astro que se le pide.</p>
+            </div>
+
+            <!-- IMÁGENES: TIPOS DE MONTURA -->
+            <div class="photo-pair">
+                <div class="photo-figure">
+                    <img src="../imagenes/Telescopio - Comparación de monturas.avif" alt="Comparación de tres tipos de monturas: altacimutal, dobsoniana y ecuatorial">
+                    <div class="figure-caption"><strong>Figura 3a.</strong> Comparación de tres tipos de monturas: altacimutal, dobsoniana y ecuatorial.</div>
+                </div>
+                <div class="photo-figure">
+                    <img src="../imagenes/Telescopio - Tipos de montura.jpg" alt="Cuatro tipos de monturas: altacimutal, dobson, ecuatorial y ecuatorial computerizada">
+                    <div class="figure-caption"><strong>Figura 3b.</strong> Cuatro tipos de monturas: altacimutal, dobson, ecuatorial y ecuatorial computerizada.</div>
+                </div>
+            </div>
+
+            <div class="photo-figure">
+                <img src="../imagenes/Telescopio goto totalmente motorizado.jpg" alt="Telescopio con montura altacimutal totalmente motorizada (GOTO)">
+                <div class="figure-caption"><strong>Figura 4.</strong> Telescopio con montura altacimutal totalmente motorizada (GOTO). El sistema GOTO mueve automáticamente los dos ejes para apuntar al objeto seleccionado.</div>
+            </div>
+
+            <div class="note">
+                <strong>¿Por qué el Konusuper 120 usa montura ecuatorial?</strong> Porque es la única que permite seguir un astro con un solo movimiento (girando el eje de AR a la velocidad de la rotación terrestre). Con una altacimutal harían falta dos movimientos simultáneos para seguir el objeto, lo que complica la observación y la astrofotografía.
+            </div>
+        </div>
+
+        <!-- 4. COORDENADAS ECUATORIALES -->
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Coordenadas ecuatoriales: Ascensión Recta y Declinación</strong>
+            <p>Para localizar un astro en el cielo se usan las <strong>coordenadas ecuatoriales</strong>, que son el equivalente celeste de la longitud y la latitud terrestres:</p>
+            <ul>
+                <li><strong>Ascensión Recta (AR):</strong> es como la <strong>longitud</strong>. Se mide en <strong>horas, minutos y segundos</strong> (de 0 h a 24 h), a partir del punto Aries (el equinoccio de primavera). 1 hora de AR = 15° de ángulo.</li>
+                <li><strong>Declinación (DEC):</strong> es como la <strong>latitud</strong>. Se mide en <strong>grados, minutos y segundos de arco</strong>, desde -90° (polo sur celeste) hasta +90° (polo norte celeste), pasando por 0° (ecuador celeste).</li>
+            </ul>
+
+            <!-- IMAGEN: DECLINACIÓN Y ASCENSIÓN RECTA -->
+            <div class="photo-figure">
+                <img src="../imagenes/Telescopio - Declinación y Ascención recta.jpg" alt="Montura ecuatorial indicando el giro en Declinación (DEC) y el giro en Ascensión Recta (RA)">
+                <div class="figure-caption"><strong>Figura 5.</strong> Montura ecuatorial con los dos ejes de movimiento: el <strong>giro en Declinación (DEC)</strong> (arriba-abajo) y el <strong>giro en Ascensión Recta (RA)</strong> (alrededor del eje polar).</div>
+            </div>
+
+            <!-- IMAGEN: DIAGRAMA DE ESTRELLAS CON AR Y DEC -->
+            <div class="photo-figure">
+                <img src="../imagenes/Telescopio - Montura Ecuatorial y estrellas.webp" alt="Diagrama de las estrellas moviéndose alrededor del polo celeste, con las coordenadas de declinación y ascensión recta, y un telescopio en el centro">
+                <div class="figure-caption"><strong>Figura 6.</strong> Las estrellas giran alrededor del polo celeste describiendo círculos paralelos al ecuador celeste. Su Declinación (DEC) permanece constante; su Ascensión Recta (AR) también es fija para cada estrella. El telescopio, con su montura ecuatorial, puede seguir este movimiento girando solo el eje de AR.</div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Ventajas de las coordenadas AR/DEC:</strong>
+                <ul style="margin-bottom:0;">
+                    <li>Las coordenadas AR y DEC de un astro son <strong>siempre las mismas</strong> (aunque cambian muy lentamente por la precesión de los equinoccios, en escalas de miles de años).</li>
+                    <li>Las coordenadas <strong>altacimutales</strong>, en cambio, cambian <strong>segundo a segundo</strong>: la altura y el acimut de una estrella dependen de la hora y del día.</li>
+                    <li>Por eso los catálogos de estrellas y los atlas celestes usan AR/DEC: son coordenadas <strong>fijas</strong> en el cielo.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5. CÍRCULOS GRADUADOS Y NONIUS -->
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Círculos graduados y nonius</strong>
+            <p>La montura ecuatorial del Konusuper 120 dispone de <strong>círculos graduados</strong> en los ejes de AR y DEC. Estos círculos permiten leer la posición angular del telescopio y, por tanto, apuntar a coordenadas conocidas:</p>
+            <ul>
+                <li><strong>Círculo de AR:</strong> graduado en horas y minutos (o en grados). Permite leer la Ascensión Recta hacia la que apunta el telescopio.</li>
+                <li><strong>Círculo de DEC:</strong> graduado en grados y minutos de arco. Permite leer la Declinación.</li>
+                <li><strong>Círculo de fechas:</strong> en algunas monturas hay un círculo auxiliar con meses y días, que sirve para ajustar la AR según la fecha de observación.</li>
+                <li><strong>Nonius:</strong> escala auxiliar que permite leer fracciones de la división más pequeña del círculo principal. Con él se pueden apreciar <strong>minutos de arco</strong> (o minutos de tiempo), en lugar de solo grados enteros.</li>
+            </ul>
+
+            <!-- IMAGEN: CÍRCULOS GRADUADOS Y NONIUS -->
+            <div class="photo-figure">
+                <img src="../imagenes/Telescopio - Circulos graduados montura ecuatorial.webp" alt="Círculo graduado de Ascensión Recta y círculo de fechas, con un nonius para precisión de minutos">
+                <div class="figure-caption"><strong>Figura 7.</strong> Círculos graduados de una montura ecuatorial: círculo de Ascensión Recta, círculo de fechas y nonius para leer con precisión de minutos.</div>
+            </div>
+
+            <div class="formula-box">
+                <strong>¿Cómo funciona un nonius?</strong><br>
+                <span style="display:block; margin-top:8px;">El nonius es una escala auxiliar con \( n \) divisiones que abarca \( n-1 \) divisiones del círculo principal. La diferencia entre una división del nonius y una del círculo principal es la <strong>precisión</strong> del instrumento.</span>
+                <span style="display:block; margin-top:6px;">Ejemplo: si el círculo principal está graduado en grados y el nonius tiene 10 divisiones que abarcan 9°, la precisión es \( 1° - 0{,}9° = 0{,}1° = 6' \).</span>
+            </div>
+        </div>
+
+        <!-- 6. AJUSTE POLAR POR DERIVA -->
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>Ajuste polar por el método de deriva</strong>
+            <p>Para que una montura ecuatorial funcione correctamente, su eje de AR debe estar <strong>paralelo al eje de rotación de la Tierra</strong>. Es decir, debe apuntar al <strong>polo norte celeste</strong> (o al polo sur, si estamos en el hemisferio sur). A esto se le llama <strong>ajuste polar</strong> o <strong>puesta en estación</strong>.</p>
+            <p>Uno de los métodos más precisos para hacerlo es el <strong>método de deriva en declinación</strong>:</p>
+            <ol>
+                <li>Coloca el telescopio con el eje de AR aproximadamente apuntando al polo norte celeste.</li>
+                <li>Busca una estrella cerca del meridiano y del ecuador celeste.</li>
+                <li>Observa la estrella con el telescopio y comprueba si se "deriva" hacia el norte o hacia el sur con el paso del tiempo.</li>
+                <li>Si la estrella se deriva hacia el norte, ajusta el tornillo de latitud de la montura en un sentido; si se deriva hacia el sur, en el contrario.</li>
+                <li>Repite el proceso con una estrella en el este y otra en el oeste para ajustar también el acimut.</li>
+                <li>Repite hasta que la estrella no se derive en declinación durante varios minutos.</li>
+            </ol>
+
+            <!-- IMAGEN: AJUSTE DERIVA -->
+            <div class="photo-figure">
+                <img src="../imagenes/Telescopio - Ajuste deriva.webp" alt="Pasos del ajuste polar de una montura ecuatorial por el método de deriva en declinación">
+                <div class="figure-caption"><strong>Figura 8.</strong> Ajuste polar de una montura ecuatorial por el método de deriva en declinación: pasos para corregir la posición del eje polar observando cómo se desplazan las estrellas.</div>
+            </div>
+
+            <div class="note">
+                <strong>¿Por qué es importante el ajuste polar?</strong> Porque si el eje de AR no apunta exactamente al polo, al girar el telescopio para seguir una estrella esta se saldrá del campo. Un buen ajuste polar permite seguimientos largos (incluso para astrofotografía) girando solo el eje de AR.
+            </div>
+        </div>
+
+        <!-- 7. PARTES DE LA MONTURA ECUATORIAL -->
+        <div class="step">
+            <span class="step-num">7</span>
+            <strong>Partes de la montura ecuatorial</strong>
+            <p>La montura ecuatorial tiene una geometría muy particular. Sus partes principales son:</p>
+            <ul>
+                <li><strong>Eje de Ascensión Recta (AR):</strong> eje paralelo al eje de rotación de la Tierra. Al girarlo, el telescopio sigue el movimiento aparente de los astros.</li>
+                <li><strong>Eje de Declinación (DEC):</strong> eje perpendicular al de AR. Al girarlo, el telescopio se mueve en declinación (norte-sur celeste).</li>
+                <li><strong>Ajuste de latitud:</strong> mecanismo que inclina el eje de AR para que sea paralelo al eje terrestre. Su ángulo debe ser igual a la latitud del lugar de observación.</li>
+                <li><strong>Dirección del polo norte celeste:</strong> el eje de AR debe apuntar al polo norte celeste.</li>
+                <li><strong>Contrapeso:</strong> masa que equilibra el tubo óptico respecto al eje de AR.</li>
+            </ul>
+
+            <!-- IMAGEN: PARTES DE LA MONTURA ECUATORIAL -->
+            <div class="photo-figure">
+                <img src="../imagenes/Telescopio Partes de la montura ecuatorial.webp" alt="Diagrama de una montura ecuatorial con sus partes: eje de declinación, dirección del polo norte celeste, movimiento AR, latitud y eje AR con movimiento en DEC">
+                <div class="figure-caption"><strong>Figura 9.</strong> Partes de una montura ecuatorial: eje de Declinación, dirección del polo norte celeste, movimiento en Ascensión Recta, ajuste de latitud y eje de AR con movimiento en Declinación.</div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Idea clave:</strong> la montura ecuatorial es como un "gnomon" gigante: su eje de AR es paralelo al eje terrestre. Cuando lo giramos a la velocidad adecuada (una vuelta cada 23 h 56 min), el telescopio "sigue" a las estrellas en su movimiento aparente por el cielo.
+            </div>
+        </div>
+
+        <!-- 8. GOTO Y VARILLAS DE MOVIMIENTO FINO -->
+        <div class="step">
+            <span class="step-num">8</span>
+            <strong>GOTO automático vs. varillas de movimiento fino</strong>
+            <p>Hay dos formas de mover una montura ecuatorial:</p>
+            <ul>
+                <li><strong>Con varillas de movimiento fino:</strong> tornillos sinfín que permiten mover el telescopio con precisión manual. Es el sistema clásico del Konusuper 120: giramos una varilla para mover el eje de AR y otra para el de DEC. Es económico y fiable, pero requiere que el observador mueva el telescopio a mano.</li>
+                <li><strong>Con motores GOTO:</strong> motores eléctricos que mueven los dos ejes automáticamente. El usuario selecciona un objeto en la base de datos y el telescopio se orienta solo. Es más cómodo, pero más caro y dependiente de la electrónica.</li>
+            </ul>
+
+            <!-- IMAGEN: GOTO VS VARILLAS -->
+            <div class="photo-figure">
+                <img src="../imagenes/Telescopio - Goto - Varillas de movto fino.webp" alt="Comparación de dos monturas ecuatoriales: una con motores GOTO automáticos y otra con varillas de movimiento fino">
+                <div class="figure-caption"><strong>Figura 10.</strong> Dos monturas ecuatoriales: a la izquierda, con motores GOTO automáticos; a la derecha, con varillas de movimiento fino (como la del Konusuper 120 del instituto).</div>
+            </div>
+
+            <div class="note">
+                <strong>El Konusuper 120 del instituto</strong> usa el sistema clásico de <strong>varillas de movimiento fino</strong>. No es GOTO, pero es perfectamente válido para aprender a apuntar y a seguir los astros a mano. Muchos astrónomos aficionados prefieren este sistema porque "se siente" el cielo.
+            </div>
+        </div>
+
+        <!-- 9. PRISMÁTICOS 10x50 -->
+        <div class="step">
+            <span class="step-num">9</span>
+            <strong>El potencial de unos prismáticos 10×50</strong>
+            <p>Antes de usar el telescopio, unos simples <strong>prismáticos 10×50</strong> son una herramienta formidable para explorar el cielo. Sus características son:</p>
+            <ul>
+                <li><strong>10×</strong>: aumentan 10 veces. Un objeto de 1° se ve como si estuviera a 10°.</li>
+                <li><strong>50 mm</strong>: diámetro de los objetivos. Recogen mucha más luz que el ojo humano (que tiene unos 7 mm de pupila).</li>
+                <li><strong>Campo de visión</strong>: típicamente unos <strong>6°–7°</strong>. Cabe la Luna entera varias veces.</li>
+                <li><strong>Pupila de salida</strong>: 50/10 = <strong>5 mm</strong>, ideal para observación nocturna.</li>
+            </ul>
+            <p>Con unos 10×50 se pueden ver:</p>
+            <ul>
+                <li><strong>La galaxia de Andrómeda (M31)</strong>: una mancha alargada de unos 3° de tamaño aparente.</li>
+                <li><strong>Las Pléyades (M45)</strong>: un cúmulo abierto de unos 2° con decenas de estrellas azules.</li>
+                <li><strong>La nebulosa de Orión (M42)</strong>: una mancha difusa de unos 1° en la espada de Orión.</li>
+                <li><strong>Estrellas dobles</strong>: Mizar y Alcor en la Osa Mayor, Albireo en el Cisne (con un poco de suerte, se ve el contraste de colores).</li>
+                <li><strong>La Vía Láctea</strong>: como una banda difusa de estrellas, especialmente en verano.</li>
+                <li><strong>Cúmulos abiertos</strong>: las Hyades, el Pesebre (M44), etc.</li>
+                <li><strong>La Luna</strong>: con sus cráteres más grandes y los mares.</li>
+                <li><strong>Júpiter y sus lunas galileanas</strong>: como un pequeño disco con hasta 4 puntos a su alrededor.</li>
+                <li><strong>Saturno</strong>: como un disco alargado (los anillos no se resuelven, pero se intuye la forma).</li>
+            </ul>
+
+            <!-- ============================================================
+                 VISTAS POR EL OCULAR DE LOS PRISMÁTICOS 10x50
+                 ============================================================ -->
+            <div class="eyepiece-section">
+                <h3 class="eyepiece-heading">🔭 Lo que verías por el ocular de los prismáticos 10×50</h3>
+                <p class="eyepiece-intro">El campo de visión de unos 10×50 es de unos <strong>6°–7°</strong>, muy amplio. Los siguientes esquemas muestran, a escala, lo que se vería en el centro del campo para cada objeto. El círculo representa el campo visual completo de los prismáticos (como si mirases por uno de los oculares).</p>
+                <div class="eyepiece-grid">
+
+                    <!-- Andrómeda -->
+                    <div class="eyepiece-card">
+                        <svg viewBox="0 0 200 200" role="img" aria-label="Vista de Andrómeda con prismáticos 10x50">
+                            <circle cx="100" cy="100" r="98" fill="#050510"/>
+                            <circle cx="100" cy="100" r="96" fill="none" stroke="#1a202c" stroke-width="3"/>
+                            <g fill="#fff">
+                                <circle cx="30" cy="40" r="0.6" opacity="0.5"/>
+                                <circle cx="168" cy="35" r="0.7" opacity="0.5"/>
+                                <circle cx="175" cy="155" r="0.6" opacity="0.4"/>
+                                <circle cx="28" cy="160" r="0.7" opacity="0.5"/>
+                                <circle cx="55" cy="18" r="0.5" opacity="0.4"/>
+                                <circle cx="150" cy="180" r="0.5" opacity="0.4"/>
+                                <circle cx="180" cy="100" r="0.4" opacity="0.3"/>
+                                <circle cx="20" cy="105" r="0.5" opacity="0.3"/>
+                            </g>
+                            <ellipse cx="100" cy="100" rx="88" ry="30" transform="rotate(-22 100 100)" fill="rgba(200,215,255,0.09)"/>
+                            <ellipse cx="100" cy="100" rx="55" ry="20" transform="rotate(-22 100 100)" fill="rgba(220,235,255,0.18)"/>
+                            <ellipse cx="100" cy="100" rx="20" ry="12" transform="rotate(-22 100 100)" fill="rgba(255,250,220,0.6)"/>
+                            <ellipse cx="100" cy="100" rx="8" ry="5" transform="rotate(-22 100 100)" fill="#fffbe0"/>
+                            <circle cx="100" cy="100" r="3" fill="#fff"/>
+                            <circle cx="140" cy="115" r="2.5" fill="#ffe7a0" opacity="0.8"/>
+                        </svg>
+                        <p class="eyepiece-label">
+                            <strong>Galaxia de Andrómeda (M31)</strong>
+                            Mancha alargada con núcleo brillante
+                            <span class="eyepiece-field-info">~3° · campo 6°</span>
+                        </p>
+                    </div>
+
+                    <!-- Pléyades -->
+                    <div class="eyepiece-card">
+                        <svg viewBox="0 0 200 200" role="img" aria-label="Vista de las Pléyades con prismáticos 10x50">
+                            <circle cx="100" cy="100" r="98" fill="#050510"/>
+                            <circle cx="100" cy="100" r="96" fill="none" stroke="#1a202c" stroke-width="3"/>
+                            <g fill="#fff">
+                                <circle cx="25" cy="50" r="0.5" opacity="0.4"/>
+                                <circle cx="175" cy="55" r="0.6" opacity="0.4"/>
+                                <circle cx="180" cy="145" r="0.5" opacity="0.3"/>
+                                <circle cx="22" cy="150" r="0.6" opacity="0.4"/>
+                                <circle cx="150" cy="30" r="0.4" opacity="0.3"/>
+                                <circle cx="40" cy="175" r="0.5" opacity="0.3"/>
+                            </g>
+                            <g fill="#bcd6ff">
+                                <circle cx="70" cy="80" r="2.8"/>
+                                <circle cx="88" cy="68" r="3.2"/>
+                                <circle cx="105" cy="62" r="2.5"/>
+                                <circle cx="122" cy="72" r="3.0"/>
+                                <circle cx="132" cy="88" r="2.4"/>
+                                <circle cx="128" cy="108" r="2.8"/>
+                                <circle cx="112" cy="122" r="2.5"/>
+                                <circle cx="92" cy="128" r="3.2"/>
+                                <circle cx="74" cy="118" r="2.6"/>
+                                <circle cx="62" cy="102" r="2.9"/>
+                                <circle cx="95" cy="95" r="2.7"/>
+                                <circle cx="108" cy="88" r="2.3"/>
+                                <circle cx="80" cy="95" r="2.0"/>
+                                <circle cx="115" cy="100" r="2.1"/>
+                                <circle cx="100" cy="105" r="2.4"/>
+                            </g>
+                        </svg>
+                        <p class="eyepiece-label">
+                            <strong>Las Pléyades (M45)</strong>
+                            Cúmulo abierto de estrellas azules
+                            <span class="eyepiece-field-info">~2° · campo 6°</span>
+                        </p>
+                    </div>
+
+                    <!-- M42 -->
+                    <div class="eyepiece-card">
+                        <svg viewBox="0 0 200 200" role="img" aria-label="Vista de la nebulosa de Orión con prismáticos 10x50">
+                            <circle cx="100" cy="100" r="98" fill="#050510"/>
+                            <circle cx="100" cy="100" r="96" fill="none" stroke="#1a202c" stroke-width="3"/>
+                            <g fill="#fff">
+                                <circle cx="30" cy="40" r="0.5" opacity="0.4"/>
+                                <circle cx="170" cy="50" r="0.6" opacity="0.4"/>
+                                <circle cx="180" cy="160" r="0.5" opacity="0.3"/>
+                                <circle cx="25" cy="170" r="0.6" opacity="0.4"/>
+                            </g>
+                            <ellipse cx="100" cy="100" rx="35" ry="28" fill="rgba(180,200,255,0.15)"/>
+                            <ellipse cx="95" cy="98" rx="22" ry="18" fill="rgba(190,215,255,0.28)"/>
+                            <ellipse cx="105" cy="102" rx="12" ry="10" fill="rgba(220,235,255,0.4)"/>
+                            <circle cx="98" cy="98" r="1.8" fill="#fff"/>
+                            <circle cx="103" cy="97" r="1.5" fill="#fff"/>
+                            <circle cx="100" cy="103" r="1.5" fill="#fff"/>
+                            <circle cx="105" cy="102" r="1.3" fill="#fff"/>
+                            <circle cx="78" cy="88" r="1.5" fill="#fff" opacity="0.9"/>
+                            <circle cx="120" cy="110" r="1.4" fill="#fff" opacity="0.8"/>
+                        </svg>
+                        <p class="eyepiece-label">
+                            <strong>Nebulosa de Orión (M42)</strong>
+                            Mancha difusa con estrellas en el centro
+                            <span class="eyepiece-field-info">~1° · campo 6°</span>
+                        </p>
+                    </div>
+
+                    <!-- Luna -->
+                    <div class="eyepiece-card">
+                        <svg viewBox="0 0 200 200" role="img" aria-label="Vista de la Luna con prismáticos 10x50">
+                            <circle cx="100" cy="100" r="98" fill="#050510"/>
+                            <circle cx="100" cy="100" r="96" fill="none" stroke="#1a202c" stroke-width="3"/>
+                            <g fill="#fff">
+                                <circle cx="30" cy="50" r="0.5" opacity="0.3"/>
+                                <circle cx="175" cy="60" r="0.6" opacity="0.3"/>
+                                <circle cx="170" cy="160" r="0.5" opacity="0.3"/>
+                            </g>
+                            <circle cx="100" cy="100" r="18" fill="#e8e0c8"/>
+                            <circle cx="94" cy="94" r="4" fill="#b5a98a" opacity="0.7"/>
+                            <circle cx="107" cy="105" r="3.5" fill="#b5a98a" opacity="0.6"/>
+                            <circle cx="98" cy="108" r="2.5" fill="#b5a98a" opacity="0.6"/>
+                            <circle cx="106" cy="92" r="2" fill="#b5a98a" opacity="0.5"/>
+                            <circle cx="92" cy="103" r="1.5" fill="#b5a98a" opacity="0.5"/>
+                        </svg>
+                        <p class="eyepiece-label">
+                            <strong>La Luna</strong>
+                            Disco pequeño con mares y cráteres grandes
+                            <span class="eyepiece-field-info">0,5° · campo 6°</span>
+                        </p>
+                    </div>
+
+                    <!-- Júpiter -->
+                    <div class="eyepiece-card">
+                        <svg viewBox="0 0 200 200" role="img" aria-label="Vista de Júpiter y sus lunas con prismáticos 10x50">
+                            <circle cx="100" cy="100" r="98" fill="#050510"/>
+                            <circle cx="100" cy="100" r="96" fill="none" stroke="#1a202c" stroke-width="3"/>
+                            <g fill="#fff">
+                                <circle cx="30" cy="40" r="0.5" opacity="0.4"/>
+                                <circle cx="170" cy="55" r="0.6" opacity="0.4"/>
+                                <circle cx="175" cy="160" r="0.5" opacity="0.3"/>
+                                <circle cx="25" cy="170" r="0.6" opacity="0.3"/>
+                            </g>
+                            <circle cx="100" cy="100" r="4" fill="#fff8d0"/>
+                            <circle cx="100" cy="100" r="2.5" fill="#fff"/>
+                            <circle cx="80" cy="100" r="1.8" fill="#ffeec8"/>
+                            <circle cx="88" cy="100" r="1.6" fill="#ffeec8"/>
+                            <circle cx="115" cy="100" r="1.6" fill="#ffeec8"/>
+                            <circle cx="125" cy="100" r="1.8" fill="#ffeec8"/>
+                        </svg>
+                        <p class="eyepiece-label">
+                            <strong>Júpiter y lunas galileanas</strong>
+                            Punto brillante con 4 satélites alineados
+                            <span class="eyepiece-field-info">campo 6°</span>
+                        </p>
+                    </div>
+
+                </div>
+                <p class="eyepiece-legend">Esquemas orientativos, no a escala exacta. El tamaño y la posición real de cada objeto dependen de la noche de observación, de la calidad del cielo y de la transparencia atmosférica.</p>
+            </div>
+
+            <div class="highlight-box">
+                <strong>¿Por qué unos prismáticos son mejores que un telescopio para empezar?</strong> Porque ofrecen un campo de visión muy amplio, son fáciles de usar, no requieren montura y permiten "pasear" por el cielo. Muchos astrónomos aficionados empiezan con unos prismáticos antes de comprar un telescopio. El Konusuper 120 es el siguiente paso lógico.
+            </div>
+        </div>
+
+        <!-- 10. TAMAÑOS DEL CIELO PROFUNDO VS LUNA -->
+        <div class="step">
+            <span class="step-num">10</span>
+            <strong>¿Qué tamaño tienen los objetos de cielo profundo comparados con la Luna?</strong>
+            <p>Una de las cosas que más sorprende a los principiantes es que muchos objetos de cielo profundo son <strong>mucho más grandes</strong> que la Luna, aunque sean mucho más débiles. La Luna llena tiene un diámetro aparente de unos <strong>0,5°</strong> (30 minutos de arco). Comparémosla con algunos objetos famosos:</p>
+
+            
+            
+            
+            
+            
+            
+            
+<table>
+    <tr>
+        <th>Objeto</th>
+        <th>Imagen</th>
+        <th>Tamaño aparente</th>
+        <th>Comparación con la Luna llena</th>
+    </tr>
+    <tr>
+        <td><strong>Luna llena</strong></td>
+        <td><img src="../imagenes/Telescopio - Luna llena.webp" alt="Luna llena" style="max-width:80px; max-height:60px; width:auto; height:auto; display:block; margin:0 auto; border-radius:4px;"></td>
+        <td>0,5°</td>
+        <td>1× (referencia)</td>
+    </tr>
+    <tr>
+        <td><strong>Galaxia de Andrómeda (M31)</strong></td>
+        <td><img src="../imagenes/Telescopio - M31.webp" alt="Galaxia de Andrómeda (M31)" style="max-width:80px; max-height:60px; width:auto; height:auto; display:block; margin:0 auto; border-radius:4px;"></td>
+        <td>~3° × 1°</td>
+        <td>~6× el diámetro de la Luna</td>
+    </tr>
+    <tr>
+        <td><strong>Pléyades (M45)</strong></td>
+        <td><img src="../imagenes/Telescopio - M45.jpeg" alt="Pléyades (M45)" style="max-width:80px; max-height:60px; width:auto; height:auto; display:block; margin:0 auto; border-radius:4px;"></td>
+        <td>~2°</td>
+        <td>~4× el diámetro de la Luna</td>
+    </tr>
+    <tr>
+        <td><strong>Nebulosa de Orión (M42)</strong></td>
+        <td><img src="../imagenes/Telescopio - M42.webp" alt="Nebulosa de Orión (M42)" style="max-width:80px; max-height:60px; width:auto; height:auto; display:block; margin:0 auto; border-radius:4px;"></td>
+        <td>~1° × 1°</td>
+        <td>~2× el diámetro de la Luna</td>
+    </tr>
+    <tr>
+        <td><strong>Cúmulo del Pesebre (M44)</strong></td>
+        <td><img src="../imagenes/Telescopio - M44.jpg" alt="Cúmulo del Pesebre (M44)" style="max-width:80px; max-height:60px; width:auto; height:auto; display:block; margin:0 auto; border-radius:4px;"></td>
+        <td>~1,5°</td>
+        <td>~3× el diámetro de la Luna</td>
+    </tr>
+    <tr>
+        <td><strong>Cúmulo de Hércules (M13)</strong></td>
+        <td><img src="../imagenes/Telescopio - M13.webp" alt="Cúmulo de Hércules (M13)" style="max-width:80px; max-height:60px; width:auto; height:auto; display:block; margin:0 auto; border-radius:4px;"></td>
+        <td>~0,3°</td>
+        <td>~0,6× el diámetro de la Luna</td>
+    </tr>
+    <tr>
+        <td><strong>Galaxia del Remolino (M51)</strong></td>
+        <td><img src="../imagenes/Telescopio - M51.webp" alt="Galaxia del Remolino (M51)" style="max-width:80px; max-height:60px; width:auto; height:auto; display:block; margin:0 auto; border-radius:4px;"></td>
+        <td>~0,2°</td>
+        <td>~0,4× el diámetro de la Luna</td>
+    </tr>
+</table>
+            
+            
+            
+            
+            
+
+            <div class="note">
+                <strong>¿Por qué no se ven tan grandes como la Luna?</strong> Porque su <strong>brillo superficial</strong> es muy bajo. La Luna es un objeto muy brillante (reflecta la luz del Sol); las galaxias y nebulosas son muy débiles. Por eso, aunque sean grandes, necesitamos cielos oscuros y paciencia para verlos. Con el Konusuper 120 y un cielo rural, se pueden observar muchos de estos objetos.
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =========================================================
+     IMÁGENES REALES DE LOS OBJETOS DE CIELO PROFUNDO
+     ========================================================= -->
+<h3 style="color: #2b6cb0; margin-top: 25px;">📸 Imágenes reales de los objetos</h3>
+<p>Las siguientes fotografías muestran el aspecto real de estos objetos celestes. Compáralas con los esquemas de las vistas por el ocular de los prismáticos 10×50 y del Konusuper 120 que aparecen más arriba en esta página, y con los tamaños aparentes de la tabla anterior.</p>
+
+<!-- Fila 1: Luna llena + M31 -->
+<div class="photo-pair">
+    <div class="photo-figure">
+        <img src="../imagenes/Telescopio - Luna llena.webp" alt="Fotografía de la Luna llena">
+        <div class="figure-caption"><strong>La Luna llena.</strong> Diámetro aparente ≈ 0,5° (30'). Es el objeto más brillante del cielo nocturno y el más fácil de observar con cualquier instrumento. En la tabla anterior es la referencia de tamaño (1×).</div>
+    </div>
+    <div class="photo-figure">
+        <img src="../imagenes/Telescopio - M31.webp" alt="Fotografía de la galaxia de Andrómeda (M31)">
+        <div class="figure-caption"><strong>Galaxia de Andrómeda (M31).</strong> Tamaño aparente ≈ 3° × 1° (≈ 6 Lunas de ancho). Es la galaxia espiral más cercana a nosotros y puede verse a simple vista en cielos oscuros. Su brillo superficial es bajo: aunque es enorme, se ve como una mancha difusa.</div>
+    </div>
+</div>
+
+<!-- Fila 2: M45 + M42 -->
+<div class="photo-pair">
+    <div class="photo-figure">
+        <img src="../imagenes/Telescopio - M45.jpeg" alt="Fotografía del cúmulo abierto de las Pléyades (M45)">
+        <div class="figure-caption"><strong>Las Pléyades (M45).</strong> Tamaño aparente ≈ 2° (≈ 4 Lunas de ancho). Cúmulo abierto de estrellas jóvenes azules en la constelación de Tauro. Visible a simple vista como un pequeño grupo de estrellas apiñadas.</div>
+    </div>
+    <div class="photo-figure">
+        <img src="../imagenes/Telescopio - M42.webp" alt="Fotografía de la nebulosa de Orión (M42)">
+        <div class="figure-caption"><strong>Nebulosa de Orión (M42).</strong> Tamaño aparente ≈ 1° × 1° (≈ 2 Lunas de ancho). Región de formación estelar en la espada de Orión. Visible a simple vista como una "estrella borrosa"; con prismáticos o telescopio se aprecia su forma de alas.</div>
+    </div>
+</div>
+
+<!-- Fila 3: M44 + M13 -->
+<div class="photo-pair">
+    <div class="photo-figure">
+        <img src="../imagenes/Telescopio - M44.jpg" alt="Fotografía del cúmulo abierto del Pesebre (M44)">
+        <div class="figure-caption"><strong>Cúmulo del Pesebre (M44).</strong> Tamaño aparente ≈ 1,5° (≈ 3 Lunas de ancho). Cúmulo abierto en la constelación de Cáncer. Visible a simple vista como una mancha difusa; con prismáticos se resuelven sus estrellas.</div>
+    </div>
+    <div class="photo-figure">
+        <img src="../imagenes/Telescopio - M13.webp" alt="Fotografía del cúmulo globular de Hércules (M13)">
+        <div class="figure-caption"><strong>Cúmulo de Hércules (M13).</strong> Tamaño aparente ≈ 0,3° (≈ 0,6 Lunas de ancho). El cúmulo globular más brillante del hemisferio norte. Con el Konusuper 120 y 100×–167× se empieza a resolver en estrellas en su zona central.</div>
+    </div>
+</div>
+
+<!-- Fila 4 (individual): M51 -->
+<div class="photo-figure">
+    <img src="../imagenes/Telescopio - M51.webp" alt="Fotografía de la galaxia del Remolino (M51)">
+    <div class="figure-caption"><strong>Galaxia del Remolino (M51).</strong> Tamaño aparente ≈ 0,2° (≈ 0,4 Lunas de ancho). Galaxia espiral interactuando con una galaxia compañera, en la constelación de los Perros de Caza. Es un objeto débil: requiere cielos oscuros y aumentos moderados para apreciarse.</div>
+</div>
+
+<div class="note" style="margin-top: 18px;">
+    <strong>Observación clave:</strong> fíjate en que M31, M45, M42 y M44 son <strong>más grandes que la Luna llena</strong> en tamaño aparente, pero se ven mucho más débiles porque su brillo superficial es muy bajo. En cambio, M13 y M51 son más pequeños que la Luna, pero también requieren cielos oscuros. La fotografía revela detalles que el ojo humano no capta: la cámara acumula luz durante minutos u horas, mientras que el ojo solo ve la luz que le llega en cada instante.
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- 11. TELESCOPIO SEGÚN LO QUE SE QUIERA OBSERVAR -->
+        <div class="step">
+            <span class="step-num">11</span>
+            <strong>¿Qué características debe tener un telescopio según lo que quieras observar?</strong>
+            <p>No hay un telescopio "perfecto" para todo. Según el tipo de objeto que quieras observar, conviene priorizar unas características u otras:</p>
+
+            <div class="mini-card azul">
+                <h4>🪐 Planetas y Luna</h4>
+                <p>Interesa un telescopio con <strong>buena resolución</strong> (diámetro grande) y una <strong>relación focal alta</strong> (f/10 o más) para conseguir aumentos altos. El Konusuper 120 (f/8,3) es un buen compromiso: con un ocular de 6 mm da 167×, suficiente para ver los anillos de Saturno y los cráteres lunares.</p>
+            </div>
+            <div class="mini-card verde">
+                <h4>🌌 Cielo profundo</h4>
+                <p>Interesa un telescopio <strong>luminoso</strong> (f/5 o menos) y con <strong>gran diámetro</strong> para recoger mucha luz. El Konusuper 120 es aceptable para objetos brillantes (Andrómeda, Pléyades, nebulosa de Orión), pero no es el ideal para galaxias débiles.</p>
+            </div>
+            <div class="mini-card naranja">
+                <h4>☀️ Sol</h4>
+                <p><strong>Nunca</strong> se debe mirar al Sol sin un filtro solar adecuado. Para observarlo se necesita un <strong>filtro solar</strong> (de vidrio o de lámina) que se coloca delante del objetivo. Con él se pueden ver manchas solares y granulación. El Konusuper 120 admite filtros solares de 120 mm de diámetro.</p>
+            </div>
+            <div class="mini-card rojo">
+                <h4>📸 Astrofotografía</h4>
+                <p>Interesa una <strong>montura ecuatorial robusta</strong> con seguimiento, y un telescopio con <strong>buen enfocador</strong>. El Konusuper 120 con montura ecuatorial es una base aceptable para iniciarse en astrofotografía de planetas y Luna (con cámara web o réflex).</p>
+            </div>
+
+            <div class="danger">
+                <strong>⚠️ Seguridad solar:</strong> nunca apuntes el telescopio al Sol sin un filtro solar homologado colocado delante del objetivo. La concentración de luz y calor puede dañar tus ojos de forma irreversible en menos de un segundo. El filtro debe ir siempre delante del objetivo, nunca en el ocular.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN MATERIALES Y PROCEDIMIENTO -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y procedimiento experimental</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>Materiales</strong>
+            <ul>
+                <li>El <strong>telescopio Konusuper 120</strong> del instituto (refractor 120 mm f/1000 mm f/8,3).</li>
+                <li>Su <strong>montura ecuatorial</strong> con trípode, contrapeso y varillas de movimiento fino.</li>
+                <li><strong>Oculares</strong> de distintas distancias focales (por ejemplo, 25 mm, 10 mm y 6 mm).</li>
+                <li><strong>Buscador</strong> 6×30 (o similar) ya montado en el tubo.</li>
+                <li><strong>Diagonal</strong> (espejo o prisma) para observación cómoda.</li>
+                <li><strong>Prismáticos 10×50</strong> para explorar el cielo antes de usar el telescopio.</li>
+                <li><strong>Mapa estelar</strong> o app de planetario (Stellarium, SkySafari, etc.).</li>
+                <li><strong>Linterna roja</strong> (para no perder la adaptación a la oscuridad).</li>
+                <li>Un <strong>cuaderno de observación</strong> y un lápiz.</li>
+                <li>Ropa de abrigo (la observación nocturna es fría, incluso en verano).</li>
+            </ul>
+            <div class="danger">
+                <strong>⚠️ Seguridad:</strong> nunca apuntes el telescopio al Sol sin filtro solar homologado. No dejes el telescopio solo durante una observación solar. Maneja el contrapeso con cuidado: es pesado. No fuerces los movimientos finos: si notas resistencia, comprueba que los tornillos de bloqueo estén flojos.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>Montaje del telescopio</strong>
+            <ol>
+                <li>Extiende el <strong>trípode</strong> en una superficie plana y nivélalo.</li>
+                <li>Coloca la <strong>montura ecuatorial</strong> sobre el trípode y fíjala con el tornillo central.</li>
+                <li>Monta el <strong>contrapeso</strong> en el extremo del eje de AR.</li>
+                <li>Coloca el <strong>tubo óptico</strong> sobre la montura, sujetándolo con las abrazaderas.</li>
+                <li>Equilibra el tubo: con el freno de AR flojo, el telescopio debe quedarse en cualquier posición sin caerse.</li>
+                <li>Coloca el <strong>buscador</strong> sobre el tubo y ajústalo para que apunte al mismo sitio que el telescopio (de día, a un objeto lejano).</li>
+                <li>Coloca el <strong>ocular</strong> y el <strong>diagonal</strong> en el portaocular.</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>Ajuste polar (puesta en estación)</strong>
+            <ol>
+                <li>Ajusta el <strong>ángulo de latitud</strong> de la montura para que coincida con la latitud del lugar (en nuestro caso, unos 40° N).</li>
+                <li>Orienta el eje de AR hacia el <strong>polo norte celeste</strong> (cerca de la estrella Polar).</li>
+                <li>Si es necesario, usa el <strong>método de deriva</strong> (Figura 8) para afinar el ajuste.</li>
+                <li>Comprueba que el seguimiento funciona: apunta a una estrella y gírala suavemente el eje de AR; la estrella debe permanecer en el campo.</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Apuntar y observar</strong>
+            <ol>
+                <li>Localiza el objeto a simple vista o con los prismáticos.</li>
+                <li>Apunta el telescopio "a ojo" hacia esa zona del cielo.</li>
+                <li>Mira por el <strong>buscador</strong> y afina el apuntado con las varillas de movimiento fino.</li>
+                <li>Mira por el <strong>ocular</strong> y enfoca con el enfocador.</li>
+                <li>Si es necesario, cambia de ocular para conseguir más aumentos.</li>
+                <li>Anota en el cuaderno: objeto, fecha, hora, ocular usado, condiciones atmosféricas y lo que has visto.</li>
+            </ol>
+            <div class="highlight-box">
+                <strong>Consejo:</strong> empieza siempre con el ocular de menor aumento (mayor distancia focal, por ejemplo 25 mm) para localizar el objeto. Cuando lo tengas centrado, cambia al de mayor aumento (por ejemplo 6 mm) para ver detalles.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>Objetos recomendados para el Konusuper 120</strong>
+            <ul>
+                <li><strong>Luna:</strong> cráteres, mares, montañas. Ideal con oculares de 10 mm y 6 mm.</li>
+                <li><strong>Júpiter:</strong> disco con bandas y lunas galileanas. Con 100×–167× se ve muy bien.</li>
+                <li><strong>Saturno:</strong> anillos y, con buena noche, la división de Cassini. Con 167× es espectacular.</li>
+                <li><strong>Marte:</strong> pequeño disco rojizo; los detalles son difíciles, pero se intuye el casquete polar.</li>
+                <li><strong>Venus:</strong> fases (como la Luna).</li>
+                <li><strong>Nebulosa de Orión (M42):</strong> visible como una mancha difusa con forma de "alas".</li>
+                <li><strong>Pléyades (M45):</strong> cúmulo abierto; mejor con prismáticos o con el ocular de menor aumento.</li>
+                <li><strong>Galaxia de Andrómeda (M31):</strong> visible como una mancha alargada; mejor con prismáticos.</li>
+                <li><strong>Cúmulo de Hércules (M13):</strong> se empieza a resolver en estrellas con 100×–167×.</li>
+                <li><strong>Estrellas dobles:</strong> Mizar y Alcor, Albireo (contraste azul-dorado).</li>
+            </ul>
+
+            <!-- ============================================================
+                 VISTAS POR EL OCULAR DEL KONUSUPER 120
+                 ============================================================ -->
+            <div class="eyepiece-section">
+                <h3 class="eyepiece-heading">👁️ Lo que verías por el ocular del Konusuper 120</h3>
+                <p class="eyepiece-intro">Estos esquemas muestran, a escala orientativa, lo que se vería por el ocular del Konusuper 120 con distintos oculares. El círculo representa el <strong>campo visual</strong> (que cambia con el aumento: a más aumento, menor campo y menos estrellas de fondo). Se indica también el aumento y el campo aproximado de cada configuración.</p>
+                <div class="eyepiece-grid">
+
+                    <!-- Luna con 25mm -->
+                    <div class="eyepiece-card">
+                        <svg viewBox="0 0 200 200" role="img" aria-label="Luna con ocular de 25mm del Konusuper 120">
+                            <circle cx="100" cy="100" r="98" fill="#050510"/>
+                            <circle cx="100" cy="100" r="96" fill="none" stroke="#1a202c" stroke-width="3"/>
+                            <circle cx="100" cy="100" r="40" fill="#e8e0c8"/>
+                            <circle cx="100" cy="100" r="40" fill="none" stroke="#a89870" stroke-width="0.5"/>
+                            <circle cx="88" cy="82" r="12" fill="#b5a98a" opacity="0.7"/>
+                            <circle cx="108" cy="85" r="9" fill="#b5a98a" opacity="0.6"/>
+                            <circle cx="115" cy="100" r="8" fill="#b5a98a" opacity="0.6"/>
+                            <circle cx="95" cy="118" r="7" fill="#b5a98a" opacity="0.5"/>
+                            <circle cx="85" cy="100" r="3.5" fill="#8a7d5e" opacity="0.7"/>
+                            <circle cx="75" cy="115" r="2.5" fill="#8a7d5e" opacity="0.6"/>
+                            <circle cx="115" cy="118" r="2.5" fill="#8a7d5e" opacity="0.6"/>
+                            <circle cx="105" cy="80" r="2" fill="#8a7d5e" opacity="0.6"/>
+                            <circle cx="120" cy="110" r="1.8" fill="#8a7d5e" opacity="0.6"/>
+                            <circle cx="78" cy="90" r="1.5" fill="#8a7d5e" opacity="0.5"/>
+                        </svg>
+                        <p class="eyepiece-label">
+                            <strong>La Luna</strong>
+                            Toda la Luna, con mares y cráteres
+                            <span class="eyepiece-field-info">25 mm · 40× · campo ~1,25°</span>
+                        </p>
+                    </div>
+
+                    <!-- Saturno con 6mm -->
+                    <div class="eyepiece-card">
+                        <svg viewBox="0 0 200 200" role="img" aria-label="Saturno con ocular de 6mm del Konusuper 120">
+                            <circle cx="100" cy="100" r="98" fill="#050510"/>
+                            <circle cx="100" cy="100" r="96" fill="none" stroke="#1a202c" stroke-width="3"/>
+                            <g fill="#fff">
+                                <circle cx="35" cy="45" r="0.4" opacity="0.4"/>
+                                <circle cx="165" cy="160" r="0.4" opacity="0.4"/>
+                                <circle cx="40" cy="160" r="0.3" opacity="0.3"/>
+                                <circle cx="170" cy="40" r="0.3" opacity="0.3"/>
+                            </g>
+                            <ellipse cx="100" cy="100" rx="36" ry="10.5" fill="#e8d8a8" opacity="0.7"/>
+                            <ellipse cx="100" cy="100" rx="28" ry="8" fill="#050510" opacity="0.6"/>
+                            <ellipse cx="100" cy="100" rx="22" ry="6.3" fill="#d8c898" opacity="0.7"/>
+                            <circle cx="100" cy="100" r="12" fill="#e8d48a"/>
+                            <path d="M 88.5 96.5 Q 100 94.5 111.5 96.5" stroke="#b89a60" stroke-width="1.3" fill="none" opacity="0.7"/>
+                            <path d="M 88.5 103.5 Q 100 105.5 111.5 103.5" stroke="#b89a60" stroke-width="1.3" fill="none" opacity="0.6"/>
+                        </svg>
+                        <p class="eyepiece-label">
+                            <strong>Saturno</strong>
+                            Disco con anillos y banda ecuatorial
+                            <span class="eyepiece-field-info">6 mm · 167× · campo ~0,3°</span>
+                        </p>
+                    </div>
+
+                    <!-- Júpiter con 10mm -->
+                    <div class="eyepiece-card">
+                        <svg viewBox="0 0 200 200" role="img" aria-label="Júpiter y sus lunas con ocular de 10mm del Konusuper 120">
+                            <circle cx="100" cy="100" r="98" fill="#050510"/>
+                            <circle cx="100" cy="100" r="96" fill="none" stroke="#1a202c" stroke-width="3"/>
+                            <g fill="#fff">
+                                <circle cx="30" cy="40" r="0.4" opacity="0.4"/>
+                                <circle cx="170" cy="55" r="0.5" opacity="0.4"/>
+                                <circle cx="175" cy="160" r="0.4" opacity="0.3"/>
+                            </g>
+                            <circle cx="100" cy="100" r="12" fill="#f0dcb0"/>
+                            <path d="M 90 96 Q 100 94 110 96" stroke="#c4a870" stroke-width="1.8" fill="none"/>
+                            <path d="M 90 100 Q 100 99 110 100" stroke="#b89a60" stroke-width="1.2" fill="none" opacity="0.7"/>
+                            <path d="M 90 105 Q 100 107 110 105" stroke="#c4a870" stroke-width="1.8" fill="none"/>
+                            <ellipse cx="106" cy="102" rx="2.5" ry="1.5" fill="#c47050" opacity="0.7"/>
+                            <circle cx="62" cy="100" r="1.8" fill="#fff2b0"/>
+                            <circle cx="76" cy="100" r="1.8" fill="#e8e8d8"/>
+                            <circle cx="128" cy="100" r="2.2" fill="#f8e8b8"/>
+                            <circle cx="145" cy="100" r="2.0" fill="#d8d8c8"/>
+                        </svg>
+                        <p class="eyepiece-label">
+                            <strong>Júpiter y lunas galileanas</strong>
+                            Bandas, Gran Mancha Roja y 4 satélites
+                            <span class="eyepiece-field-info">10 mm · 100× · campo ~0,5°</span>
+                        </p>
+                    </div>
+
+                    <!-- M42 con 25mm -->
+                    <div class="eyepiece-card">
+                        <svg viewBox="0 0 200 200" role="img" aria-label="Nebulosa de Orión con ocular de 25mm del Konusuper 120">
+                            <circle cx="100" cy="100" r="98" fill="#050510"/>
+                            <circle cx="100" cy="100" r="96" fill="none" stroke="#1a202c" stroke-width="3"/>
+                            <ellipse cx="100" cy="100" rx="80" ry="65" fill="rgba(150,180,240,0.08)"/>
+                            <ellipse cx="100" cy="100" rx="60" ry="48" fill="rgba(170,200,250,0.15)"/>
+                            <ellipse cx="100" cy="100" rx="42" ry="32" fill="rgba(190,215,255,0.25)"/>
+                            <ellipse cx="65" cy="90" rx="30" ry="18" fill="rgba(180,205,255,0.22)"/>
+                            <ellipse cx="135" cy="105" rx="32" ry="18" fill="rgba(180,205,255,0.22)"/>
+                            <ellipse cx="100" cy="100" rx="15" ry="12" fill="rgba(230,240,255,0.5)"/>
+                            <circle cx="96" cy="96" r="2" fill="#fff"/>
+                            <circle cx="104" cy="95" r="1.8" fill="#fff"/>
+                            <circle cx="99" cy="104" r="1.8" fill="#fff"/>
+                            <circle cx="105" cy="103" r="1.6" fill="#fff"/>
+                            <circle cx="52" cy="80" r="1.5" fill="#fff" opacity="0.8"/>
+                            <circle cx="145" cy="120" r="1.4" fill="#fff" opacity="0.7"/>
+                            <circle cx="70" cy="130" r="1.2" fill="#fff" opacity="0.6"/>
+                        </svg>
+                        <p class="eyepiece-label">
+                            <strong>Nebulosa de Orión (M42)</strong>
+                            Nebulosa completa con el Trapecio
+                            <span class="eyepiece-field-info">25 mm · 40× · campo ~1,25°</span>
+                        </p>
+                    </div>
+
+                    <!-- M13 con 10mm -->
+                    <div class="eyepiece-card">
+                        <svg viewBox="0 0 200 200" role="img" aria-label="Cúmulo de Hércules M13 con ocular de 10mm del Konusuper 120">
+                            <circle cx="100" cy="100" r="98" fill="#050510"/>
+                            <circle cx="100" cy="100" r="96" fill="none" stroke="#1a202c" stroke-width="3"/>
+                            <circle cx="100" cy="100" r="38" fill="rgba(255,240,200,0.06)"/>
+                            <circle cx="100" cy="100" r="28" fill="rgba(255,240,200,0.1)"/>
+                            <g fill="#fff">
+                                <circle cx="100" cy="100" r="1.5"/>
+                                <circle cx="97" cy="96" r="1.2"/>
+                                <circle cx="104" cy="98" r="1.3"/>
+                                <circle cx="99" cy="103" r="1.2"/>
+                                <circle cx="103" cy="104" r="1.1"/>
+                                <circle cx="95" cy="100" r="1.0"/>
+                                <circle cx="106" cy="101" r="1.2"/>
+                                <circle cx="100" cy="94" r="1.0"/>
+                                <circle cx="101" cy="107" r="1.1"/>
+                                <circle cx="92" cy="96" r="1.0"/>
+                                <circle cx="108" cy="95" r="1.1"/>
+                                <circle cx="94" cy="106" r="0.9"/>
+                                <circle cx="107" cy="108" r="1.0"/>
+                                <circle cx="96" cy="91" r="0.9"/>
+                                <circle cx="105" cy="92" r="0.8"/>
+                                <circle cx="91" cy="103" r="0.9"/>
+                                <circle cx="109" cy="105" r="0.9"/>
+                                <circle cx="99" cy="88" r="0.8"/>
+                                <circle cx="100" cy="112" r="0.9"/>
+                                <circle cx="85" cy="97" r="0.8"/>
+                                <circle cx="116" cy="99" r="0.8"/>
+                                <circle cx="87" cy="105" r="0.8"/>
+                                <circle cx="114" cy="109" r="0.8"/>
+                                <circle cx="90" cy="92" r="0.8"/>
+                                <circle cx="110" cy="93" r="0.8"/>
+                                <circle cx="94" cy="112" r="0.7"/>
+                                <circle cx="107" cy="113" r="0.7"/>
+                                <circle cx="84" cy="108" r="0.7"/>
+                                <circle cx="117" cy="105" r="0.7"/>
+                                <circle cx="80" cy="90" r="0.6" opacity="0.8"/>
+                                <circle cx="122" cy="96" r="0.6" opacity="0.8"/>
+                                <circle cx="79" cy="112" r="0.6" opacity="0.7"/>
+                                <circle cx="121" cy="113" r="0.6" opacity="0.7"/>
+                                <circle cx="88" cy="84" r="0.6" opacity="0.7"/>
+                                <circle cx="113" cy="85" r="0.6" opacity="0.7"/>
+                                <circle cx="84" cy="117" r="0.6" opacity="0.7"/>
+                                <circle cx="116" cy="118" r="0.6" opacity="0.7"/>
+                                <circle cx="77" cy="100" r="0.5" opacity="0.6"/>
+                                <circle cx="123" cy="103" r="0.5" opacity="0.6"/>
+                                <circle cx="95" cy="80" r="0.5" opacity="0.6"/>
+                                <circle cx="105" cy="120" r="0.5" opacity="0.6"/>
+                                <circle cx="75" cy="95" r="0.5" opacity="0.5"/>
+                                <circle cx="125" cy="110" r="0.5" opacity="0.5"/>
+                                <circle cx="100" cy="78" r="0.5" opacity="0.5"/>
+                                <circle cx="99" cy="122" r="0.5" opacity="0.5"/>
+                            </g>
+                            <circle cx="40" cy="50" r="0.7" fill="#fff" opacity="0.6"/>
+                            <circle cx="160" cy="150" r="0.7" fill="#fff" opacity="0.6"/>
+                        </svg>
+                        <p class="eyepiece-label">
+                            <strong>Cúmulo de Hércules (M13)</strong>
+                            Bola de estrellas resueltas en el centro
+                            <span class="eyepiece-field-info">10 mm · 100× · campo ~0,5°</span>
+                        </p>
+                    </div>
+
+                    <!-- Andrómeda con 25mm -->
+                    <div class="eyepiece-card">
+                        <svg viewBox="0 0 200 200" role="img" aria-label="Andrómeda con ocular de 25mm del Konusuper 120">
+                            <circle cx="100" cy="100" r="98" fill="#050510"/>
+                            <circle cx="100" cy="100" r="96" fill="none" stroke="#1a202c" stroke-width="3"/>
+                            <ellipse cx="100" cy="100" rx="140" ry="45" transform="rotate(-22 100 100)" fill="rgba(200,215,255,0.06)"/>
+                            <ellipse cx="100" cy="100" rx="85" ry="28" transform="rotate(-22 100 100)" fill="rgba(210,225,255,0.15)"/>
+                            <ellipse cx="100" cy="100" rx="55" ry="20" transform="rotate(-22 100 100)" fill="rgba(225,235,255,0.25)"/>
+                            <ellipse cx="100" cy="100" rx="20" ry="11" transform="rotate(-22 100 100)" fill="rgba(255,250,220,0.7)"/>
+                            <ellipse cx="100" cy="100" rx="8" ry="5" transform="rotate(-22 100 100)" fill="#fffbe0"/>
+                            <circle cx="100" cy="100" r="3" fill="#fff"/>
+                            <circle cx="135" cy="110" r="2.5" fill="#ffe7a0" opacity="0.8"/>
+                        </svg>
+                        <p class="eyepiece-label">
+                            <strong>Galaxia de Andrómeda (M31)</strong>
+                            Solo el núcleo; la galaxia desborda el campo
+                            <span class="eyepiece-field-info">25 mm · 40× · campo ~1,25°</span>
+                        </p>
+                    </div>
+
+                </div>
+                <p class="eyepiece-legend">Esquemas orientativos, no a escala exacta. El tamaño aparente y la visibilidad real dependen de la calidad del cielo, de la transparencia atmosférica y del ocular empleado.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>Variantes para investigar</strong>
+            <ul>
+                <li><strong>Cambiar de ocular:</strong> calcula el aumento con cada ocular y comprueba cómo cambia la imagen.</li>
+                <li><strong>Comparar con prismáticos:</strong> observa el mismo objeto con los 10×50 y con el telescopio, y anota las diferencias.</li>
+                <li><strong>Medir el campo de visión:</strong> apunta a una estrella y mide cuánto tarda en cruzar el campo con el telescopio quieto (método de deriva).</li>
+                <li><strong>Ajuste polar:</strong> compara la calidad del seguimiento con y sin ajuste polar fino.</li>
+                <li><strong>Observar el Sol:</strong> con filtro solar homologado, observa manchas solares y dibújalas.</li>
+                <li><strong>Fotografía:</strong> con un adaptador para móvil o réflex, intenta fotografiar la Luna y Júpiter.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">7</span>
+            <strong>Cálculos útiles con el Konusuper 120</strong>
+            <p>Con los datos del telescopio (f = 1000 mm, D = 120 mm) y los oculares disponibles, podemos calcular:</p>
+            <ul>
+                <li><strong>Aumento:</strong> \( M = \dfrac{f_{\text{telescopio}}}{f_{\text{ocular}}} \).</li>
+                <li><strong>Pupila de salida:</strong> \( d = \dfrac{D}{M} = \dfrac{f_{\text{ocular}}}{f/D} \).</li>
+                <li><strong>Aumento máximo útil:</strong> aproximadamente \( 2 \times D \) (en mm) = 240×, aunque en la práctica se limita a 200× por la atmósfera.</li>
+                <li><strong>Poder de resolución (límite de Dawes):</strong> \( \theta = \dfrac{116}{D(\text{mm})} \) segundos de arco = 0,97".</li>
+                <li><strong>Magnitud límite:</strong> aproximadamente \( m = 2 + 5 \log_{10}(D) \) ≈ 12,4 (en cielos oscuros).</li>
+            </ul>
+            <table>
+                <tr><th>Ocular</th><th>Aumento</th><th>Pupila de salida</th><th>Uso recomendado</th></tr>
+                <tr><td>25 mm</td><td>40×</td><td>3,0 mm</td><td>Cielo profundo, campos amplios, Luna entera</td></tr>
+                <tr><td>10 mm</td><td>100×</td><td>1,2 mm</td><td>Planetas, Luna detallada, cúmulos</td></tr>
+                <tr><td>6 mm</td><td>167×</td><td>0,7 mm</td><td>Planetas (noches buenas), estrellas dobles</td></tr>
+                <tr><td>4 mm</td><td>250×</td><td>0,5 mm</td><td>Máximo teórico (solo noches excepcionales)</td></tr>
+            </table>
+            <div class="note">
+                <strong>Regla práctica:</strong> el aumento máximo útil de un telescopio es aproximadamente \( 2 \times D \) (en mm). Para el Konusuper 120, eso son 240×. Pero en la práctica, la atmósfera limita el aumento útil a unos 200× en la mayoría de las noches. Por encima de ese valor, la imagen se ve borrosa y sin más detalle.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has aprendido?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>El Konusuper 120 es un refractor de 120 mm de diámetro y 1000 mm de distancia focal (f/8,3), montado sobre una montura ecuatorial con varillas de movimiento fino.</strong></p>
+            <p>Su diseño permite observar planetas, Luna, estrellas dobles y objetos brillantes de cielo profundo. La montura ecuatorial, con sus círculos graduados y su ajuste polar, permite apuntar y seguir los astros con precisión.</p>
+        </div>
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>El <strong>diámetro</strong> es la característica más importante de un telescopio: determina la luz recogida y el poder de resolución.</li>
+            <li>La <strong>distancia focal</strong> y el <strong>ocular</strong> determinan el aumento: \( M = f_{\text{tel}}/f_{\text{ocular}} \).</li>
+            <li>Las <strong>coordenadas ecuatoriales</strong> (AR y DEC) son fijas para cada astro, mientras que las altacimutales cambian segundo a segundo.</li>
+            <li>La <strong>montura ecuatorial</strong> permite seguir los astros girando un solo eje (el de AR).</li>
+            <li>Los <strong>círculos graduados</strong> y el <strong>nonius</strong> permiten leer posiciones con precisión de minutos.</li>
+            <li>El <strong>ajuste polar</strong> por el método de deriva es fundamental para un buen seguimiento.</li>
+            <li>Los <strong>prismáticos 10×50</strong> son una herramienta excelente para explorar el cielo antes de usar el telescopio.</li>
+            <li>Muchos objetos de cielo profundo son <strong>más grandes que la Luna</strong>, aunque su brillo superficial sea muy bajo.</li>
+            <li>Cada tipo de observación (planetas, cielo profundo, Sol) requiere <strong>características distintas</strong> del telescopio.</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que un telescopio con más aumentos es siempre mejor. Un aumento excesivo hace que la imagen se vea borrosa y sin detalle. El aumento útil máximo es aproximadamente \( 2 \times D \) (en mm), y en la práctica suele ser menor por la atmósfera. Un telescopio con buen diámetro y aumentos moderados da mejores imágenes que uno con aumentos excesivos.
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO el telescopio: ejercicios y reflexiones</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>Aumentos con distintos oculares</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> El Konusuper 120 tiene una distancia focal de 1000 mm. Calcula el aumento que se obtiene con oculares de 25 mm, 10 mm y 6 mm. ¿Cuál es el aumento máximo útil del telescopio?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Fórmula:</strong> \( M = \dfrac{f_{\text{telescopio}}}{f_{\text{ocular}}} \).</div>
+                    <div class="formula-box">
+                        \[ M_{25} = \frac{1000}{25} = 40\times \]
+                        \[ M_{10} = \frac{1000}{10} = 100\times \]
+                        \[ M_{6} = \frac{1000}{6} \approx 167\times \]
+                    </div>
+                    <div class="paso"><strong>Aumento máximo útil:</strong> \( 2 \times D = 2 \times 120 = 240\times \) (teórico). En la práctica, unos 200× por la atmósfera.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el ocular de 6 mm da 167×, dentro del rango útil. El de 4 mm daría 250×, por encima del máximo práctico en la mayoría de las noches.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Relación focal y luminosidad</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Calcula la relación focal del Konusuper 120. ¿Es un telescopio "luminoso" o "planetario"? Compara con un telescopio de 200 mm de diámetro y 1000 mm de distancia focal.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Konusuper 120:</strong></div>
+                    <div class="formula-box">
+                        \[ f/D = \frac{1000}{120} \approx 8{,}3 \]
+                    </div>
+                    <div class="paso">Es un <strong>f/8,3</strong>: un valor intermedio. No es tan luminoso como un f/5 (cielo profundo) ni tan "planetario" como un f/10 o f/12, pero es un buen equilibrio para todo.</div>
+                    <div class="paso"><strong>Telescopio de 200 mm f/1000 mm:</strong></div>
+                    <div class="formula-box">
+                        \[ f/D = \frac{1000}{200} = 5 \]
+                    </div>
+                    <div class="paso">Es un <strong>f/5</strong>, mucho más luminoso (ideal para cielo profundo y astrofotografía), pero con más aberraciones y menos aumentos para el mismo ocular.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el Konusuper 120 es un "todo terreno" equilibrado. El de 200 mm f/5 es más especializado en cielo profundo.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>Ventajas de las coordenadas ecuatoriales</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica por qué las coordenadas AR/DEC son más útiles que las altacimutales para localizar un astro. Pon un ejemplo concreto.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Coordenadas AR/DEC:</strong> son fijas para cada astro. Por ejemplo, la estrella Polar está siempre en AR ≈ 2h 31min, DEC ≈ +89°. No cambia con la hora ni con el día.</div>
+                    <div class="paso"><strong>Paso 2 — Coordenadas altacimutales:</strong> cambian segundo a segundo. La altura y el acimut de la Polar dependen de la hora y de la fecha. A las 22:00 puede estar a 40° de altura; a las 23:00, a 41°.</div>
+                    <div class="paso"><strong>Paso 3 — Ventaja:</strong> con AR/DEC, un catálogo de estrellas es válido para siempre. Con altacimutales, habría que recalcular las coordenadas cada vez.</div>
+                    <div class="paso"><strong>Paso 4 — Conclusión:</strong> por eso los atlas celestes, los catálogos y las monturas ecuatoriales usan AR/DEC. Es el sistema de referencia "natural" del cielo.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>Tamaño de Andrómeda comparado con la Luna</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> La galaxia de Andrómeda (M31) tiene un tamaño aparente de unos 3° × 1°. La Luna llena tiene un diámetro de 0,5°. ¿Cuántas Lunas cabrían a lo ancho de Andrómeda? ¿Por qué no la vemos tan grande como la Luna a simple vista?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Comparación:</strong> \( 3° / 0{,}5° = 6 \). Caben <strong>6 Lunas</strong> a lo ancho de Andrómeda.</div>
+                    <div class="paso"><strong>Paso 2 — ¿Por qué no la vemos así?</strong> Porque su <strong>brillo superficial</strong> es muy bajo. La Luna refleja la luz del Sol y es muy brillante; Andrómeda es una galaxia lejana y su luz se reparte por una superficie enorme.</div>
+                    <div class="paso"><strong>Paso 3 — Consecuencia:</strong> para ver Andrómeda se necesita un cielo oscuro (sin contaminación lumínica) y, preferiblemente, prismáticos o un telescopio de campo amplio.</div>
+                    <div class="paso"><strong>Conclusión:</strong> los objetos de cielo profundo pueden ser grandes, pero débiles. El tamaño aparente no lo es todo: el brillo superficial es clave.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>El nonius: precisión de lectura</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un círculo graduado está dividido en grados. El nonius tiene 10 divisiones que abarcan 9° del círculo principal. ¿Cuál es la precisión del nonius? Si la lectura principal es 25° y el nonius marca la 4ª división, ¿cuál es la lectura completa?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Precisión:</strong> \( 1° - 0{,}9° = 0{,}1° = 6' \).</div>
+                    <div class="paso"><strong>Paso 2 — Lectura:</strong> \( 25° + 4 \times 0{,}1° = 25{,}4° = 25° 24' \).</div>
+                    <div class="paso"><strong>Paso 3 — Conclusión:</strong> el nonius permite leer con una precisión de 6 minutos de arco (o de tiempo, según el círculo). Es una mejora importante respecto a la lectura directa del círculo principal, que solo daría grados enteros.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>¿Qué ocular elegir para cada objeto?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Con el Konusuper 120 y oculares de 25 mm, 10 mm y 6 mm, elige el ocular más adecuado para: (a) ver la Luna entera, (b) observar los anillos de Saturno, (c) ver la nebulosa de Orión entera, (d) observar el cúmulo de Hércules.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>(a) Luna entera:</strong> ocular de <strong>25 mm</strong> (40×). La Luna (0,5°) cabe entera en el campo.</div>
+                    <div class="paso"><strong>(b) Anillos de Saturno:</strong> ocular de <strong>6 mm</strong> (167×). Saturno es pequeño; se necesita aumento.</div>
+                    <div class="paso"><strong>(c) Nebulosa de Orión entera:</strong> ocular de <strong>25 mm</strong> (40×). La nebulosa tiene ~1°; con 40× se ve entera.</div>
+                    <div class="paso"><strong>(d) Cúmulo de Hércules:</strong> ocular de <strong>10 mm</strong> (100×) o <strong>6 mm</strong> (167×) para resolver estrellas. Es pequeño (~0,3°), así que mejor con aumento.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el ocular adecuado depende del tamaño aparente del objeto y del detalle que queramos ver. Empieza siempre con el de menor aumento para localizar y luego cambia.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Prismáticos 10×50: ¿qué se puede ver?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> ¿Qué ventajas tienen unos prismáticos 10×50 frente al Konusuper 120 para la observación de cielo profundo? ¿Y qué desventajas?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Ventajas:</strong></div>
+                    <ul>
+                        <li>Campo de visión muy amplio (6°–7°), ideal para objetos extensos (Andrómeda, Pléyades, Vía Láctea).</li>
+                        <li>Muy portátiles y fáciles de usar.</li>
+                        <li>Visión binocular (con los dos ojos), más cómoda y con efecto 3D.</li>
+                        <li>Imagen "correcta" (no invertida), intuitiva para apuntar.</li>
+                    </ul>
+                    <div class="paso"><strong>Desventajas:</strong></div>
+                    <ul>
+                        <li>Menor aumento (10×) y menor diámetro (50 mm), así que no se resuelven detalles finos.</li>
+                        <li>No se pueden cambiar los oculares.</li>
+                        <li>No permiten aumentos altos para planetas.</li>
+                        <li>Requieren trípode para observaciones largas (a pulso se cansan los brazos).</li>
+                    </ul>
+                    <div class="paso"><strong>Conclusión:</strong> los prismáticos y el telescopio son <strong>complementarios</strong>. Los prismáticos para explorar el cielo y ver objetos extensos; el telescopio para detalles y aumentos.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 8 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 8</span>
+                    <span>¿Qué telescopio elegir para cada uso?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un aficionado quiere observar (a) planetas, (b) galaxias débiles, (c) el Sol. ¿Qué características priorizaría en cada caso? ¿Sirve el Konusuper 120 para los tres usos?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>(a) Planetas:</strong> priorizar <strong>diámetro</strong> (resolución) y relación focal alta (f/10 o más) para aumentos. El Konusuper 120 es aceptable (f/8,3; 167× con 6 mm).</div>
+                    <div class="paso"><strong>(b) Galaxias débiles:</strong> priorizar <strong>diámetro grande</strong> y relación focal baja (f/5 o menos). El Konusuper 120 no es el ideal, pero sirve para objetos brillantes.</div>
+                    <div class="paso"><strong>(c) Sol:</strong> cualquier telescopio con <strong>filtro solar homologado</strong>. El Konusuper 120 admite filtros de 120 mm.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el Konusuper 120 es un "todo terreno" que sirve para los tres usos, aunque no sea el óptimo para ninguno. Es un excelente telescopio de iniciación.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 9 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 9</span>
+                    <span>¿Por qué el ajuste polar es importante?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Explica qué ocurre si el eje de AR de la montura ecuatorial no está bien ajustado al polo norte celeste. ¿Cómo afecta al seguimiento de las estrellas?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Seguimiento correcto:</strong> con el eje de AR paralelo al eje terrestre, al girar solo el eje de AR a la velocidad adecuada, la estrella permanece en el centro del campo.</div>
+                    <div class="paso"><strong>Paso 2 — Seguimiento incorrecto:</strong> si el eje de AR no apunta al polo, al girar solo el eje de AR la estrella se desplaza en declinación. Se sale del campo en pocos minutos.</div>
+                    <div class="paso"><strong>Paso 3 — Consecuencia:</strong> para mantener la estrella en el campo, hay que corregir también en declinación. Es incómodo y hace imposible la astrofotografía de larga exposición.</div>
+                    <div class="paso"><strong>Paso 4 — Solución:</strong> hacer un buen ajuste polar (por ejemplo, con el método de deriva) antes de empezar a observar. Con un buen ajuste, el seguimiento es preciso durante horas.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 10 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 10</span>
+                    <span>Diferencia entre montura altacimutal y ecuatorial</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Compara una montura altacimutal y una ecuatorial: ¿qué ejes tiene cada una? ¿Cuál permite seguir los astros con un solo movimiento? ¿Cuál es más intuitiva para un principiante?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Altacimutal:</strong> tiene dos ejes: <strong>altura</strong> (arriba-abajo) y <strong>acimut</strong> (izquierda-derecha). Para seguir un astro hay que mover los dos ejes a la vez. Es muy intuitiva para un principiante (como mover la cabeza).</div>
+                    <div class="paso"><strong>Ecuatorial:</strong> tiene dos ejes: <strong>Ascensión Recta (AR)</strong>, paralelo al eje terrestre, y <strong>Declinación (DEC)</strong>, perpendicular. Para seguir un astro basta con girar el eje de AR. No es tan intuitiva al principio, pero es mucho más cómoda para observar y fotografiar.</div>
+                    <div class="paso"><strong>Conclusión:</strong> la altacimutal es más sencilla de usar, pero la ecuatorial es la adecuada para seguimiento y astrofotografía. El Konusuper 120 usa ecuatorial por esta razón.</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> El Konusuper 120 es un excelente telescopio de iniciación: refractor de 120 mm, f/8,3, con montura ecuatorial. Con él se aprenden las tres ideas fundamentales de la astronomía práctica: (1) el <strong>diámetro</strong> manda para recoger luz y resolver detalles; (2) las <strong>coordenadas ecuatoriales</strong> (AR/DEC) son fijas y permiten apuntar y seguir los astros; (3) la <strong>montura ecuatorial</strong> permite seguir el movimiento aparente del cielo girando un solo eje. Además, los <strong>prismáticos 10×50</strong> son un complemento perfecto para explorar el cielo y descubrir que muchos objetos de cielo profundo son más grandes de lo que parecen... aunque su brillo superficial sea muy bajo. Y siempre, siempre: <strong>nunca mirar al Sol sin filtro homologado</strong>.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Un refractor de 120 mm, una montura ecuatorial y unos prismáticos 10×50: todo lo necesario para descubrir el cielo. Aprende sus partes, sus monturas y sus coordenadas, y el universo estará a tu alcance.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>
