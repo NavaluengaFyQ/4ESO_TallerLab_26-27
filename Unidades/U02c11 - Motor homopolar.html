@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#U02c10 - Motores eléctricos: del homopolar al motor de continua</title>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ============================================
+           ESTILO DE CAJAS PARA SECCIONES INFORMATIVAS
+           ============================================ */
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin: 20px auto;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .header-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .header-left h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        .header-left p {
+            margin: 6px 0 0 0;
+            font-size: 1em;
+        }
+        .header-sub {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+        .header-sub img {
+            max-height: 30px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.2);
+            padding: 2px;
+        }
+        .header-sub .codigo {
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 0.5px;
+            color: #ffecb0;
+        }
+        .header-sub .texto {
+            font-size: 1em;
+            font-weight: 300;
+        }
+        .header-right img {
+            max-height: 70px;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+            background: rgba(255,255,255,0.15);
+            border-radius: 8px;
+            padding: 4px;
+        }
+        .section {
+            padding: 25px 30px;
+            margin: 15px;
+            border-radius: 12px;
+            border-left: 5px solid;
+        }
+        .enunciado { background: #f7fafc; border-color: #a0aec0; }
+        .objetivo  { background: #fffaf0; border-color: #ed8936; }
+        .procedimiento { background: #f0fff4; border-color: #48bb78; }
+        .resultado { background: #ebf8ff; border-color: #4299e1; }
+        .section h2 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .enunciado h2 { color: #4a5568; }
+        .objetivo h2  { color: #c05621; }
+        .procedimiento h2 { color: #276749; }
+        .resultado h2 { color: #2b6cb0; }
+        .formula-box {
+            background: #edf2f7;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+            overflow-x: auto;
+        }
+        .step {
+            background: white;
+            border-left: 4px solid #a0aec0;
+            padding: 15px;
+            margin: 12px 0;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .step-num {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .note {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #744210;
+        }
+        .danger {
+            background: #fff5f5;
+            border: 1px solid #fc8181;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+            font-size: 0.95em;
+            color: #742a2a;
+        }
+        p {
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        ul, ol {
+            padding-left: 1.8em;
+            line-height: 1.7;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.98em;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 8px 12px;
+            text-align: center;
+        }
+        th {
+            background: #edf2f7;
+            color: #2d3748;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin: 18px 0;
+            color: #1a202c;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+        .highlight-box strong {
+            color: #2d3748;
+        }
+        .mini-card {
+            display: inline-block;
+            vertical-align: top;
+            width: 45%;
+            min-width: 260px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px 18px;
+            margin: 8px 1.5%;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+            border-top: 5px solid #667eea;
+        }
+        .mini-card h4 {
+            margin: 0 0 8px 0;
+            color: #4a5568;
+        }
+        .mini-card.rojo { border-top-color: #e53e3e; }
+        .mini-card.azul { border-top-color: #3182ce; }
+        .mini-card.verde { border-top-color: #38a169; }
+        .mini-card.naranja { border-top-color: #ed8936; }
+        .mini-card.morado { border-top-color: #805ad5; }
+
+        /* ============================================
+           IMÁGENES Y TIRAS DE COLOR
+           ============================================ */
+        figure.figura {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.figura img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+            background: #fff;
+            padding: 4px;
+        }
+        figure.figura figcaption {
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: #4a5568;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        .color-strip {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .color-chip {
+            flex: 1 1 170px;
+            border-radius: 14px;
+            padding: 16px 12px;
+            color: #ffffff;
+            text-align: center;
+            font-weight: 600;
+            line-height: 1.4;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+        }
+        .color-chip span {
+            display: block;
+            font-weight: 300;
+            font-size: 0.9em;
+            margin-top: 4px;
+        }
+        .chip-morado   { background: #6b21a8; }
+        .chip-verde    { background: #15803d; }
+        .chip-amarillo { background: #b45309; }
+        .chip-azul     { background: #1e40af; }
+        .chip-rojo     { background: #b91c1c; }
+
+        /* =========================================================
+           ESTILOS PARA EL BLOQUE DESPLEGABLE
+           ========================================================= */
+        details {
+            margin: 30px 15px 20px 15px;
+            background: #ffffff;
+            border: 2px solid #667eea;
+            border-radius: 20px;
+            padding: 0.2rem 0.2rem 0.5rem 0.2rem;
+            box-shadow: 0 6px 14px rgba(102, 126, 234, 0.2);
+            transition: all 0.2s;
+        }
+        details summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            background: #f0f4ff;
+            border-radius: 18px;
+            user-select: none;
+            transition: background 0.2s;
+            flex-wrap: wrap;
+        }
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary .fa-chevron-circle-down {
+            font-size: 1.6rem;
+            color: #667eea;
+            transition: transform 0.3s ease;
+        }
+        details[open] summary .fa-chevron-circle-down {
+            transform: rotate(180deg);
+        }
+        details summary .icon-pulsame {
+            background: #667eea;
+            color: white;
+            padding: 0.1rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+        details .details-content {
+            padding: 0.5rem 1.8rem 2rem 1.8rem;
+        }
+        .exercise-card {
+            background: #f9fcff;
+            border: 1px solid #dce7f2;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem 1.8rem 1.8rem;
+            margin: 1.8rem 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+        }
+        .exercise-card .ex-title {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 0.4rem;
+            flex-wrap: wrap;
+        }
+        .exercise-card .ex-title .badge {
+            background: #667eea;
+            color: white;
+            border-radius: 40px;
+            padding: 0.05rem 0.9rem;
+            font-size: 0.85rem;
+        }
+        .exercise-card .enunciado {
+            background: #f1f6fd;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin: 0.6rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+        }
+        .exercise-card .solucion {
+            background: #eef3f9;
+            padding: 0.8rem 1.5rem;
+            border-radius: 14px;
+            border: 1px solid #d3e0ee;
+            margin-top: 0.8rem;
+        }
+        .exercise-card .solucion .paso {
+            margin: 0.5rem 0;
+        }
+        .exercise-card .solucion .paso strong {
+            color: #2b3a67;
+        }
+        .clave-didactica {
+            background: #e6f0fa;
+            padding: 1rem 1.8rem;
+            border-radius: 40px;
+            margin-top: 1.8rem;
+            font-weight: 500;
+            color: #1a365d;
+            border-left: 6px solid #667eea;
+        }
+        .sub-parte {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #2d3748;
+            margin: 22px 0 8px 0;
+            padding: 8px 14px;
+            background: #f0f4ff;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- CABECERA -->
+    <div class="header">
+        <div class="header-left">
+            <h1>IES Valle del Alberche</h1>
+            <div class="header-sub">
+                <img src="../img_comunes/Cápsula.png" width="40" height="auto">
+                <span class="codigo">#U02c10.- </span>
+                <span class="texto">Motores eléctricos: del homopolar al motor de continua</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <img src="../img_comunes/Valle del Alberche v2-Small.png" alt="Logo del centro" width="1000">
+        </div>
+    </div>
+
+    <!-- SECCIÓN ENUNCIADO -->
+    <div class="section enunciado">
+        <h2>📋 ¿En qué consiste la práctica?</h2>
+        <p>Vamos a construir <strong>motores eléctricos</strong> de menos a más complejidad. Empezaremos por el <strong>motor homopolar</strong>, el más simple posible: solo necesitas una <strong>pila</strong>, un <strong>imán de neodimio</strong> y un <strong>trozo de alambre de cobre</strong>. Comprobaremos que hay <strong>varias formas de montarlo</strong> (alambre que gira sobre la pila, pila que rueda por el suelo, imán con tornillo que gira sobre la pila…) y todas comparten la misma física.</p>
+        <p>Después daremos el salto a los <strong>motores de corriente continua</strong>: primero una <strong>bobina en un campo magnético</strong> con un conmutador sencillo, y luego un <strong>motor de dos bobinas</strong>, con una girando (rotor) y otra generando el campo (estátor). La idea es ver cómo un mismo principio —la <strong>fuerza de Lorentz</strong>— se aprovecha de formas cada vez más eficaces para conseguir un giro continuo.</p>
+        <div class="formula-box">
+            <strong>Pregunta que intentamos responder:</strong><br>
+            ¿Cómo se combinan corriente y magnetismo para producir movimiento, y por qué unos motores necesitan más piezas que otros?
+        </div>
+    </div>
+
+    <!-- SECCIÓN OBJETIVO -->
+    <div class="section objetivo">
+        <h2>🎯 ¿Qué vas a aprender?</h2>
+        <ul>
+            <li>Qué es la <strong>fuerza de Lorentz</strong> y cómo actúa sobre un conductor con corriente.</li>
+            <li>Qué es el <strong>campo magnético</strong> y cómo se representa con líneas de campo.</li>
+            <li>Por qué la <strong>geometría del conductor</strong> es clave para que aparezca el giro.</li>
+            <li>Cómo funcionan los <strong>motores homopolares</strong> en sus distintas configuraciones (alambre, pila rodante, imán con tornillo).</li>
+            <li>Qué es el <strong>par motor</strong> y de qué depende (\( \tau = N I A B \sin\theta \)).</li>
+            <li>Por qué un motor de continua necesita un <strong>conmutador</strong> para girar siempre en el mismo sentido.</li>
+            <li>La diferencia entre <strong>rotor</strong> y <strong>estátor</strong> en un motor de dos bobinas.</li>
+            <li>Manejar material básico con seguridad: pila, imán de neodimio, alambre, tijeras y cúter.</li>
+        </ul>
+    </div>
+
+    <!-- SECCIÓN FUNDAMENTO TEÓRICO -->
+    <div class="section procedimiento">
+        <h2>🔬 Fundamento teórico</h2>
+
+        <div class="step">
+            <span class="step-num">1</span>
+            <strong>La corriente eléctrica: electrones en movimiento</strong>
+            <p>Una <strong>pila</strong> mantiene una diferencia de potencial entre sus bornes. Si unimos ambos polos con un conductor, los electrones se ponen en marcha: aparece una <strong>corriente eléctrica</strong>. Sin circuito cerrado no hay corriente, y sin corriente no hay motor posible.</p>
+            <p>Por convenio, el sentido de la corriente \( I \) es el del movimiento de las cargas positivas, es decir, <strong>del polo + al polo −</strong> por el exterior de la pila. Los electrones, en cambio, se mueven en sentido contrario.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">2</span>
+            <strong>El imán de neodimio: el campo magnético</strong>
+            <p>Un <strong>imán permanente</strong> genera a su alrededor un <strong>campo magnético</strong> \( \vec{B} \). Se representa con <strong>líneas de campo</strong> que salen del polo norte (N) y entran por el polo sur (S). En la superficie de un imán de neodimio típico el campo ronda los <strong>0,3–0,5 T</strong>, cientos de veces más intenso que el campo terrestre (≈ 5·10⁻⁵ T).</p>
+            <p>El campo magnético no ejerce fuerza sobre una carga en reposo, pero <strong>sí sobre cargas en movimiento</strong>. Esa es la puerta de entrada al motor eléctrico.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">3</span>
+            <strong>La fuerza de Lorentz: la fórmula que lo explica</strong>
+            <p>Sobre un tramo de conductor recto de longitud \( L \) por el que circula una corriente \( I \) dentro de un campo magnético \( \vec{B} \), aparece una fuerza:</p>
+            <div class="formula-box">
+                \[ \vec{F} = I\,\vec{L}\times\vec{B} \qquad\Rightarrow\qquad F = I\,L\,B\,\sin\theta \]
+            </div>
+            <p>La fuerza es <strong>perpendicular</strong> a la corriente y al campo a la vez. Su sentido se determina con la <strong>regla de la mano izquierda</strong> (o la regla del tornillo). Si \( \theta = 90° \) (corriente y campo perpendiculares), la fuerza es máxima: \( F = I\,L\,B \).</p>
+            <figure class="figura">
+                <img src="../imagenes/MotorHomopolar-FuerzaLorentz.jpg" alt="Diagrama de la fuerza de Lorentz sobre un conductor con corriente en un campo magnético" width="500">
+                <figcaption>La fuerza \( \vec{F} \) es perpendicular a la corriente \( I \) y al campo \( \vec{B} \). Si se invierte el sentido de la corriente o se cambia el polo del imán, la fuerza se invierte.</figcaption>
+            </figure>
+        </div>
+
+        <div class="step">
+            <span class="step-num">4</span>
+            <strong>Par motor: por qué un conductor doblado gira</strong>
+            <p>Si el conductor forma un <strong>bucle</strong> (una espira), las fuerzas sobre sus dos lados opuestos apuntan en <strong>sentidos contrarios</strong>, pero están separadas por una distancia: eso genera un <strong>par motor</strong> (momento de fuerzas) que hace girar el conjunto.</p>
+            <div class="formula-box">
+                \[ \tau = N\,I\,A\,B\,\sin\theta \]
+            </div>
+            <p>donde \( N \) es el número de espiras, \( A \) el área de la bobina y \( \theta \) el ángulo entre la normal al plano de la espira y el campo. El par es máximo cuando la espira está <strong>paralela</strong> al campo y nulo cuando está <strong>perpendicular</strong>.</p>
+        </div>
+
+        <div class="step">
+            <span class="step-num">5</span>
+            <strong>El motor homopolar: el más simple de todos</strong>
+            <p>En el motor homopolar, el campo del imán es <strong>axial</strong> (sale por el polo del imán pegado a la pila) y el tramo de alambre que transporta corriente es <strong>radial</strong> (va del eje a la periferia). Por la regla de la mano izquierda, la fuerza resultante es <strong>tangencial</strong>: empuja el alambre a girar alrededor del eje.</p>
+            <p>La clave es que, a medida que el alambre gira, <strong>sigue siendo radial</strong> y el campo del imán <strong>no cambia de signo</strong> respecto al conductor. Por eso la fuerza siempre apunta en el mismo sentido de giro y el motor <strong>no necesita conmutador</strong>. De ahí el nombre "homopolar": la polaridad del campo, vista desde el conductor, es siempre la misma.</p>
+            <div class="note">
+                <strong>Invertir el giro:</strong> basta con dar la vuelta al imán (cambiar N por S) o invertir la pila (cambiar + por −). La fuerza de Lorentz se invierte y el alambre gira al revés.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">6</span>
+            <strong>El motor de una bobina: el salto a la continua</strong>
+            <p>Coloca una bobina plana entre dos imanes que crean un campo magnético uniforme. Al pasar corriente, los lados de la bobina sufren fuerzas opuestas y la bobina <strong>gira</strong>… pero solo hasta <strong>alinearse</strong> con el campo. En ese momento el par se anula y la bobina se detiene (o, por inercia, vuelve atrás).</p>
+            <p>Para que gire de forma continua en el mismo sentido hace falta un <strong>conmutador</strong>: un dispositivo que <strong>invierte la corriente</strong> del rotor cada media vuelta. Así el par nunca se cancela. Ese es el principio del motor de corriente continua.</p>
+            <div class="note">
+                <strong>Idea clave:</strong> en el homopolar la geometría ya garantiza el par continuo; en el motor de una bobina hay que "engañar" al campo invirtiendo la corriente. Esa es toda la diferencia entre ambos.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">7</span>
+            <strong>El motor de dos bobinas: rotor y estátor</strong>
+            <p>En un motor de corriente continua "completo" distinguimos dos partes:</p>
+            <ul>
+                <li><strong>Estátor:</strong> la parte fija. Puede ser un <strong>imán permanente</strong> o una <strong>bobina</strong> alimentada con corriente continua que genera el campo magnético.</li>
+                <li><strong>Rotor:</strong> la parte móvil. Es la bobina que gira sobre un eje. Recibe corriente a través del <strong>conmutador</strong> y las <strong>escobillas</strong>.</li>
+            </ul>
+            <p>El campo del estátor "atraviesa" el rotor y, al circular corriente por este, aparece el par motor. El conmutador invierte la corriente del rotor cada media vuelta para que el giro sea continuo.</p>
+            <div class="highlight-box">
+                <strong>Comparativa:</strong> el motor de dos bobinas permite <strong>controlar el campo por separado</strong> (variando la corriente del estátor) y es la base de los motores industriales reales. El motor de una bobina es su versión didáctica mínima. El homopolar es la versión "sin conmutador", útil solo para demostraciones.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">8</span>
+            <strong>Síntesis: de lo simple a lo complejo</strong>
+            <p>Todos los montajes que vamos a construir usan la <strong>misma física</strong>: la fuerza de Lorentz. Lo único que cambia es <strong>cómo se gestiona el campo y la corriente</strong> para que el giro no se detenga:</p>
+            <table>
+                <tr>
+                    <th>Montaje</th>
+                    <th>¿Conmutador?</th>
+                    <th>¿Qué gira?</th>
+                    <th>Idea clave</th>
+                </tr>
+                <tr>
+                    <td>Homopolar (A1, A2, A3)</td>
+                    <td>No</td>
+                    <td>Alambre, pila o imán (según montaje)</td>
+                    <td>Geometría radial + campo axial → fuerza tangencial continua</td>
+                </tr>
+                <tr>
+                    <td>1 bobina (B)</td>
+                    <td>Sí</td>
+                    <td>Bobina</td>
+                    <td>El conmutador invierte la corriente cada media vuelta</td>
+                </tr>
+                <tr>
+                    <td>2 bobinas (C)</td>
+                    <td>Sí</td>
+                    <td>Rotor (bobina)</td>
+                    <td>Rotor + estátor separados; el campo se controla por separado</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="danger">
+            <strong>⚠️ Seguridad:</strong> los imanes de neodimio son <strong>muy fuertes</strong>: pueden pinzarte la piel si se juntan de golpe, son frágiles (se rompen y astillan) y no deben acercarse a tarjetas, móviles ni marcapasos. El alambre de cobre puede cortar si se manipula con fuerza; usa alicates. No cortocircuites la pila (un cable directo de + a −): se calienta mucho y puede quemar. Si usas cúter para pelar el alambre, corta siempre <strong>alejándote de los dedos</strong>.
+        </div>
+    </div>
+
+    <!-- SECCIÓN MATERIALES Y MONTAJE -->
+    <div class="section procedimiento">
+        <h2>⚙️ Materiales y montaje</h2>
+
+        <!-- ==================== PARTE A ==================== -->
+        <div class="sub-parte">🅰️ Parte A — El motor homopolar (3 configuraciones)</div>
+
+        <div class="step">
+            <span class="step-num">A</span>
+            <strong>Materiales comunes</strong>
+            <ul>
+                <li><strong>Pila</strong> AA (o AAA) de 1,5 V. Mejor alcalina (da más corriente).</li>
+                <li><strong>Imán de neodimio</strong> (disco o anillo, Ø ≈ 10–15 mm).</li>
+                <li><strong>Alambre de cobre</strong> desnudo o esmaltado (≈ 15–20 cm).</li>
+                <li><strong>Tornillo</strong> de hierro (para la configuración A3).</li>
+                <li><strong>Alicates</strong> de punta redonda (opcional) y <strong>tijeras</strong>.</li>
+                <li>Superficie plana y lisa (mesa o suelo).</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">A1</span>
+            <strong>Configuración A1 — Alambre que gira sobre la pila</strong>
+            <p><strong>Montaje:</strong></p>
+            <ol>
+                <li>Coloca el imán de neodimio sobre la mesa.</li>
+                <li>Apoya la pila <strong>de pie</strong> sobre el imán (el polo que toque el imán da igual; se puede probar al revés).</li>
+                <li>Dobla el alambre dándole una forma (espiral, lazo, corazón, simple "U"…) de modo que un extremo <strong>toque el polo superior</strong> de la pila y el otro <strong>roce el imán</strong> por un lateral.</li>
+                <li>Ajusta los contactos: deben tocar <strong>a la vez</strong> sin hacer demasiada presión.</li>
+                <li>Suéltalo: el alambre empieza a girar.</li>
+            </ol>
+            <figure class="figura">
+                <img src="../imagenes/MotorHomopolar-A1_AlambreGira.jpg" alt="Alambre de cobre girando alrededor de una pila apoyada sobre un imán de neodimio" width="300">
+                <figcaption>Configuración A1: el alambre de cobre, doblado en forma de lazo, toca el polo superior de la pila y el imán. Al cerrar el circuito, gira sobre la pila.</figcaption>
+            </figure>
+            <div class="note">
+                <strong>Truco:</strong> si no gira, revisa que el alambre esté <strong>limpio</strong> (sin esmalte en los extremos de contacto) y que toque <strong>ambos puntos a la vez</strong>. Un contacto flojo o demasiado fuerte impide el giro.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">A2</span>
+            <strong>Configuración A2 — Pila que rueda sobre el suelo</strong>
+            <p><strong>Montaje:</strong></p>
+            <ol>
+                <li>Coloca la pila <strong>tumbada</strong> sobre la mesa.</li>
+                <li>Pega el imán en uno de los polos (por ejemplo, el −).</li>
+                <li>Dobla el alambre en forma de "U" o de lazo, de modo que un extremo toque el polo libre de la pila y el otro <strong>toque el imán</strong> por su borde inferior (o el suelo metálico si el imán está en el otro extremo).</li>
+                <li>Al cerrar el circuito, la pila entera <strong>rueda</strong> sobre la mesa.</li>
+            </ol>
+            <figure class="figura">
+                <img src="../imagenes/MotorHomopolar-A2_PilaRueda.jpg" alt="Pila con imán rodando por el suelo gracias a un alambre que cierra el circuito" width="400">
+                <figcaption>Configuración A2: aquí lo que gira es la propia pila. El alambre crea un tramo de corriente radial y el imán aporta el campo axial: la fuerza tangencial hace rodar la pila.</figcaption>
+            </figure>
+            <div class="note">
+                <strong>Observa:</strong> en A1 giraba el alambre y la pila quedaba fija; en A2 gira la pila y el alambre queda quieto (relativamente). La física es la misma; cambia qué parte está libre para moverse.
+            </div>
+        </div>
+
+        <div class="step">
+            <span class="step-num">A3</span>
+            <strong>Configuración A3 — Imán con tornillo girando sobre la pila</strong>
+            <p><strong>Montaje:</strong></p>
+            <ol>
+                <li>Pon la pila <strong>de pie</strong> sobre la mesa.</li>
+                <li>Apoya la <strong>punta del tornillo</strong> en el polo superior de la pila (el tornillo se sostiene "de pie" sobre su punta).</li>
+                <li>Pega el <strong>imán de neodimio</strong> a la cabeza del tornillo (o al cuerpo, si el tornillo es pequeño).</li>
+                <li>El conjunto <strong>tornillo + imán</strong> empieza a girar sobre la pila.</li>
+            </ol>
+            <figure class="figura">
+                <img src="../imagenes/MotorHomopolar-A3_TornilloIman.jpg" alt="Tornillo con imán de neodimio girando sobre la pila" width="300">
+                <figcaption>Configuración A3: el imán pegado al tornillo cierra el circuito a través del cuerpo del tornillo. La corriente recorre el tornillo radialmente y el campo del imán la empuja a girar.</figcaption>
+            </figure>
+            <div class="note">
+                <strong>¿Por qué gira?</strong> El tornillo conduce la corriente desde la punta (que toca la pila) hasta el imán. Ese tramo de corriente, inmerso en el campo del propio imán, sufre la fuerza de Lorentz tangencial. El imán actúa como "estátor" y el tornillo como "rotor".
+            </div>
+        </div>
+
+        <!-- ==================== PARTE B ==================== -->
+        <div class="sub-parte">🅱️ Parte B — Motor de una bobina en un campo magnético</div>
+
+        <div class="step">
+            <span class="step-num">B</span>
+            <strong>Materiales</strong>
+            <ul>
+                <li><strong>Alambre de cobre esmaltado</strong> (≈ 1 m) para bobina de 10–15 vueltas.</li>
+                <li><strong>Dos imanes</strong> de neodimio o un imán en herradura, para crear un campo lo más uniforme posible.</li>
+                <li><strong>Soporte</strong>: corcho, plastilina o pieza impresa en 3D para sujetar los imanes y el eje.</li>
+                <li><strong>Conmutador sencillo</strong>: dos contactos (por ejemplo, dos imperdibles o dos trozos de alambre grueso) que rozan el eje de la bobina.</li>
+                <li><strong>Pila</strong> AA (o portapilas) y cables de conexión.</li>
+                <li><strong>Eje</strong>: un palillo, un clip o un trozo de alambre rígido.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">B</span>
+            <strong>Montaje</strong>
+            <ol>
+                <li>Enrolla el alambre esmaltado en una bobina de 10–15 vueltas (Ø ≈ 3–4 cm). Deja dos extremos largos para el eje.</li>
+                <li><strong>Pela el esmalte</strong> de los dos extremos del alambre (solo en la zona que va a hacer contacto eléctrico).</li>
+                <li>Sujeta la bobina sobre su eje (palillo, clip o alambre rígido) de modo que pueda girar libremente.</li>
+                <li>Coloca los dos imanes <strong>enfrentados</strong> a ambos lados de la bobina, con polos opuestos mirándose (N–S), para crear un campo uniforme en la zona de la bobina.</li>
+                <li>Conecta los extremos de la bobina a los <strong>contactos del conmutador</strong>: dos piezas que rozan el eje y que giran con él (o que están fijas y rozan el eje, según el diseño).</li>
+                <li>Conecta el conmutador a la pila. La bobina empieza a girar.</li>
+            </ol>
+            <figure class="figura">
+                <img src="../imagenes/MotorDC-B_UnaBobina.jpg" alt="Motor de una bobina entre dos imanes con conmutador sencillo" width="500">
+                <figcaption>Motor de una bobina: la bobina gira entre dos imanes. El conmutador invierte la corriente cada media vuelta para que el par no se cancele.</figcaption>
+            </figure>
+            <div class="note">
+                <strong>Observa:</strong> si quitas el conmutador y alimentas la bobina directamente, la bobina gira hasta alinearse con el campo y <strong>se detiene</strong>. El conmutador es lo que la mantiene girando.
+            </div>
+        </div>
+
+        <!-- ==================== PARTE C ==================== -->
+        <div class="sub-parte">🅲 Parte C — Motor de dos bobinas (corriente continua)</div>
+
+        <div class="step">
+            <span class="step-num">C</span>
+            <strong>Materiales</strong>
+            <ul>
+                <li><strong>Alambre de cobre esmaltado</strong> (≈ 2 m) para dos bobinas (rotor y estátor).</li>
+                <li><strong>Pila</strong> AA (o portapilas) y cables de conexión.</li>
+                <li><strong>Conmutador</strong>: dos semianillos metálicos (se pueden hacer con dos trozos de alambre) y dos escobillas (trozos de grafito o alambre).</li>
+                <li><strong>Eje</strong> rígido (palillo, varilla roscada fina o clip) y soportes.</li>
+                <li><strong>Cinta aislante</strong> o pistola de pegamento para fijar.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <span class="step-num">C</span>
+            <strong>Montaje</strong>
+            <ol>
+                <li>Construye una <strong>bobina estátor</strong> (fija): varias vueltas de alambre esmaltado sobre un tubo de cartón o sobre sus propias vueltas, con extremos libres para conectar a la pila. Esta bobina genera el campo magnético.</li>
+                <li>Construye una <strong>bobina rotor</strong> (móvil): parecida, pero montada sobre un eje que pueda girar libremente.</li>
+                <li>Coloca el estátor alrededor o enfrentado al rotor, de forma que el campo del estátor atraviese el rotor.</li>
+                <li>Instala el <strong>conmutador</strong>: dos semianillos en el eje del rotor, en contacto con dos escobillas fijas conectadas a la pila. Al girar el eje, los semianillos cambian de contacto cada media vuelta e invierten la corriente del rotor.</li>
+                <li>Conecta el estátor a la pila (en serie con el rotor a través del conmutador, o en paralelo; ambos funcionan).</li>
+                <li>Al cerrar el circuito, el rotor empieza a girar de forma continua.</li>
+            </ol>
+            <figure class="figura">
+                <img src="../imagenes/MotorDC-C_DosBobinas.jpg" alt="Motor de dos bobinas con rotor y estátor y conmutador" width="500">
+                <figcaption>Motor de dos bobinas: el estátor (fijo) genera el campo; el rotor (giratorio) recibe corriente a través del conmutador. Así el giro es continuo y controlable.</figcaption>
+            </figure>
+            <div class="note">
+                <strong>Simplificación:</strong> si sustituyes el estátor-bobina por un <strong>imán permanente</strong>, tienes un motor de imán permanente: más sencillo de montar y perfecto para entender el funcionamiento. La física es la misma.
+            </div>
+        </div>
+
+        <!-- Tabla resumen de materiales -->
+        <div class="step">
+            <span class="step-num">∑</span>
+            <strong>Tabla resumen de los cinco montajes</strong>
+            <table>
+                <tr>
+                    <th>Montaje</th>
+                    <th>Elementos clave</th>
+                    <th>¿Conmutador?</th>
+                    <th>¿Qué gira?</th>
+                    <th>Dificultad</th>
+                </tr>
+                <tr>
+                    <td><strong>A1</strong></td>
+                    <td>Pila + imán + alambre</td>
+                    <td>No</td>
+                    <td>Alambre</td>
+                    <td>★☆☆</td>
+                </tr>
+                <tr>
+                    <td><strong>A2</strong></td>
+                    <td>Pila + imán + alambre (pila tumbada)</td>
+                    <td>No</td>
+                    <td>Pila</td>
+                    <td>★☆☆</td>
+                </tr>
+                <tr>
+                    <td><strong>A3</strong></td>
+                    <td>Pila + imán + tornillo</td>
+                    <td>No</td>
+                    <td>Tornillo + imán</td>
+                    <td>★☆☆</td>
+                </tr>
+                <tr>
+                    <td><strong>B</strong></td>
+                    <td>Bobina + 2 imanes + conmutador + pila</td>
+                    <td>Sí</td>
+                    <td>Bobina</td>
+                    <td>★★☆</td>
+                </tr>
+                <tr>
+                    <td><strong>C</strong></td>
+                    <td>2 bobinas (rotor + estátor) + conmutador + pila</td>
+                    <td>Sí</td>
+                    <td>Rotor</td>
+                    <td>★★★</td>
+                </tr>
+            </table>
+            <div class="formula-box">
+                <strong>Estimación de par motor (montaje B):</strong><br>
+                \( N = 15 \) espiras, \( I \approx 0{,}5\ \mathrm{A} \), \( A \approx 10\ \mathrm{cm^2} = 10^{-3}\ \mathrm{m^2} \), \( B \approx 0{,}3\ \mathrm{T} \):<br>
+                \( \tau = N I A B = 15 \cdot 0{,}5 \cdot 10^{-3} \cdot 0{,}3 \approx 2{,}25 \times 10^{-3}\ \mathrm{N\cdot m} \)<br>
+                Suficiente para vencer la fricción del eje en un montaje cuidado.
+            </div>
+            <div class="danger">
+                <strong>⚠️ Seguridad en el montaje:</strong> no dejes la pila conectada mucho tiempo sin girar el motor: la bobina se calienta y la pila se agota. Si usas imanes muy fuertes, mantén los dedos alejados del entrehierro. Revisa que los cables no hagan cortocircuito accidental.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN RESULTADO -->
+    <div class="section resultado">
+        <h2>📊 ¿Qué has demostrado?</h2>
+        <div class="formula-box" style="border-color: #38b2ac; border-width: 3px; background: #e6fffa;">
+            <p><strong>Los motores eléctricos convierten energía eléctrica en energía mecánica gracias a la fuerza de Lorentz. La diferencia entre montajes está en cómo se gestiona el campo magnético y la corriente para que el giro sea continuo.</strong></p>
+            <p>Homopolar (geometría) → 1 bobina + conmutador → 2 bobinas (rotor + estátor).</p>
+        </div>
+        <p>Además, has comprobado que:</p>
+        <ul>
+            <li>Sin <strong>campo magnético</strong> no hay motor: sin imán o sin bobina estátor, el conductor no gira.</li>
+            <li>Sin <strong>circuito cerrado</strong> tampoco: los contactos deben ser continuos (en el homopolar) o pasar por el conmutador (en el motor de continua).</li>
+            <li>La <strong>forma del conductor</strong> importa: un tramo recto no produce par; un bucle o un tramo radial sí.</li>
+            <li>El <strong>homopolar</strong> no necesita conmutador porque el campo del imán no cambia de signo respecto al conductor.</li>
+            <li>El <strong>motor de continua</strong> necesita conmutador para que el par no se cancele cada media vuelta.</li>
+            <li>El <strong>motor de dos bobinas</strong> separa rotor y estátor y permite controlar el campo por separado (electroimán o imán permanente).</li>
+        </ul>
+        <div class="note">
+            <strong>Error típico:</strong> pensar que el alambre "es atraído por el imán". En realidad la fuerza es <strong>perpendicular</strong> a la corriente y al campo, no una simple atracción magnética. Tampoco es "magia": es la misma fuerza de Lorentz en todos los montajes. Si el alambre se queda quieto, casi siempre es por un contacto deficiente, no porque "no haya fuerza".
+        </div>
+    </div>
+
+    <!-- BLOQUE DESPLEGABLE -->
+    <details>
+        <summary>
+            <i class="fas fa-chevron-circle-down"></i>
+            <span>🧪 DESMITIFICANDO los motores eléctricos</span>
+            <span class="icon-pulsame"><i class="fas fa-hand-pointer"></i> Pulsame</span>
+        </summary>
+        <div class="details-content">
+
+            <!-- EJERCICIO 1 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 1</span>
+                    <span>La regla de la mano izquierda</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Un tramo recto de alambre de 5 cm transporta una corriente de 2 A hacia el este. Está inmerso en un campo magnético vertical de 0,4 T que apunta hacia arriba. Determina la dirección y el sentido de la fuerza magnética que actúa sobre el alambre.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Fórmula:</strong> \( \vec{F} = I\,\vec{L}\times\vec{B} \). La dirección de \( \vec{F} \) es perpendicular a \( \vec{L} \) (este) y a \( \vec{B} \) (arriba).</div>
+                    <div class="paso"><strong>Paso 2 — Regla de la mano izquierda:</strong> dedo índice → corriente (este); dedo corazón → campo (arriba); pulgar → fuerza. Resultado: la fuerza apunta hacia el <strong>sur</strong> (o hacia el norte, según la orientación exacta; perpendicular al plano formado por este y arriba).</div>
+                    <div class="paso"><strong>Paso 3 — Módulo:</strong> \( F = I L B \sin 90° = 2 \cdot 0{,}05 \cdot 0{,}4 \cdot 1 = 0{,}04\ \mathrm{N} \).</div>
+                    <div class="paso"><strong>Resultado:</strong> fuerza de 0,04 N, perpendicular al alambre y al campo, en el plano horizontal (sentido determinado por la regla).</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 2 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 2</span>
+                    <span>Fuerza de Lorentz en números</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En el motor homopolar A1, la corriente que circula por el alambre es de aproximadamente 0,5 A, el tramo de alambre perpendicular al campo mide 2 cm y el campo del imán de neodimio en la zona del alambre es de ≈ 0,3 T. Calcula la fuerza magnética sobre ese tramo.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Datos:</strong> \( I = 0{,}5\ \mathrm{A} \), \( L = 0{,}02\ \mathrm{m} \), \( B = 0{,}3\ \mathrm{T} \), \( \theta = 90° \).</div>
+                    <div class="paso"><strong>Paso 2 — Fórmula:</strong> \( F = I L B \sin\theta \).</div>
+                    <div class="paso"><strong>Paso 3 — Cálculo:</strong> \( F = 0{,}5 \cdot 0{,}02 \cdot 0{,}3 = 3 \times 10^{-3}\ \mathrm{N} \).</div>
+                    <div class="paso"><strong>Resultado:</strong> \( F \approx 3\ \mathrm{mN} \). Es una fuerza pequeña, pero suficiente para vencer la fricción de un alambre ligero bien equilibrado.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 3 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 3</span>
+                    <span>Par motor de una bobina</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Una bobina de 15 espiras, área 10 cm², está inmersa en un campo de 0,3 T. Circula una corriente de 0,5 A. Calcula el par motor máximo y explica cómo cambia si duplicas el número de espiras, la corriente o el campo.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Datos:</strong> \( N = 15 \), \( A = 10^{-3}\ \mathrm{m^2} \), \( B = 0{,}3\ \mathrm{T} \), \( I = 0{,}5\ \mathrm{A} \).</div>
+                    <div class="paso"><strong>Paso 2 — Fórmula:</strong> \( \tau = N I A B \sin\theta \). El máximo es con \( \sin\theta = 1 \): \( \tau_{\max} = N I A B \).</div>
+                    <div class="paso"><strong>Paso 3 — Cálculo:</strong> \( \tau_{\max} = 15 \cdot 0{,}5 \cdot 10^{-3} \cdot 0{,}3 = 2{,}25 \times 10^{-3}\ \mathrm{N\cdot m} \).</div>
+                    <div class="paso"><strong>Paso 4 — Proporcionalidad:</strong> duplicar \( N \), \( I \), \( A \) o \( B \) duplica el par máximo. El par es proporcional a los cuatro factores.</div>
+                    <div class="paso"><strong>Resultado:</strong> \( \tau_{\max} \approx 2{,}25\ \mathrm{mN\cdot m} \). Para aumentar el par: más espiras, más corriente, bobina más grande o imán más fuerte.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 4 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 4</span>
+                    <span>¿Por qué el homopolar no necesita conmutador?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En el motor homopolar, el alambre gira indefinidamente sin conmutador. En cambio, la bobina del montaje B se detiene si no lo tiene. Explica la diferencia.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Geometría del homopolar:</strong> el campo del imán es <strong>axial</strong> (sale del polo pegado a la pila) y el tramo de corriente es <strong>radial</strong> (del eje a la periferia). La fuerza resultante es tangencial.</div>
+                    <div class="paso"><strong>Paso 2 — Al girar:</strong> el tramo sigue siendo radial y el campo sigue siendo axial <strong>en la misma dirección relativa</strong>. La fuerza tangencial no se cancela en ningún momento.</div>
+                    <div class="paso"><strong>Paso 3 — Bobina en campo uniforme:</strong> al girar, el ángulo \( \theta \) entre el plano de la bobina y el campo cambia. En \( \theta = 0 \) (bobina perpendicular al campo) el par se anula y la bobina se detiene o invierte el sentido.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el homopolar <strong>no cambia de geometría relativa</strong> al girar; la bobina sí. Por eso la bobina necesita conmutador y el homopolar no.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 5 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 5</span>
+                    <span>¿Por qué el motor de continua necesita conmutador?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Sin conmutador, una bobina en un campo magnético uniforme gira hasta alinearse y se detiene. Explica por qué, y cómo el conmutador resuelve el problema.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Par y ángulo:</strong> \( \tau = N I A B \sin\theta \). Cuando \( \theta = 0 \) (bobina perpendicular al campo), \( \tau = 0 \).</div>
+                    <div class="paso"><strong>Paso 2 — Alineación:</strong> la bobina gira hasta esa posición y se queda atascada, porque el par es nulo y no hay nada que la empuje más allá (salvo la inercia, que la haría oscilar).</div>
+                    <div class="paso"><strong>Paso 3 — Conmutador:</strong> invierte la corriente del rotor <strong>cada media vuelta</strong>, justo cuando la bobina pasa por la posición de par nulo. Así el par cambia de sentido y siempre empuja en el mismo sentido de giro.</div>
+                    <div class="paso"><strong>Resultado:</strong> el conmutador convierte el par oscilante en par <strong>unidireccional</strong>. Sin él, no hay motor de continua que gire de forma continua.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 6 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 6</span>
+                    <span>Rotor y estátor: ¿quién es quién?</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> En el motor de dos bobinas (montaje C), identifica cuál es el rotor y cuál el estátor. ¿Qué ocurre si se invierte la corriente en el estátor? ¿Y si se invierte en el rotor?</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>Paso 1 — Identificación:</strong> el <strong>estátor</strong> es la bobina <strong>fija</strong> que genera el campo magnético; el <strong>rotor</strong> es la bobina <strong>giratoria</strong> sobre el eje.</div>
+                    <div class="paso"><strong>Paso 2 — Invertir la corriente del estátor:</strong> el campo magnético se invierte. El par sobre el rotor también se invierte: el rotor gira en sentido contrario.</div>
+                    <div class="paso"><strong>Paso 3 — Invertir la corriente del rotor:</strong> el par también se invierte: el rotor gira en sentido contrario.</div>
+                    <div class="paso"><strong>Paso 4 — Invertir ambas a la vez:</strong> el sentido de giro vuelve a ser el original (dos inversiones se compensan).</div>
+                    <div class="paso"><strong>Conclusión:</strong> el sentido de giro depende del <strong>producto</strong> de las corrientes del rotor y del estátor. Invertir una sola de ellas cambia el sentido; invertir ambas lo conserva.</div>
+                </div>
+            </div>
+
+            <!-- EJERCICIO 7 -->
+            <div class="exercise-card">
+                <div class="ex-title">
+                    <span class="badge">Ejercicio 7</span>
+                    <span>Del aula a la industria</span>
+                </div>
+                <div class="enunciado">
+                    <p><strong>Enunciado:</strong> Nombra al menos tres aplicaciones reales de los motores eléctricos que se basan en los mismos principios que has visto en el laboratorio, y explica en qué se parecen y en qué se diferencian.</p>
+                </div>
+                <div class="solucion">
+                    <div class="paso"><strong>1. Motores de disco duro y ventiladores:</strong> usan motores de corriente continua sin escobillas (BLDC), que combinan el principio del rotor y el estátor con electrónica de conmutación en lugar de escobillas mecánicas. Más fiables y silenciosos.</div>
+                    <div class="paso"><strong>2. Vehículos eléctricos:</strong> motores síncronos de imanes permanentes (como el del montaje C simplificado, con imán en el estátor) o motores de inducción. El principio sigue siendo la fuerza de Lorentz sobre el rotor.</div>
+                    <div class="paso"><strong>3. Tracción ferroviaria y motores homopolares:</strong> los motores homopolares de gran potencia se han usado históricamente en locomotoras y en aplicaciones navales (BEP). Su ventaja: no necesitan conmutador.</div>
+                    <div class="paso"><strong>4. Motores paso a paso:</strong> usados en impresoras 3D, robótica y automatización. Controlan la posición angular con precisión mediante conmutación electrónica del estátor.</div>
+                    <div class="paso"><strong>Conclusión:</strong> el camaleón de los motores (nunca mejor dicho) es el mismo: corriente + campo magnético → fuerza → giro. Lo que cambia es cómo se gestiona la conmutación: mecánica (escobillas), electrónica (BLDC) o inexistente (homopolar).</div>
+                </div>
+            </div>
+
+            <!-- Pie didáctico -->
+            <div class="clave-didactica">
+                <i class="fas fa-lightbulb" style="margin-right: 0.6rem; color: #f1c40f;"></i>
+                <strong>Clave didáctica:</strong> Los tres niveles de motor son la misma lección en tres pasos. (1) La <strong>fuerza de Lorentz</strong> es el motor de todo. (2) El <strong>homopolar</strong> aprovecha la geometría radial + campo axial para mantener el giro sin conmutador. (3) El <strong>motor de continua</strong> necesita un <strong>conmutador</strong> para que el par no se cancele, y el de <strong>dos bobinas</strong> separa rotor y estátor para controlar el campo. Entender esta progresión te permite <strong>diseñar y controlar</strong> motores, no solo mirarlos. Del alambre que gira sobre la pila al rotor de un ventilador, la física es exactamente la misma.
+            </div>
+        </div>
+    </details>
+
+    <!-- BLOQUE "ES HORA DE" -->
+    <div style="padding: 25px 15px; text-align: center; background: white; margin: 20px;">
+        <div style="
+            max-width: 100%;
+            padding: 15px;
+            margin: 10px auto;
+            text-align: center;
+            background: #f8fafc;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        ">
+            <p style="
+                font-size: clamp(0.95rem, 3vw, 1.2rem);
+                color: #2d3748;
+                margin-top: 0;
+                margin-bottom: 12px;
+                padding: 0 10px;
+            ">
+                <br>  Una pila, un imán y un alambre: tres elementos y una sola fuerza de Lorentz.<br>
+                <i>(Los detalles sobre lo que entra en las pruebas escritas se publicarán periódicamente en M.Teams).</i>
+            </p>
+
+            <div style="text-align:center;">
+                <a
+                    href="../index.html"
+                    target="_blank"
+                    style="
+                        display:inline-block;
+                        padding:12px 24px;
+                        background:#0078D4;
+                        color:white;
+                        text-decoration:none;
+                        border-radius:12px;
+                        font-weight:bold;
+                    "
+                >
+                    Volver al inicio
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- ===================FIN DE ES HORA DE ==================== -->
+
+</div> <!-- fin container -->
+</body>
+</html>
